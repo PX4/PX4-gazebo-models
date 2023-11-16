@@ -1,8 +1,9 @@
 #!/bin/bash
 
-PREV=$1
-CURR=$2
-FUEL_TOKEN=$3
+FUEL_TOKEN=$1
+
+PREV=$(git log --format="%H" -n 2 | tail -n 1)
+CURR=$(git log --format="%H" -n 1 | tail -n 1)
 
 mod_list=$(git diff $PREV $CURR --name-status)
 prev_model=
