@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
-  <model name='x500-vision'>
+  <model name='x500_vision'>
     <include merge='true'>
       <uri>x500</uri>
     </include>
