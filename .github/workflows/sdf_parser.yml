@@ -4,7 +4,7 @@ on:
     push:
       branches:
         - '*'
-  
+
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -12,10 +12,10 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v3
-            
+
             - name: Install packages
               id: install-packages
-              run: | 
+              run: |
                 sudo apt install -y build-essential cmake python3-pip wget lsb-release gnupg curl
                 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
                 wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
@@ -31,13 +31,17 @@ jobs:
                 cmake .. -Wno-dev
                 make
 
+            - name: Get latest commit hash
+              id: latest_commit
+              run: echo "hash=$(git log --format="%H" -n 1 | tail -n 1)" >> $GITHUB_OUTPUT
+
+            - name: Get second-to-last commit hash
+              id: second_to_last_commit
+              run: echo "hash=$(git log --format="%H" -n 2 | tail -n 1)" >> $GITHUB_OUTPUT
+
             - name: Get changed files
               id: changed-files
-              run: |
-                commit_sha=$(git rev-parse HEAD)
-
-                # Get the list of changed files
-                echo "changed_files=$(git diff --name-only $commit_sha^ $commit_sha)" >> $GITHUB_OUTPUT
+              run:  echo "changed_files=$(git diff --name-only ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }})" >> $GITHUB_OUTPUT
 
             - name: Iterate, find and check .sdf files
               run: |
@@ -45,7 +49,7 @@ jobs:
                   if [[ $file == *.sdf ]]; then
                     echo "Checking $file"
 
-                    # Run sdf parser    
+                    # Run sdf parser
                     ./sdf_parsing/build/check_sdf $file
                     exit_code=$?
 
