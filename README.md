@@ -4,9 +4,7 @@ Models and worlds to be used in local Fuel instances and kept up to date in [app
 ## Starting GZ simulation
 In addition to providing resource files for all models and worlds, this repo also contains a simulation-gazebo script that will start a world and works in conjunction with PX4.
 
-:::note
 In order for this script to work, you must have installed gz-garden beforehand. The way to do this can be found [here](https://gazebosim.org/docs/garden/install_ubuntu):
-:::
 
 After setting up gazebo, navigate to the repo containing simulation-gazebo and script with
 
@@ -14,7 +12,7 @@ After setting up gazebo, navigate to the repo containing simulation-gazebo and s
 python simulation-gazebo
 ```
 
-If you do not provide any arguments, this will download all models and worlds from the PX4-gazebo-models repo, save them to `/.simulation-gazebo` and start a default world.
+If you do not provide any arguments, this will download all models and worlds from the PX4-gazebo-models repo, save them to `/.simulation-gazebo` and start a default world. **In order for a model to load, you need to start PX4 as well**
 
 The following arguments can be passed:
 
