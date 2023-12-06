@@ -22,7 +22,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://OakD-Lite/meshes/OakDLite.dae</uri>
+            <uri>model://models/OakD-Lite/meshes/OakDLite.dae</uri>
           </mesh>
         </geometry>
       </visual>

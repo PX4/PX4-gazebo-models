@@ -2,7 +2,7 @@
 <sdf version='1.9'>
   <model name='x500'>
     <include merge='true'>
-      <uri>model://x500_base</uri>
+      <uri>model://models/x500_base</uri>
     </include>
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_0_joint</jointName>

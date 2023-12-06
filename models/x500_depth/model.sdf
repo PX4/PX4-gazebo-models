@@ -5,7 +5,7 @@
       <uri>x500</uri>
     </include>
     <include merge='true'>
-      <uri>model://OakD-Lite</uri>
+      <uri>model://models/OakD-Lite</uri>
       <pose>.12 .03 .242 0 0 0</pose>
     </include>
     <joint name="CameraJoint" type="fixed">
