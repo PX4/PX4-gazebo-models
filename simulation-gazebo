@@ -10,8 +10,8 @@ DEFAULT_DOWNLOAD_DIR = "https://github.com/PX4/PX4-gazebo-models/archive/refs/he
 
 
 def run(cmd):
-    subprocess.run(['bash', '-c', cmd], cwd='.')
-
+    process_handle = subprocess.Popen(['bash', '-c', cmd], cwd='.')
+    return process_handle
 
 def main():
     is_windows = platform.system() == 'Windows'
@@ -107,7 +107,14 @@ def main():
         if args.gz_ip:
             cmd = f'GZ_IP={args.gz_ip} {cmd}'
 
-        run(cmd)
+        try:
+            process_handle = run(cmd)
+
+            while process_handle.poll() is None:
+                process_handle.wait()
+
+        except KeyboardInterrupt:
+            exit(0)
 
 if __name__ == "__main__":
     main()
