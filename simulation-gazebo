@@ -100,7 +100,7 @@ def main():
     # Launch gazebo simulation
     print('> Launching gazebo simulation...')
     if not args.dryrun:
-        cmd = f'GZ_SIM_RESOURCE_PATH={args.model_store} gz sim -r {args.model_store}/worlds/{args.world}.sdf'
+        cmd = f'GZ_SIM_RESOURCE_PATH={args.model_store}/models gz sim -r {args.model_store}/worlds/{args.world}.sdf'
 
         if args.gz_partition:
             cmd = f'GZ_PARTITION={args.gz_partition} {cmd}'
