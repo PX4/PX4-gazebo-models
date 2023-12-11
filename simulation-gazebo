@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import platform
 import argparse
 import subprocess
 import os
@@ -14,12 +13,6 @@ def run(cmd):
     return process_handle
 
 def main():
-    is_windows = platform.system() == 'Windows'
-
-    if is_windows:
-        print('Windows is not supported at this time.')
-        exit(1)
-
     parser = argparse.ArgumentParser(description='Gazebo simulation')
 
     parser.add_argument('--world', help='World to run in Gazebo', required=False, default="default")
@@ -88,14 +81,10 @@ def main():
         except:
             print(f'Warning: Could not unzip model files at {args.model_store}/resources.zip. Check model file format.')
 
-        os.system(f'mkdir {args.model_store}/tmp')
-        os.system(f'mv {args.model_store}/PX4-gazebo-models-main/models {args.model_store}/tmp/')
-        os.system(f'mv {args.model_store}/PX4-gazebo-models-main/worlds {args.model_store}/tmp/')
-        os.system(f'rm -rf {args.model_store}/PX4-gazebo-models-main/')
+        os.system(f'mv {args.model_store}/PX4-gazebo-models-main/models {args.model_store}/models')
+        os.system(f'mv {args.model_store}/PX4-gazebo-models-main/worlds {args.model_store}/worlds')
         os.system(f'rm {args.model_store}/resources.zip')
-        os.system(f'mv {args.model_store}/tmp/models {args.model_store}/models')
-        os.system(f'mv {args.model_store}/tmp/worlds {args.model_store}/worlds')
-        os.system(f'rm -rf {args.model_store}/tmp')
+        os.system(f'rm -rf {args.model_store}/PX4-gazebo-models-main/')
 
     # Launch gazebo simulation
     print('> Launching gazebo simulation...')
