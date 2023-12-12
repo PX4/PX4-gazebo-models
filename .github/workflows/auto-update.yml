@@ -29,5 +29,10 @@ jobs:
         id: second_to_last_commit
         run: echo "hash=$(git log --format="%H" -n 2 | tail -n 1)" >> $GITHUB_OUTPUT
 
+      - name: Display commit hashes
+        run: |
+          echo "Latest Commit: ${{ steps.latest_commit.outputs.hash }}"
+          echo "Second-to-last Commit: ${{ steps.second_to_last_commit.outputs.hash }}" 
+
       - name: Update Fuel Models
         run: ./fuel_upload.sh ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }} ${{ secrets.GAZEBO_FUEL_TOKEN }}
