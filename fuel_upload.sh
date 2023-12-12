@@ -14,7 +14,7 @@ while IFS= read -r line; do
 	model=$(echo "$line" | awk -F'/' '{print $2}')
 
 	# Delete the model from if it exists and is encountered for the first time.
-	if [[ $model != $prev_model ]] && ([[ $type == "models"]] || [[ $type == "worlds" ]]); then
+	if [[ $model != $prev_model ]] && ([[ $type == "models" ]] || [[ $type == "worlds" ]]); then
 		echo "Trying to delete $model from fuel server"
 		gz fuel delete --header 'Private-token: $FUEL_TOKEN' --url https://fuel.gazebosim.org/1.0/PX4/$type/$model -o PX4
 
