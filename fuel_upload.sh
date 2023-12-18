@@ -21,7 +21,7 @@ while IFS= read -r line; do
 	# If you want to modify or add a model, reupload it.
 		if [[ "$line" == "A"* || "$line" == "M"* ]]; then
 				echo "Uploading $model to fuel server"
-				gz fuel upload -m ./$type/$model -o PX4 --header 'Private-token: $FUEL_TOKEN' --url https://fuel.gazebosim.org
+				gz fuel upload -m ./$type/$model -o PX4 --header "Private-token: $FUEL_TOKEN" --url https://fuel.gazebosim.org
 		fi
 
 		prev_model=$model
