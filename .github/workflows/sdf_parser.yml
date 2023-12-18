@@ -1,9 +1,9 @@
 name: SDF Parsing
 
 on:
-    push:
-      branches:
-        - '*'
+  push:
+    branches:
+      - '*'
 
 jobs:
     build:
@@ -41,13 +41,14 @@ jobs:
               id: second_to_last_commit
               run: echo "hash=$(git log --format="%H" -n 2 | tail -n 1)" >> $GITHUB_OUTPUT
 
-            - name: Get changed files
-              id: changed-files
-              run:  echo "changed_files=$(git diff --name-only ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }})" >> $GITHUB_OUTPUT
+            # - name: Get changed files
+            #   id: changed-files
+            #   run:  echo "changed_files=$(git diff --name-only ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }})" >> $GITHUB_OUTPUT
 
             - name: Iterate, find and check .sdf files
               run: |
-                for file in ${{ steps.changed-files.outputs.changed_files }}; do
+                changed_files=$(git diff --name-only ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }})
+                for file in $changed_files; do
                   if [[ $file == *.sdf ]]; then
                     echo "Checking $file"
 
