@@ -11,7 +11,9 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 2
 
             - name: Install packages
               id: install-packages
@@ -20,7 +22,7 @@ jobs:
                 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
                 wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
                 sudo apt-get update
-                sudo apt install libsdformat14-dev libsdformat14
+                sudo apt install -y libsdformat14-dev libsdformat14
 
             - name: Build check_sdf
               id: build-check-sdf
