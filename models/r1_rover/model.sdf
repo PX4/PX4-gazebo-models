@@ -134,7 +134,7 @@
 		<sensor name="navsat_sensor" type="navsat">
 			<always_on>1</always_on>
 			<update_rate>30</update_rate>
-      	</sensor>
+		</sensor>
 	  </link>
 	  <link name='lf_wheel_link'>
 		<pose>0.15 0.16317 0.0215 0 -0 0</pose>

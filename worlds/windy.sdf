@@ -145,10 +145,9 @@
         <falloff>0</falloff>
       </spot>
     </light>
-
     <wind>
-	    <linear_velocity>10 10 10</linear_velocity>
-    </wind>
+		<linear_velocity>10 10 10</linear_velocity>
+	</wind>
 
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>

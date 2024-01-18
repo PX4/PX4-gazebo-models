@@ -74,11 +74,10 @@
     <scene>
       <ambient>0.8 0.5 1</ambient>
       <grid>false</grid>
-      <sky>1
-      <clouds>1</clouds>
+      <sky>
+        <clouds>true</clouds>
       </sky>
       <shadows>1</shadows>
-
     </scene>
     <light name='sunUTC' type='directional'>
       <pose>0 0 500 0 -0 0</pose>
@@ -107,6 +106,7 @@
       <name>park</name>
       <pose>205 155 -1 0 0 0</pose>
     </include>
+
     <include>
       <uri>
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/Coast Water
@@ -122,7 +122,6 @@
       <latitude_deg>37.412173071650805</latitude_deg>
       <longitude_deg>-121.998878727967</longitude_deg>
     </spherical_coordinates>
-
 
   </world>
 </sdf>
