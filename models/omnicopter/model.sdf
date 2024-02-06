@@ -69,6 +69,10 @@
         <always_on>1</always_on>
         <update_rate>250</update_rate>
       </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
     </link>
     <link name='rotor_0'>
       <pose>0.1 0.1 0.1 -0.350879 -0.908651  0.172719</pose>
