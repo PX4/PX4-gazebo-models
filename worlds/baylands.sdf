@@ -98,7 +98,6 @@
         <falloff>0</falloff>
       </spot>
     </light>
-
     <include>
       <uri>
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/baylands
@@ -106,7 +105,6 @@
       <name>park</name>
       <pose>205 155 -1 0 0 0</pose>
     </include>
-
     <include>
       <uri>
         https://fuel.gazebosim.org/1.0/OpenRobotics/models/Coast Water
@@ -115,13 +113,11 @@
         <relative_to>park</relative_to>
       </pose>
     </include>
-
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <world_frame_orientation>ENU</world_frame_orientation>
       <latitude_deg>37.412173071650805</latitude_deg>
       <longitude_deg>-121.998878727967</longitude_deg>
     </spherical_coordinates>
-
   </world>
 </sdf>
