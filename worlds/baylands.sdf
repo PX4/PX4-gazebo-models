@@ -92,11 +92,6 @@
         <constant>1</constant>
         <quadratic>0</quadratic>
       </attenuation>
-      <spot>
-        <inner_angle>0</inner_angle>
-        <outer_angle>0</outer_angle>
-        <falloff>0</falloff>
-      </spot>
     </light>
     <include>
       <uri>
