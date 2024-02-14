@@ -221,7 +221,7 @@
 			</axis>
 		</joint>
 	  	<link name='lb_wheel_link'>
-	    	pose>-0.15 0.16317 0.0215 0 -0 0</pose>
+	    	<pose>-0.15 0.16317 0.0215 0 -0 0</pose>
 	    	<inertial>
 			<pose>0 0 0 1.57079632679 0 0</pose>
 			<mass>0.414</mass>
@@ -319,7 +319,7 @@
 				</inertia>
 			</inertial>
 			<collision name='rf_wheel_link_collision'>
-				pose>0 0 0 1.57079632679 0 0</pose>
+				<pose>0 0 0 1.57079632679 0 0</pose>
 				<geometry>
 					<cylinder>
 						<radius>0.0686</radius>
