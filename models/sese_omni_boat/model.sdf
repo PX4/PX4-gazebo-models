@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+    <model name="sese_omni_boat">
+        <pose>0 0 0 0 0 0</pose>
+        <self_collide>false</self_collide>
+        <static>false</static>
+        <link name="base_link">
+            <inertial>
+                <mass>40</mass>
+                <inertia>
+                    <ixx>1.89</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>0.64</iyy>
+                    <iyz>0</iyz>
+                    <izz>2.083</izz>
+                </inertia>
+            </inertial>
+            <!-- <velocity_decay /> -->
+            <visual name="base_link_visual">
+                <pose>0.22 -0.3 -0.1 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <uri>model://sese_omni_boat/meshes/simplified_drone_model1.stl</uri>
+                        <scale>0.001 0.001 0.001</scale>
+                    </mesh>
+                </geometry>
+                <material>
+                    <ambient>0.2 0.2 0.2 1</ambient>
+                    <diffuse>0.2 0.2 0.2 1</diffuse>
+                    <specular>0.2 0.2 0.2 1</specular>
+                </material>
+            </visual>
+            <collision name="base_link_collision_1">
+                <pose>0 0 0 0 0 0</pose>
+                <geometry>
+                    <box>
+                        <size>0.5 1 0.37</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <min_depth>0.001</min_depth>
+                            <max_vel>0</max_vel>
+                        </ode>
+                    </contact>
+                    <friction>
+                        <ode />
+                    </friction>
+                </surface>
+            </collision>
+        </link>
+        <!-- <link name="rotor_0">
+            <gravity>true</gravity>
+            <self_collide>false</self_collide>
+            <velocity_decay />
+            <pose>0.174 -0.174 0.06 0 0 0</pose>
+            <inertial>
+                <mass>0.016076923076923075</mass>
+                <inertia>
+                    <ixx>3.8464910483993325e-07</ixx>
+                    <iyy>2.6115851691700804e-05</iyy>
+                    <izz>2.649858234714004e-05</izz>
+                </inertia>
+            </inertial>
+            <visual name="rotor_0_visual">
+                <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.8461538461538461 0.8461538461538461 0.8461538461538461</scale>
+                        <uri>model://sese_omni_boat/meshes/prop.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <script>
+                        <name>Gazebo/DarkGrey</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+            <collision name="rotor_0_collision">
+                <pose>0 0 0 0 0 0 </pose>
+                <geometry>
+                    <box>
+                        <size>0.2792307692307692 0.016923076923076923 0.0008461538461538462</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <min_depth>0.001</min_depth>
+                            <max_vel>0</max_vel>
+                        </ode>
+                    </contact>
+                    <friction>
+                        <ode />
+                    </friction>
+                </surface>
+            </collision>
+        </link>
+        <joint name="rotor_0_joint" type="revolute">
+            <parent>base_link</parent>
+            <child>rotor_0</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                </dynamics>
+            </axis>
+        </joint>
+        <link name="rotor_1">
+            <gravity>true</gravity>
+            <self_collide>false</self_collide>
+            <velocity_decay />
+            <pose>-0.174 0.174 0.06 0 0 0</pose>
+            <inertial>
+                <mass>0.016076923076923075</mass>
+                <inertia>
+                    <ixx>3.8464910483993325e-07</ixx>
+                    <iyy>2.6115851691700804e-05</iyy>
+                    <izz>2.649858234714004e-05</izz>
+                </inertia>
+            </inertial>
+            <visual name="rotor_1_visual">
+                <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.8461538461538461 0.8461538461538461 0.8461538461538461</scale>
+                        <uri>model://sese_omni_boat/meshes/prop.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <script>
+                        <name>Gazebo/DarkGrey</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+            <collision name="rotor_1_collision">
+                <pose>0 0 0 0 0 0 </pose>
+                <geometry>
+                    <box>
+                        <size>0.2792307692307692 0.016923076923076923 0.0008461538461538462</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <min_depth>0.001</min_depth>
+                            <max_vel>0</max_vel>
+                        </ode>
+                    </contact>
+                    <friction>
+                        <ode />
+                    </friction>
+                </surface>
+            </collision>
+        </link>
+        <joint name="rotor_1_joint" type="revolute">
+            <parent>base_link</parent>
+            <child>rotor_1</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                </dynamics>
+            </axis>
+        </joint>
+        <link name="rotor_2">
+            <gravity>true</gravity>
+            <self_collide>false</self_collide>
+            <velocity_decay />
+            <pose>0.174 0.174 0.06 0 0 0</pose>
+            <inertial>
+                <mass>0.016076923076923075</mass>
+                <inertia>
+                    <ixx>3.8464910483993325e-07</ixx>
+                    <iyy>2.6115851691700804e-05</iyy>
+                    <izz>2.649858234714004e-05</izz>
+                </inertia>
+            </inertial>
+            <visual name="rotor_2_visual">
+                <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.8461538461538461 0.8461538461538461 0.8461538461538461</scale>
+                        <uri>model://sese_omni_boat/meshes/prop.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <script>
+                        <name>Gazebo/DarkGrey</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+            <collision name="rotor_2_collision">
+                <pose>0 0 0 0 0 0 </pose>
+                <geometry>
+                    <box>
+                        <size>0.2792307692307692 0.016923076923076923 0.0008461538461538462</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <min_depth>0.001</min_depth>
+                            <max_vel>0</max_vel>
+                        </ode>
+                    </contact>
+                    <friction>
+                        <ode />
+                    </friction>
+                </surface>
+            </collision>
+        </link>
+        <joint name="rotor_2_joint" type="revolute">
+            <parent>base_link</parent>
+            <child>rotor_2</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                </dynamics>
+            </axis>
+        </joint>
+        <link name="rotor_3">
+            <gravity>true</gravity>
+            <self_collide>false</self_collide>
+            <velocity_decay />
+            <pose>-0.174 -0.174 0.06 0 0 0</pose>
+            <inertial>
+                <mass>0.016076923076923075</mass>
+                <inertia>
+                    <ixx>3.8464910483993325e-07</ixx>
+                    <iyy>2.6115851691700804e-05</iyy>
+                    <izz>2.649858234714004e-05</izz>
+                </inertia>
+            </inertial>
+            <visual name="rotor_3_visual">
+                <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
+                <geometry>
+                    <mesh>
+                        <scale>0.8461538461538461 0.8461538461538461 0.8461538461538461</scale>
+                        <uri>model://sese_omni_boat/meshes/prop.dae</uri>
+                    </mesh>
+                </geometry>
+                <material>
+                    <script>
+                        <name>Gazebo/DarkGrey</name>
+                        <uri>file://media/materials/scripts/gazebo.material</uri>
+                    </script>
+                </material>
+            </visual>
+            <collision name="rotor_3_collision">
+                <pose>0 0 0 0 0 0 </pose>
+                <geometry>
+                    <box>
+                        <size>0.2792307692307692 0.016923076923076923 0.0008461538461538462</size>
+                    </box>
+                </geometry>
+                <surface>
+                    <contact>
+                        <ode>
+                            <min_depth>0.001</min_depth>
+                            <max_vel>0</max_vel>
+                        </ode>
+                    </contact>
+                    <friction>
+                        <ode />
+                    </friction>
+                </surface>
+            </collision>
+        </link>
+        <joint name="rotor_3_joint" type="revolute">
+            <parent>base_link</parent>
+            <child>rotor_3</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+                <dynamics>
+                    <spring_reference>0</spring_reference>
+                    <spring_stiffness>0</spring_stiffness>
+                </dynamics>
+            </axis>
+        </joint> -->
+        <sensor name="imu_sensor" type="imu">
+            <always_on>1</always_on>
+            <update_rate>250</update_rate>
+        </sensor>
+        <sensor name="air_pressure_sensor" type="air_pressure">
+            <always_on>1</always_on>
+            <update_rate>50</update_rate>
+            <air_pressure>
+                <pressure>
+                    <noise type="gaussian">
+                        <mean>0</mean>
+                        <stddev>0.01</stddev>
+                    </noise>
+                </pressure>
+            </air_pressure>
+        </sensor>
+        <!-- <plugin
+            filename="ignition-gazebo-thruster-system"
+            name="ignition::gazebo::systems::Thruster">
+            <namespace>sese_omni_boat</namespace>
+            <joint_name>rotor_1_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1000</fluid_density>
+            <propeller_diameter>0.2</propeller_diameter>
+        </plugin> -->
+        <plugin
+            filename="gz-sim-hydrodynamics-system"
+            name="gz::sim::systems::Hydrodynamics">
+            <link_name>base_link</link_name>
+            <xDotU>-0.04876161</xDotU>
+            <yDotV>-1.26324739</yDotV>
+            <zDotW>-1.26324739</zDotW>
+            <kDotP>0</kDotP>
+            <mDotQ>-0.3346</mDotQ>
+            <nDotR>-0.3346</nDotR>
+            <xUabsU>-0.62282</xUabsU>
+            <xU>-5</xU>
+            <yVabsV>-60.127</yVabsV>
+            <yV>-5</yV>
+            <zWabsW>-6.0127</zWabsW>
+            <zW>-100</zW>
+            <kPabsP>-0.001916</kPabsP>
+            <kP>-1</kP>
+            <mQabsQ>-6.32698957</mQabsQ>
+            <mQ>-1</mQ>
+            <nRabsR>-6.32698957</nRabsR>
+            <nR>-1</nR>
+        </plugin>
+    </model>
+</sdf>
