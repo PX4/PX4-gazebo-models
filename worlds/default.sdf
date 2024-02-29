@@ -163,14 +163,14 @@
     </light>
     <light type="directional" name="sun_2">
       <cast_shadows>true</cast_shadows>
-      <pose>2 2 2 0 0 0</pose>
+      <pose>200 200 200 0 0 0</pose>
       <diffuse>0.5 0.5 0.5 0.3</diffuse>
       <specular>0.2 0.2 0.2 0.3</specular>
       <attenuation>
-        <range>1000</range>
-        <constant>0.9</constant>
-        <linear>0.01</linear>
-        <quadratic>0.001</quadratic>
+        <range>2000</range>
+        <constant>1</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
       </attenuation>
       <direction>0.01 0.01 -0.9</direction>
     </light>
