@@ -234,7 +234,7 @@
       </spot>
     </light>
     <wind>
-	    <linear_velocity>10 10 10</linear_velocity>
+      <linear_velocity>10 10 10</linear_velocity>
     </wind>
   </world>
 </sdf>
