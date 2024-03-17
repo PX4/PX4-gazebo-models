@@ -7,7 +7,7 @@
         <link name="base_link">
             <velocity_decay />
             <inertial>
-                <mass>40</mass>
+                <mass>30</mass>
                 <inertia>
                     <ixx>3.78</ixx>
                     <ixy>0</ixy>
@@ -22,7 +22,7 @@
                 <geometry>
                     <mesh>
                         <uri>model://sese_omni_boat/meshes/ASV_RYBITWA.stl</uri>
-                        <scale>0.0001 0.0001 0.0001</scale>
+                        <scale>0.001 0.001 0.001</scale>
                     </mesh>
                 </geometry>
                 <material>
@@ -32,10 +32,10 @@
                 </material>
             </visual>
             <collision name="base_link_collision_1">
-                <pose>0 0 0 0 0 0</pose>
+                <pose>0 0 0.1 0 0 0</pose>
                 <geometry>
                     <box>
-                        <size>0.55 1.2 0.37</size>
+                        <size>0.55 1.3 0.37</size>
                     </box>
                 </geometry>
                 <surface>
