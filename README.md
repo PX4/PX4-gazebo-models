@@ -31,3 +31,5 @@ The following arguments can be passed:
 `--overwrite` A boolean variable providing the ability to overwrite existing directories with new data.
 
 `--dryrun` A boolean variable that can be set when running testcases. It will not provide any interactivity and will not start Gazebo simulation.
+
+`--headless` A boolean variable providing the ability to run in headless (server-only) mode. This is the [mode of operation in macOS](https://gazebosim.org/docs/harmonic/getstarted#macos), and is more suitable for container use.
