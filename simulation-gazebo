@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--model_store', help='Path to model storage directory', required=False, default="~/.simulation-gazebo")
     parser.add_argument('--overwrite', help='Overwrite existing model directories', required=False, default=False, action='store_true')
     parser.add_argument('--dryrun', help='Test in dryrun. Do not launch gazebo', required=False, default=False, action='store_true')
+    parser.add_argument('--headless', help='Run Gazebo without GUI', required=False, default=False, action='store_true')
 
     args = parser.parse_args()
 
@@ -90,6 +91,8 @@ def main():
     print('> Launching gazebo simulation...')
     if not args.dryrun:
         cmd = f'GZ_SIM_RESOURCE_PATH={args.model_store}/models gz sim -r {args.model_store}/worlds/{args.world}.sdf'
+        if args.headless:
+            cmd = f'{cmd} -s'
 
         if args.gz_partition:
             cmd = f'GZ_PARTITION={args.gz_partition} {cmd}'
