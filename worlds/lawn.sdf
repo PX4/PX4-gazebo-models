@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
-  <world name="default">
+  <world name="lawn">
     <physics type="ode">
       <max_step_size>0.004</max_step_size>
       <real_time_factor>1.0</real_time_factor>
@@ -158,9 +158,14 @@
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type="adiabatic"/>
     <scene>
-      <grid>false</grid>
-      <ambient>0.4 0.4 0.4 1</ambient>
-      <background>0.7 0.7 0.7 1</background>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <grid>true</grid>
+      <ambient>0.5 0.5 0.5 0.3</ambient>
+      <background>0.3 0.3 0.3 0.3</background>
       <shadows>true</shadows>
     </scene>
     <model name="ground_plane">
@@ -175,23 +180,33 @@
           </geometry>
           <surface>
             <friction>
-              <ode/>
+              <ode>
+                <mu>0.6</mu>
+                <mu2>0.6</mu2>
+              </ode>
             </friction>
             <bounce/>
-            <contact/>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode>
+                <min_depth>0.005</min_depth>
+                <kp>1e8</kp>
+              </ode>
+            </contact>
           </surface>
         </collision>
         <visual name="visual">
+          <cast_shadows>false</cast_shadows>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>100 100</size>
+              <size>400 400</size>
             </plane>
           </geometry>
           <material>
-            <ambient>0.8 0.8 0.8 1</ambient>
-            <diffuse>0.8 0.8 0.8 1</diffuse>
-            <specular>0.8 0.8 0.8 1</specular>
+            <diffuse>0.6 1.0 0.25 0.5</diffuse>
+            <specular>0 0 0 0</specular>
+            <emissive>0 0 0 0</emissive>
           </material>
         </visual>
         <pose>0 0 0 0 -0 0</pose>
@@ -231,12 +246,25 @@
         <falloff>0</falloff>
       </spot>
     </light>
+    <light type="directional" name="sun_2">
+      <cast_shadows>true</cast_shadows>
+      <pose>200 200 200 0 0 0</pose>
+      <diffuse>0.5 0.5 0.5 0.3</diffuse>
+      <specular>0.2 0.2 0.2 0.3</specular>
+      <attenuation>
+        <range>2000</range>
+        <constant>1</constant>
+        <linear>0</linear>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <direction>0.01 0.01 -0.9</direction>
+    </light>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <world_frame_orientation>ENU</world_frame_orientation>
       <latitude_deg>47.397971057728974</latitude_deg>
       <longitude_deg> 8.546163739800146</longitude_deg>
-      <altitude>0</altitude>
+      <elevation>0</elevation>
     </spherical_coordinates>
   </world>
 </sdf>
