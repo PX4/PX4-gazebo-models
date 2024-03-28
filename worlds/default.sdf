@@ -18,17 +18,102 @@
       <render_engine>ogre2</render_engine>
     </plugin>
     <gui fullscreen="false">
-      <plugin name="3D View" filename="GzScene3D">
+      <!-- 3D scene -->
+      <plugin filename="MinimalScene" name="3D View">
         <gz-gui>
           <title>3D View</title>
-          <property type="bool" key="showTitleBar">0</property>
+          <property type="bool" key="showTitleBar">false</property>
           <property type="string" key="state">docked</property>
         </gz-gui>
         <engine>ogre2</engine>
         <scene>scene</scene>
-        <ambient_light>0.5984631152222222 0.5984631152222222 0.5984631152222222</ambient_light>
-        <background_color>0.8984631152222222 0.8984631152222222 0.8984631152222222</background_color>
+        <ambient_light>0.4 0.4 0.4</ambient_light>
+        <background_color>0.8 0.8 0.8</background_color>
         <camera_pose>-6 0 6 0 0.5 0</camera_pose>
+        <camera_clip>
+          <near>0.25</near>
+          <far>25000</far>
+        </camera_clip>
+      </plugin>
+      <!-- Plugins that add functionality to the scene -->
+      <plugin filename="EntityContextMenuPlugin" name="Entity context menu">
+        <gz-gui>
+          <property key="state" type="string">floating</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="GzSceneManager" name="Scene Manager">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="InteractiveViewControl" name="Interactive view control">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="CameraTracking" name="Camera Tracking">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="MarkerManager" name="Marker manager">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="SelectEntities" name="Select Entities">
+        <gz-gui>
+          <anchors target="Select entities">
+            <line own="right" target="right"/>
+            <line own="top" target="top"/>
+          </anchors>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="VisualizationCapabilities" name="Visualization Capabilities">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="Spawn" name="Spawn Entities">
+        <gz-gui>
+          <anchors target="Select entities">
+            <line own="right" target="right"/>
+            <line own="top" target="top"/>
+          </anchors>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
       </plugin>
       <plugin name="World control" filename="WorldControl">
         <gz-gui>
@@ -73,14 +158,9 @@
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type="adiabatic"/>
     <scene>
-      <sky>
-        <clouds>
-          <speed>12</speed>
-        </clouds>
-      </sky>
-      <grid>true</grid>
-      <ambient>0.5 0.5 0.5 0.3</ambient>
-      <background>0.3 0.3 0.3 0.3</background>
+      <grid>false</grid>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
       <shadows>true</shadows>
     </scene>
     <model name="ground_plane">
@@ -95,33 +175,23 @@
           </geometry>
           <surface>
             <friction>
-              <ode>
-                <mu>0.6</mu>
-                <mu2>0.6</mu2>
-              </ode>
+              <ode/>
             </friction>
             <bounce/>
-            <contact>
-              <collide_bitmask>65535</collide_bitmask>
-              <ode>
-                <min_depth>0.005</min_depth>
-                <kp>1e8</kp>
-              </ode>
-            </contact>
+            <contact/>
           </surface>
         </collision>
         <visual name="visual">
-          <cast_shadows>false</cast_shadows>
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>400 400</size>
+              <size>100 100</size>
             </plane>
           </geometry>
           <material>
-            <diffuse>0.6 1.0 0.25 0.5</diffuse>
-            <specular>0 0 0 0</specular>
-            <emissive>0 0 0 0</emissive>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
           </material>
         </visual>
         <pose>0 0 0 0 -0 0</pose>
@@ -161,25 +231,12 @@
         <falloff>0</falloff>
       </spot>
     </light>
-    <light type="directional" name="sun_2">
-      <cast_shadows>true</cast_shadows>
-      <pose>200 200 200 0 0 0</pose>
-      <diffuse>0.5 0.5 0.5 0.3</diffuse>
-      <specular>0.2 0.2 0.2 0.3</specular>
-      <attenuation>
-        <range>2000</range>
-        <constant>1</constant>
-        <linear>0</linear>
-        <quadratic>0</quadratic>
-      </attenuation>
-      <direction>0.01 0.01 -0.9</direction>
-    </light>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <world_frame_orientation>ENU</world_frame_orientation>
       <latitude_deg>47.397971057728974</latitude_deg>
       <longitude_deg> 8.546163739800146</longitude_deg>
-      <elevation>0</elevation>
+      <altitude>0</altitude>
     </spherical_coordinates>
   </world>
 </sdf>
