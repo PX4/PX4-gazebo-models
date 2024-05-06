@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='x500_flow'>
+    <include merge='true'>
+      <uri>x500</uri>
+    </include>
+    <include merge='true'>
+      <uri>model://ArkFlow</uri>
+      <pose>-0.05 .01 .235 0 3.14 1.57</pose>
+    </include>
+    <joint name="LidarJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>ArkFlowSensor</child>
+      <pose relative_to="base_link">-0.05 .01 .235 0 3.14 1.57</pose>
+    </joint>
+  </model>
+</sdf>
