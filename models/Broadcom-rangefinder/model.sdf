@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
-  <model name='ArkFlow'>
+  <model name='Broadcom'>
     <pose>0 0 0 0 3.14 1.57</pose>
     <self_collide>false</self_collide>
     <static>false</static>
-    <link name="ArkFlowSensor">
+    <link name="BroadcomSensor">
       <inertial>
         <pose>0.01 0.07 .018 0 0 0</pose>
         <mass>0.06</mass>
@@ -17,16 +17,16 @@
           <izz>0.0000436519</izz>
         </inertia>
       </inertial>
-      <visual name="ArkFlow/visual">
+      <visual name="Broadcom/visual">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://ArkFlow/meshes/ark_flow.dae</uri>
+            <uri>model://Broadcom-rangefinder/meshes/broadcom.dae</uri>
           </mesh>
         </geometry>
       </visual>
-      <collision name="ArkFlow/collision">
+      <collision name="Broadcom/collision">
         <pose>0.01 0.07 .018 0 0 0</pose>
         <geometry>
           <box>
@@ -47,7 +47,7 @@
           </scan>
           <range>
             <min>0.06</min>
-            <max>35</max>
+            <max>30</max>
             <resolution>0.01</resolution>
           </range>
           <noise>
