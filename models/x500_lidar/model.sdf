@@ -6,7 +6,7 @@
     </include>
     <include merge='true'>
       <!-- <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Lidar 2d v2</uri> -->
-      <uri>model://lidar_2d</uri>
+      <uri>model://lidar_2d_v2</uri>
       <pose>.12 0 .26 0 0 0</pose>
     </include>
     <joint name="LidarJoint" type="fixed">
