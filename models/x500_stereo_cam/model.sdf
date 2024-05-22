@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='x500_stereo_cam'>
+    <include merge='true'>
+      <uri>x500</uri>
+    </include>
+    <include merge='true'>
+      <uri>model://stereo_cam</uri>
+      <pose>.12 .0 .242 0 0 0</pose>
+    </include>
+    <joint name="CameraJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>stereo_cam/base_link</child>
+      <pose relative_to="base_link">.12 .0 .242 0 0 0</pose>
+    </joint>
+  </model>
+</sdf>
