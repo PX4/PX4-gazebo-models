@@ -188,31 +188,6 @@
         https://fuel.gazebosim.org/1.0/beronaeron/models/upb 12
       </uri>
     </include>
-    <model name="textured_plane">
-      <static>true</static>
-      <link name="link">
-        <visual name="visual">
-          <pose>5 0 5 1.57 0 -1.57</pose>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>2 2</size>
-            </plane>
-          </geometry>
-          <material>
-            <ambient>1 1 1 1</ambient>
-            <diffuse>1 1 1 1</diffuse>
-            <specular>0.1 0.1 0.1 1</specular>
-            <emissive>0 0 0 1</emissive>
-            <pbr>
-              <metal>
-                <albedo_map>file:///home/omer/Pictures/apriltag.png</albedo_map>
-              </metal>
-            </pbr>
-          </material>
-        </visual>
-      </link>
-    </model>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <world_frame_orientation>ENU</world_frame_orientation>
