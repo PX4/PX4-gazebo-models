@@ -173,7 +173,7 @@
         <collision name="collision">
           <geometry>
             <heightmap>
-              <uri>file://media/dem/data.dem</uri>
+              <uri>file://media/dem/data.dt2</uri>
               <size>50 50 10</size>
               <pos>0 0 -685</pos>
             </heightmap>
