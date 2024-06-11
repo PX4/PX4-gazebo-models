@@ -12,7 +12,7 @@
     <plugin name="gz::sim::systems::Contact" filename="gz-sim-contact-system" />
     <plugin name="gz::sim::systems::Imu" filename="gz-sim-imu-system" />
     <plugin name="gz::sim::systems::AirPressure" filename="gz-sim-air-pressure-system" />
-    <plugin name="gz::sim::systems::ApplyLinkWrench" filename="gz-sim-apply-link-wrench-system" />
+    <!-- <plugin name="gz::sim::systems::ApplyLinkWrench" filename="gz-sim-apply-link-wrench-system" />  -->
     <plugin name="gz::sim::systems::NavSat" filename="gz-sim-navsat-system" />
     <plugin name="gz::sim::systems::Sensors" filename="gz-sim-sensors-system">
       <render_engine>ogre2</render_engine>
@@ -170,13 +170,20 @@
     <model name="heightmap">
       <static>true</static>
       <link name="link">
-        <collision name="collision">
+        <!-- <collision name="collision">
           <geometry>
             <heightmap>
               <uri>file://media/dem/data.dt2</uri>
-              <size>50 50 10</size>
-              <pos>0 0 -685</pos>
+              <size>60 60 10</size>
+              <pos>0 0 -648</pos>
             </heightmap>
+          </geometry>
+        </collision> -->
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>50 50 2</size>
+            </box>
           </geometry>
         </collision>
 
@@ -218,7 +225,7 @@
 
               <uri>file://media/dem/data.dt2</uri>
               <size>60 60 10</size>
-              <pos>0 0 -643</pos>
+              <pos>0 0 -647</pos>
             </heightmap>
           </geometry>
         </visual>
