@@ -26,6 +26,21 @@
             <height>480</height>
             <format>L8</format>
           </image>
+          <distortion>
+            <k1>0.0</k1>
+            <k2>0.0</k2>
+            <k3>0.0</k3>
+            <p1>0.0</p1>
+            <p2>0.0</p2>
+          </distortion>
+          <lens>
+            <intrinsics>
+              <fx>384.0</fx> <!-- calculated based on hfov = 80 [deg], width = 640, heigth = 480 -->
+              <fy>384.0</fy>
+              <cx>320.0</cx>
+              <cy>240.0</cy>
+            </intrinsics>
+          </lens>
           <clip>
             <near>0.1</near>
             <far>100</far>
