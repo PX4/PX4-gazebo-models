@@ -6,12 +6,21 @@
     </include>
     <include merge='true'>
       <uri>model://mono_cam</uri>
-      <pose>.12 .03 .242 0 0 0</pose>
+      <pose>.2 .2 .3 0 -0.68 0</pose>
+    </include>
+    <include merge='true'>
+      <uri>model://seg_cam</uri>
+      <pose>.2 .2 .3 0 -0.68 0</pose>
     </include>
     <joint name="CameraJoint" type="fixed">
       <parent>base_link</parent>
       <child>mono_cam/base_link</child>
-      <pose relative_to="base_link">.12 .03 .242 0 0 0</pose>
+      <pose relative_to="base_link">.2 .2 .3 0 0 0</pose>
+    </joint>
+    <joint name="SegCameraJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>seg_cam/base_link</child>
+      <pose relative_to="base_link">.2 .2 .3 0 0 0</pose>
     </joint>
   </model>
 </sdf>
