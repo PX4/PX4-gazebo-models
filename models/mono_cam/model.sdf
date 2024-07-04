@@ -37,8 +37,8 @@
             <intrinsics>
               <fx>384.0</fx> <!-- calculated based on hfov = 80 [deg], width = 640, heigth = 480 -->
               <fy>384.0</fy>
-              <cx>320.0</cx>
-              <cy>240.0</cy>
+              <cx>319.5</cx>
+              <cy>239.5</cy>
             </intrinsics>
           </lens>
           <clip>
