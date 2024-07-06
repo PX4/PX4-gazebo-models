@@ -24,7 +24,7 @@
           <image>
             <width>640</width>
             <height>480</height>
-            <format>L8</format>
+            <format>R8G8B8</format>
           </image>
           <distortion>
             <k1>0.0</k1>
