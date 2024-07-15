@@ -31,6 +31,8 @@
         <camera>
           <segmentation_type>semantic</segmentation_type>
           <horizontal_fov>1.3962634</horizontal_fov>
+          <triggered>true</triggered>
+          <trigger_topic>/camera/trigger</trigger_topic>
           <image>
             <width>640</width>
             <height>480</height>
