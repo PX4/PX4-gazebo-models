@@ -582,7 +582,9 @@
       filename="gz-sim-odometry-publisher-system"
       name="gz::sim::systems::OdometryPublisher">
       <dimensions>3</dimensions>
-      <odom_frame>world</odom_frame>
+      <odom_frame>/world</odom_frame>
+      <robot_base_frame>/vehicle</robot_base_frame>
+      <tf_topic>/vehicle/tf</tf_topic>
     </plugin>
   </model>
 </sdf>

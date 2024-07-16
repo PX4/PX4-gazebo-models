@@ -26,29 +26,32 @@
           </box>
         </geometry>
       </visual>
-        <sensor name="2d" type="boundingbox_camera">
-          <topic>boxes_2d</topic>
-          <camera>
-            <triggered>true</triggered>
-            <trigger_topic>/camera/trigger</trigger_topic>
-            <box_type>2d</box_type>
-            <horizontal_fov>1.3962634</horizontal_fov>
-            <image>
-              <width>640</width>
-              <height>480</height>
-            </image>
-            <clip>
-              <near>0.1</near>
-              <far>100</far>
-            </clip>
-            <!-- <save enabled="true">
+      <sensor name="2d" type="boundingbox_camera">
+        <topic>boxes_2d</topic>
+        <camera>
+          <triggered>true</triggered>
+          <trigger_topic>/camera/trigger</trigger_topic>
+          <box_type>2d</box_type>
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <optical_frame_id>/bbox_camera</optical_frame_id>
+          <camera_info_topic>/bbox_camera/camera_info</camera_info_topic>
+          <image>
+            <width>640</width>
+            <height>480</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <!-- <save enabled="true">
               <path>bounding_box_3d_data</path>
             </save> -->
-          </camera>
-          <always_on>1</always_on>
-          <update_rate>30</update_rate>
-          <visualize>true</visualize>
-        </sensor>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>/bbox_camera</topic>
+      </sensor>
     </link>
   </model>
 </sdf>
