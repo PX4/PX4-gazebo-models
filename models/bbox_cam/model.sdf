@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name="bbox_cam">
+    <pose>0 0 0 0 0.0 0</pose>
+    <link name="bbox_cam/base_link">
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.000166667</ixx>
+          <iyy>0.000166667</iyy>
+          <izz>0.000166667</izz>
+        </inertia>
+      </inertial>
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.0 0.0 0.0</size>
+          </box>
+        </geometry>
+      </visual>
+        <sensor name="2d" type="boundingbox_camera">
+          <topic>boxes_2d</topic>
+          <camera>
+            <triggered>true</triggered>
+            <trigger_topic>/camera/trigger</trigger_topic>
+            <box_type>2d</box_type>
+            <horizontal_fov>1.3962634</horizontal_fov>
+            <image>
+              <width>640</width>
+              <height>480</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>100</far>
+            </clip>
+            <!-- <save enabled="true">
+              <path>bounding_box_3d_data</path>
+            </save> -->
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>true</visualize>
+        </sensor>
+    </link>
+  </model>
+</sdf>

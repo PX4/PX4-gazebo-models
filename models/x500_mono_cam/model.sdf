@@ -9,7 +9,7 @@
       <pose>.2 .2 .3 0 -0.5 0</pose>
     </include>
     <include merge='true'>
-      <uri>model://seg_cam</uri>
+      <uri>model://bbox_cam</uri>
       <pose>.2 .2 .3 0 -0.5 0</pose>
     </include>
     <joint name="CameraJoint" type="fixed">
@@ -17,9 +17,9 @@
       <child>mono_cam/base_link</child>
       <pose relative_to="base_link">.2 .2 .3 0 0 0</pose>
     </joint>
-    <joint name="SegCameraJoint" type="fixed">
+    <joint name="BboxCameraJoint" type="fixed">
       <parent>base_link</parent>
-      <child>seg_cam/base_link</child>
+      <child>bbox_cam/base_link</child>
       <pose relative_to="base_link">.2 .2 .3 0 0 0</pose>
     </joint>
   </model>
