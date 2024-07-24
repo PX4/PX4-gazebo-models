@@ -14,27 +14,5 @@
       <child>mono_cam/base_link</child>
       <pose relative_to="base_link">0 0 0 0 1.5707 0</pose>
     </joint>
-
-<!--     <link name="camera_connector_arm">
-      <visual name="camera_connector_arm_visual">
-        <pose>.13 0 .185 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.01 0.01 0.11</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Grey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-    </link>
-    <joint name="camera_connector_arm_joint" type="fixed">
-      <parent>base_link</parent>
-      <child>camera_connector_arm</child>
-      <pose relative_to="base_link">.13 0 .185 0 0 0</pose>
-    </joint> -->
   </model>
 </sdf>
