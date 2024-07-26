@@ -6,7 +6,7 @@
     <link name="rangefinder/base_link">
       <inertial>
         <pose>0.02 0.02 0.02 0 0 0</pose>
-        <mass>0.010</mass>
+        <mass>0.050</mass>
         <inertia>
           <ixx>0.00004</ixx>
           <ixy>0</ixy>
