@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='Broadcom'>
+    <pose>0 0 0 0 3.14 1.57</pose>
+    <self_collide>false</self_collide>
+    <static>false</static>
+    <link name="BroadcomSensor">
+      <inertial>
+        <pose>0.01 0.07 .018 0 0 0</pose>
+        <mass>0.06</mass>
+        <inertia>
+          <ixx>0.0000460804</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0000055421</iyy>
+          <iyz>0</iyz>
+          <izz>0.0000436519</izz>
+        </inertia>
+      </inertial>
+      <visual name="Broadcom/visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://Broadcom-rangefinder/meshes/broadcom.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="Broadcom/collision">
+        <pose>0.01 0.07 .018 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.06 0.06 0.035</size>
+          </box>
+        </geometry>
+      </collision>
+      <sensor name="broadcomafbrs50" type="gpu_ray">
+        <pose>0.01 0.07 0.018 -1.57 0 0</pose>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>-1.57</min_angle>
+              <max_angle>1.57</max_angle>
+            </horizontal>
+          </scan>
+          <range>
+            <min>0.06</min>
+            <max>30</max>
+            <resolution>0.01</resolution>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.02</stddev>
+          </noise>
+        </ray>
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <visualize>true</visualize>
+      </sensor>
+      <gravity>true</gravity>
+      <velocity_decay/>
+    </link>
+    <!-- <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin> -->
+  </model>
+</sdf>
