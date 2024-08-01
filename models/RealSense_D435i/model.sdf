@@ -63,6 +63,7 @@
       </visual>
 
       <sensor name="RealSense_D435i" type="rgbd_camera">
+        <pose>0.0 0 0 0 0 -1.57</pose>
         <update_rate>60</update_rate>
         <topic>realsense_d435i</topic>
         <camera name="camera">
@@ -88,8 +89,8 @@
             <center>0.5 0.5</center>
           </distortion>
           <image>
-            <width>640</width>
-            <height>480</height>
+            <width>1280</width>
+            <height>720</height>
             <format>R8G8B8</format>
           </image>
           <clip>
@@ -98,8 +99,8 @@
           </clip>
           <depth_camera>
             <clip>
-              <near>0.1</near>
-              <far>10</far>
+              <near>0.5</near>
+              <far>6</far>
             </clip>
           </depth_camera>
           <noise>
