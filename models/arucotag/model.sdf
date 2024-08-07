@@ -21,6 +21,19 @@
           </pbr>
         </material>
       </visual>
+      <collision name='base_collision'>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>0.5 0.5</size>
+          </plane>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
     </link>
   </model>
 </sdf>
