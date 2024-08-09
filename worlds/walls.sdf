@@ -166,18 +166,6 @@
     <model name="ground_plane">
       <static>true</static>
       <link name="link">
-        <inertial>
-          <inertia>
-            <ixx>0.16666</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>0.16666</iyy>
-            <iyz>0</iyz>
-            <izz>0.16666</izz>
-          </inertia>
-          <mass>10</mass>
-          <pose>0 0 0 0 0 0</pose>
-        </inertial>
         <collision name="collision">
           <geometry>
             <plane>
@@ -228,56 +216,92 @@
       <pose>5 0 0 0 0 0</pose>
       <static>true</static>
       <link name="link1">
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>1 20 30</size>
-          </box>
-        </geometry>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>1 20 30</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
-          <specular>1 1 1 1</specular>
-        </material>
-      </visual>
+        <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1.0</mass>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>1 20 30</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>1 20 30</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>1 1 1 1</specular>
+          </material>
+        </visual>
       </link>
     </model>
     <model name="box2">
       <static>true</static>
       <pose>-3 5 0 0 0 0</pose>
       <link name="link2">
-      <collision name="collision">
-        <geometry>
-          <box>
-            <size>10 1 30</size>
-          </box>
-        </geometry>
-      </collision>
-      <visual name="visual">
-        <geometry>
-          <box>
-            <size>10 1 30</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
-          <specular>1 1 1 1</specular>
-        </material>
-      </visual>
+      <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1.0</mass>
+        </inertial>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 1 30</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 1 30</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>1 1 1 1</specular>
+          </material>
+        </visual>
       </link>
     </model>
     <model name="box3">
       <static>true</static>
       <pose>13 -10 0 0 0 0</pose>
-      <link name="link2">
+      <link name="link3">
+      <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1.0</mass>
+        </inertial>
       <collision name="collision">
         <geometry>
           <box>
@@ -302,7 +326,19 @@
     <model name="box4">
       <pose>12 0 0 0 0 0</pose>
       <static>true</static>
-      <link name="link1">
+      <link name="link4">
+      <pose>0 0 0 0 0 0</pose>
+        <inertial>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+          <mass>1.0</mass>
+        </inertial>
       <collision name="collision">
         <geometry>
           <box>
