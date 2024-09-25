@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <sdf version='1.5'>
   <model name='advanced_plane'>
+    <include merge='true'>
+      <uri>model://mono_cam</uri>
+      <pose>0.55 0 -0.01 0 0 0</pose>
+    </include>
+    <joint name="attach_joint" type="fixed">
+      <parent>base_link</parent> <!-- Parent link of the joint (main_model) -->
+      <child>mono_cam/base_link</child> <!-- Child link of the joint (nested_model) -->
+      <pose relative_to="base_link">0.55 0 -0.01 0 0 0</pose>
+    </joint>
     <pose>0 0 0.246 0 0 0</pose>
     <link name='base_link'>
       <pose>0 0 0 0 0 0</pose>
