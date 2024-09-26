@@ -17,13 +17,6 @@
         </inertia>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
-      <!-- <collision name="RealSense_D435i/collision">
-        <geometry>
-          <mesh>
-            <uri>model://RealSense_D435i/meshes/realsense.dae</uri>
-          </mesh>
-        </geometry>
-      </collision> -->
       <collision name="RealSense_D435i/collision">
         <pose>0 -0.013 0 0 0 0</pose>
         <geometry>
@@ -57,7 +50,6 @@
                 model://RealSense_D435i/materials/textures/RealSense_Roughness.png</roughness_map>
             </metal>
           </pbr>
-          <!-- fallback to script if no PBR support-->
           <script>
             <uri>model://RealSense_D435i/materials/scripts/</uri>
             <uri>model://RealSense_D435i/materials/textures/</uri>
@@ -65,63 +57,16 @@
           </script>
         </material>
       </visual>
-
-      <!-- <sensor name="RealSense_D435i" type="rgbd_camera">
-        <pose>0.0 0 0 0 0 -1.57</pose>
-        <update_rate>60</update_rate>
-        <topic>realsense_d435i</topic>
-        <camera name="camera">
-          <horizontal_fov>1.0472</horizontal_fov>
-          <lens>
-            <intrinsics>
-              <fx>554.25469</fx>
-              <fy>554.25469</fy>
-              <cx>320.5</cx>
-              <cy>240.5</cy>
-              <s>0</s>
-            </intrinsics>
-          </lens>
-          <distortion>
-            <k1>0.0</k1>
-            <k2>0.0</k2>
-            <k3>0.0</k3>
-            <p1>0.0</p1>
-            <p2>0.0</p2>
-            <center>0.5 0.5</center>
-          </distortion>
-          <image>
-            <width>480</width>
-            <height>360</height>
-            <format>R8G8B8</format>
-          </image>
-          <clip>
-            <near>0.01</near>
-            <far>300</far>
-          </clip>
-          <depth_camera>
-            <clip>
-              <near>0.5</near>
-              <far>6</far>
-            </clip>
-          </depth_camera>
-          <noise>
-            <type>gaussian</type>
-            <mean>0</mean>
-            <stddev>0.007</stddev>
-          </noise>
-        </camera>
-      </sensor> -->
-
       <sensor name="depth_camera_on" type="depth_camera">
         <pose>0 0 0.1 0 0 -1.57</pose>
-        <update_rate>2</update_rate>
+        <update_rate>20</update_rate>
         <topic>realsense_d435i</topic>
         <visualize>true</visualize>
         <camera>
           <horizontal_fov>0.785</horizontal_fov>
           <image>
-            <width>480</width>
-            <height>360</height>
+            <width>840</width>
+            <height>480</height>
             <format>R_FLOAT32</format>
           </image>
           <clip>
@@ -130,94 +75,6 @@
           </clip>
         </camera>
       </sensor>
-
-      <sensor name="imu_sensor" type="imu">
-        <always_on>1</always_on>
-        <update_rate>400</update_rate>
-        <topic>realsense_d435i/imu</topic>
-        <imu>
-          <angular_velocity>
-            <x>
-              <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-              </noise>
-            </x>
-            <y>
-              <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-              </noise>
-            </y>
-            <z>
-              <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-              </noise>
-            </z>
-          </angular_velocity>
-          <linear_acceleration>
-            <x>
-              <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-              </noise>
-            </x>
-            <y>
-              <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-              </noise>
-            </y>
-            <z>
-              <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-              </noise>
-            </z>
-          </linear_acceleration>
-        </imu>
-      </sensor>
-      <!-- <sensor name='gpu_lidar' type='gpu_lidar'>"
-        <pose>0 0 0.15 3.14159 0 -1.57</pose>
-        <topic>lidar</topic>
-        <update_rate>20</update_rate>
-        <ray>
-          <scan>
-            <horizontal>
-              <samples>72</samples>
-              <resolution>1</resolution>
-              <min_angle>-1.25</min_angle>
-              <max_angle>1.25</max_angle>
-            </horizontal>
-            <vertical>
-              <samples>1</samples>
-              <resolution>0.06</resolution>
-              <min_angle>0</min_angle>
-              <max_angle>0</max_angle>
-            </vertical>
-          </scan>
-          <range>
-            <min>0.6</min>
-            <max>6.0</max>
-            <resolution>0.01</resolution>
-          </range>
-        </ray>
-        <always_on>1</always_on>
-        <visualize>true</visualize>
-      </sensor> -->
     </link>
   </model>
 </sdf>
