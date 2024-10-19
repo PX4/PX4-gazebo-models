@@ -1,72 +1,315 @@
 #!/usr/bin/env
 
 import argparse
-import avl_out_parse
+import new_avl_out_parse
 import os
 import yaml
 import subprocess
 import shutil
+from pathlib import Path
+
+ctrl_surface_type_sdf = {
+    "not_set": "not_set",
+    "left_aileron": "aileron",
+    "right_aileron": "aileron",
+    "elevator": "elevator",
+    "rudder": "rudder",
+    "left_elevon": "elevon",
+    "right_elevon": "elevon",
+    "left_v-tail": "V-tail",
+    "right_t-tail": "V-tail",
+    "left_flap": "flap",
+    "right_flap": "flap",
+    "airbrake": "airbrake",
+    "custom": "custom",
+    "left_a-tail": "a-tail",
+    "right_a-tail": "a-tail",
+    "single_channel_aileron": "aileron",
+    "steering_wheel": "steering_wheel",
+    "left_spoiler": "spoiler",
+    "right_spoiler": "spoiler"
+}
+
+ctrl_surface_type_initd = {
+    "not_set": 0,
+    "left_aileron": 1,
+    "right_aileron": 2,
+    "elevator": 3,
+    "rudder": 4,
+    "left_elevon": 5,
+    "right_elevon": 6,
+    "left_v-tail": 7,
+    "right_t-tail": 8,
+    "left_flap": 9,
+    "right_flap": 10,
+    "airbrake": 11,
+    "custom": 12,
+    "left_a-tail": 13,
+    "right_a-tail": 14,
+    "single_channel_aileron": 15,
+    "steering_wheel": 16,
+    "left_spoiler": 17,
+    "right_spoiler": 18
+}
 
 """
-Write individual airfoil section definitions to the .avl file.
-Sections are defined through a 3D point in space and assigned properties such as chord, angle of incidence etc.
-AVL then links them up to the other sections of a particular surface. You can define any number of sections for
-a particular surface, but there always have to be at least two (a left and right edge).
+Writes the section definitions of a surface to an AVL file. Sections are defined using 3D coordinates, 
+chord length, angle of incidence, and control surface parameters. Each section can define multiple control 
+surface types (e.g., aileron, elevator, rudder), and at least two sections (left and right edges) must be defined 
+for each surface.
 
 Args:
-	plane_name (str): The name of the vehicle.
-	x (str): The x coordinate of the section.
-	y (str): The y coordinate of the section.
-	z (str): The z coordinate of the section.
-	chord (str): Chord in this section of the surface. Trailing edge is at x + chord, y, z.
-	ainc (str): Angle of incidence for this section. Taken as a rotation (RH rule) about the surface's
-		spanwise axis projected onto the Y-Z plane.
-	nspan (str): Number of spanwise vortices in until the next section.
-	sspan (str): Controls the spanwise spacing of the vortices.
-	naca_number (str): The chosen NACA number that will define the cambered properties of this section
-		of the surface. For help picking an airfoil go to: http://airfoiltools.com/airfoil/naca4digit.
-	ctrl_surface_type: The selected type of control surface. This should be consistent along the entirety of
-		the surface. (Question: Flap and Aileron along the same airfoil?)
+    plane_name (str): The name of the aircraft or vehicle.
+    control_surface (dict): Dictionary containing section details and control surface information.
 
-Return:
-	None.
+Returns:
+    None
+"""
+def write_avl_section_from_section(plane_name: (str), control_surface: (dict)):
+	# TODO: Find out if elevons are defined in avl
+	sections = control_surface['sections']
+	with open(f'{plane_name}.avl','a') as avl_file:
+		for section in sections:
+			avl_file.write(f"\n#{section['name']}\n")
+			avl_file.write(f"SECTION\n")
+			avl_file.write("!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace \n")
+			avl_file.write(f"{section['position']['X']} "
+						f"{section['position']['Y']} "
+						f"{section['position']['Z']} "
+						f"{section['chord']} "
+						f"{section['ainc']} "
+						f"{section['nspan']} "
+						f"{section['sspace']} \n")
+			
+			# Define NACA airfoil shape.
+			# For help picking an airfoil go to: http://airfoiltools.com/airfoil/naca4digit
+			# NOTE: AVL can only use 4-digit NACA codes.
+			if 'naca' in section:
+				avl_file.write("NACA \n")
+				avl_file.write(f"{section['naca']} \n")
+			
+			if "types" not in section:
+				continue  # Skip this section if it does not have a type 
+			
+			for surface_type in section["types"]:
+				if surface_type['type'] not in ctrl_surface_type_sdf:
+					raise ValueError(f'The selected type is invalid. Available types are: {ctrl_surface_type_sdf}')
+				type = ctrl_surface_type_sdf.get(surface_type['type'])
+				match type:
+					case 'aileron':
+						avl_file.write("CONTROL \n")
+						avl_file.write(f"aileron  {surface_type['Cgain']}  {surface_type['Xhinge']}  {surface_type['HingeVec']['X']}  {surface_type['HingeVec']['Y']}  {surface_type['HingeVec']['Z']}  {surface_type['SgnDup']} \n")
+
+					case 'elevator':
+						avl_file.write("CONTROL \n")
+						avl_file.write(f"elevator  {surface_type['Cgain']}  {surface_type['Xhinge']}  {surface_type['HingeVec']['X']}  {surface_type['HingeVec']['Y']}  {surface_type['HingeVec']['Z']}  {surface_type['SgnDup']} \n")
+
+					case 'rudder':
+						avl_file.write("CONTROL \n")
+						avl_file.write(f"rudder  {surface_type['Cgain']}  {surface_type['Xhinge']}  {surface_type['HingeVec']['X']}  {surface_type['HingeVec']['Y']}  {surface_type['HingeVec']['Z']}  {surface_type['SgnDup']} \n")
+	avl_file.close()
 
 """
-def write_section(plane_name: str,x: str,y: str,z: str,chord: str,ainc: str,nspan: str,sspace: str,naca_number: str,ctrl_surf_type: str):
+Processes control surface information by writing the relevant parameters for each surface type (aileron, 
+elevator, rudder) to the AVL and associated files. This includes setting control surface angles, writing servo 
+parameters to the SDF file, and servo configuration in the init.d file for PX4 simulation.
 
+Args:
+    plane_name (str): The name of the aircraft or vehicle.
+    ctrl_surface (dict): Dictionary containing control surface sections and types.
+    ctrl_surface_order (list): List of already processed control surface types to avoid repetition.
+    file_location (str): Location of the final files (AVL, SDF, init.d).
+    num_ctrl_surfaces (int): The total number of control surfaces on the aircraft.
+
+Returns:
+    None
+"""
+def process_control_surface_from_section(plane_name: str, ctrl_surface: dict, ctrl_surface_order: list, file_location: str, num_ctrl_surfaces: int):
+	sections = ctrl_surface['sections']
+	# Create a set to track processed control surfaces
+	processed_types = set()
+	# Iterate through each section surface type in the list
 	with open(f'{plane_name}.avl','a') as avl_file:
-		avl_file.write("SECTION \n")
-		avl_file.write("!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace \n")
-		avl_file.write(f'{x}   {y}    {z}    {chord}    {ainc}     {nspan}    {sspace} \n')
-		if naca_number != "0000":
-			avl_file.write("NACA \n")
-			avl_file.write(f'{naca_number} \n')
+		for section in sections:
+			if 'types' not in section:
+				continue  # Skip this section if it does not have a type
+			
+			for type_struct in section["types"]:
+				if type_struct["type"] not in list(ctrl_surface_type_sdf.keys())[:]:
+					raise ValueError(f"The selected type \"{type_struct['type']}\"is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())[:]}")
+				sdf_type = ctrl_surface_type_sdf.get(type_struct["type"])
+				initD_type = ctrl_surface_type_initd.get(type_struct["type"])
+				if sdf_type in processed_types:
+					continue
+				elif sdf_type == 'aileron':
+					avl_file.write("\nANGLE \n")
+					avl_file.write(f"{ctrl_surface['angle']} \n")
+					processed_types.add('aileron')
+				elif sdf_type == 'elevator':
+					avl_file.write("\nYDUPLICATE\n")
+					avl_file.write("0.0\n\n")
+
+				# Process and write the servo parameters to the .sdf file
+				with open('./templates/servo_template.sdf', 'r') as source:
+					content = source.read()
+
+				# Replacing placeholders with actual values
+				content = content.replace("<joint name='' type=''>",
+					f"<joint name='servo_{len(ctrl_surface_order)}' type='revolute'>")
+				content = content.replace("<parent></parent>", "<parent>base_link</parent>")
+				content = content.replace("<child></child>", f"<child>{ctrl_surface['name']}</child>")
+				content = content.replace("<pose></pose>", 
+					f"<pose>{-ctrl_surface['translation']['Z'] - section['position']['Z']} "
+					f"{ctrl_surface['translation']['Y'] + section['position']['Y']} "
+					f"{ctrl_surface['translation']['X'] + section['position']['X']} 0 0 0</pose>")
+				content = content.replace("<xyz></xyz>", 
+					f"<xyz>{type_struct['HingeVec']['Z']} "
+					f"{type_struct['HingeVec']['Y']} "
+					f"{type_struct['HingeVec']['X']}</xyz>")
+				content = content.replace("<joint_name></joint_name>", f"<joint_name>servo_{len(ctrl_surface_order)}</joint_name>")
+				content = content.replace("<sub_topic></sub_topic>", f"<sub_topic>servo_{len(ctrl_surface_order)}</sub_topic>")
+
+				# Append the modified content to the target .sdf file
+				with open(file_location + f"{plane_name}.sdf", 'a') as target:
+					target.write(content)
+					target.close()
+
+				# Process and write the parameters to the init.d-posix file
+				with open(file_location + "init.d-posix.txt", 'r') as source:
+					content = source.read()
+					
+					content = content.replace(f"param set-default CA_SV_CS_COUNT {num_ctrl_surfaces}",
+						f"param set-default CA_SV_CS_COUNT {num_ctrl_surfaces}\n"
+						f"param set-default CA_SV_CS{len(ctrl_surface_order)}_TYPE {initD_type}")
+					source.close()
+
+				# add the modified content to the target file
+				with open(file_location + "init.d-posix.txt", 'w') as target:
+					target.write(content)
+					target.close()
+
+				# append the content to the target file
+				with open(file_location + "init.d-posix.txt", 'a') as target:
+					#initalize the func as 1 and the servo as number 201
+					target.write(f"\nparam set-default SIM_GZ_SV_FUNC{len(ctrl_surface_order)+1} {len(ctrl_surface_order) + 201}")
+					target.close()
+
+				ctrl_surface_order.append(sdf_type)
+				processed_types.add(sdf_type)
+
+"""
+Writes section definitions of a control surface with a specific general type (aileron, elevator, rudder) to 
+the AVL file. Each section includes coordinates, chord, angle of incidence, and control surface definitions. This 
+function is tailored to handle one general control surface type consistently across all sections.
+
+Args:
+    plane_name (str): The name of the aircraft or vehicle.
+    control_surface (dict): Dictionary containing details of sections and control surface types.
+
+Returns:
+    None
+"""
+def write_avl_surface_from_surface(plane_name: str, control_surface: dict):
+	# TODO: Find out if elevons are defined in AVL
+	sections = control_surface['sections']
+	sdf_type = control_surface['type']
+
+	if sdf_type not in ctrl_surface_type_sdf:
+		raise ValueError(f'The selected type is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())}')
+
+	sdf_type_avl = ctrl_surface_type_sdf.get(sdf_type)
+
+	with open(f'{plane_name}.avl', 'a') as avl_file:
+		for section in sections:
+			avl_file.write(f"\n#{section['name']}\n")
+			avl_file.write(f"SECTION\n")
+			avl_file.write("!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace \n")
+			avl_file.write(f"{section['position']['X']} "
+			f"{section['position']['Y']} "
+			f"{section['position']['Z']} "
+			f"{section['chord']} "
+			f"{section['ainc']} "
+			f"{section['nspan']} "
+			f"{section['sspace']} \n")
+
+			# Define NACA airfoil shape.
+			if 'naca' in section:
+				avl_file.write("NACA \n")
+				avl_file.write(f"{section['naca']} \n")
+
+			# Write control surface based on type
+			avl_file.write("CONTROL \n")
+
+			match sdf_type_avl:
+				case 'aileron':
+					avl_file.write("aileron  1.0  0.0  0.0  0.0  0.0  -1 \n")
+				case 'elevator':
+					avl_file.write("elevator  1.0  0.0  0.0  0.0  0.0  1 \n")
+				case 'rudder':
+					avl_file.write("rudder  1.0  0.0  0.0  0.0  0.0  1 \n")	
 		avl_file.close()
 
-	match ctrl_surf_type:
-		case 'aileron':
-			#TODO provide custom options for gain and hinge positions
-			with open(f'{plane_name}.avl','a') as avl_file:
-				avl_file.write("CONTROL \n")
-				avl_file.write("aileron  1.0  0.0  0.0  0.0  0.0  -1 \n")
-				avl_file.close()
+"""
+Processes control surface parameters for surfaces with a specific general type (aileron, elevator, rudder). 
+Writes corresponding data to the AVL file, SDF file, and init.d for PX4. This function handles all instances 
+of a single general type across multiple sections.
 
-		case 'elevator':
-			with open(f'{plane_name}.avl','a') as avl_file:
-				avl_file.write("CONTROL \n")
-				avl_file.write("elevator  1.0  0.0  0.0  0.0  0.0  1 \n")
-				avl_file.close()
+Args:
+    plane_name (str): The name of the aircraft or vehicle.
+    ctrl_surface (dict): Dictionary containing control surface sections and types.
+    ctrl_surface_order (list): List of already processed control surface types to avoid repetition.
+    file_location (str): Location of the final files (AVL, SDF, init.d).
+    num_ctrl_surfaces (int): The total number of control surfaces on the aircraft.
 
-		case 'rudder':
-			with open(f'{plane_name}.avl','a') as avl_file:
-				avl_file.write("CONTROL \n")
-				avl_file.write("rudder  1.0  0.0  0.0  0.0  0.0  1 \n")
-				avl_file.close()
+Returns:
+    None
+"""
+def process_control_surface_from_surface(plane_name: str, ctrl_surface: dict, ctrl_surface_order: list, file_location: str, num_ctrl_surfaces: int):
+	if ctrl_surface["type"] not in list(ctrl_surface_type_sdf.keys())[:]:
+		raise ValueError(f"The selected type \"{ctrl_surface['type']}\"is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())[:]}")
+	sdf_type = ctrl_surface_type_sdf.get(ctrl_surface['type'])
+	initD_type = ctrl_surface_type_initd.get(ctrl_surface["type"])
+	sections = ctrl_surface['sections']
+	# Create a set to track processed control surfaces
+	processed_types = set()
+	# Iterate through each section surface type in the list
+	with open(f'{plane_name}.avl','a') as avl_file:
+		for _ in sections:
+			if sdf_type in processed_types:
+				continue
+			elif sdf_type == 'aileron':
+				avl_file.write("\nANGLE \n")
+				avl_file.write(f"{ctrl_surface['angle']} \n")
+				processed_types.add('aileron')
+			elif sdf_type == 'elevator':
+				avl_file.write("\nYDUPLICATE\n")
+				avl_file.write("0.0\n\n")
 
+			# Process and write the parameters to the init.d-posix file
+			with open(file_location + "init.d-posix.txt", 'r') as source:
+				content = source.read()
+				
+				content = content.replace(f"param set-default CA_SV_CS_COUNT {num_ctrl_surfaces}",
+					f"param set-default CA_SV_CS_COUNT {num_ctrl_surfaces}\n"
+					f"param set-default CA_SV_CS{len(ctrl_surface_order)}_TYPE {initD_type}")
+				source.close()
 
+			# add the modified content to the target file
+			with open(file_location + "init.d-posix.txt", 'w') as target:
+				target.write(content)
+				target.close()
+
+			# append the content to the target file
+			with open(file_location + "init.d-posix.txt", 'a') as target:
+				#initalize the func as 1 and the servo as number 201
+				target.write(f"\nparam set-default SIM_GZ_SV_FUNC{len(ctrl_surface_order)+1} {len(ctrl_surface_order) + 201}")
+				target.close()
+
+			ctrl_surface_order.append(sdf_type)
+			processed_types.add(sdf_type)
 
 """
-Read the provided yaml file and generate the corresponding .avl file that can be read into AVL.
+Read the provided yaml file and generate the corresponding .avl file that can be read into AVL as well as the init.d for the ROMFS.
 Also calls AVL and the avl_out_parse.py file that generates the sdf plugin.
 
 Args:
@@ -80,19 +323,24 @@ Return:
 def main():
 	user = os.environ.get('USER')
 	# This will find Avl on a users machine.
+	target_directory_path = None
 	for root, dirs, _ in os.walk(f'/home/{user}/'):
 		if "Avl" in dirs:
-			target_directory_path = os.path.join(root, "Avl")
-			break
+			target_directory_path = os.path.join(root, "Avl")	
+
+	if target_directory_path is None:
+		raise FileNotFoundError("The 'Avl' directory was not found.")
+
 	parent_directory_path = os.path.dirname(target_directory_path)
 	filedir = f'{parent_directory_path}/'
-	print(filedir)
 
 	parser = argparse.ArgumentParser()
 	parser.add_argument("--yaml_file", help="Path to input yaml file.")
 	parser.add_argument("--avl_path", default=filedir, help="Provide an absolute AVL path. If this argument is passed, AVL will be moved there and the files will adjust their paths accordingly.")
 	inputs = parser.parse_args()
 
+	if inputs.yaml_file is None:
+		raise ValueError("Error: --yaml_file is required. Please provide a valid path to the YAML file.")
 
 	# If the user passes the avl_path argument then move Avl to that location:
 	if inputs.avl_path != filedir:
@@ -105,9 +353,8 @@ def main():
 
 		# Adjust paths to AVL in process.sh
 		print("Adjusting paths")
-		with open("./process.sh", "r") as file:
+		with open("./template_process.sh", "r") as file:
 			all_lines = file.readlines()
-			file.close()
 
 		it = 0
 		for line in all_lines:
@@ -126,11 +373,44 @@ def main():
 
 		with open("./process.sh", "w") as file:
 			file.writelines(all_lines)
-			file.close()
+	else:
+		with open("./template_process.sh", "r") as file:
+			all_lines = file.readlines()
 
+		with open("./process.sh", "w") as file:
+			file.writelines(all_lines)
+			
+	#make the file executable
+	os.chmod('./process.sh', 0o755)
 
-	with open(inputs.yaml_file,'r') as yaml_file:
-		yaml_data = yaml.safe_load(yaml_file)
+	# Set current path for user
+	curr_path = subprocess.run(['pwd'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+	if curr_path.returncode == 0:
+        # Save the output in a variable
+		savedir = curr_path.stdout.strip()
+
+	#load the file from the --yaml_file or go to the created file from a previous run and reset it (plane name and yaml name must be the same)
+	if Path(inputs.yaml_file).is_file():
+		#source given by user
+		with open(inputs.yaml_file,'r') as yaml_file:
+			yaml_data = yaml.safe_load(yaml_file)
+	else:
+		try:
+			file_name = inputs.yaml_file.split('/')[-1] #plane_example_0.yml
+			directory = file_name.split('.yml')[0] #plane_example_0
+			with open(savedir + '/' + directory + '/' + file_name ,'r') as yaml_file:
+				yaml_data = yaml.safe_load(yaml_file)
+			if Path(savedir + '/' + directory + '/' + directory + ".avl").is_file():
+				os.remove(savedir + '/' + directory + '/' + directory + ".avl")
+			if Path(savedir + '/' + directory + '/' + directory + ".ps").is_file():
+				os.remove(savedir + '/' + directory + '/' + directory + ".ps")
+			if Path(savedir + '/' + directory + '/' + directory + ".sdf").is_file():
+				os.remove(savedir + '/' + directory + '/' + directory + ".sdf")
+			if Path(savedir + '/' + directory + '/' + "init.d-posix.txt").is_file():
+				os.remove(savedir + '/' + directory + '/' + "init.d-posix.txt")
+			yaml_file.close()
+		except:
+			raise ValueError("\nError: given --yaml_file does not exist. Please provide a valid path to the YAML file.\n")
 
 	airframes = ['cessna','standard_vtol','custom']
 	plane_name = yaml_data['vehicle_name']
@@ -138,33 +418,44 @@ def main():
 	if not frame_type in airframes:
 		raise ValueError("\nThis is not a valid airframe, please choose a valid airframe. \n")
 
+	# SPECIFY STALL PARAMETERS BASED ON AIRCRAFT TYPE (IF PROVIDED)
+	if not os.path.exists(f'{savedir}/{plane_name}'):
+		os.makedirs(f'{savedir}/{plane_name}')
+	file_location = f'{savedir}/{plane_name}/'
+
 	# Parameters that need to be provided:
 	# General
 	# - Reference Area (Sref)
 	# - Wing span (Bref) (wing span squared / area = aspect ratio which is a required parameter for the sdf file)
 	# - Reference point (X,Y,Zref) point at which moments and forces are calculated
 	#Control Surface specific
-	# - type (select from options; aileron,elevator,rudder)
+	# - name
+	# - type (select from options in the px4 paramer list of CA_SV_CS0_TYPE)
 	# - nchord
 	# - cspace
 	# - nspanwise
 	# - sspace
+	# - angle (if an aileron)
+	# - name (section)
 	# - x,y,z 1. (section)
 	# - chord 1. (section)
 	# - ainc 1. (section)
 	# - Nspan 1. (optional for section)
 	# - sspace 1. (optional for section)
+	# - types (optional if a type is given in control surface note if type is given in control surface that type will be used in all sections)
+	# - Cgain 1.1 (section, type)
+	# - Xhinge 1.1 (section, type)
+	# - HingeVec 1.1 (section, type)
+	# - SgnDup 1.1 (section, type)
 	# - x,y,z 2. (section)
 	# - chord 2. (section)
 	# - ainc 2. (section)
 	# - Nspan 2. (optional for section)
 	# - sspace 2. (optional for section)
 
-	# TODO: Find out if elevons are defined
-	ctrl_surface_types = ['aileron','elevator','rudder']
 	# - Reference Chord (Cref) (= area/wing span)
 	delineation = '!***************************************'
-	sec_demark = '#--------------------------------------------------'
+	sec_demark = '\n\n#--------------------------------------------------'
 	num_ctrl_surfaces = 0
 	ctrl_surface_order = []
 	area = 0
@@ -198,7 +489,7 @@ def main():
 			ref_pt_y = yaml_data["reference_point"]["Y"]
 			ref_pt_z = yaml_data["reference_point"]["Z"]
 
-			if(span != 0 and area != 0):
+			if(area != 0 and span != 0):
 				ref_chord = float(area)/float(span)
 			else:
 				raise ValueError("Invalid reference chord value. Check area and wing span values.")
@@ -212,26 +503,32 @@ def main():
 				avl_file.close()
 
 			num_ctrl_surfaces = yaml_data["num_ctrl_surfaces"]
-			for i, control_surface in enumerate(yaml_data["control_surfaces"]):
+
+			#Set up parameters of the init.d-posix file
+			with open("./templates/init.d-posix.txt", 'r') as source:
+				content = source.read()
+			
+			# Replacing placeholders with actual values
+			content = content.replace("# @name",
+				f"# @name {plane_name}")
+			content = content.replace(r"PX4_SIM_MODEL=${PX4_SIM_MODEL:=}",
+				f"PX4_SIM_MODEL=${{PX4_SIM_MODEL:= {plane_name}}}")
+			content = content.replace("param set-default CA_SV_CS_COUNT",
+				f"param set-default CA_SV_CS_COUNT {num_ctrl_surfaces}")
+
+			with open(file_location + f"init.d-posix.txt", 'a') as target:
+				target.writelines(content)
+				target.close()
+
+			for control_surface in yaml_data["control_surfaces"]:
 
 				# Wings always need to be defined from left to right
 				ctrl_surf_name = control_surface['name']
-				ctrl_surf_type = control_surface['type']
-				if ctrl_surf_type not in ctrl_surface_types:
-					raise ValueError(f'The selected type is invalid. Available types are: {ctrl_surface_types}')
-
-				# The order of control surfaces becomes important in the output parsing
-				# to correctly assign derivatives to particular surfaces.
-				ctrl_surface_order.append(ctrl_surf_type)
 
 				nchord = control_surface["nchord"]
 				cspace = control_surface["cspace"]
 				nspanwise = control_surface["nspan"]
 				sspace = control_surface["sspace"]
-
-				# TODO: Add more control surface types that also require Angles.
-				if ctrl_surf_type.lower() == 'aileron':
-					angle = control_surface["angle"]
 
 				#Translation of control surface, will move the whole surface to specified position
 				tx = control_surface["translation"]["X"]
@@ -246,48 +543,24 @@ def main():
 					avl_file.write("!Nchordwise     Cspace      Nspanwise       Sspace \n")
 					avl_file.write(f'{nchord}       {cspace}        {nspanwise}     {sspace} \n')
 
-					# If we have a elevator, we can duplicate the defined control surface along the y-axis of the model
-					# as both sides are generally modelled and controlled as one in simulation. Adjust for split elevators if desired.
-					if ctrl_surf_type.lower() == 'elevator':
-						avl_file.write("\nYDUPLICATE\n")
-						avl_file.write("0.0\n\n")
-
-					# Elevators and Rudders do not require an angle of incidence.
-					if ctrl_surf_type.lower() == 'aileron':
-						avl_file.write("ANGLE \n")
-						avl_file.write(f'{angle} \n')
-
 					# Translate the surface to a particular position in space.
 					avl_file.write("TRANSLATE \n")
 					avl_file.write(f'{tx}    {ty}    {tz} \n')
 					avl_file.close()
 
-
-				# Define NACA airfoil shape.
-				# For help picking an airfoil go to: http://airfoiltools.com/airfoil/naca4digit
-				# NOTE: AVL can only use 4-digit NACA codes.
-				if ctrl_surf_type.lower() == "aileron":
-					naca_number = control_surface["naca"]
+				#if a type is defined in the control surface that type will be used in all sections
+				if 'type' in control_surface:
+					process_control_surface_from_surface(plane_name, control_surface, ctrl_surface_order, file_location, num_ctrl_surfaces)
+					write_avl_section_from_surface(plane_name, control_surface)
 				else:
-					# Provide a default NACA number for unused airfoils
-					naca_number = '0000'
+					process_control_surface_from_section(plane_name, control_surface, ctrl_surface_order, file_location, num_ctrl_surfaces)
+					write_avl_section_from_section(plane_name, control_surface)
+				
 
 				# Iterating over each defined section for the control surface. There need to be at least
 				# two in order to define a left and right edge, but there is no upper limit.
 				# CRITICAL: ALWAYS DEFINE YOUR SECTION FROM LEFT TO RIGHT
-				for j, section in enumerate(control_surface["sections"]):
-
-					print(f'Defining {j}. section of {i+1}. control surface \n')
-					y = section["position"]["Y"]
-					z = section["position"]["Z"]
-					x = section["position"]["X"]
-					chord = section["chord"]
-					ainc = section["ainc"]
-					nspan = section["nspan"]
-					write_section(plane_name,x,y,z,chord,ainc,nspan,sspace,naca_number,ctrl_surf_type)
-
-				print(f'\nPARAMETER DEFINITION FOR {i+1}. CONTROL SURFACE COMPLETED \n')
-
+				print(f"\nPARAMETER DEFINITION FOR CONTROL SURFACE {control_surface['name']} COMPLETED \n")
 
    	# Calculation of Aspect Ratio (AR) and Mean Aerodynamic Chord (mac)
 	AR = str((float(span)*float(span))/float(area))
@@ -296,8 +569,8 @@ def main():
 	# Call shell script that will pass the generated .avl file to AVL
 	os.system(f'./process.sh {plane_name}')
 
-	# Call main function of avl parse script to parse the generated AVL files.
-	avl_out_parse.main(plane_name,frame_type,AR,mac,ref_pt_x,ref_pt_y,ref_pt_z,num_ctrl_surfaces,area,ctrl_surface_order,inputs.avl_path)
+	# Call main function of avl parse script to parse the generated AVL files.	
+	new_avl_out_parse.main(plane_name,frame_type,AR,mac,ref_pt_x,ref_pt_y,ref_pt_z,num_ctrl_surfaces,area,ctrl_surface_order,inputs.avl_path)
 
 	# Finally move all generated files to a new directory and show the generated geometry image:
 	result = subprocess.run(['pwd'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

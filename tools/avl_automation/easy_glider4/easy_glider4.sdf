@@ -1,0 +1,211 @@
+    <joint name='servo_0' type='revolute'>
+      <parent>base_link</parent>
+      <child>left_wing</child>
+      <pose>0 -0.31 0.28 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <!-- -30/+30 deg. -->
+          <lower>-0.53</lower>
+          <upper>0.53</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+    <plugin
+      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>servo_0</joint_name>
+      <sub_topic>servo_0</sub_topic>
+      <p_gain>10</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+    </plugin>
+    
+    <joint name='servo_1' type='revolute'>
+      <parent>base_link</parent>
+      <child>right_wing</child>
+      <pose>0 0.31 0.28 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <!-- -30/+30 deg. -->
+          <lower>-0.53</lower>
+          <upper>0.53</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+    <plugin
+      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>servo_1</joint_name>
+      <sub_topic>servo_1</sub_topic>
+      <p_gain>10</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+    </plugin>
+    
+    <joint name='servo_2' type='revolute'>
+      <parent>base_link</parent>
+      <child>elevator</child>
+      <pose>-0.15 0 0.96 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <!-- -30/+30 deg. -->
+          <lower>-0.53</lower>
+          <upper>0.53</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+    <plugin
+      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>servo_2</joint_name>
+      <sub_topic>servo_2</sub_topic>
+      <p_gain>10</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+    </plugin>
+    
+    <joint name='servo_3' type='revolute'>
+      <parent>base_link</parent>
+      <child>rudder</child>
+      <pose>-0.1 0 0.96 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <!-- -30/+30 deg. -->
+          <lower>-0.53</lower>
+          <upper>0.53</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+    <plugin
+      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>servo_3</joint_name>
+      <sub_topic>servo_3</sub_topic>
+      <p_gain>10</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+    </plugin>
+    
+<plugin filename="gz-sim-advanced-lift-drag-system" name="gz::sim::systems::AdvancedLiftDrag">
+      <a0>0.00000</a0>
+      <CL0>0.01833</CL0>
+      <AR>7.788461538461539</AR>
+      <eff>0.0013</eff>
+      <CLa>3.732924</CLa>
+      <CD0>0.00895</CD0>
+      <Cem0>-0.07876</Cem0>
+      <Cema>-6.639457</Cema>
+      <CYb>-0.186432</CYb>
+      <Cellb>-0.023224</Cellb>
+      <Cenb>0.107739</Cenb>
+      <CDp>0.074094</CDp>
+      <CYp>-0.018430</CYp>
+      <CLp>0.000097</CLp>
+      <Cellp>-0.387325</Cellp>
+      <Cemp>0.001388</Cemp>
+      <Cenp>0.010615</Cenp>
+      <CDq>0.067023</CDq>
+      <CYq>-0.012817</CYq>
+      <CLq>-16.630802</CLq>
+      <Cellq>0.004970</Cellq>
+      <Cemq>-36.058178</Cemq>
+      <Cenq>-0.101652</Cenq>
+      <CDr>0.008711</CDr>
+      <CYr>0.223308</CYr>
+      <CLr>0.324375</CLr>
+      <Cellr>0.028160</Cellr>
+      <Cemr>0.482519</Cemr>
+      <Cenr>-0.130587</Cenr>
+      <alpha_stall>0.3391428111</alpha_stall>
+      <CLa_stall>-3.85</CLa_stall>
+      <CDa_stall>-0.9233984055</CDa_stall>
+      <Cema_stall>0</Cema_stall>
+      <cp>0 0 0</cp>
+      <area>0.416</area>
+      <mac>0.15407407407407406</mac>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+      <num_ctrl_surfaces>4</num_ctrl_surfaces>
+      <control_surface>
+        <name>servo_0</name>
+        <index>0</index>
+        <direction>1</direction>
+        <CD_ctrl>-0.000000</CD_ctrl>
+        <CY_ctrl>-0.000010</CY_ctrl>
+        <CL_ctrl>-0.006575</CL_ctrl>
+        <Cell_ctrl>-0.000000</Cell_ctrl>
+        <Cem_ctrl>-0.010033</Cem_ctrl>
+        <Cen_ctrl>0.000050</Cen_ctrl>
+    </control_surface>
+
+    <control_surface>
+        <name>servo_1</name>
+        <index>1</index>
+        <direction>1</direction>
+        <CD_ctrl>-0.000000</CD_ctrl>
+        <CY_ctrl>-0.000010</CY_ctrl>
+        <CL_ctrl>-0.006575</CL_ctrl>
+        <Cell_ctrl>0.0</Cell_ctrl>
+        <Cem_ctrl>-0.010033</Cem_ctrl>
+        <Cen_ctrl>-5e-05</Cen_ctrl>
+    </control_surface>
+
+    <control_surface>
+        <name>servo_2</name>
+        <index>2</index>
+        <direction>-1</direction>
+        <CD_ctrl>-0.000023</CD_ctrl>
+        <CY_ctrl>-0.000019</CY_ctrl>
+        <CL_ctrl>-0.001997</CL_ctrl>
+        <Cell_ctrl>0.000000</Cell_ctrl>
+        <Cem_ctrl>-0.008535</Cem_ctrl>
+        <Cen_ctrl>0.000013</Cen_ctrl>
+    </control_surface>
+
+    <control_surface>
+        <name>servo_3</name>
+        <index>3</index>
+        <direction>1</direction>
+        <CD_ctrl>-0.000049</CD_ctrl>
+        <CY_ctrl>-0.001225</CY_ctrl>
+        <CL_ctrl>0.000019</CL_ctrl>
+        <Cell_ctrl>-0.000142</Cell_ctrl>
+        <Cem_ctrl>0.000114</Cem_ctrl>
+        <Cen_ctrl>0.000704</Cen_ctrl>
+    </control_surface>
+
+</plugin>
