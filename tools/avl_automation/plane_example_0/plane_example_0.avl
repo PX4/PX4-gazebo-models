@@ -1,0 +1,114 @@
+!*************************************** 
+!plane_example_0 input dataset 
+!*************************************** 
+plane_example_0 
+!Mach 
+0.0 
+!IYsym    IZsym    Zsym 
+0     0     0 
+!Sref    Cref    Bref 
+12     0.8     15 
+!Xref    Yref    Zref 
+0     0      0 
+
+
+#--------------------------------------------------
+SURFACE 
+right_wing 
+!Nchordwise     Cspace      Nspanwise       Sspace 
+1       1        16     -2 
+TRANSLATE 
+0    0    0 
+
+ANGLE 
+4 
+
+#section_1
+SECTION
+!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
+-0.25 0 0 1 0 8 1 
+CONTROL 
+aileron  1.0  0.0  0.0  0.0  0.0  -1 
+
+#section_2
+SECTION
+!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
+-0.175 5 0.5 0.7 0 0 0 
+CONTROL 
+aileron  1.0  0.0  0.0  0.0  0.0  -1 
+
+
+#--------------------------------------------------
+SURFACE 
+left_wing 
+!Nchordwise     Cspace      Nspanwise       Sspace 
+1       1        16     -2 
+TRANSLATE 
+0    0    0 
+
+ANGLE 
+4 
+
+#section_1
+SECTION
+!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
+-0.175 -5 0.5 0.7 0 0 0 
+CONTROL 
+aileron  1.0  0.0  0.0  0.0  0.0  -1 
+
+#section_2
+SECTION
+!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
+-0.25 0 0 1 0 8 1 
+CONTROL 
+aileron  1.0  0.0  0.0  0.0  0.0  -1 
+
+
+#--------------------------------------------------
+SURFACE 
+elevator 
+!Nchordwise     Cspace      Nspanwise       Sspace 
+1       1        7     -2 
+TRANSLATE 
+6    0    0.5 
+
+YDUPLICATE
+0.0
+
+
+#section_1
+SECTION
+!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
+-0.1 0 0 0.4 0 7 -1.25 
+CONTROL 
+elevator  1.0  0.0  0.0  0.0  0.0  1 
+
+#section_2
+SECTION
+!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
+-0.075 2 0 0.3 0 0 0 
+CONTROL 
+elevator  1.0  0.0  0.0  0.0  0.0  1 
+
+
+#--------------------------------------------------
+SURFACE 
+fin 
+!Nchordwise     Cspace      Nspanwise       Sspace 
+1       1        10     1 
+TRANSLATE 
+6    0    0.5 
+
+#section_1
+SECTION
+!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
+-0.1 0 0 0.4 0 7 -1.25 
+CONTROL 
+rudder  1.0  0.0  0.0  0.0  0.0  1 
+
+#section_2
+SECTION
+!Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
+-0.075 0 1 0.3 0 0 0 
+CONTROL 
+rudder  1.0  0.0  0.0  0.0  0.0  1 
