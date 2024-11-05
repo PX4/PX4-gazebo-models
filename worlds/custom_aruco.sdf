@@ -110,7 +110,8 @@
           <visualize>true</visualize>
           <update_rate>30</update_rate>
           <topic>camera/image_raw</topic>
-          <gz_frame_id>camera_rgb_frame</gz_frame_id>
+          <!-- Remove this line -->
+          <!-- <gz_frame_id>camera_rgb_frame</gz_frame_id> -->
           <camera name="intel_realsense_r200">
             <camera_info_topic>camera/camera_info</camera_info_topic>
             <horizontal_fov>1.047</horizontal_fov>
