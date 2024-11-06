@@ -5,11 +5,11 @@
       <uri>x500</uri>
     </include>
     <link name="camera_link">
-      <pose>0.12 0.03 0.242 0 0 0</pose> <!-- Adjust position and orientation -->
+      <pose>0.12 0.03 0.242 1.5708 0 0</pose>
       <inertial>
-    <mass>0.0</mass> <!-- Adjust the mass value as needed -->
+    <mass>0.0</mass>
     <inertia>
-      <ixx>0.000</ixx> <!-- Adjust inertia values as necessary -->
+      <ixx>0.000</ixx>
       <iyy>0.000</iyy>
       <izz>0.000</izz>
       <ixy>0</ixy>
@@ -20,7 +20,7 @@
       <sensor name="camera" type="camera">
         <always_on>true</always_on>
         <visualize>true</visualize>
-        <update_rate>1</update_rate>
+        <update_rate>3</update_rate>
         <topic>camera/image_raw</topic>
         <camera name="intel_realsense_r200">
           <camera_info_topic>camera/camera_info</camera_info_topic>
