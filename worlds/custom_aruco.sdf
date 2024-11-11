@@ -17,6 +17,8 @@
     <plugin name="gz::sim::systems::Sensors" filename="gz-sim-sensors-system">
       <render_engine>ogre2</render_engine>
     </plugin>
+    <plugin filename="libMovingArucoPlugin.so" name="gazebo::MovingArucoPlugin">
+    </plugin>
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type="adiabatic"/>
@@ -102,15 +104,15 @@
       <elevation>0</elevation>
     </spherical_coordinates>
     <include>
-    <uri>model://aruco_marker</uri>
-    <name>aruco_marker_1</name>
-    <pose>4 0 0.001 0 0 0</pose>
-  </include>
+      <uri>model://aruco_marker</uri>
+      <name>aruco_marker_1</name>
+      <pose>4 0 0.001 0 0 0</pose>
+    </include>
 
-  <include>
-    <uri>model://aruco_marker</uri>
-    <name>aruco_marker_2</name>
-    <pose>4 4 0.001 0 0 0</pose>
-  </include>
+    <include>
+      <uri>model://aruco_marker</uri>
+      <name>aruco_marker_2</name>
+      <pose>4 4 0.001 0 0 0</pose>
+    </include>
   </world>
 </sdf>
