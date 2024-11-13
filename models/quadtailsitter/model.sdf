@@ -397,10 +397,11 @@
     <plugin filename="gz-sim-advanced-lift-drag-system" name="gz::sim::systems::AdvancedLiftDrag">
       <a0>0.0</a0>
       <CL0>0.15188</CL0>
-      <AR>6.5</AR>
+      <AR>8.5</AR>
       <eff>0.97</eff>
       <CLa>5.015</CLa>
-      <CD0>0.029</CD0>
+      <cda>1.5</cda>
+      <CD0>0.15</CD0>
       <Cem0>0.075</Cem0>
       <Cema>-0.463966</Cema>
       <CYb>-0.258244</CYb>
@@ -429,7 +430,7 @@
       <CDa_stall>-0.9233984055</CDa_stall>
       <Cema_stall>0</Cema_stall>
       <ref_pt>-0.12 0.0 0.0</ref_pt>
-      <area>0.15</area>
+      <area>0.4</area>
       <mac>0.22</mac>
       <air_density>1.2041</air_density>
       <forward>0 0 1</forward>
