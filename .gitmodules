@@ -1,3 +1,6 @@
 [submodule "models/sh_136"]
 	path = models/sh_136
 	url = git@github.com:gswarms/sh_136.git
+[submodule "models/gs001"]
+	path = models/gs001
+	url = git@github.com:gswarms/gs001.git
