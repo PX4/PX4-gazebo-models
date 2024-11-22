@@ -75,6 +75,32 @@
           <diffuse>0.175 0.175 0.175 1.0</diffuse>
         </material>
       </visual>
+      <visual name='motor_1'>
+        <pose>-0.35 -0.35 0.045 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.035</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>.175 .175 .175 1.0</ambient>
+          <diffuse>.175 .175 .175 1.0</diffuse>
+        </material>
+      </visual>
+      <visual name='motor_3'>
+        <pose>-0.35 0.35 0.045 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <length>0.035</length>
+            <radius>0.02</radius>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>.175 .175 .175 1.0</ambient>
+          <diffuse>.175 .175 .175 1.0</diffuse>
+        </material>
+      </visual>
       <gravity>1</gravity>
       <velocity_decay/>
       <self_collide>0</self_collide>
@@ -166,7 +192,7 @@
     </joint>
 
     <link name='motor_0'>
-      <pose>0.35 -0.35 0.02 0 0 0</pose>
+      <pose>0.35 -0.35 0.045 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.05</mass>
@@ -220,8 +246,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1.5</lower>
-          <upper>1.5</upper>
+          <lower>0.</lower>
+          <upper>1.57</upper>
         </limit>
         <dynamics>
           <friction>1.0</friction>
@@ -231,7 +257,6 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-
 
     <link name='rotor_0'>
       <pose>0.35 -0.35 0.07 0 0 0</pose>
@@ -364,7 +389,7 @@
     </joint>
 
     <link name='motor_2'>
-      <pose>0.35 0.35 0.02 0 0 0</pose>
+      <pose>0.35 0.35 0.045 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.05</mass>
@@ -418,8 +443,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1.5</lower>
-          <upper>1.5</upper>
+          <lower>0.</lower>
+          <upper>1.57</upper>
         </limit>
         <dynamics>
           <friction>1.0</friction>
@@ -429,7 +454,6 @@
         <use_parent_model_frame>1</use_parent_model_frame>
       </axis>
     </joint>
-
 
     <link name='rotor_2'>
       <pose>0.35 0.35 0.07 0 0 0</pose>
@@ -467,7 +491,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://tiltrotor/meshes/iris_prop_ccw.dae</uri>
+            <uri>model://tiltrotor/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
         <material> <!-- DarkGrey-->
@@ -532,7 +556,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://tiltrotor/meshes/iris_prop_ccw.dae</uri>
+            <uri>model://tiltrotor/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
         <material> <!-- DarkGrey-->
@@ -846,7 +870,6 @@
       filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
       <joint_name>motor_0_joint</joint_name>
       <sub_topic>servo_3</sub_topic>
-      <motorType>position</motorType>
       <p_gain>10</p_gain>
       <i_gain>0</i_gain>
       <d_gain>0</d_gain>
@@ -892,7 +915,6 @@
       filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
       <joint_name>motor_2_joint</joint_name>
       <sub_topic>servo_4</sub_topic>
-      <motorType>position</motorType>
       <p_gain>10</p_gain>
       <i_gain>0</i_gain>
       <d_gain>0</d_gain>
