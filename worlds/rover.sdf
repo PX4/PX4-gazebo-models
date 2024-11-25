@@ -176,8 +176,8 @@
           <surface>
             <friction>
               <ode>
-                <mu>1</mu>
-                <mu2>1</mu2>
+                <mu>2</mu>
+                <mu2>2</mu2>
               </ode>
             </friction>
             <bounce/>
