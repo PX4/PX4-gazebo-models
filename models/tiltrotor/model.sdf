@@ -870,7 +870,7 @@
       filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
       <joint_name>motor_0_joint</joint_name>
       <sub_topic>servo_3</sub_topic>
-      <p_gain>10</p_gain>
+      <p_gain>100</p_gain>
       <i_gain>0</i_gain>
       <d_gain>0</d_gain>
       <i_max>0.0</i_max>
@@ -915,7 +915,7 @@
       filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
       <joint_name>motor_2_joint</joint_name>
       <sub_topic>servo_4</sub_topic>
-      <p_gain>10</p_gain>
+      <p_gain>100</p_gain>
       <i_gain>0</i_gain>
       <d_gain>0</d_gain>
       <i_max>0.0</i_max>
