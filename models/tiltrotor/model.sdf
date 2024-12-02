@@ -43,7 +43,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://tiltrotor/meshes/x8_wing.dae</uri>
+            <uri>model://standard_vtol/meshes/x8_wing.dae</uri>
           </mesh>
         </geometry>
         <material> <!-- DarkGrey-->
@@ -294,7 +294,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://tiltrotor/meshes/iris_prop_ccw.dae</uri>
+            <uri>model://standard_vtol/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>  <!-- Blue -->
@@ -359,7 +359,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://tiltrotor/meshes/iris_prop_ccw.dae</uri>
+            <uri>model://standard_vtol/meshes/iris_prop_ccw.dae</uri>
           </mesh>
         </geometry>
         <material>  <!-- Blue -->
@@ -491,7 +491,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://tiltrotor/meshes/iris_prop_cw.dae</uri>
+            <uri>model://standard_vtol/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
         <material> <!-- DarkGrey-->
@@ -556,7 +556,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://tiltrotor/meshes/iris_prop_cw.dae</uri>
+            <uri>model://standard_vtol/meshes/iris_prop_cw.dae</uri>
           </mesh>
         </geometry>
         <material> <!-- DarkGrey-->
@@ -603,7 +603,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://tiltrotor/meshes/x8_elevon_left.dae</uri>
+            <uri>model://standard_vtol/meshes/x8_elevon_left.dae</uri>
           </mesh>
         </geometry>
         <material>  <!-- Blue -->
@@ -630,7 +630,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://tiltrotor/meshes/x8_elevon_right.dae</uri>
+            <uri>model://standard_vtol/meshes/x8_elevon_right.dae</uri>
           </mesh>
         </geometry>
         <material>  <!-- Blue -->
