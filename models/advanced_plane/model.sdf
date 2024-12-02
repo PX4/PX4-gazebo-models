@@ -360,9 +360,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -389,9 +388,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -418,9 +416,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -447,9 +444,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -476,9 +472,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -505,9 +500,8 @@
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
