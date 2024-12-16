@@ -289,7 +289,7 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-1.5708</lower>
+          <lower>-2.35619</lower>
           <upper>0.7854</upper>
           <effort>100</effort>
           <velocity>-1</velocity>
@@ -309,7 +309,7 @@
       </physics>
     </joint>
 
-   <!-- Plugins -->
+  <!-- Plugins -->
 
     <plugin
       filename="gz-sim-joint-position-controller-system"
