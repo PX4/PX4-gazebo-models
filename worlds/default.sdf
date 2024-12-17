@@ -171,7 +171,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>1 1</size>
+              <size>400 400</size>
             </plane>
           </geometry>
           <surface>
@@ -186,7 +186,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>100 100</size>
+              <size>400 400</size>
             </plane>
           </geometry>
           <material>
