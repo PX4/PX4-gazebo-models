@@ -202,7 +202,7 @@
       <sensor name="camera_imu" type="imu">
         <always_on>1</always_on>
         <update_rate>250</update_rate>
-        <pose>-0.0412 0 -0.162 0 0 0</pose>
+        <pose>-0.0412 0 -0.162 0 0 3.14</pose>
         <imu>
           <angular_velocity>
             <x>
