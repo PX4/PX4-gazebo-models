@@ -185,13 +185,18 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>100 100</size>
+              <size>50 50</size>
             </plane>
           </geometry>
           <material>
             <ambient>0.8 0.8 0.8 1</ambient>
             <diffuse>0.8 0.8 0.8 1</diffuse>
             <specular>0.8 0.8 0.8 1</specular>
+            <pbr>
+              <metal>
+                <albedo_map>model://arucotag/tiled_meseeks_small.png</albedo_map>
+              </metal>
+            </pbr>
           </material>
         </visual>
         <pose>0 0 0 0 -0 0</pose>
