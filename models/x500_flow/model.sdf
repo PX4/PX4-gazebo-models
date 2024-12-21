@@ -7,7 +7,7 @@
     </include>
     <include merge='true'>
       <uri>model://mono_cam</uri>
-      <pose>.03 0 .18 0 1.5707 0</pose>
+      <pose relative_to="base_link">0.03 0 -.15 0 1.57 0</pose>
     </include>
     <include merge='true'>
       <uri>model://LW20</uri>

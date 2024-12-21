@@ -244,8 +244,8 @@
       <elevation>0</elevation>
     </spherical_coordinates>
 
-    <include>
+<!--     <include>
       <uri>model://arucotag</uri>
-    </include>
+    </include> -->
   </world>
 </sdf>
