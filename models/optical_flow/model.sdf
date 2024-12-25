@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='optical_flow'>
+    <static>false</static>
+    <link name="optical_flow/base_link">
+      <inertial>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>0.00001</ixx>
+          <iyy>0.00001</iyy>
+          <izz>0.00001</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+      <visual name="optical_flow/visual/housing">
+        <geometry>
+          <box>
+            <size>0.015 0.015 0.005</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.2 0.2 1.0</ambient>
+          <diffuse>0.2 0.2 0.2 1.0</diffuse>
+        </material>
+      </visual>
+      <sensor name="flow_camera" type="camera">
+        <pose>0 0 0 0 1.5707 0</pose>
+        <camera>
+          <horizontal_fov>0.8</horizontal_fov>
+          <image>
+            <width>64</width>
+            <height>64</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>30</far>
+          </clip>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>flow_camera</topic>
+      </sensor>
+      <sensor name="optical_flow" type="custom" gz:type="optical_flow">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>/optical_flow</topic>
+        <gz:optical_flow>
+          <camera_topic>flow_camera</camera_topic>
+        </gz:optical_flow>
+      </sensor>
+    </link>
+  </model>
+</sdf>
