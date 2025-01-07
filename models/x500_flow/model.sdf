@@ -7,7 +7,7 @@
     </include>
     <include merge='true'>
       <uri>model://optical_flow</uri>
-      <pose relative_to="base_link">0.03 0 -.15 0 1.57 0</pose>
+      <pose relative_to="base_link">0.03 0 -0.1 0 0 0</pose>
     </include>
     <include merge='true'>
       <uri>model://LW20</uri>
@@ -16,7 +16,7 @@
     <joint name="optical_flow_joint" type="fixed">
       <parent>base_link</parent>
       <child>optical_flow/base_link</child>
-      <pose relative_to="base_link">0 0 0 0 1.5707 0</pose>
+      <pose relative_to="base_link">0 0 -0.1 0 1.5707 0</pose>
     </joint>
     <joint name="lidar_model_joint" type="fixed">
       <parent>base_link</parent>
