@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
-    <world name="territory">
+    <world name="terrain">
         <physics type="ode">
             <max_step_size>0.004</max_step_size>
             <real_time_factor>1.0</real_time_factor>
@@ -12,8 +12,6 @@
         <plugin name="gz::sim::systems::Contact" filename="gz-sim-contact-system" />
         <plugin name="gz::sim::systems::Imu" filename="gz-sim-imu-system" />
         <plugin name="gz::sim::systems::AirPressure" filename="gz-sim-air-pressure-system" />
-        <!-- <plugin name="gz::sim::systems::ApplyLinkWrench"
-        filename="gz-sim-apply-link-wrench-system" />  -->
         <plugin name="gz::sim::systems::NavSat" filename="gz-sim-navsat-system" />
         <plugin name="gz::sim::systems::Sensors" filename="gz-sim-sensors-system">
             <render_engine>ogre2</render_engine>
@@ -186,7 +184,7 @@
 
                             <uri>file://media/dem/data.dt2</uri>
                             <size>400 400 2</size>
-                            <pos>0 0 -646.5</pos>
+                            <pos>0 0 -644.4</pos>
                         </heightmap>
                     </geometry>
                 </visual>
@@ -212,19 +210,6 @@
                 <outer_angle>0</outer_angle>
                 <falloff>0</falloff>
             </spot>
-        </light>
-        <light type="directional" name="sun_2">
-            <cast_shadows>true</cast_shadows>
-            <pose>200 200 200 0 0 0</pose>
-            <diffuse>0.5 0.5 0.5 0.3</diffuse>
-            <specular>0.2 0.2 0.2 0.3</specular>
-            <attenuation>
-                <range>2000</range>
-                <constant>1</constant>
-                <linear>0</linear>
-                <quadratic>0</quadratic>
-            </attenuation>
-            <direction>0.01 0.01 -0.9</direction>
         </light>
 
         <spherical_coordinates>

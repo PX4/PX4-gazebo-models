@@ -5,13 +5,13 @@
       <uri>x500</uri>
     </include>
     <include merge='true'>
-      <uri>model://RealSense_D435i</uri>
-      <pose>.12 .0 .25 0 0 1.57</pose>
+      <uri>model://realsense_d435i</uri>
+      <pose>.13 .0 .23 0 1.57  0</pose>
     </include>
     <joint name="CameraJoint" type="fixed">
       <parent>base_link</parent>
-      <child>RealSense_D435i/base_link</child>
-      <pose relative_to="base_link">.12 .03 .242 0 0 0</pose>
+      <child>realsense_d435i/base_link</child>
+      <pose relative_to="base_link">.12 .03 .1 0 0 0</pose>
     </joint>
     <plugin
       filename="gz-sim-odometry-publisher-system"
