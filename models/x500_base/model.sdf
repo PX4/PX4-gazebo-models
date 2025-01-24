@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
   <model name='x500_base'>
-    <pose>0 0 0 0 0 0</pose>
+    <pose>0 0 .24 0 0 0</pose>
     <self_collide>false</self_collide>
     <static>false</static>
     <link name="base_link">
@@ -19,7 +19,7 @@
       <gravity>true</gravity>
       <velocity_decay/>
       <visual name="base_link_visual">
-        <pose>0 0 0 0 0 3.141592654</pose>
+        <pose>0 0 .025 0 0 3.141592654</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
