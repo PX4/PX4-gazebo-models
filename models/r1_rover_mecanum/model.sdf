@@ -1,5 +1,5 @@
 <sdf version='1.6'>
-	<model name='r1_rover'>
+	<model name='r1_rover_mecanum'>
 		<link name='base_link'>
 			<pose>0 0 0 0 0 0</pose>
 			<inertial>
@@ -14,7 +14,7 @@
 					<izz>0.53333</izz>
 				</inertia>
 			</inertial>
-			<collision name='base_link_collision'>
+			<collision name='base_link_collisionn'>
 				<pose>0 0 0.15 0 0 0</pose>
 				<geometry>
 					<box>
@@ -22,7 +22,7 @@
 					</box>
 				</geometry>
 			</collision>
-			<visual name='base_link_visual_chassi'>
+			<visual name='base_link_visual'>
 				<pose>0 0 0 0 0 0</pose>
 				<geometry>
 					<mesh>
@@ -35,7 +35,7 @@
 					<specular>1.0 1.0 1.0</specular>
 				</material>
 			</visual>
-			<visual name='base_link_visual_top_link'>
+			<visual name='top_link_visual_1'>
 				<pose>0 0 0.114486 0 0 0</pose>
 				<geometry>
 					<mesh>
@@ -48,7 +48,7 @@
 					<specular>1.0 1.0 1.0</specular>
 				</material>
 			</visual>
-			<visual name='base_link_visual_battery_link'>
+			<visual name='link_visual_2'>
 				<pose>-0.09302 -0.000128 0.114486 0 0 0</pose>
 				<geometry>
 					<mesh>
@@ -61,7 +61,7 @@
 					<specular>0.5 0.5 0.5</specular>
 				</material>
 			</visual>
-			<visual name='base_link_visual_housing_link'>
+			<visual name='link_visual_3'>
 				<pose>0.03473 0 0.114486 0 0 0</pose>
 				<geometry>
 					<mesh>
@@ -74,7 +74,7 @@
 					<specular>0.5 0.5 0.5</specular>
 				</material>
 			</visual>
-			<visual name='base_link_visual_antenna_link'>
+			<visual name='link_visual_4'>
 				<pose>-0.1565 0.0762 0.114486 0 0 0</pose>
 				<geometry>
 					<mesh>
@@ -87,7 +87,7 @@
 					<specular>0.5 0.5 0.5</specular>
 				</material>
 			</visual>
-			<visual name='base_link_visual_antenna_link_2'>
+			<visual name='link_visual_5'>
 				<pose>-0.1565 -0.0762 0.114486 0 0 0</pose>
 				<geometry>
 					<mesh>
@@ -101,60 +101,61 @@
 				</material>
 			</visual>
 			<gravity>1</gravity>
+			<velocity_decay/>
 			<sensor name="imu_sensor" type="imu">
 				<always_on>1</always_on>
 				<update_rate>250</update_rate>
 				<imu>
 					<angular_velocity>
 						<x>
-						<noise type="gaussian">
+							<noise type="gaussian">
 							<mean>0</mean>
 							<stddev>0.0003394</stddev>
 							<dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
 							<dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-						</noise>
+							</noise>
 						</x>
 						<y>
-						<noise type="gaussian">
+							<noise type="gaussian">
 							<mean>0</mean>
 							<stddev>0.0003394</stddev>
 							<dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
 							<dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-						</noise>
+							</noise>
 						</y>
 						<z>
-						<noise type="gaussian">
+							<noise type="gaussian">
 							<mean>0</mean>
 							<stddev>0.0003394</stddev>
 							<dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
 							<dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-						</noise>
+							</noise>
 						</z>
 					</angular_velocity>
 					<linear_acceleration>
 						<x>
-						<noise type="gaussian">
+							<noise type="gaussian">
 							<mean>0</mean>
 							<stddev>0.004</stddev>
 							<dynamic_bias_stddev>0.006</dynamic_bias_stddev>
 							<dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-						</noise>
+							</noise>
 						</x>
 						<y>
-						<noise type="gaussian">
+							<noise type="gaussian">
 							<mean>0</mean>
 							<stddev>0.004</stddev>
 							<dynamic_bias_stddev>0.006</dynamic_bias_stddev>
 							<dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-						</noise>
+							</noise>
 						</y>
 						<z>
-						<noise type="gaussian">
+							<noise type="gaussian">
 							<mean>0</mean>
 							<stddev>0.004</stddev>
 							<dynamic_bias_stddev>0.006</dynamic_bias_stddev>
 							<dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-						</noise>
+							</noise>
 						</z>
 					</linear_acceleration>
 				</imu>
@@ -165,8 +166,8 @@
 				<air_pressure>
 					<pressure>
 						<noise type="gaussian">
-							<mean>0</mean>
-							<stddev>0.01</stddev>
+						<mean>0</mean>
+						<stddev>0.01</stddev>
 						</noise>
 					</pressure>
 				</air_pressure>
@@ -176,7 +177,7 @@
 				<update_rate>30</update_rate>
 			</sensor>
 		</link>
-	  	<link name='lf_wheel_link'>
+		<link name='lf_wheel_link'>
 			<pose>0.15 0.16317 0.0215 0 0 0</pose>
 			<inertial>
 				<pose>0 0 0 1.57079632679 0 0</pose>
@@ -194,57 +195,41 @@
 				<pose>0 0 0 1.57079632679 0 0</pose>
 				<geometry>
 					<cylinder>
-						<radius>0.0686</radius>
-						<length>0.0762</length>
+					<radius>0.0686</radius>
+					<length>0.0762</length>
 					</cylinder>
 				</geometry>
-				<max_contacts>1</max_contacts>
 				<surface>
 					<friction>
-						<torsional>
-							<coefficient>0.25</coefficient>
-							<use_patch_radius>1</use_patch_radius>
-							<surface_radius>0.0686</surface_radius>
-						</torsional>
 						<ode>
-							<mu>2.0</mu>
-							<mu2>2.0</mu2>
-							<fdir1>1 0 0</fdir1>
+							<mu>3.0</mu>
+							<mu2>0.0</mu2>
+							<fdir1 gz:expressed_in="base_link">1 -1 0</fdir1>
 							<slip1>0.0</slip1>
 							<slip2>0.0</slip2>
 						</ode>
 					</friction>
-					<bounce>
-						<restitution_coefficient>0</restitution_coefficient>
-						<threshold>1e6</threshold>
-					</bounce>
-					<contact>
-						<ode>
-							<min_depth>0.001</min_depth>
-							<max_vel>0.0</max_vel>
-							<kp>1.0e6</kp>
-							<kd>100.0</kd>
-						</ode>
-					</contact>
 				</surface>
 			</collision>
-			<visual name='lf_wheel_link_visual'>
+			<visual name='visual'>
 				<pose>0 0 0 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<scale>1 1 1</scale>
-						<uri>model://r1_rover/meshes/wheel_link.STL</uri>
+						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+						<!-- scale mesh to radius == 0.0686 -->
+						<scale>0.001372 0.001372 0.001372</scale>
 					</mesh>
 				</geometry>
 				<material>
-					<diffuse>0.0 0.0 0.0</diffuse>
-					<specular>0.5 0.5 0.5</specular>
+					<ambient>0.2 0.2 0.2 1</ambient>
+					<diffuse>0.2 0.2 0.2 1</diffuse>
+					<specular>0.2 0.2 0.2 1</specular>
 				</material>
 			</visual>
 			<gravity>1</gravity>
 			<velocity_decay/>
 		</link>
-		<joint name='motor_0' type='revolute'>
+	    <joint name='motor_0' type='revolute'>
 			<child>lf_wheel_link</child>
 			<parent>base_link</parent>
 			<axis>
@@ -259,12 +244,12 @@
 				</dynamics>
 				<use_parent_model_frame>1</use_parent_model_frame>
 			</axis>
-		</joint>
-	  	<link name='lb_wheel_link'>
-	    	<pose>-0.15 0.16317 0.0215 0 0 0</pose>
-	    	<inertial>
-			<pose>0 0 0 1.57079632679 0 0</pose>
-			<mass>0.414</mass>
+	    </joint>
+		<link name='lb_wheel_link'>
+			<pose>-0.15 0.16317 0.0215 0 0 0</pose>
+			<inertial>
+				<pose>0 0 0 1.57079632679 0 0</pose>
+				<mass>0.414</mass>
 				<inertia>
 					<ixx>0.00068682</ixx>
 					<ixy>0</ixy>
@@ -278,57 +263,41 @@
 				<pose>0 0 0 1.57079632679 0 0</pose>
 				<geometry>
 					<cylinder>
-						<radius>0.0686</radius>
-						<length>0.0762</length>
+					<radius>0.0686</radius>
+					<length>0.0762</length>
 					</cylinder>
 				</geometry>
-				<max_contacts>1</max_contacts>
 				<surface>
 					<friction>
-					<torsional>
-						<coefficient>0.25</coefficient>
-						<use_patch_radius>1</use_patch_radius>
-						<surface_radius>0.0686</surface_radius>
-					</torsional>
-					<ode>
-						<mu>2.0</mu>
-						<mu2>2.0</mu2>
-						<fdir1>1 0 0</fdir1>
-						<slip1>0.0</slip1>
-						<slip2>0.0</slip2>
-					</ode>
+						<ode>
+							<mu>3.0</mu>
+							<mu2>0.0</mu2>
+							<fdir1 gz:expressed_in="base_link">1 1 0</fdir1>
+							<slip1>0.0</slip1>
+							<slip2>0.0</slip2>
+						</ode>
 					</friction>
-					<bounce>
-						<restitution_coefficient>0</restitution_coefficient>
-						<threshold>1e6</threshold>
-					</bounce>
-					<contact>
-					<ode>
-						<min_depth>0.001</min_depth>
-						<max_vel>0.0</max_vel>
-						<kp>1.0e6</kp>
-						<kd>100.0</kd>
-					</ode>
-					</contact>
 				</surface>
-	    	</collision>
-			<visual name='lb_wheel_link_visual'>
+			</collision>
+			<visual name='visual'>
 				<pose>0 0 0 0 0 0</pose>
-					<geometry>
-						<mesh>
-							<scale>1 1 1</scale>
-							<uri>model://r1_rover/meshes/wheel_link.STL</uri>
-						</mesh>
-					</geometry>
-					<material>
-						<diffuse>0.0 0.0 0.0</diffuse>
-						<specular>0.5 0.5 0.5</specular>
-					</material>
+				<geometry>
+					<mesh>
+						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_left.STL</uri>
+						<!-- scale mesh to radius == 0.0686 -->
+						<scale>0.001372 0.001372 0.001372</scale>
+					</mesh>
+				</geometry>
+				<material>
+					<ambient>0.2 0.2 0.2 1</ambient>
+					<diffuse>0.2 0.2 0.2 1</diffuse>
+					<specular>0.2 0.2 0.2 1</specular>
+				</material>
 			</visual>
 			<gravity>1</gravity>
 			<velocity_decay/>
-	 	</link>
-		<joint name='motor_1' type='revolute'>
+		</link>
+		<joint name='motor_2' type='revolute'>
 			<child>lb_wheel_link</child>
 			<parent>base_link</parent>
 			<axis>
@@ -344,7 +313,7 @@
 				<use_parent_model_frame>1</use_parent_model_frame>
 			</axis>
 		</joint>
-	  	<link name='rf_wheel_link'>
+		<link name='rf_wheel_link'>
 			<pose>0.15 -0.16317 0.0215 0 0 0</pose>
 			<inertial>
 				<pose>0 0 0 1.57079632679 0 0</pose>
@@ -362,57 +331,41 @@
 				<pose>0 0 0 1.57079632679 0 0</pose>
 				<geometry>
 					<cylinder>
-						<radius>0.0686</radius>
-						<length>0.0762</length>
+					<radius>0.0686</radius>
+					<length>0.0762</length>
 					</cylinder>
 				</geometry>
-				<max_contacts>1</max_contacts>
 				<surface>
 					<friction>
-						<torsional>
-							<coefficient>0.25</coefficient>
-							<use_patch_radius>1</use_patch_radius>
-							<surface_radius>0.0686</surface_radius>
-						</torsional>
 						<ode>
-							<mu>2.0</mu>
-							<mu2>2.0</mu2>
-							<fdir1>1 0 0</fdir1>
+							<mu>3.0</mu>
+							<mu2>0.0</mu2>
+							<fdir1 gz:expressed_in="base_link">1 1 0</fdir1>
 							<slip1>0.0</slip1>
 							<slip2>0.0</slip2>
 						</ode>
 					</friction>
-					<bounce>
-						<restitution_coefficient>0</restitution_coefficient>
-						<threshold>1e6</threshold>
-					</bounce>
-					<contact>
-						<ode>
-							<min_depth>0.001</min_depth>
-							<max_vel>0.0</max_vel>
-							<kp>1.0e6</kp>
-							<kd>100.0</kd>
-						</ode>
-					</contact>
 				</surface>
 			</collision>
-			<visual name='rf_wheel_link_visual'>
+			<visual name='visual'>
 				<pose>0 0 0 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<scale>1 1 1</scale>
-						<uri>model://r1_rover/meshes/wheel_link.STL</uri>
+						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_left.STL</uri>
+						<!-- scale mesh to radius == 0.0686 -->
+						<scale>0.001372 0.001372 0.001372</scale>
 					</mesh>
-		  		</geometry>
-		  		<material>
-		    		<diffuse>0.0 0.0 0.0</diffuse>
-		    		<specular>0.5 0.5 0.5</specular>
-		  		</material>
+				</geometry>
+				<material>
+					<ambient>0.2 0.2 0.2 1</ambient>
+					<diffuse>0.2 0.2 0.2 1</diffuse>
+					<specular>0.2 0.2 0.2 1</specular>
+				</material>
 			</visual>
 			<gravity>1</gravity>
 			<velocity_decay/>
 		</link>
-		<joint name='motor_2' type='revolute'>
+	    <joint name='motor_1' type='revolute'>
 			<child>rf_wheel_link</child>
 			<parent>base_link</parent>
 			<axis>
@@ -427,8 +380,8 @@
 				</dynamics>
 				<use_parent_model_frame>1</use_parent_model_frame>
 			</axis>
-		</joint>
-	  	<link name='rb_wheel_link'>
+	    </joint>
+		<link name='rb_wheel_link'>
 			<pose>-0.15 -0.16317 0.0215 0 0 0</pose>
 			<inertial>
 				<pose>0 0 0 1.57079632679 0 0</pose>
@@ -450,50 +403,36 @@
 						<length>0.0762</length>
 					</cylinder>
 				</geometry>
-				<max_contacts>1</max_contacts>
 				<surface>
 					<friction>
-						<torsional>
-							<coefficient>0.25</coefficient>
-							<use_patch_radius>1</use_patch_radius>
-							<surface_radius>0.0686</surface_radius>
-						</torsional>
 						<ode>
-							<mu>2.0</mu>
-							<mu2>2.0</mu2>
-							<fdir1>1 0 0</fdir1>
+							<mu>3.0</mu>
+							<mu2>0.0</mu2>
+							<fdir1 gz:expressed_in="base_link">1 -1 0</fdir1>
 							<slip1>0.0</slip1>
 							<slip2>0.0</slip2>
 						</ode>
 					</friction>
-					<bounce>
-						<restitution_coefficient>0</restitution_coefficient>
-						<threshold>1e6</threshold>
-					</bounce>
-					<contact>
-						<ode>
-							<min_depth>0.001</min_depth>
-							<kp>1e8</kp>
-						</ode>
-					</contact>
 				</surface>
 			</collision>
-			<visual name='rb_wheel_link_visual'>
+			<visual name='visual'>
 				<pose>0 0 0 0 0 0</pose>
 				<geometry>
 					<mesh>
-						<scale>1 1 1</scale>
-						<uri>model://r1_rover/meshes/wheel_link.STL</uri>
+						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+						<!-- scale mesh to radius == 0.0686 -->
+						<scale>0.001372 0.001372 0.001372</scale>
 					</mesh>
 				</geometry>
 				<material>
-					<diffuse>0.0 0.0 0.0</diffuse>
-					<specular>0.5 0.5 0.5</specular>
+					<ambient>0.2 0.2 0.2 1</ambient>
+					<diffuse>0.2 0.2 0.2 1</diffuse>
+					<specular>0.2 0.2 0.2 1</specular>
 				</material>
 			</visual>
 			<gravity>1</gravity>
 			<velocity_decay/>
-	 	</link>
+		</link>
 		<joint name='motor_3' type='revolute'>
 			<child>rb_wheel_link</child>
 			<parent>base_link</parent>
@@ -510,14 +449,16 @@
 				<use_parent_model_frame>1</use_parent_model_frame>
 			</axis>
 		</joint>
-	  	<static>0</static>
+		<static>0</static>
+		<!-- LF -->
 		<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
 			<joint_name>motor_0</joint_name>
 			<sub_topic>command/motor_speed</sub_topic>
 			<use_actuator_msg>true</use_actuator_msg>
-			<actuator_number>1</actuator_number>
+			<actuator_number>0</actuator_number>
 			<p_gain>10.0</p_gain>
 		</plugin>
+		<!-- RF -->
 		<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
 			<joint_name>motor_1</joint_name>
 			<sub_topic>command/motor_speed</sub_topic>
@@ -525,27 +466,27 @@
 			<actuator_number>1</actuator_number>
 			<p_gain>10.0</p_gain>
 		</plugin>
+		<!-- LB -->
 		<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
 			<joint_name>motor_2</joint_name>
 			<sub_topic>command/motor_speed</sub_topic>
 			<use_actuator_msg>true</use_actuator_msg>
-			<actuator_number>0</actuator_number>
+			<actuator_number>2</actuator_number>
 			<p_gain>10.0</p_gain>
 		</plugin>
+		<!-- RB -->
 		<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
 			<joint_name>motor_3</joint_name>
 			<sub_topic>command/motor_speed</sub_topic>
 			<use_actuator_msg>true</use_actuator_msg>
-			<actuator_number>0</actuator_number>
+			<actuator_number>3</actuator_number>
 			<p_gain>10.0</p_gain>
 		</plugin>
-		<plugin
-			filename="gz-sim-joint-state-publisher-system"
-			name="gz::sim::systems::JointStatePublisher">
+		<plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
 			<joint_name>motor_0</joint_name>
 			<joint_name>motor_1</joint_name>
 			<joint_name>motor_2</joint_name>
 			<joint_name>motor_3</joint_name>
 		</plugin>
-  </model>
+	</model>
 </sdf>
