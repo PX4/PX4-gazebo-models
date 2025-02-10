@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <world name="terrain">
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <plugin name="gz::sim::systems::Physics" filename="gz-sim-physics-system" />
+    <plugin name="gz::sim::systems::UserCommands" filename="gz-sim-user-commands-system" />
+    <plugin name="gz::sim::systems::SceneBroadcaster" filename="gz-sim-scene-broadcaster-system" />
+    <plugin name="gz::sim::systems::Contact" filename="gz-sim-contact-system" />
+    <plugin name="gz::sim::systems::Imu" filename="gz-sim-imu-system" />
+    <plugin name="gz::sim::systems::AirPressure" filename="gz-sim-air-pressure-system" />
+    <plugin name="gz::sim::systems::NavSat" filename="gz-sim-navsat-system" />
+    <plugin name="gz::sim::systems::Sensors" filename="gz-sim-sensors-system">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <gui fullscreen="false">
+      <!-- 3D scene -->
+      <plugin name='3D View' filename='GzScene3D'>
+        <gz-gui>
+          <title>3D View</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="string" key="state">docked</property>
+        </gz-gui>
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+        <ambient_light>0.4 0.4 0.4</ambient_light>
+        <background_color>0.8 0.8 0.8</background_color>
+        <camera_pose>900 75 30 0 0.5 0</camera_pose>
+        <camera_clip>
+          <near>0.25</near>
+          <far>25000</far>
+        </camera_clip>
+        <scene>scene</scene>
+        <!-- <horizontal_fov>57.29578</horizontal_fov> -->
+      </plugin>
+      <plugin filename="WorldControl" name="World control">
+        <gz-gui>
+          <title>World control</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="bool" key="resizable">false</property>
+          <property type="double" key="height">72</property>
+          <property type="double" key="width">150</property>
+          <property type="double" key="z">1</property>
+
+          <property type="string" key="state">floating</property>
+          <anchors target="3D View">
+            <line own="left" target="left" />
+            <line own="bottom" target="bottom" />
+          </anchors>
+        </gz-gui>
+        <play_pause>true</play_pause>
+        <step>true</step>
+        <start_paused>true</start_paused>
+        <service>/world/world_demo/control</service>
+        <stats_topic>/world/world_demo/stats</stats_topic>
+      </plugin>
+      <plugin filename="WorldStats" name="World stats">
+        <gz-gui>
+          <title>World stats</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="bool" key="resizable">false</property>
+          <property type="double" key="height">110</property>
+          <property type="double" key="width">290</property>
+          <property type="double" key="z">1</property>
+
+          <property type="string" key="state">floating</property>
+          <anchors target="3D View">
+            <line own="right" target="right" />
+            <line own="bottom" target="bottom" />
+          </anchors>
+        </gz-gui>
+
+        <sim_time>true</sim_time>
+        <real_time>true</real_time>
+        <real_time_factor>true</real_time_factor>
+        <iterations>true</iterations>
+        <topic>/world/world_demo/stats</topic>
+      </plugin>
+
+      <plugin filename="Shapes" name="Shapes">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="x" type="double">0</property>
+          <property key="y" type="double">0</property>
+          <property key="width" type="double">250</property>
+          <property key="height" type="double">50</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+          <property key="cardBackground" type="string">#666666</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="TransformControl" name="Transform control">
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="x" type="double">0</property>
+          <property key="y" type="double">50</property>
+          <property key="width" type="double">250</property>
+          <property key="height" type="double">50</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+          <property key="cardBackground" type="string">#777777</property>
+        </gz-gui>
+      </plugin>
+      <plugin filename="EntityTree" name="Entity tree" />
+      <plugin filename="ComponentInspector" name="Component Inspector" />
+    </gui>
+
+    <include>
+      <uri>mount</uri>
+    </include>
+    <!-- <include>
+      <uri>land</uri>
+    </include> -->
+
+    <include>
+      <name>house_1</name>
+      <pose>921.61 37.57 7.62 -0.11 -0.01 0.07</pose>
+      <uri>Collapsed House</uri>
+    </include>
+    <include>
+      <name>house_2</name>
+      <pose>944.64 81.7 9.52 -0.05 -0.02 1.71</pose>
+      <uri>Collapsed House</uri>
+    </include>
+    <include>
+      <name>house_3</name>
+      <pose>900.73 110.55 11.09 -0.19 0.02 -3.05</pose>
+      <uri>Collapsed House</uri>
+    </include>
+
+    <include>
+      <pose>875.64 73.12 8.0 -0.02 0 1.67</pose>
+      <uri>School</uri>
+    </include>
+
+    <include>
+      <pose>964.62 23.0 7.7 0 0 0</pose>
+      <uri>Water tower</uri>
+    </include>
+
+    <include>
+      <name>radio_tower_1</name>
+      <pose>591.07 -73.40 92.37 0 0 0</pose>
+      <uri>Radio tower</uri>
+    </include>
+    <include>
+      <name>radio_tower_2</name>
+      <pose>507.76 -18.47 135.57 0 0 0</pose>
+      <uri>Radio tower</uri>
+    </include>
+
+    <include>
+      <pose>929.93 100.86 10.57 -0.22 -0.01 -3.11</pose>
+      <uri>Hatchback red</uri>
+    </include>
+
+    <include>
+      <pose>895.25 49.52 7.9 0.06 0.06 1.65</pose>
+      <uri>Ambulance</uri>
+    </include>
+
+    <include>
+      <name>pickup_1</name>
+      <pose>926 77.58 9.97 -0.02 0 1.5</pose>
+      <uri>Pickup</uri>
+    </include>
+    <include>
+      <name>pickup_2</name>
+      <pose>920.02 101.17 10.52 0.11 -0.08 -0.01</pose>
+      <uri>Pickup</uri>
+    </include>
+
+    <!-- Person -->
+    <include>
+      <name>female_1</name>
+      <pose>920 52.32 7.9 0 0 0.26</pose>
+      <uri>Casual female</uri>
+    </include>
+    <include>
+      <name>female_2</name>
+      <pose>943.05 80.54 13.18 0 0 -2.39</pose>
+      <uri>Casual female</uri>
+    </include>
+    <include>
+      <name>female_3</name>
+      <pose>923 78.97 9.95 0 0 -1.57</pose>
+      <uri>Casual female</uri>
+    </include>
+    <include>
+      <name>female_4</name>
+      <pose>926.96 97.08 10.60 0 0 -1.57</pose>
+      <uri>Casual female</uri>
+    </include>
+
+    <include>
+      <name>Male_1</name>
+      <pose>907.45 56.71 6.27 0 0 -0.28</pose>
+      <uri>MaleVisitorPhone</uri>
+    </include>
+    <include>
+      <name>Male_2</name>
+      <pose>925.71 76.0 10.84 0 0 1.57</pose>
+      <uri>MaleVisitorPhone</uri>
+    </include>
+
+    <actor name="actor_walking">
+      <skin>
+        <filename>https://fuel.gazebosim.org/1.0/Mingfei/models/actor/tip/files/meshes/walk.dae</filename>
+        <scale>1.0</scale>
+      </skin>
+      <animation name='walk'>
+        <filename>https://fuel.gazebosim.org/1.0/Mingfei/models/actor/tip/files/meshes/walk.dae</filename>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>0.000000</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id="0" type="walk">
+          <waypoint>
+            <time>0</time>
+            <pose>920 75 10.75 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>15</time>
+            <pose>920 85 10.75 0 0 1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>30</time>
+            <pose>920 85 10.75 0 0 -1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>45</time>
+            <pose>920 75 10.75 0 0 -1.57</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    <!--  -->
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic" />
+    <scene>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <grid>true</grid>
+      <ambient>0.5 0.5 0.5 0.3</ambient>
+      <background>0.3 0.3 0.3 0.3</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <light name="sunUTC" type="directional">
+      <pose>0 0 500 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0.001 0.625 -0.78</direction>
+      <diffuse>0.904 0.904 0.904 1</diffuse>
+      <specular>0.271 0.271 0.271 1</specular>
+      <attenuation>
+        <range>2000</range>
+        <linear>0</linear>
+        <constant>1</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg> 8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+  </world>
+</sdf>
