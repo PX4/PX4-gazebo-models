@@ -1,0 +1,18 @@
+model {
+  file: "model.sdf"
+  file_format {
+    version {
+      major: 1
+      minor: 6
+    }
+    name: "sdf"
+  }
+}
+name: "Collapsed House"
+description: "A collapsed house."
+version: 1
+authors {
+  name: "Nate Koenig"
+  email: "nate@osrfoundation.org"
+}
+

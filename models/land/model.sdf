@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name="land">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>2000 1000 2</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <heightmap>
+            <use_terrain_paging>true</use_terrain_paging>
+            <texture>
+              <diffuse>materials/textures/mud_cracked_albedo.png</diffuse>
+              <normal>materials/textures/mud_cracked_normal.png</normal>
+              <size>100</size>
+            </texture>
+            <uri>materials/textures/mount.png</uri>
+            <size>2000 1000 3.0</size>
+            <pos>0 0 -5</pos>
+          </heightmap>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
