@@ -12,7 +12,7 @@
     </include>
     <joint name="CameraJoint" type="fixed">
       <parent>base_link</parent>
-      <child>camera_link</child>
+      <child>mono_cam/base_link</child>
       <pose relative_to="base_link">0 0 0 0 1.5707 0</pose>
     </joint>
   </model>
