@@ -1,0 +1,65 @@
+name: SDF Parsing
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                fetch-depth: 2
+
+            - name: Install packages
+              id: install-packages
+              run: |
+                sudo apt install -y build-essential cmake python3-pip wget lsb-release gnupg curl
+                sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+                wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+                sudo apt-get update
+                sudo apt install -y libsdformat14-dev libsdformat14
+
+            - name: Build check_sdf
+              id: build-check-sdf
+              run: |
+                cd ./sdf_parsing
+                mkdir build
+                cd build/
+                cmake .. -Wno-dev
+                make
+
+            - name: Get latest commit hash
+              id: latest_commit
+              run: echo "hash=$(git log --format="%H" -n 1 | tail -n 1)" >> $GITHUB_OUTPUT
+
+            - name: Get second-to-last commit hash
+              id: second_to_last_commit
+              run: echo "hash=$(git log --format="%H" -n 2 | tail -n 1)" >> $GITHUB_OUTPUT
+
+            # - name: Get changed files
+            #   id: changed-files
+            #   run:  echo "changed_files=$(git diff --name-only ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }})" >> $GITHUB_OUTPUT
+
+            - name: Iterate, find and check .sdf files
+              run: |
+                changed_files=$(git diff --name-only ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }})
+                for file in $changed_files; do
+                  if [[ $file == *.sdf ]]; then
+                    echo "Checking $file"
+
+                    # Run sdf parser
+                    ./sdf_parsing/build/check_sdf $file
+                    exit_code=$?
+
+                    # Exit if exit code not equal 0
+                    if [ $exit_code -ne 0 ]; then
+                        echo "sdf parsing error in $file, exit code: $exit_code"
+                    fi
+
+                  fi
+                done

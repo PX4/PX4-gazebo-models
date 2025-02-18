@@ -1,0 +1,33 @@
+name: Auto Update
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get latest commit hash
+        id: latest_commit
+        run: echo "hash=$(git log --format="%H" -n 1 | tail -n 1)" >> $GITHUB_OUTPUT
+
+      - name: Get second-to-last commit hash
+        id: second_to_last_commit
+        run: echo "hash=$(git log --format="%H" -n 2 | tail -n 1)" >> $GITHUB_OUTPUT
+
+      - name: Update Fuel Models
+        run: |
+          sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+          wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+          sudo apt-get update
+          sudo apt-get install -y libgz-fuel-tools8-dev
+          ./fuel_upload.sh ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }} ${{ secrets.GAZEBO_FUEL_TOKEN }}
