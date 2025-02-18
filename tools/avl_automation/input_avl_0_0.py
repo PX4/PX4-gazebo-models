@@ -1,7 +1,7 @@
 #!/usr/bin/env
 
 import argparse
-import avl_out_parse
+import avl_out_parse_0_0
 import os
 import yaml
 import subprocess
@@ -67,7 +67,7 @@ def write_section(plane_name: str,x: str,y: str,z: str,chord: str,ainc: str,nspa
 
 """
 Read the provided yaml file and generate the corresponding .avl file that can be read into AVL.
-Also calls AVL and the avl_out_parse.py file that generates the sdf plugin.
+Also calls AVL and the avl_out_parse_0_0.py file that generates the sdf plugin.
 
 Args:
 	yaml_file: Path to the input yaml file
@@ -297,7 +297,7 @@ def main():
 	os.system(f'./process.sh {plane_name}')
 
 	# Call main function of avl parse script to parse the generated AVL files.
-	avl_out_parse.main(plane_name,frame_type,AR,mac,ref_pt_x,ref_pt_y,ref_pt_z,num_ctrl_surfaces,area,ctrl_surface_order,inputs.avl_path)
+	avl_out_parse_0_0.main(plane_name,frame_type,AR,mac,ref_pt_x,ref_pt_y,ref_pt_z,num_ctrl_surfaces,area,ctrl_surface_order,inputs.avl_path)
 
 	# Finally move all generated files to a new directory and show the generated geometry image:
 	result = subprocess.run(['pwd'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
