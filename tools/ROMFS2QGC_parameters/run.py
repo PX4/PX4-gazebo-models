@@ -1,6 +1,6 @@
 import sys
 
-def replace_lines_in_file(input_filename, output_filename):
+def replace_lines_in_file(input_filename, output_filename, vehicle_id):
     try:
         with open(input_filename, 'r', encoding='utf-8') as file:
             lines = file.readlines()
@@ -12,7 +12,7 @@ def replace_lines_in_file(input_filename, output_filename):
             parts = line.strip().split()
             if len(parts) >= 4 and "param" in parts[0]:
                 comment = " " + " ".join(parts[4:]) if len(parts) > 4 else ""
-                updated_lines.append(f"1\t1\t{parts[2]}\t{parts[3]}\tidk\t{comment}\n")
+                updated_lines.append(f"{vehicle_id}\t1\t{parts[2]}\t{parts[3]}\tidk\t{comment}\n")
             else:
                 updated_lines.append(line)
         
@@ -25,6 +25,6 @@ def replace_lines_in_file(input_filename, output_filename):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("Usage: python script.py <input_filename> <output_filename>")
+        print("Usage: python3 run.py <input_filename> <output_filename> <Vehicle-id>")
     else:
-        replace_lines_in_file(sys.argv[1], sys.argv[2])
+        replace_lines_in_file(sys.argv[1], sys.argv[2], sys.argv[3])
