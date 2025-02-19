@@ -8,10 +8,11 @@
     <include merge='true'>
       <uri>model://mono_cam</uri>
       <pose>0 0 .10 0 1.5707 0</pose>
+      <name>mono_cam</name>
     </include>
     <joint name="CameraJoint" type="fixed">
       <parent>base_link</parent>
-      <child>mono_cam/base_link</child>
+      <child>camera_link</child>
       <pose relative_to="base_link">0 0 0 0 1.5707 0</pose>
     </joint>
   </model>
