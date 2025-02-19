@@ -11,7 +11,7 @@ In order to run this tool, it is possible to use an semi-automated method or a m
 1. Open QGC and obtain the parameters of the vehicle to mimic in simulation.
 2. Run `python3 run.py --params_file <QGC_parameters_file.params>`
 3. Place the output in the simulated plane under (PX4-Autopilot/ROMFS/px4fmu_common/init.d-posix/airframes) and added it in the CMakeList.txt
-4. Run a simulation of the given vehicle and copy the errors to the errors.txt file (not all parameters are implemented in gz compared with the QGC so ERROR param foo is not available is expected)
+4. Run a simulation of the given vehicle and copy the errors to the errors.txt file (not all parameters are implemented in gz compared with the QGC so: 'ERROR [param] Parameter PARAM_NAME not found.' is an expected output from gazebo)
 5. Run `python3 clean.py <romfs_path> <error_path>` (this will comment out the parameters that were giving as errors)
 6. Run `python3 file_checker.py <romfs_filename>` (this will check for any double definitions)
 6. Place the new output under (PX4-Autopilot/ROMFS/px4fmu_common/init.d-posix/airframes)
