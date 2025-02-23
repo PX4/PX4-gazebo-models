@@ -17,7 +17,6 @@
     <plugin name="gz::sim::systems::Sensors" filename="gz-sim-sensors-system">
       <render_engine>ogre2</render_engine>
     </plugin>
-    <plugin name="custom::OpticalFlowSystem" filename="libOpticalFlowSystem.so" />
     <gui fullscreen="false">
       <!-- 3D scene -->
       <plugin filename="MinimalScene" name="3D View">
@@ -186,18 +185,13 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>50 50</size>
+              <size>100 100</size>
             </plane>
           </geometry>
           <material>
             <ambient>0.8 0.8 0.8 1</ambient>
             <diffuse>0.8 0.8 0.8 1</diffuse>
             <specular>0.8 0.8 0.8 1</specular>
-            <pbr>
-              <metal>
-                <albedo_map>model://arucotag/tiled_meseeks_small.png</albedo_map>
-              </metal>
-            </pbr>
           </material>
         </visual>
         <pose>0 0 0 0 -0 0</pose>
