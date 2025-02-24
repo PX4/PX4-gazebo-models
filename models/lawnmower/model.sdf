@@ -572,7 +572,6 @@
     </joint>
     <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
       <joint_name>right_wheel_joint</joint_name>
-      <!--sub_topic>servo_0</sub_topic-->
       <sub_topic>command/motor_speed</sub_topic>
       <use_actuator_msg>true</use_actuator_msg>
       <actuator_number>0</actuator_number>
@@ -589,7 +588,6 @@
     </plugin>
     <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
       <joint_name>left_wheel_joint</joint_name>
-      <!--sub_topic>servo_1</sub_topic-->
       <sub_topic>command/motor_speed</sub_topic>
       <use_actuator_msg>true</use_actuator_msg>
       <actuator_number>1</actuator_number>
@@ -607,7 +605,7 @@
     <!-- Note: SIM_GZ_SV_FAIL1 defines servo_0 etc. -->
     <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
       <joint_name>cutter_blades_joint</joint_name>
-      <sub_topic>servo_2</sub_topic>
+      <sub_topic>servo_0</sub_topic>
       <!-- p_gain>1.0</p_gain>
       <cmd_max>2000.0</cmd_max>
       <cmd_min>1000.0</cmd_min>
@@ -615,7 +613,7 @@
     </plugin>
     <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
       <joint_name>engine_visual_joint</joint_name>
-      <sub_topic>servo_3</sub_topic>
+      <sub_topic>servo_1</sub_topic>
       <p_gain>10.0</p_gain>
       <!-- use_actuator_msg>false</use_actuator_msg>
       <initial_velocity>0</initial_velocity>
