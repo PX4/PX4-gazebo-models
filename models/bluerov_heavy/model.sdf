@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <include>
+    <pose>0 0 0 0 0 0</pose>
+    <!-- model from a single instance -->
+    <uri>https://fuel.gazebosim.org/1.0/proque/models/kth_freeflyer</uri>
+
+
+    <!-- hydrodynamics plugin-->
+    <plugin
+      filename="gz-sim-hydrodynamics-system"
+      name="gz::sim::systems::Hydrodynamics">
+      <link_name>base_link</link_name>
+      <xDotU>-4.876161</xDotU>
+      <yDotV>-126.324739</yDotV>
+      <zDotW>-126.324739</zDotW>
+      <kDotP>0</kDotP>
+      <mDotQ>-33.46</mDotQ>
+      <nDotR>-33.46</nDotR>
+      <xUabsU>-6.2282</xUabsU>
+      <xU>0</xU>
+      <yVabsV>-601.27</yVabsV>
+      <yV>0</yV>
+      <zWabsW>-601.27</zWabsW>
+      <zW>0</zW>
+      <kPabsP>-0.1916</kPabsP>
+      <kP>0</kP>
+      <mQabsQ>-632.698957</mQabsQ>
+      <mQ>0</mQ>
+      <nRabsR>-632.698957</nRabsR>
+      <nR>0</nR>
+    </plugin>
+  </include>
+</sdf>
