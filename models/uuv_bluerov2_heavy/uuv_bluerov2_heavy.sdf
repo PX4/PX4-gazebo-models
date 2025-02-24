@@ -555,151 +555,81 @@
             <motorType>velocity</motorType>
         </plugin>
 
-        <plugin name="magnetometer_plugin" filename="libgazebo_magnetometer_plugin.so">
-            <robotNamespace />
-            <pubRate>100</pubRate>
-            <noiseDensity>0.0004</noiseDensity>
-            <randomWalk>6.4e-06</randomWalk>
-            <biasCorrelationTime>600</biasCorrelationTime>
-            <magTopic>/mag</magTopic>
-        </plugin>
+        <sensor name="air_pressure_sensor" type="air_pressure">
+            <always_on>1</always_on>
+            <update_rate>50</update_rate>
+            <air_pressure>
+            <pressure>
+                <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.01</stddev>
+                </noise>
+            </pressure>
+            </air_pressure>
+        </sensor>
 
-        <plugin name="barometer_plugin" filename="libgazebo_barometer_plugin.so">
-            <robotNamespace />
-            <pubRate>50</pubRate>
-            <baroTopic>/baro</baroTopic>
-        </plugin>
-
-        <plugin name="uuv_plugin" filename="libgazebo_uuv_plugin.so">
-            <robotNamespace />
-            <baseLinkName>base_link</baseLinkName>
-            <addedMassLinear>1.11 2.8 2.8</addedMassLinear>
-            <addedMassAngular>0.00451 0.0163 0.0163</addedMassAngular>
-            <dampingLinear>5.39 17.36 17.36</dampingLinear>
-            <dampingAngular>0.00114 0.007 0.007</dampingAngular>
-            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
-            <buoyancy>
-                <link_name>base_link</link_name>
-                <origin>0 0 0</origin>
-                <compensation>1</compensation>
-                <height_scale_limit>0.05</height_scale_limit>
-            </buoyancy>
-        </plugin>
-
-        <plugin name="mavlink_interface" filename="libgazebo_mavlink_interface.so">
-            <robotNamespace />
-            <imuSubTopic>/imu</imuSubTopic>
-            <magSubTopic>/mag</magSubTopic>
-            <baroSubTopic>/baro</baroSubTopic>
-            <mavlink_addr>INADDR_ANY</mavlink_addr>
-            <mavlink_udp_port>14560</mavlink_udp_port>
-            <mavlink_tcp_port>4560</mavlink_tcp_port>
-            <serialEnabled>0</serialEnabled>
-            <serialDevice>/dev/ttyACM0</serialDevice>
-            <baudRate>921600</baudRate>
-            <qgc_addr>INADDR_ANY</qgc_addr>
-            <qgc_udp_port>14550</qgc_udp_port>
-            <sdk_addr>INADDR_ANY</sdk_addr>
-            <sdk_udp_port>14540</sdk_udp_port>
-            <hil_mode>false</hil_mode>
-            <hil_state_level>false</hil_state_level>
-            <vehicle_is_tailsitter>false</vehicle_is_tailsitter>
-            <send_vision_estimation>0</send_vision_estimation>
-            <send_odometry>0</send_odometry>
-            <enable_lockstep>true</enable_lockstep>
-            <use_tcp>true</use_tcp>
-            <motorSpeedCommandPubTopic>/gazebo/command/motor_speed</motorSpeedCommandPubTopic>
-
-            <!-- control channels, this way for every channel different settings can be realized -->
-            <control_channels>
-                <channel name="thruster1">
-                    <input_index>0</input_index>
-                    <input_offset>0</input_offset>
-                    <input_scaling>1</input_scaling>
-                    <zero_position_disarmed>0</zero_position_disarmed>
-                    <zero_position_armed>0</zero_position_armed>
-                    <joint_control_type>velocity</joint_control_type>
-                    <joint_name>thruster1_joint</joint_name>
-                </channel>
-                <channel name="thruster2">
-                    <input_index>1</input_index>
-                    <input_offset>0</input_offset>
-                    <input_scaling>1</input_scaling>
-                    <zero_position_disarmed>0</zero_position_disarmed>
-                    <zero_position_armed>0</zero_position_armed>
-                    <joint_control_type>velocity</joint_control_type>
-                    <joint_name>thruster2_joint</joint_name>
-                </channel>
-                <channel name="thruster3">
-                    <input_index>2</input_index>
-                    <input_offset>0</input_offset>
-                    <input_scaling>1</input_scaling>
-                    <zero_position_disarmed>0</zero_position_disarmed>
-                    <zero_position_armed>0</zero_position_armed>
-                    <joint_control_type>velocity</joint_control_type>
-                    <joint_name>thruster3_joint</joint_name>
-                </channel>
-                <channel name="thruster4">
-                    <input_index>3</input_index>
-                    <input_offset>0</input_offset>
-                    <input_scaling>1</input_scaling>
-                    <zero_position_disarmed>0</zero_position_disarmed>
-                    <zero_position_armed>0</zero_position_armed>
-                    <joint_control_type>velocity</joint_control_type>
-                    <joint_name>thruster4_joint</joint_name>
-                </channel>
-                <channel name="thruster5">
-                    <input_index>4</input_index>
-                    <input_offset>0</input_offset>
-                    <input_scaling>1</input_scaling>
-                    <zero_position_disarmed>0</zero_position_disarmed>
-                    <zero_position_armed>0</zero_position_armed>
-                    <joint_control_type>velocity</joint_control_type>
-                    <joint_name>thruster5_joint</joint_name>
-                </channel>
-                <channel name="thruster6">
-                    <input_index>5</input_index>
-                    <input_offset>0</input_offset>
-                    <input_scaling>1</input_scaling>
-                    <zero_position_disarmed>0</zero_position_disarmed>
-                    <zero_position_armed>0</zero_position_armed>
-                    <joint_control_type>velocity</joint_control_type>
-                    <joint_name>thruster6_joint</joint_name>
-                </channel>
-                <channel name="thruster7">
-                    <input_index>6</input_index>
-                    <input_offset>0</input_offset>
-                    <input_scaling>1</input_scaling>
-                    <zero_position_disarmed>0</zero_position_disarmed>
-                    <zero_position_armed>0</zero_position_armed>
-                    <joint_control_type>velocity</joint_control_type>
-                    <joint_name>thruster7_joint</joint_name>
-                </channel>
-                <channel name="thruster8">
-                    <input_index>7</input_index>
-                    <input_offset>0</input_offset>
-                    <input_scaling>1</input_scaling>
-                    <zero_position_disarmed>0</zero_position_disarmed>
-                    <zero_position_armed>0</zero_position_armed>
-                    <joint_control_type>velocity</joint_control_type>
-                    <joint_name>thruster8_joint</joint_name>
-                </channel>
-            </control_channels>
-        </plugin>
-
-        <plugin name="gazebo_imu_plugin" filename="libgazebo_imu_plugin.so">
-            <robotNamespace />
-            <linkName>base_link</linkName>
-            <imuTopic>/imu</imuTopic>
-            <gyroscopeNoiseDensity>0.0003394</gyroscopeNoiseDensity>
-            <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
-            <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
-            <gyroscopeTurnOnBiasSigma>0.0087</gyroscopeTurnOnBiasSigma>
-            <accelerometerNoiseDensity>0.004</accelerometerNoiseDensity>
-            <accelerometerRandomWalk>0.006</accelerometerRandomWalk>
-            <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
-            <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
-        </plugin>
+       <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
 
     </model>
 </sdf>
