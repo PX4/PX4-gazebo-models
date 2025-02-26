@@ -219,10 +219,11 @@
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
+          <!-- Noise modeled after BMP390 -->
           <pressure>
             <noise type="gaussian">
               <mean>0</mean>
-              <stddev>0.01</stddev>
+              <stddev>3</stddev>
             </noise>
           </pressure>
         </air_pressure>
