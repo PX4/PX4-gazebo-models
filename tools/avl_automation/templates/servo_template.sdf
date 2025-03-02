@@ -1,0 +1,30 @@
+    <joint name='' type=''>
+      <parent></parent>
+      <child></child>
+      <pose></pose>
+      <axis>
+        <xyz></xyz>
+        <limit>
+          <!-- -30/+30 deg. -->
+          <lower>-0.53</lower>
+          <upper>0.53</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+        </ode>
+      </physics>
+    </joint>
+    <plugin
+      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name></joint_name>
+      <sub_topic></sub_topic>
+      <p_gain>10</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+    </plugin>
+    
