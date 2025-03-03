@@ -236,11 +236,11 @@
         </collision>
         <pose>0 0 2 0 0 0</pose>
         <inertial>
-            <mass>1</mass>
+            <mass>10000</mass>
             <inertia>
-                <ixx>1</ixx>
-                <iyy>1</iyy>
-                <izz>1</izz>
+                <ixx>10000</ixx>
+                <iyy>10000</iyy>
+                <izz>10000</izz>
             </inertia>
         </inertial>
         <sensor name="navsat_sensor" type="navsat">
