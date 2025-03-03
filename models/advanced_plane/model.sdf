@@ -403,7 +403,7 @@
         </inertia>
       </inertial>
       <sensor name='lidar' type='gpu_lidar'>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 3.14 0 0</pose>
         <update_rate>50</update_rate>
         <ray>
           <scan>
