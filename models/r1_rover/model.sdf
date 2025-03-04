@@ -1,5 +1,5 @@
 <sdf version='1.6'>
-	<model name='r1_rover'>
+<model name='r1_rover'>
     <link name='base_link'>
 	    	<pose>0 0 0 0 -0 0</pose>
 			<inertial>
