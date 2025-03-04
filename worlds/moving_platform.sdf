@@ -254,6 +254,7 @@
             name="gz::sim::systems::VelocityControl">
         <link_name>platform_link</link_name>
 	  </plugin>
+      <plugin name="custom::MovingPlatformController" filename="libMovingPlatformController.so" />
     </model>
     <light name="sunUTC" type="directional">
       <pose>0 0 500 0 -0 0</pose>
