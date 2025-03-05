@@ -1,7 +1,7 @@
 <sdf version='1.6'>
 	<model name='r1_rover'>
-    <link name='base_link'>
-	    	<pose>0 0 0 0 -0 0</pose>
+	<link name='base_link'>
+			<pose>0 0 0 0 -0 0</pose>
 			<inertial>
 				<pose>0 0 0 0 -0 0</pose>
 				<mass>20.0</mass>
@@ -185,12 +185,37 @@
 					</pressure>
 				</air_pressure>
 			</sensor>
+			<sensor name="magnetometer_sensor" type="magnetometer">
+				<always_on>1</always_on>
+				<update_rate>100</update_rate>
+				<magnetometer>
+				<!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+				<!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+				<!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+				<!-- Noise modeled after IIS2MDC -->
+					<x>
+						<noise type="gaussian">
+						<stddev>0.0001</stddev>
+						</noise>
+					</x>
+					<y>
+						<noise type="gaussian">
+						<stddev>0.0001</stddev>
+						</noise>
+					</y>
+					<z>
+						<noise type="gaussian">
+						<stddev>0.0001</stddev>
+						</noise>
+					</z>
+				</magnetometer>
+			</sensor>
 			<sensor name="navsat_sensor" type="navsat">
 				<always_on>1</always_on>
 				<update_rate>30</update_rate>
 			</sensor>
 		</link>
-	  	<link name='lf_wheel_link'>
+		<link name='lf_wheel_link'>
 			<pose>0.15 0.16317 0.0215 0 -0 0</pose>
 			<inertial>
 				<pose>0 0 0 1.57079632679 0 0</pose>
@@ -274,9 +299,9 @@
 				<use_parent_model_frame>1</use_parent_model_frame>
 			</axis>
 		</joint>
-	  	<link name='lb_wheel_link'>
-	    	<pose>-0.15 0.16317 0.0215 0 -0 0</pose>
-	    	<inertial>
+		<link name='lb_wheel_link'>
+			<pose>-0.15 0.16317 0.0215 0 -0 0</pose>
+			<inertial>
 			<pose>0 0 0 1.57079632679 0 0</pose>
 			<mass>0.414</mass>
 				<inertia>
@@ -325,7 +350,7 @@
 					</ode>
 					</contact>
 				</surface>
-	    	</collision>
+			</collision>
 			<visual name='lb_wheel_link_visual'>
 				<pose>0 0 0 0 -0 0</pose>
 					<geometry>
@@ -341,7 +366,7 @@
 			</visual>
 			<gravity>1</gravity>
 			<velocity_decay/>
-	 	</link>
+		</link>
 		<joint name='motor_1' type='revolute'>
 			<child>lb_wheel_link</child>
 			<parent>base_link</parent>
@@ -358,7 +383,7 @@
 				<use_parent_model_frame>1</use_parent_model_frame>
 			</axis>
 		</joint>
-	  	<link name='rf_wheel_link'>
+		<link name='rf_wheel_link'>
 			<pose>0.15 -0.16317 0.0215 0 -0 0</pose>
 			<inertial>
 				<pose>0 0 0 1.57079632679 0 0</pose>
@@ -417,11 +442,11 @@
 						<scale>1 1 1</scale>
 						<uri>model://r1_rover/meshes/wheel_link.STL</uri>
 					</mesh>
-		  		</geometry>
-		  		<material>
-		    		<diffuse>0.0 0.0 0.0</diffuse>
-		    		<specular>0.5 0.5 0.5</specular>
-		  		</material>
+				</geometry>
+				<material>
+					<diffuse>0.0 0.0 0.0</diffuse>
+					<specular>0.5 0.5 0.5</specular>
+				</material>
 			</visual>
 			<gravity>1</gravity>
 			<velocity_decay/>
@@ -442,7 +467,7 @@
 				<use_parent_model_frame>1</use_parent_model_frame>
 			</axis>
 		</joint>
-	  	<link name='rb_wheel_link'>
+		<link name='rb_wheel_link'>
 			<pose>-0.15 -0.16317 0.0215 0 -0 0</pose>
 			<inertial>
 				<pose>0 0 0 1.57079632679 0 0</pose>
@@ -507,7 +532,7 @@
 			</visual>
 			<gravity>1</gravity>
 			<velocity_decay/>
-	 	</link>
+		</link>
 		<joint name='motor_3' type='revolute'>
 			<child>rb_wheel_link</child>
 			<parent>base_link</parent>
@@ -524,7 +549,7 @@
 				<use_parent_model_frame>1</use_parent_model_frame>
 			</axis>
 		</joint>
-	  	<static>0</static>
+		<static>0</static>
 		<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
 			<joint_name>motor_0</joint_name>
 			<sub_topic>command/motor_speed</sub_topic>
