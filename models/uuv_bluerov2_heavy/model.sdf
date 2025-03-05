@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <sdf version="1.9">
-    <model name="BlueROV2 Heavy">
+    <model name="uuv_bluerov2_heavy">
         <pose>0 0 0 0 0 0</pose>
 
         <link name="base_link">
