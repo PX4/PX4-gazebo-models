@@ -200,5 +200,14 @@
       https://fuel.gazebosim.org/1.0/OpenRobotics/models/Portuguese Ledge
       </uri>
     </include>
+    <plugin
+      filename="gz-sim-buoyancy-system"
+      name="gz::sim::systems::Buoyancy">
+      <uniform_fluid_density>1000</uniform_fluid_density>
+      <density_change>
+        <above_depth>0</above_depth>
+        <density>1</density>
+      </density_change>
+    </plugin>
   </world>
 </sdf>
