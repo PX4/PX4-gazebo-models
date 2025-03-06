@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
   <world name="underwater_world">
-    <gravity>0 0 0</gravity>
+      <gravity>0 0 0</gravity>
     <scene>
       <!-- For turquoise ambient -->
       <ambient>0.0 1.0 1.0</ambient>

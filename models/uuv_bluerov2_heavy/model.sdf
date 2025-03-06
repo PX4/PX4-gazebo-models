@@ -117,8 +117,53 @@
             </sensor>
         </link>
 
-        <link name="thruster1">
+        <joint name="thruster0_joint" type="revolute">
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+            </axis>
+            <parent>base_link</parent>
+            <child>thruster0</child>
+        </joint>
+        <link name="thruster0">
             <pose>0.14 -0.10 0 0 1.570796 0.78539815</pose>
+            <inertial>
+                <mass>1e-10</mass>
+                <inertia>
+                    <ixx>1e-06</ixx>
+                    <ixy>0</ixy>
+                    <ixz>0</ixz>
+                    <iyy>1e-06</iyy>
+                    <iyz>0</iyz>
+                    <izz>1e-06</izz>
+                </inertia>
+            </inertial>
+            <visual name="thruster0_visual">
+                <geometry>
+                    <mesh>
+                        <scale>1 1 1</scale>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                    </mesh>
+                </geometry>
+            </visual>
+        </link>
+
+        <joint name="thruster1_joint" type="revolute">
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit>
+                    <lower>-1e+16</lower>
+                    <upper>1e+16</upper>
+                </limit>
+            </axis>
+            <parent>base_link</parent>
+            <child>thruster1</child>
+        </joint>
+        <link name="thruster1">
+            <pose>0.14 0.10 0 0 1.570796 -0.78539815</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -137,15 +182,11 @@
                         <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
-                <material>
-                    <script>
-                        <name>Gazebo/Green</name>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
-                    </script>
-                </material>
+
             </visual>
         </link>
-        <joint name="thruster1_joint" type="revolute">
+
+        <joint name="thruster2_joint" type="revolute">
             <axis>
                 <xyz>0 0 1</xyz>
                 <limit>
@@ -154,11 +195,10 @@
                 </limit>
             </axis>
             <parent>base_link</parent>
-            <child>thruster1</child>
+            <child>thruster2</child>
         </joint>
-
         <link name="thruster2">
-            <pose>0.14 0.10 0 0 1.570796 -0.78539815</pose>
+            <pose>-0.14 -0.10 0 0 1.570796 2.356194</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -177,15 +217,10 @@
                         <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
-                <material>
-                    <script>
-                        <name>Gazebo/Green</name>
-                        <uri>file://media/materials/scripts/gazebo.material</uri>
-                    </script>
-                </material>
             </visual>
         </link>
-        <joint name="thruster2_joint" type="revolute">
+
+        <joint name="thruster3_joint" type="revolute">
             <axis>
                 <xyz>0 0 1</xyz>
                 <limit>
@@ -194,11 +229,10 @@
                 </limit>
             </axis>
             <parent>base_link</parent>
-            <child>thruster2</child>
+            <child>thruster3</child>
         </joint>
-
         <link name="thruster3">
-            <pose>-0.14 -0.10 0 0 1.570796 2.356194</pose>
+            <pose>-0.14 0.10 0 0 1.570796 -2.356194</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -217,15 +251,10 @@
                         <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
-                <material>
-                    <script>
-                        <name>Gazebo/Blue</name>
-                        <uri>file://media/materials/scripts/gazebo.material</uri>
-                    </script>
-                </material>
             </visual>
         </link>
-        <joint name="thruster3_joint" type="revolute">
+
+        <joint name="thruster4_joint" type="revolute">
             <axis>
                 <xyz>0 0 1</xyz>
                 <limit>
@@ -234,11 +263,10 @@
                 </limit>
             </axis>
             <parent>base_link</parent>
-            <child>thruster3</child>
+            <child>thruster4</child>
         </joint>
-
         <link name="thruster4">
-            <pose>-0.14 0.10 0 0 1.570796 -2.356194</pose>
+            <pose>0.12 -0.22 0.06 0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -257,15 +285,11 @@
                         <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
-                <material>
-                    <script>
-                        <name>Gazebo/Blue</name>
-                        <uri>file://media/materials/scripts/gazebo.material</uri>
-                    </script>
-                </material>
+
             </visual>
         </link>
-        <joint name="thruster4_joint" type="revolute">
+
+        <joint name="thruster5_joint" type="revolute">
             <axis>
                 <xyz>0 0 1</xyz>
                 <limit>
@@ -274,11 +298,10 @@
                 </limit>
             </axis>
             <parent>base_link</parent>
-            <child>thruster4</child>
+            <child>thruster5</child>
         </joint>
-
         <link name="thruster5">
-            <pose>0.12 -0.22 0.06 0 0 0</pose>
+            <pose>0.12 0.22 0.06 0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -297,15 +320,10 @@
                         <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
-                <material>
-                    <script>
-                        <name>Gazebo/Green</name>
-                        <uri>file://media/materials/scripts/gazebo.material</uri>
-                    </script>
-                </material>
             </visual>
         </link>
-        <joint name="thruster5_joint" type="revolute">
+
+        <joint name="thruster6_joint" type="revolute">
             <axis>
                 <xyz>0 0 1</xyz>
                 <limit>
@@ -314,11 +332,10 @@
                 </limit>
             </axis>
             <parent>base_link</parent>
-            <child>thruster5</child>
+            <child>thruster6</child>
         </joint>
-
         <link name="thruster6">
-            <pose>0.12 0.22 0.06 0 0 0</pose>
+            <pose>-0.12 -0.22 0.06 0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -337,15 +354,10 @@
                         <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
-                <material>
-                    <script>
-                        <name>Gazebo/Blue</name>
-                        <uri>file://media/materials/scripts/gazebo.material</uri>
-                    </script>
-                </material>
             </visual>
         </link>
-        <joint name="thruster6_joint" type="revolute">
+
+        <joint name="thruster7_joint" type="revolute">
             <axis>
                 <xyz>0 0 1</xyz>
                 <limit>
@@ -354,11 +366,10 @@
                 </limit>
             </axis>
             <parent>base_link</parent>
-            <child>thruster6</child>
+            <child>thruster7</child>
         </joint>
-
         <link name="thruster7">
-            <pose>-0.12 -0.22 0.06 0 0 0</pose>
+            <pose>-0.12 0.22 0.06 0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -377,65 +388,9 @@
                         <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
-                <material>
-                    <script>
-                        <name>Gazebo/Blue</name>
-                        <uri>file://media/materials/scripts/gazebo.material</uri>
-                    </script>
-                </material>
-            </visual>
-        </link>
-        <joint name="thruster7_joint" type="revolute">
-            <axis>
-                <xyz>0 0 1</xyz>
-                <limit>
-                    <lower>-1e+16</lower>
-                    <upper>1e+16</upper>
-                </limit>
-            </axis>
-            <parent>base_link</parent>
-            <child>thruster7</child>
-        </joint>
 
-        <link name="thruster8">
-            <pose>-0.12 0.22 0.06 0 0 0</pose>
-            <inertial>
-                <mass>1e-10</mass>
-                <inertia>
-                    <ixx>1e-06</ixx>
-                    <ixy>0</ixy>
-                    <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
-                    <iyz>0</iyz>
-                    <izz>1e-06</izz>
-                </inertia>
-            </inertial>
-            <visual name="thruster8_visual">
-                <geometry>
-                    <mesh>
-                        <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
-                    </mesh>
-                </geometry>
-                <material>
-                    <script>
-                        <name>Gazebo/Green</name>
-                        <uri>file://media/materials/scripts/gazebo.material</uri>
-                    </script>
-                </material>
             </visual>
         </link>
-        <joint name="thruster8_joint" type="revolute">
-            <axis>
-                <xyz>0 0 1</xyz>
-                <limit>
-                    <lower>-1e+16</lower>
-                    <upper>1e+16</upper>
-                </limit>
-            </axis>
-            <parent>base_link</parent>
-            <child>thruster8</child>
-        </joint>
         <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster1_joint</jointName>
             <linkName>thruster1</linkName>
