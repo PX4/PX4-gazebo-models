@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
-  <world name="underwater_world">
-      <gravity>0 0 0</gravity>
+  <world name="underwater">
+    <gravity>0 0 0</gravity>
     <scene>
       <!-- For turquoise ambient -->
       <ambient>0.0 1.0 1.0</ambient>
       <background>0.0 0.7 0.8</background>
     </scene>
-
-    <!-- Physics: Underwater Environment -->
     <physics type="ode">
-      <max_step_size>0.001</max_step_size>
+      <max_step_size>0.004</max_step_size>
       <real_time_factor>1.0</real_time_factor>
       <real_time_update_rate>250</real_time_update_rate>
     </physics>
@@ -163,7 +161,6 @@
       </plugin>
       <plugin name="Entity tree" filename="EntityTree"/>
     </gui>
-    <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type="adiabatic"/>
     <scene>
@@ -198,7 +195,6 @@
       <longitude_deg> 8.546163739800146</longitude_deg>
       <elevation>0</elevation>
     </spherical_coordinates>
-
     <include>
       <uri>
       https://fuel.gazebosim.org/1.0/OpenRobotics/models/Portuguese Ledge
