@@ -39,7 +39,6 @@
     <plugin
       filename="gz-sim-velocity-control-system"
       name="gz::sim::systems::VelocityControl">
-      <link_name>platform_link</link_name>
     </plugin>
     <plugin
       filename="libMovingPlatformController.so"
