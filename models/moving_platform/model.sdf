@@ -41,5 +41,9 @@
       name="gz::sim::systems::VelocityControl">
       <link_name>platform_link</link_name>
     </plugin>
+    <plugin
+      filename="libMovingPlatformController.so"
+      name="custom::MovingPlatformController">
+    </plugin>
   </model>
 </sdf>
