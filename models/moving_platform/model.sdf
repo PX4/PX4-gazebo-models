@@ -35,5 +35,11 @@
         <update_rate>30</update_rate>
       </sensor>
     </link>
+    <!-- plugin for sending direct velocity commands -->
+    <plugin
+      filename="gz-sim-velocity-control-system"
+      name="gz::sim::systems::VelocityControl">
+      <link_name>platform_link</link_name>
+    </plugin>
   </model>
 </sdf>
