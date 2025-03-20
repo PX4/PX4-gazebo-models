@@ -27,7 +27,7 @@ int main(int argc, const char* argv[])
   if (!rootElement->HasElement("model"))
   {
     std::cerr << sdfPath << " is not a model SDF file!" << std::endl;
-    return -3;
+    return 0;
   }
   const sdf::ElementPtr modelElement = rootElement->GetElement("model");
   const std::string modelName = modelElement->Get<std::string>("name");

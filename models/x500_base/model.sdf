@@ -219,67 +219,86 @@
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
+          <!-- Noise modeled after BMP390 -->
           <pressure>
             <noise type="gaussian">
               <mean>0</mean>
-              <stddev>0.01</stddev>
+              <stddev>3</stddev>
             </noise>
           </pressure>
         </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
       </sensor>
       <sensor name="imu_sensor" type="imu">
         <always_on>1</always_on>
         <update_rate>250</update_rate>
         <imu>
           <angular_velocity>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- 0.05 deg/s converted to rad/s -->
             <x>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
               </noise>
             </x>
             <y>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
               </noise>
             </y>
             <z>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
               </noise>
             </z>
           </angular_velocity>
           <linear_acceleration>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- X & Y axis: 0.65 mg-rms converted to m/ss -->
             <x>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
               </noise>
             </x>
             <y>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
               </noise>
             </y>
+            <!-- Z axis: 0.70 mg-rms converted to m/ss-->
             <z>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.00686</stddev>
               </noise>
             </z>
           </linear_acceleration>
