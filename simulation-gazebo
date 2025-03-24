@@ -84,6 +84,7 @@ def main():
 
         os.system(f'mv {args.model_store}/PX4-gazebo-models-main/models {args.model_store}/models')
         os.system(f'mv {args.model_store}/PX4-gazebo-models-main/worlds {args.model_store}/worlds')
+        os.system(f'mv {args.model_store}/PX4-gazebo-models-main/server.config {args.model_store}/')
         os.system(f'rm {args.model_store}/resources.zip')
         os.system(f'rm -rf {args.model_store}/PX4-gazebo-models-main/')
 
