@@ -16,7 +16,7 @@ easy_glider4
 SURFACE 
 left_aileron 
 !Nchordwise     Cspace      Nspanwise       Sspace 
-1       1        18     -2 
+1       1        17     -2 
 TRANSLATE 
 0.275    0    0 
 
@@ -26,7 +26,7 @@ ANGLE
 #section_end
 SECTION
 !Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
-0.185 -0.885 0 0.02 0 1 -2 
+0.185 -0.885 0 0.02 0 0 0 
 NACA 
 2412 
 
@@ -37,7 +37,7 @@ SECTION
 NACA 
 2412 
 CONTROL 
-aileron  1.0  0.765  0  1  0  -1 
+aileron  1.0  0.765  0  1  0  1 
 
 #aileron_begin
 SECTION
@@ -46,7 +46,7 @@ SECTION
 NACA 
 2412 
 CONTROL 
-aileron  1.0  0.8  0  1  0  -1 
+aileron  1.0  0.8  0  1  0  1 
 
 #section_begin
 SECTION
@@ -60,7 +60,7 @@ NACA
 SURFACE 
 right_aileron 
 !Nchordwise     Cspace      Nspanwise       Sspace 
-1       1        18     -2 
+1       1        17     -2 
 TRANSLATE 
 0.275    0    0 
 
@@ -81,7 +81,7 @@ SECTION
 NACA 
 2412 
 CONTROL 
-aileron  1.0  0.8  0  1  0  1 
+aileron  1.0  0.8  0  -1  0  1 
 
 #aileron_end
 SECTION
@@ -90,12 +90,12 @@ SECTION
 NACA 
 2412 
 CONTROL 
-aileron  1.0  0.765  0  1  0  1 
+aileron  1.0  0.765  0  -1  0  1 
 
 #section_end
 SECTION
 !Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
-0.185 0.885 0 0.02 0 1 -2 
+0.185 0.885 0 0.02 0 0 0 
 NACA 
 2412 
 
@@ -104,7 +104,7 @@ NACA
 SURFACE 
 elevator 
 !Nchordwise     Cspace      Nspanwise       Sspace 
-1       1        15     -1.25 
+1       1        14     -1.25 
 TRANSLATE 
 0.96    0    0.15 
 
@@ -133,7 +133,7 @@ elevator  1.0  0.611  0  1  0  1
 #section_end
 SECTION
 !Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
-0.13 0.235 0 0.02 0 1 -1.25 
+0.13 0.235 0 0.02 0 0 0 
 NACA 
 2412 
 
@@ -142,7 +142,7 @@ NACA
 SURFACE 
 rudder 
 !Nchordwise     Cspace      Nspanwise       Sspace 
-1       1        14     -1.25 
+1       1        7     -1.25 
 TRANSLATE 
 0.96    0    0.1 
 
@@ -158,7 +158,7 @@ rudder  1.0  0.571  0  0  1  1
 #rudder_end
 SECTION
 !Xle    Yle    Zle     Chord   Ainc  Nspanwise  Sspace 
-0.12 0 0.29 0.02 0 7 -1.25 
+0.12 0 0.29 0.02 0 0 0 
 NACA 
 2412 
 CONTROL 

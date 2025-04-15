@@ -16,40 +16,8 @@ reference_point:
 #Provide information on each of the Control Surfaces
 num_ctrl_surfaces: 4
 control_surfaces:
-  - name: left_wing
-    type: aileron
-    nchord: 1
-    cspace: 1
-    nspan: 16
-    sspace: -2
-    angle: 4
-    translation:
-      X: 0
-      Y: 0
-      Z: 0
-    naca: 2412
-    sections:
-    - name: section_1
-      position:
-        X: -0.175
-        Y: -5
-        Z: 0.5
-      chord: 0.7
-      ainc: 0
-      nspan: 0
-      sspace: 0
-    - name: section_2
-      position:
-        X: -0.25
-        Y: 0
-        Z: 0
-      chord: 1
-      ainc: 0
-      nspan: 8
-      sspace: 1
-
   - name: right_wing
-    type: aileron
+    type: right_aileron
     nchord: 1
     cspace: 1
     nspan: 16
@@ -79,6 +47,39 @@ control_surfaces:
       ainc: 0
       nspan: 0
       sspace: 0
+
+
+  - name: left_wing
+    type: left_aileron
+    nchord: 1
+    cspace: 1
+    nspan: 16
+    sspace: -2
+    angle: 4
+    translation:
+      X: 0
+      Y: 0
+      Z: 0
+    naca: 2412
+    sections:
+    - name: section_1
+      position:
+        X: -0.175
+        Y: -5
+        Z: 0.5
+      chord: 0.7
+      ainc: 0
+      nspan: 0
+      sspace: 0
+    - name: section_2
+      position:
+        X: -0.25
+        Y: 0
+        Z: 0
+      chord: 1
+      ainc: 0
+      nspan: 8
+      sspace: 1
 
   - name: elevator
     type: elevator

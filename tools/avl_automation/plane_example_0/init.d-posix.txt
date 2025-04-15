@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# @name easy_glider4 Advanced Plane SITL
+# @name plane_example_0 Advanced Plane SITL
 #
 
 . ${R}etc/init.d/rc.fw_defaults
@@ -61,8 +61,8 @@ param set-default CA_ROTOR0_PX 0.3
 param set-default CA_SV_CS_COUNT 4
 param set-default CA_SV_CS3_TYPE 4
 param set-default CA_SV_CS2_TYPE 3
-param set-default CA_SV_CS1_TYPE 2
-param set-default CA_SV_CS0_TYPE 1 6
+param set-default CA_SV_CS1_TYPE 1
+param set-default CA_SV_CS0_TYPE 2 6
 param set-default CA_SV_CS0_TRQ_R -0.5
 param set-default CA_SV_CS0_TYPE 1
 param set-default CA_SV_CS1_TRQ_R 0.5

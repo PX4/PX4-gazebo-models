@@ -33,7 +33,7 @@
       <child>right_aileron</child>
       <pose>0 0.31 0.28 0 0 0</pose>
       <axis>
-        <xyz>0 1 0</xyz>
+        <xyz>0 -1 0</xyz>
         <limit>
           <!-- -30/+30 deg. -->
           <lower>-0.53</lower>
@@ -120,34 +120,34 @@
     
 <plugin filename="gz-sim-advanced-lift-drag-system" name="gz::sim::systems::AdvancedLiftDrag">
       <a0>0.00000</a0>
-      <CL0>0.36958</CL0>
+      <CL0>0.36986</CL0>
       <AR>7.788461538461539</AR>
-      <eff>0.8522</eff>
-      <CLa>3.678585</CLa>
-      <CD0>0.00774</CD0>
-      <Cem0>-0.57886</Cem0>
-      <Cema>-6.596023</Cema>
-      <CYb>-0.186390</CYb>
-      <Cellb>-0.062296</Cellb>
-      <Cenb>0.107682</Cenb>
-      <CDp>0.001328</CDp>
-      <CYp>0.032289</CYp>
-      <CLp>0.008875</CLp>
-      <Cellp>-0.392295</Cellp>
-      <Cemp>0.019432</Cemp>
-      <Cenp>-0.032829</Cenp>
-      <CDq>0.538070</CDq>
-      <CYq>0.026538</CYq>
-      <CLq>-16.421881</CLq>
-      <Cellq>0.020174</Cellq>
-      <Cemq>-35.879570</Cemq>
-      <Cenq>-0.014918</Cenq>
-      <CDr>-0.003445</CDr>
-      <CYr>0.220856</CYr>
-      <CLr>-0.003229</CLr>
-      <Cellr>0.137034</Cellr>
-      <Cemr>-0.005019</Cemr>
-      <Cenr>-0.129136</Cenr>
+      <eff>0.8523</eff>
+      <CLa>3.679875</CLa>
+      <CD0>0.00759</CD0>
+      <Cem0>-0.57912</Cem0>
+      <Cema>-6.591829</Cema>
+      <CYb>-0.187754</CYb>
+      <Cellb>-0.062425</Cellb>
+      <Cenb>0.108424</Cenb>
+      <CDp>0.001662</CDp>
+      <CYp>0.032506</CYp>
+      <CLp>0.004311</CLp>
+      <Cellp>-0.392788</Cellp>
+      <Cemp>0.012745</Cemp>
+      <Cenp>-0.033202</Cenp>
+      <CDq>0.549541</CDq>
+      <CYq>0.028560</CYq>
+      <CLq>-16.413084</CLq>
+      <Cellq>0.016506</Cellq>
+      <Cemq>-35.807747</Cemq>
+      <Cenq>-0.016106</Cenq>
+      <CDr>-0.003477</CDr>
+      <CYr>0.222424</CYr>
+      <CLr>-0.002658</CLr>
+      <Cellr>0.137367</Cellr>
+      <Cemr>-0.004534</Cemr>
+      <Cenr>-0.129973</Cenr>
       <alpha_stall>0.3391428111</alpha_stall>
       <CLa_stall>-3.85</CLa_stall>
       <CDa_stall>-0.9233984055</CDa_stall>
@@ -164,24 +164,24 @@
         <name>servo_0</name>
         <index>0</index>
         <direction>1</direction>
-        <CD_ctrl>-0.000141</CD_ctrl>
-        <CY_ctrl>0.000001</CY_ctrl>
-        <CL_ctrl>-0.006555</CL_ctrl>
-        <Cell_ctrl>0.000002</Cell_ctrl>
-        <Cem_ctrl>-0.010027</Cem_ctrl>
-        <Cen_ctrl>-0.000001</Cen_ctrl>
+        <CD_ctrl>-0.000001</CD_ctrl>
+        <CY_ctrl>0.000107</CY_ctrl>
+        <CL_ctrl>0.000065</CL_ctrl>
+        <Cell_ctrl>-0.001596</Cell_ctrl>
+        <Cem_ctrl>0.000091</Cem_ctrl>
+        <Cen_ctrl>0.000031</Cen_ctrl>
     </control_surface>
 
     <control_surface>
         <name>servo_1</name>
         <index>1</index>
         <direction>1</direction>
-        <CD_ctrl>-0.000141</CD_ctrl>
-        <CY_ctrl>0.000001</CY_ctrl>
-        <CL_ctrl>-0.006555</CL_ctrl>
-        <Cell_ctrl>-2e-06</Cell_ctrl>
-        <Cem_ctrl>-0.010027</Cem_ctrl>
-        <Cen_ctrl>1e-06</Cen_ctrl>
+        <CD_ctrl>-0.000001</CD_ctrl>
+        <CY_ctrl>-0.000107</CY_ctrl>
+        <CL_ctrl>0.000065</CL_ctrl>
+        <Cell_ctrl>0.001596</Cell_ctrl>
+        <Cem_ctrl>0.000091</Cem_ctrl>
+        <Cen_ctrl>0.000031</Cen_ctrl>
     </control_surface>
 
     <control_surface>
@@ -189,10 +189,10 @@
         <index>2</index>
         <direction>-1</direction>
         <CD_ctrl>-0.000044</CD_ctrl>
-        <CY_ctrl>-0.000009</CY_ctrl>
-        <CL_ctrl>-0.001989</CL_ctrl>
+        <CY_ctrl>-0.000008</CY_ctrl>
+        <CL_ctrl>-0.001961</CL_ctrl>
         <Cell_ctrl>-0.000000</Cell_ctrl>
-        <Cem_ctrl>-0.008509</Cem_ctrl>
+        <Cem_ctrl>-0.008387</Cem_ctrl>
         <Cen_ctrl>0.000005</Cen_ctrl>
     </control_surface>
 
@@ -201,11 +201,11 @@
         <index>3</index>
         <direction>1</direction>
         <CD_ctrl>-0.000015</CD_ctrl>
-        <CY_ctrl>-0.001227</CY_ctrl>
+        <CY_ctrl>-0.001237</CY_ctrl>
         <CL_ctrl>0.000003</CL_ctrl>
-        <Cell_ctrl>-0.000141</Cell_ctrl>
-        <Cem_ctrl>0.000025</Cem_ctrl>
-        <Cen_ctrl>0.000705</Cen_ctrl>
+        <Cell_ctrl>-0.000142</Cell_ctrl>
+        <Cem_ctrl>0.000026</Cem_ctrl>
+        <Cen_ctrl>0.000711</Cen_ctrl>
     </control_surface>
 
 </plugin>

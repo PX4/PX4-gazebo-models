@@ -1,7 +1,7 @@
 #!/usr/bin/env
 
 import argparse
-import avl_out_parse_1_0
+import avl_out_parser
 import os
 import yaml
 import subprocess
@@ -108,14 +108,8 @@ def main():
 		except:
 			raise ValueError("\nError: given --yaml_file does not exist. Please provide a valid path to the YAML file.\n")
 
-	if 'automation_version' in yaml_data:
-		version = yaml_data['automation_version']
-	else:
-		version = 0.0
-	version = str(version).replace('.', '_')
-
 	# Call shell script that will pass the generated .avl file to AVL
-	os.system(f'python3 input_avl_{version}.py --yaml_file {inputs.yaml_file}')
+	os.system(f'python3 avl_input_parser.py --yaml_file {inputs.yaml_file}')
 
 if __name__ == '__main__':
 	main()

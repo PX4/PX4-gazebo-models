@@ -1,6 +1,3 @@
-# Version of the compiler to be used
-automation_version: 1.0
-
 # Enter a name for your vehicle
 vehicle_name: easy_glider4
 
@@ -22,7 +19,7 @@ control_surfaces:
   - name: left_aileron
     nchord: 1
     cspace: 1
-    nspan: 18
+    nspan: 17
     sspace: -2
     angle: 4
     translation:
@@ -38,8 +35,8 @@ control_surfaces:
         Z: 0
       chord: 0.02
       ainc: 0
-      nspan: 1
-      sspace: -2
+      nspan: 0
+      sspace: 0
     - name: aileron_end
       types:
       - type: left_aileron
@@ -49,7 +46,7 @@ control_surfaces:
           X: 0
           Y: 1
           Z: 0
-        SgnDup: -1
+        SgnDup: 1
       naca: "2412"
       position:
         X: 0.035
@@ -68,7 +65,7 @@ control_surfaces:
           X: 0
           Y: 1
           Z: 0
-        SgnDup: -1
+        SgnDup: 1
       naca: "2412"
       position:
         X: 0.005
@@ -92,7 +89,7 @@ control_surfaces:
   - name: right_aileron
     nchord: 1
     cspace: 1
-    nspan: 18
+    nspan: 17
     sspace: -2
     angle: 4
     translation:
@@ -117,7 +114,7 @@ control_surfaces:
         Xhinge: 0.80
         HingeVec:
           X: 0
-          Y: 1
+          Y: -1
           Z: 0
         SgnDup: 1
       naca: "2412"
@@ -136,7 +133,7 @@ control_surfaces:
         Xhinge: 0.765
         HingeVec:
           X: 0
-          Y: 1
+          Y: -1
           Z: 0
         SgnDup: 1
       naca: "2412"
@@ -156,14 +153,14 @@ control_surfaces:
         Z: 0
       chord: 0.02
       ainc: 0
-      nspan: 1
-      sspace: -2
+      nspan: 0
+      sspace: 0
 
 #elevator is mirrored only halth of it must be defined
   - name: elevator
     nchord: 1
     cspace: 1
-    nspan: 15
+    nspan: 14
     sspace: -1.25
     translation:
       X: 0.96
@@ -216,13 +213,13 @@ control_surfaces:
         Z: 0
       chord: 0.02
       ainc: 0
-      nspan: 1
-      sspace: -1.25
+      nspan: 0
+      sspace: 0
 
   - name: rudder
     nchord: 1
     cspace: 1
-    nspan: 14
+    nspan: 7
     sspace: -1.25
     translation:
       X: 0.96
@@ -265,5 +262,5 @@ control_surfaces:
         Z: 0.29
       chord: 0.02
       ainc: 0
-      nspan: 7
-      sspace: -1.25
+      nspan: 0
+      sspace: 0

@@ -1,7 +1,7 @@
 #!/usr/bin/env
 
 import argparse
-import avl_out_parse_1_0
+import avl_out_parser
 import os
 import yaml
 import subprocess
@@ -93,7 +93,7 @@ def write_avl_section_from_section(plane_name: (str), control_surface: (dict)):
 			
 			for surface_type in section["types"]:
 				if surface_type['type'] not in ctrl_surface_type_sdf:
-					raise ValueError(f'The selected type is invalid. Available types are: {ctrl_surface_type_sdf}')
+					raise ValueError(f'\033[91m [Err] \033[0m The selected type is invalid. Available types are: {ctrl_surface_type_sdf}')
 				type = ctrl_surface_type_sdf.get(surface_type['type'])
 				match type:
 					case 'aileron':
@@ -136,7 +136,7 @@ def process_control_surface_from_section(plane_name: str, ctrl_surface: dict, ct
 			
 			for type_struct in section["types"]:
 				if type_struct["type"] not in list(ctrl_surface_type_sdf.keys())[:]:
-					raise ValueError(f"The selected type \"{type_struct['type']}\"is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())[:]}")
+					raise ValueError(f"\033[91m [Err] \033[0mThe selected type \"{type_struct['type']}\" is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())[:]}")
 				sdf_type = ctrl_surface_type_sdf.get(type_struct["type"])
 				initD_type = ctrl_surface_type_initd.get(type_struct["type"])
 				if sdf_type in processed_types:
@@ -193,7 +193,7 @@ def process_control_surface_from_section(plane_name: str, ctrl_surface: dict, ct
 					#initalize the func as 1 and the servo as number 201
 					target.write(f"\nparam set-default SIM_GZ_SV_FUNC{len(ctrl_surface_order)+1} {len(ctrl_surface_order) + 201}")
 					target.close()
-
+				
 				ctrl_surface_order.append(sdf_type)
 				processed_types.add(sdf_type)
 
@@ -215,7 +215,7 @@ def write_avl_surface_from_surface(plane_name: str, control_surface: dict):
 	sdf_type = control_surface['type']
 
 	if sdf_type not in ctrl_surface_type_sdf:
-		raise ValueError(f'The selected type is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())}')
+		raise ValueError(f'\033[91m [Err] \033[0m The selected type is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())}')
 
 	sdf_type_avl = ctrl_surface_type_sdf.get(sdf_type)
 
@@ -266,7 +266,7 @@ Returns:
 """
 def process_control_surface_from_surface(plane_name: str, ctrl_surface: dict, ctrl_surface_order: list, file_location: str, num_ctrl_surfaces: int):
 	if ctrl_surface["type"] not in list(ctrl_surface_type_sdf.keys())[:]:
-		raise ValueError(f"The selected type \"{ctrl_surface['type']}\"is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())[:]}")
+		raise ValueError(f"\033[91m [Err] \033[0m The selected type \"{ctrl_surface['type']}\" is invalid. Available types are: {list(ctrl_surface_type_sdf.keys())[:]}")
 	sdf_type = ctrl_surface_type_sdf.get(ctrl_surface['type'])
 	initD_type = ctrl_surface_type_initd.get(ctrl_surface["type"])
 	sections = ctrl_surface['sections']
@@ -285,6 +285,7 @@ def process_control_surface_from_surface(plane_name: str, ctrl_surface: dict, ct
 				avl_file.write("\nYDUPLICATE\n")
 				avl_file.write("0.0\n\n")
 
+			
 			# Process and write the parameters to the init.d-posix file
 			with open(file_location + "init.d-posix.txt", 'r') as source:
 				content = source.read()
@@ -304,7 +305,7 @@ def process_control_surface_from_surface(plane_name: str, ctrl_surface: dict, ct
 				#initalize the func as 1 and the servo as number 201
 				target.write(f"\nparam set-default SIM_GZ_SV_FUNC{len(ctrl_surface_order)+1} {len(ctrl_surface_order) + 201}")
 				target.close()
-
+			
 			ctrl_surface_order.append(sdf_type)
 			processed_types.add(sdf_type)
 
@@ -403,6 +404,7 @@ def main():
 				os.remove(savedir + '/' + directory + '/' + directory + ".sdf")
 			if Path(savedir + '/' + directory + '/' + "init.d-posix.txt").is_file():
 				os.remove(savedir + '/' + directory + '/' + "init.d-posix.txt")
+			
 			yaml_file.close()
 		except:
 			raise ValueError("\nError: given --yaml_file does not exist. Please provide a valid path to the YAML file.\n")
@@ -514,7 +516,7 @@ def main():
 			with open(file_location + f"init.d-posix.txt", 'a') as target:
 				target.writelines(content)
 				target.close()
-
+			
 			for control_surface in yaml_data["control_surfaces"]:
 
 				# Wings always need to be defined from left to right
@@ -565,7 +567,7 @@ def main():
 	os.system(f'./process.sh {plane_name}')
 
 	# Call main function of avl parse script to parse the generated AVL files.	
-	avl_out_parse_1_0.main(plane_name,frame_type,AR,mac,ref_pt_x,ref_pt_y,ref_pt_z,num_ctrl_surfaces,area,ctrl_surface_order,inputs.avl_path)
+	avl_out_parser.main(plane_name,frame_type,AR,mac,ref_pt_x,ref_pt_y,ref_pt_z,num_ctrl_surfaces,area,ctrl_surface_order,inputs.avl_path)
 
 	# Finally move all generated files to a new directory and show the generated geometry image:
 	result = subprocess.run(['pwd'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
