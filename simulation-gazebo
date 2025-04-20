@@ -84,13 +84,18 @@ def main():
 
         os.system(f'mv {args.model_store}/PX4-gazebo-models-main/models {args.model_store}/models')
         os.system(f'mv {args.model_store}/PX4-gazebo-models-main/worlds {args.model_store}/worlds')
+        os.system(f'mv {args.model_store}/PX4-gazebo-models-main/server.config {args.model_store}/')
         os.system(f'rm {args.model_store}/resources.zip')
         os.system(f'rm -rf {args.model_store}/PX4-gazebo-models-main/')
 
     # Launch gazebo simulation
     print('> Launching gazebo simulation...')
     if not args.dryrun:
-        cmd = f'GZ_SIM_RESOURCE_PATH={args.model_store}/models gz sim -r {args.model_store}/worlds/{args.world}.sdf'
+        cmd = f'GZ_SIM_RESOURCE_PATH={args.model_store}/models '
+        # cmd += f'GZ_SIM_SYSTEM_PLUGIN_PATH={args.model_store}/plugins '
+        cmd += f'GZ_SIM_SERVER_CONFIG_PATH={args.model_store}/server.config '
+        cmd += f'gz sim -r {args.model_store}/worlds/{args.world}.sdf'
+
         if args.headless:
             cmd = f'{cmd} -s'
 
