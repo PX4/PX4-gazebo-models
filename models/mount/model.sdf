@@ -12,6 +12,7 @@
         </geometry>
       </collision>
       <visual name="visual">
+        <pose>0 0 -30 0 0 0</pose>
         <geometry>
           <heightmap>
             <use_terrain_paging>true</use_terrain_paging>
@@ -44,7 +45,6 @@
             </blend>
             <uri>materials/textures/mount.png</uri>
             <size>1000 1000 150.0</size>
-            <pos>500 0 -10</pos>
           </heightmap>
         </geometry>
       </visual>

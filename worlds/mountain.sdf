@@ -29,7 +29,7 @@
         <scene>scene</scene>
         <ambient_light>0.4 0.4 0.4</ambient_light>
         <background_color>0.8 0.8 0.8</background_color>
-        <camera_pose>900 75 30 0 0.5 0</camera_pose>
+        <camera_pose>-100 75 100 0 0.5 0</camera_pose>
         <camera_clip>
           <near>0.25</near>
           <far>25000</far>
@@ -113,39 +113,6 @@
       <uri>mount</uri>
     </include>
 
-    <actor name="actor_walking">
-      <skin>
-        <filename>https://fuel.gazebosim.org/1.0/Mingfei/models/actor/tip/files/meshes/walk.dae</filename>
-        <scale>1.0</scale>
-      </skin>
-      <animation name='walk'>
-        <filename>https://fuel.gazebosim.org/1.0/Mingfei/models/actor/tip/files/meshes/walk.dae</filename>
-      </animation>
-      <script>
-        <loop>true</loop>
-        <delay_start>0.000000</delay_start>
-        <auto_start>true</auto_start>
-        <trajectory id="0" type="walk">
-          <waypoint>
-            <time>0</time>
-            <pose>920 75 10.75 0 0 1.57</pose>
-          </waypoint>
-          <waypoint>
-            <time>15</time>
-            <pose>920 85 10.75 0 0 1.57</pose>
-          </waypoint>
-          <waypoint>
-            <time>30</time>
-            <pose>920 85 10.75 0 0 -1.57</pose>
-          </waypoint>
-          <waypoint>
-            <time>45</time>
-            <pose>920 75 10.75 0 0 -1.57</pose>
-          </waypoint>
-        </trajectory>
-      </script>
-    </actor>
-
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type="adiabatic" />
@@ -190,4 +157,3 @@
     </spherical_coordinates>
   </world>
 </sdf>
-
