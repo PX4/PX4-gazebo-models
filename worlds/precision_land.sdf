@@ -19,61 +19,6 @@
       <render_engine>ogre2</render_engine>
     </plugin>
 
-    <model name="axes">
-      <static>1</static>
-      <link name="link">
-        <visual name="r">
-          <cast_shadows>0</cast_shadows>
-          <pose>1 0 0.1 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>2 0.02 0.02</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>1 0 0 0.8</ambient>
-            <diffuse>1 0 0 0.8</diffuse>
-            <emissive>1 0 0 0.8</emissive>
-            <specular>0.5 0.5 0.5 0.8</specular>
-          </material>
-        </visual>
-        <visual name="g">
-          <cast_shadows>0</cast_shadows>
-          <pose>0 1 0.1 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>0.02 2 0.02</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0 1 0 0.8</ambient>
-            <diffuse>0 1 0 0.8</diffuse>
-            <emissive>0 1 0 0.8</emissive>
-            <specular>0.5 0.5 0.5 0.8</specular>
-          </material>
-        </visual>
-        <visual name="b">
-          <cast_shadows>0</cast_shadows>
-          <pose>0 0 1.1 0 0 0</pose>
-          <geometry>
-            <box>
-              <size>0.02 0.02 2</size>
-            </box>
-          </geometry>
-          <material>
-            <ambient>0 0 1 0.8</ambient>
-            <diffuse>0 0 1 0.8</diffuse>
-            <emissive>0 0 1 0.8</emissive>
-            <specular>0.5 0.5 0.5 0.8</specular>
-          </material>
-        </visual>
-        <sensor name="navsat_sensor" type="navsat">
-          <always_on>1</always_on>
-          <update_rate>1</update_rate>
-        </sensor>
-      </link>
-    </model>
-
     <gui fullscreen="false">
       <!-- 3D scene -->
       <plugin filename="MinimalScene" name="3D View">
@@ -211,6 +156,20 @@
       </plugin>
       <plugin name="Entity tree" filename="EntityTree"/>
     </gui>
+
+    <include>
+      <uri>model://axes</uri>
+    </include>
+
+    <include>
+      <uri>model://land</uri>
+    </include>
+
+    <include>
+      <uri>model://stack_rover_ar</uri>
+      <pose>2 2 1 0 0 0</pose>
+    </include>
+
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type="adiabatic"/>
@@ -220,55 +179,7 @@
       <background>0.7 0.7 0.7 1</background>
       <shadows>true</shadows>
     </scene>
-    <model name="ground_plane">
-      <static>true</static>
-      <link name="link">
-        <collision name="collision">
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>1 1</size>
-            </plane>
-          </geometry>
-          <surface>
-            <friction>
-              <ode/>
-            </friction>
-            <bounce/>
-            <contact/>
-          </surface>
-        </collision>
-        <visual name="visual">
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <material>
-            <ambient>0.8 0.8 0.8 1</ambient>
-            <diffuse>0.8 0.8 0.8 1</diffuse>
-            <specular>0.8 0.8 0.8 1</specular>
-          </material>
-        </visual>
-        <pose>0 0 0 0 -0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 -0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
-      </link>
-      <pose>0 0 0 0 -0 0</pose>
-      <self_collide>false</self_collide>
-    </model>
+
     <light name="sunUTC" type="directional">
       <pose>0 0 500 0 -0 0</pose>
       <cast_shadows>true</cast_shadows>
