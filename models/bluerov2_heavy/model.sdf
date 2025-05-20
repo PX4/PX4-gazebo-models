@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
-    <model name="uuv_bluerov2_heavy">
+    <model name="bluerov2_heavy">
         <pose>0 0 0 0 0 0</pose>
         <link name="base_link">
             <pose>0 0 0 0 -0 0</pose>
@@ -37,7 +37,7 @@
             <visual name="base_link_visual">
                 <geometry>
                     <mesh>
-                        <uri>model://uuv_bluerov2_heavy/meshes/BlueROV2heavy.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/BlueROV2heavy.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -145,7 +145,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -179,7 +179,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
 
@@ -214,7 +214,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -248,7 +248,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -282,7 +282,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
 
@@ -317,7 +317,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -351,7 +351,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -385,7 +385,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
 
