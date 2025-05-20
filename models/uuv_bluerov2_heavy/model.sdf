@@ -41,80 +41,80 @@
                     </mesh>
                 </geometry>
             </visual>
-            <sensor name="air_pressure_sensor" type="air_pressure">
-                <always_on>1</always_on>
-                <update_rate>50</update_rate>
-                <air_pressure>
+        <sensor name="air_pressure_sensor" type="air_pressure">
+            <always_on>1</always_on>
+            <update_rate>50</update_rate>
+            <air_pressure>
                 <pressure>
                     <noise type="gaussian">
                     <mean>0</mean>
                     <stddev>0.01</stddev>
                     </noise>
                 </pressure>
-                </air_pressure>
-            </sensor>
-            <sensor name="imu_sensor" type="imu">
-                <always_on>1</always_on>
-                <update_rate>250</update_rate>
-                <imu>
-                <angular_velocity>
-                    <x>
-                    <noise type="gaussian">
-                        <mean>0</mean>
-                        <stddev>0.00018665</stddev>
-                        <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                        <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-                    </noise>
-                    </x>
-                    <y>
-                    <noise type="gaussian">
-                        <mean>0</mean>
-                        <stddev>0.00018665</stddev>
-                        <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                        <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-                    </noise>
-                    </y>
-                    <z>
-                    <noise type="gaussian">
-                        <mean>0</mean>
-                        <stddev>0.00018665</stddev>
-                        <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                        <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-                    </noise>
-                    </z>
-                </angular_velocity>
-                <linear_acceleration>
-                    <x>
-                    <noise type="gaussian">
-                        <mean>0</mean>
-                        <stddev>0.00186</stddev>
-                        <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                        <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-                    </noise>
-                    </x>
-                    <y>
-                    <noise type="gaussian">
-                        <mean>0</mean>
-                        <stddev>0.00186</stddev>
-                        <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                        <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-                    </noise>
-                    </y>
-                    <z>
-                    <noise type="gaussian">
-                        <mean>0</mean>
-                        <stddev>0.00186</stddev>
-                        <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                        <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-                    </noise>
-                    </z>
-                </linear_acceleration>
-                </imu>
-            </sensor>
-            <sensor name="navsat_sensor" type="navsat">
-                    <always_on>1</always_on>
-                    <update_rate>30</update_rate>
-            </sensor>
+            </air_pressure>
+        </sensor>
+        <sensor name="imu_sensor" type="imu">
+            <always_on>1</always_on>
+            <update_rate>250</update_rate>
+            <imu>
+            <angular_velocity>
+                <x>
+                <noise type="gaussian">
+                    <mean>0</mean>
+                    <stddev>0.00018665</stddev>
+                    <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+                </x>
+                <y>
+                <noise type="gaussian">
+                    <mean>0</mean>
+                    <stddev>0.00018665</stddev>
+                    <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+                </y>
+                <z>
+                <noise type="gaussian">
+                    <mean>0</mean>
+                    <stddev>0.00018665</stddev>
+                    <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+                </z>
+            </angular_velocity>
+            <linear_acceleration>
+                <x>
+                <noise type="gaussian">
+                    <mean>0</mean>
+                    <stddev>0.00186</stddev>
+                    <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                    <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+                </x>
+                <y>
+                <noise type="gaussian">
+                    <mean>0</mean>
+                    <stddev>0.00186</stddev>
+                    <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                    <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+                </y>
+                <z>
+                <noise type="gaussian">
+                    <mean>0</mean>
+                    <stddev>0.00186</stddev>
+                    <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                    <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+                </z>
+            </linear_acceleration>
+            </imu>
+        </sensor>
+        <sensor name="navsat_sensor" type="navsat">
+            <always_on>1</always_on>
+            <update_rate>30</update_rate>
+        </sensor>
         </link>
 
         <joint name="thruster0_joint" type="revolute">
@@ -391,10 +391,13 @@
 
             </visual>
         </link>
+        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+            <dimensions>3</dimensions>
+        </plugin>
         <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster1_joint</jointName>
             <linkName>thruster1</linkName>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>bidirectional</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -405,12 +408,18 @@
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>velocity</motorType>
+            <motorType>force_polynomial</motorType>
+            <controlMethod>duty_cycle</controlMethod>
+            <minCommand>0.00</minCommand>
+            <minDutyCycle>0</minDutyCycle>
+            <maxDutyCycle>1000</maxDutyCycle>
+            <positiveThrustPolynomial>[111.86699613,  -873.38184792,  2708.25899589, -4168.78679858, 3180.27517273,  -956.94963749]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[-1.91403632e+00,  6.98981894e-01,  7.50510321e+01, -4.47636255e+02, 1.31070716e+03, -1.96703619e+03,  1.17156758e+03]</negativeThrustPolynomial>
         </plugin>
-        <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+        <!-- <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster2_joint</jointName>
             <linkName>thruster2</linkName>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>bidirectional</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -421,12 +430,20 @@
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>velocity</motorType>
+            <motorType>force_polynomial</motorType>
+            <a0ThrustConstant>0.0</a0ThrustConstant>
+            <a1ThrustConstant>0.1</a1ThrustConstant>
+            <a2ThrustConstant>0.2</a2ThrustConstant>
+            <a3ThrustConstant>0.3</a3ThrustConstant>
+            <a0TorqueConstant>0.0</a0TorqueConstant>
+            <a1TorqueConstant>0.0</a1TorqueConstant>
+            <a2TorqueConstant>0.0</a2TorqueConstant>
+            <a3TorqueConstant>0.0</a3TorqueConstant>
         </plugin>
         <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster3_joint</jointName>
             <linkName>thruster3</linkName>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>bidirectional</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -437,12 +454,20 @@
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>velocity</motorType>
+            <motorType>force_polynomial</motorType>
+            <a0ThrustConstant>0.0</a0ThrustConstant>
+            <a1ThrustConstant>0.1</a1ThrustConstant>
+            <a2ThrustConstant>0.2</a2ThrustConstant>
+            <a3ThrustConstant>0.3</a3ThrustConstant>
+            <a0TorqueConstant>0.0</a0TorqueConstant>
+            <a1TorqueConstant>0.0</a1TorqueConstant>
+            <a2TorqueConstant>0.0</a2TorqueConstant>
+            <a3TorqueConstant>0.0</a3TorqueConstant>
         </plugin>
         <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster4_joint</jointName>
             <linkName>thruster4</linkName>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>bidirectional</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -453,12 +478,20 @@
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>velocity</motorType>
+            <motorType>force_polynomial</motorType>
+            <a0ThrustConstant>0.0</a0ThrustConstant>
+            <a1ThrustConstant>0.1</a1ThrustConstant>
+            <a2ThrustConstant>0.2</a2ThrustConstant>
+            <a3ThrustConstant>0.3</a3ThrustConstant>
+            <a0TorqueConstant>0.0</a0TorqueConstant>
+            <a1TorqueConstant>0.0</a1TorqueConstant>
+            <a2TorqueConstant>0.0</a2TorqueConstant>
+            <a3TorqueConstant>0.0</a3TorqueConstant>
         </plugin>
         <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster5_joint</jointName>
             <linkName>thruster5</linkName>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>bidirectional</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -469,12 +502,20 @@
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>velocity</motorType>
+            <motorType>force_polynomial</motorType>
+            <a0ThrustConstant>0.0</a0ThrustConstant>
+            <a1ThrustConstant>0.1</a1ThrustConstant>
+            <a2ThrustConstant>0.2</a2ThrustConstant>
+            <a3ThrustConstant>0.3</a3ThrustConstant>
+            <a0TorqueConstant>0.0</a0TorqueConstant>
+            <a1TorqueConstant>0.0</a1TorqueConstant>
+            <a2TorqueConstant>0.0</a2TorqueConstant>
+            <a3TorqueConstant>0.0</a3TorqueConstant>
         </plugin>
         <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster6_joint</jointName>
             <linkName>thruster6</linkName>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>bidirectional</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -485,12 +526,20 @@
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>velocity</motorType>
+            <motorType>force_polynomial</motorType>
+            <a0ThrustConstant>0.0</a0ThrustConstant>
+            <a1ThrustConstant>0.1</a1ThrustConstant>
+            <a2ThrustConstant>0.2</a2ThrustConstant>
+            <a3ThrustConstant>0.3</a3ThrustConstant>
+            <a0TorqueConstant>0.0</a0TorqueConstant>
+            <a1TorqueConstant>0.0</a1TorqueConstant>
+            <a2TorqueConstant>0.0</a2TorqueConstant>
+            <a3TorqueConstant>0.0</a3TorqueConstant>
         </plugin>
         <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster7_joint</jointName>
             <linkName>thruster7</linkName>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>bidirectional</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -501,12 +550,21 @@
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>velocity</motorType>
+            <motorType>force_polynomial</motorType>
+            <a0ThrustConstant>0.0</a0ThrustConstant>
+            <a1ThrustConstant>0.1</a1ThrustConstant>
+            <a2ThrustConstant>0.2</a2ThrustConstant>
+            <a3ThrustConstant>0.3</a3ThrustConstant>
+            <a0TorqueConstant>0.0</a0TorqueConstant>
+            <a1TorqueConstant>0.0</a1TorqueConstant>
+            <a2TorqueConstant>0.0</a2TorqueConstant>
+            <a3TorqueConstant>0.0</a3TorqueConstant>
+            <minRotVelocity>150.0</minRotVelocity>
         </plugin>
         <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
             <jointName>thruster8_joint</jointName>
             <linkName>thruster8</linkName>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>bidirectional</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -517,12 +575,18 @@
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>velocity</motorType>
-        </plugin>
-        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
-            <dimensions>3</dimensions>
-        </plugin>
-        <plugin
+            <motorType>force_polynomial</motorType>
+            <a0ThrustConstant>0.0</a0ThrustConstant>
+            <a1ThrustConstant>0.1</a1ThrustConstant>
+            <a2ThrustConstant>0.2</a2ThrustConstant>
+            <a3ThrustConstant>0.3</a3ThrustConstant>
+            <a0TorqueConstant>0.0</a0TorqueConstant>
+            <a1TorqueConstant>0.0</a1TorqueConstant>
+            <a2TorqueConstant>0.0</a2TorqueConstant>
+            <a3TorqueConstant>0.0</a3TorqueConstant>
+        </plugin> -->
+        <!-- This Hydrodynamics plugin crashes with this simulation (perhaps world problem) -->
+        <!-- <plugin
           filename="gz-sim-hydrodynamics-system"
           name="gz::sim::systems::Hydrodynamics">
           <link_name>base_link</link_name>
@@ -544,6 +608,6 @@
           <mQ>0</mQ>
           <nRabsR>-632.698957</nRabsR>
           <nR>0</nR>
-        </plugin>
+        </plugin> -->
     </model>
 </sdf>
