@@ -8,9 +8,8 @@
       <background>0.0 0.7 0.8</background>
     </scene>
     <physics type="ode">
-      <max_step_size>0.004</max_step_size>
+      <max_step_size>0.02</max_step_size>
       <real_time_factor>1.0</real_time_factor>
-      <real_time_update_rate>250</real_time_update_rate>
     </physics>
     <plugin name="gz::sim::systems::Physics" filename="gz-sim-physics-system"/>
     <plugin name="gz::sim::systems::UserCommands" filename="gz-sim-user-commands-system"/>
@@ -195,17 +194,17 @@
       <longitude_deg> 8.546163739800146</longitude_deg>
       <elevation>0</elevation>
     </spherical_coordinates>
-    <include>
+    <!-- <include>
       <uri>
       https://fuel.gazebosim.org/1.0/OpenRobotics/models/Portuguese Ledge
       </uri>
-    </include>
+    </include> -->
     <plugin
       filename="gz-sim-buoyancy-system"
       name="gz::sim::systems::Buoyancy">
       <uniform_fluid_density>1000</uniform_fluid_density>
       <density_change>
-        <above_depth>0</above_depth>
+        <above_depth>1</above_depth>
         <density>1</density>
       </density_change>
     </plugin>
