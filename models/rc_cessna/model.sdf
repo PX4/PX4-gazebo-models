@@ -692,6 +692,7 @@
           <upper>1.79769e+308</upper>
         </limit>
         <dynamics>
+          <friction>0.02</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -708,6 +709,7 @@
           <upper>1.79769e+308</upper>
         </limit>
         <dynamics>
+          <friction>0.02</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -724,6 +726,7 @@
           <upper>1.79769e+308</upper>
         </limit>
         <dynamics>
+          <friction>0.02</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
