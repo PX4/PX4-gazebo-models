@@ -732,6 +732,17 @@
         </dynamics>
       </axis>
     </joint>
+
+    <include merge='true'>
+      <uri>model://mono_cam</uri>
+      <pose>.20 0 -0.05 0 0 0</pose>
+    </include>
+    <joint name="CameraJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>mono_cam/base_link</child>
+      <pose relative_to="base_link">.20 0 -0.05 0 0 0</pose>
+    </joint>
+
     <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
       <a0>0.05984281113</a0>
       <cla>4.752798721</cla>
