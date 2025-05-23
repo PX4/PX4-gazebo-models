@@ -63,7 +63,7 @@
         <always_on>1</always_on>
         <update_rate>30</update_rate>
         <visualize>true</visualize>
-        <topic>camera</topic>
+        <topic>gz_camera</topic>
       </sensor>
       <gravity>true</gravity>
       <velocity_decay/>
