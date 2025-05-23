@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <model name="x500_double_cam_down">
+    <self_collide>false</self_collide>
+
+    <!-- Include the x500 base model as merged -->
+    <include merge="true">
+      <uri>x500</uri>
+    </include>
+
+    <!-- Include the right camera as a nested model -->
+    <include>
+      <uri>model://mono_cam2</uri>
+      <name>mono_cam_right</name>
+      <pose>0.1 0 0.10 0 1.5707 0</pose>
+    </include>
+
+    <!-- Include the left camera as a nested model -->
+    <include>
+      <uri>model://mono_cam2</uri>
+      <name>mono_cam_left</name>
+      <pose>-0.1 0 0.10 0 1.5707 0</pose>
+    </include>
+
+    <!-- Fixed joint attaching the right camera -->
+    <joint name="CameraJointRight" type="fixed">
+      <parent>base_link</parent>
+      <child>mono_cam_right::mono_cam/base_link</child>
+      <pose relative_to="base_link">0.1 0 0 0 1.5707 0</pose>
+    </joint>
+
+    <!-- Fixed joint attaching the left camera -->
+    <joint name="CameraJointLeft" type="fixed">
+      <parent>base_link</parent>
+      <child>mono_cam_left::mono_cam/base_link</child>
+      <pose relative_to="base_link">-0.1 0 0 0 1.5707 0</pose>
+    </joint>
+
+  </model>
+</sdf>
