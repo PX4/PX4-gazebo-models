@@ -635,7 +635,7 @@
       <!-- <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Lidar 2d v2</uri> -->
       <uri>model://livox_mid360</uri>
       <!-- <pose>.2 -0.5 .03 0 0.25 0</pose> -->
-      <pose>.2 0 .03 0 0 0</pose>
+      <pose>.2 0 .03 3.141592654 0 0</pose>
     </include>
     <joint name="LidarJoint" type="fixed">
       <parent>base_link</parent>
