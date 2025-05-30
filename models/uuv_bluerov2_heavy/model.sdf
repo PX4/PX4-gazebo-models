@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
-    <model name="bluerov2_heavy">
-        <pose>0 0 0 0 0 0</pose>
+    <model name="uuv_bluerov2_heavy">
+        <pose>0 0 -96.5   0 0 0</pose>
         <link name="base_link">
             <pose>0 0 0 0 -0 0</pose>
             <inertial>
@@ -37,7 +37,7 @@
             <visual name="base_link_visual">
                 <geometry>
                     <mesh>
-                        <uri>model://bluerov2_heavy/meshes/BlueROV2heavy.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/BlueROV2heavy.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -116,7 +116,6 @@
             <update_rate>30</update_rate>
         </sensor>
         </link>
-
         <joint name="thruster0_joint" type="revolute">
             <axis>
                 <xyz>0 0 1</xyz>
@@ -145,7 +144,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -179,7 +178,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
 
@@ -214,7 +213,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -248,7 +247,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -282,7 +281,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
 
@@ -317,7 +316,7 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -351,12 +350,11 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
         </link>
-
         <joint name="thruster7_joint" type="revolute">
             <axis>
                 <xyz>0 0 1</xyz>
@@ -385,229 +383,190 @@
                 <geometry>
                     <mesh>
                         <scale>1 1 1</scale>
-                        <uri>model://bluerov2_heavy/meshes/prop.dae</uri>
+                        <uri>model://uuv_bluerov2_heavy/meshes/prop.dae</uri>
                     </mesh>
                 </geometry>
 
             </visual>
         </link>
-        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
-            <dimensions>3</dimensions>
-        </plugin>
-        <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
-            <jointName>thruster1_joint</jointName>
-            <linkName>thruster1</linkName>
-            <turningDirection>bidirectional</turningDirection>
+        <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
+            <jointName>thruster0_joint</jointName>
+            <linkName>thruster0</linkName>
+            <motorNumber>0</motorNumber>
+            <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
             <motorConstant>10</motorConstant>
             <momentConstant>0.01</momentConstant>
             <commandSubTopic>command/motor_speed</commandSubTopic>
-            <motorNumber>0</motorNumber>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
             <motorType>force_polynomial</motorType>
             <controlMethod>duty_cycle</controlMethod>
             <minCommand>0.00</minCommand>
-            <minDutyCycle>0</minDutyCycle>
-            <maxDutyCycle>1000</maxDutyCycle>
-            <positiveThrustPolynomial>[111.86699613,  -873.38184792,  2708.25899589, -4168.78679858, 3180.27517273,  -956.94963749]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[-1.91403632e+00,  6.98981894e-01,  7.50510321e+01, -4.47636255e+02, 1.31070716e+03, -1.96703619e+03,  1.17156758e+03]</negativeThrustPolynomial>
+            <minDutyCycle>1000</minDutyCycle>
+            <maxDutyCycle>2000</maxDutyCycle>
+            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
-        <!-- <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+        <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
+            <jointName>thruster1_joint</jointName>
+            <linkName>thruster1</linkName>
+            <motorNumber>1</motorNumber>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100.0</maxRotVelocity>
+            <motorConstant>10</motorConstant>
+            <momentConstant>0.01</momentConstant>
+            <commandSubTopic>command/motor_speed</commandSubTopic>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+            <motorType>force_polynomial</motorType>
+            <controlMethod>duty_cycle</controlMethod>
+            <minCommand>0.00</minCommand>
+            <minDutyCycle>1000</minDutyCycle>
+            <maxDutyCycle>2000</maxDutyCycle>
+            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+        </plugin>
+        <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster2_joint</jointName>
             <linkName>thruster2</linkName>
-            <turningDirection>bidirectional</turningDirection>
+            <motorNumber>2</motorNumber>
+            <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
             <motorConstant>10</motorConstant>
             <momentConstant>0.01</momentConstant>
             <commandSubTopic>command/motor_speed</commandSubTopic>
-            <motorNumber>1</motorNumber>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
             <motorType>force_polynomial</motorType>
-            <a0ThrustConstant>0.0</a0ThrustConstant>
-            <a1ThrustConstant>0.1</a1ThrustConstant>
-            <a2ThrustConstant>0.2</a2ThrustConstant>
-            <a3ThrustConstant>0.3</a3ThrustConstant>
-            <a0TorqueConstant>0.0</a0TorqueConstant>
-            <a1TorqueConstant>0.0</a1TorqueConstant>
-            <a2TorqueConstant>0.0</a2TorqueConstant>
-            <a3TorqueConstant>0.0</a3TorqueConstant>
+            <controlMethod>duty_cycle</controlMethod>
+            <minCommand>0.00</minCommand>
+            <minDutyCycle>1000</minDutyCycle>
+            <maxDutyCycle>2000</maxDutyCycle>
+            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
-        <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+        <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster3_joint</jointName>
             <linkName>thruster3</linkName>
-            <turningDirection>bidirectional</turningDirection>
+            <motorNumber>3</motorNumber>
+            <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
-            <motorConstant>-10</motorConstant>
-            <momentConstant>-0.01</momentConstant>
+            <motorConstant>10</motorConstant>
+            <momentConstant>0.01</momentConstant>
             <commandSubTopic>command/motor_speed</commandSubTopic>
-            <motorNumber>2</motorNumber>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
             <motorType>force_polynomial</motorType>
-            <a0ThrustConstant>0.0</a0ThrustConstant>
-            <a1ThrustConstant>0.1</a1ThrustConstant>
-            <a2ThrustConstant>0.2</a2ThrustConstant>
-            <a3ThrustConstant>0.3</a3ThrustConstant>
-            <a0TorqueConstant>0.0</a0TorqueConstant>
-            <a1TorqueConstant>0.0</a1TorqueConstant>
-            <a2TorqueConstant>0.0</a2TorqueConstant>
-            <a3TorqueConstant>0.0</a3TorqueConstant>
+            <controlMethod>duty_cycle</controlMethod>
+            <minCommand>0.00</minCommand>
+            <minDutyCycle>1000</minDutyCycle>
+            <maxDutyCycle>2000</maxDutyCycle>
+            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
-        <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+        <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster4_joint</jointName>
             <linkName>thruster4</linkName>
-            <turningDirection>bidirectional</turningDirection>
+            <motorNumber>4</motorNumber>
+            <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
-            <motorConstant>-10</motorConstant>
-            <momentConstant>-0.01</momentConstant>
+            <motorConstant>10</motorConstant>
+            <momentConstant>0.01</momentConstant>
             <commandSubTopic>command/motor_speed</commandSubTopic>
-            <motorNumber>3</motorNumber>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
             <motorType>force_polynomial</motorType>
-            <a0ThrustConstant>0.0</a0ThrustConstant>
-            <a1ThrustConstant>0.1</a1ThrustConstant>
-            <a2ThrustConstant>0.2</a2ThrustConstant>
-            <a3ThrustConstant>0.3</a3ThrustConstant>
-            <a0TorqueConstant>0.0</a0TorqueConstant>
-            <a1TorqueConstant>0.0</a1TorqueConstant>
-            <a2TorqueConstant>0.0</a2TorqueConstant>
-            <a3TorqueConstant>0.0</a3TorqueConstant>
+            <controlMethod>duty_cycle</controlMethod>
+            <minCommand>0.00</minCommand>
+            <minDutyCycle>1000</minDutyCycle>
+            <maxDutyCycle>2000</maxDutyCycle>
+            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
-        <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+        <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster5_joint</jointName>
             <linkName>thruster5</linkName>
-            <turningDirection>bidirectional</turningDirection>
+            <motorNumber>5</motorNumber>
+            <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
             <motorConstant>10</motorConstant>
             <momentConstant>0.01</momentConstant>
             <commandSubTopic>command/motor_speed</commandSubTopic>
-            <motorNumber>4</motorNumber>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
             <motorType>force_polynomial</motorType>
-            <a0ThrustConstant>0.0</a0ThrustConstant>
-            <a1ThrustConstant>0.1</a1ThrustConstant>
-            <a2ThrustConstant>0.2</a2ThrustConstant>
-            <a3ThrustConstant>0.3</a3ThrustConstant>
-            <a0TorqueConstant>0.0</a0TorqueConstant>
-            <a1TorqueConstant>0.0</a1TorqueConstant>
-            <a2TorqueConstant>0.0</a2TorqueConstant>
-            <a3TorqueConstant>0.0</a3TorqueConstant>
+            <controlMethod>duty_cycle</controlMethod>
+            <minCommand>0.00</minCommand>
+            <minDutyCycle>1000</minDutyCycle>
+            <maxDutyCycle>2000</maxDutyCycle>
+            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
-        <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+        <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster6_joint</jointName>
             <linkName>thruster6</linkName>
-            <turningDirection>bidirectional</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100.0</maxRotVelocity>
-            <motorConstant>-10</motorConstant>
-            <momentConstant>-0.01</momentConstant>
-            <commandSubTopic>command/motor_speed</commandSubTopic>
-            <motorNumber>5</motorNumber>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>force_polynomial</motorType>
-            <a0ThrustConstant>0.0</a0ThrustConstant>
-            <a1ThrustConstant>0.1</a1ThrustConstant>
-            <a2ThrustConstant>0.2</a2ThrustConstant>
-            <a3ThrustConstant>0.3</a3ThrustConstant>
-            <a0TorqueConstant>0.0</a0TorqueConstant>
-            <a1TorqueConstant>0.0</a1TorqueConstant>
-            <a2TorqueConstant>0.0</a2TorqueConstant>
-            <a3TorqueConstant>0.0</a3TorqueConstant>
-        </plugin>
-        <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
-            <jointName>thruster7_joint</jointName>
-            <linkName>thruster7</linkName>
-            <turningDirection>bidirectional</turningDirection>
-            <timeConstantUp>0.0125</timeConstantUp>
-            <timeConstantDown>0.025</timeConstantDown>
-            <maxRotVelocity>1100.0</maxRotVelocity>
-            <motorConstant>-10</motorConstant>
-            <momentConstant>-0.01</momentConstant>
-            <commandSubTopic>command/motor_speed</commandSubTopic>
             <motorNumber>6</motorNumber>
-            <rotorDragCoefficient>0</rotorDragCoefficient>
-            <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
-            <motorType>force_polynomial</motorType>
-            <a0ThrustConstant>0.0</a0ThrustConstant>
-            <a1ThrustConstant>0.1</a1ThrustConstant>
-            <a2ThrustConstant>0.2</a2ThrustConstant>
-            <a3ThrustConstant>0.3</a3ThrustConstant>
-            <a0TorqueConstant>0.0</a0TorqueConstant>
-            <a1TorqueConstant>0.0</a1TorqueConstant>
-            <a2TorqueConstant>0.0</a2TorqueConstant>
-            <a3TorqueConstant>0.0</a3TorqueConstant>
-            <minRotVelocity>150.0</minRotVelocity>
-        </plugin>
-        <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
-            <jointName>thruster8_joint</jointName>
-            <linkName>thruster8</linkName>
-            <turningDirection>bidirectional</turningDirection>
+            <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
             <motorConstant>10</motorConstant>
             <momentConstant>0.01</momentConstant>
             <commandSubTopic>command/motor_speed</commandSubTopic>
-            <motorNumber>7</motorNumber>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
             <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
             <motorType>force_polynomial</motorType>
-            <a0ThrustConstant>0.0</a0ThrustConstant>
-            <a1ThrustConstant>0.1</a1ThrustConstant>
-            <a2ThrustConstant>0.2</a2ThrustConstant>
-            <a3ThrustConstant>0.3</a3ThrustConstant>
-            <a0TorqueConstant>0.0</a0TorqueConstant>
-            <a1TorqueConstant>0.0</a1TorqueConstant>
-            <a2TorqueConstant>0.0</a2TorqueConstant>
-            <a3TorqueConstant>0.0</a3TorqueConstant>
-        </plugin> -->
-        <!-- This Hydrodynamics plugin crashes with this simulation (perhaps world problem) -->
-        <!-- <plugin
-          filename="gz-sim-hydrodynamics-system"
-          name="gz::sim::systems::Hydrodynamics">
-          <link_name>base_link</link_name>
-          <xDotU>-4.876161</xDotU>
-          <yDotV>-126.324739</yDotV>
-          <zDotW>-126.324739</zDotW>
-          <kDotP>0</kDotP>
-          <mDotQ>-33.46</mDotQ>
-          <nDotR>-33.46</nDotR>
-          <xUabsU>-6.2282</xUabsU>
-          <xU>0</xU>
-          <yVabsV>-601.27</yVabsV>
-          <yV>0</yV>
-          <zWabsW>-601.27</zWabsW>
-          <zW>0</zW>
-          <kPabsP>-0.1916</kPabsP>
-          <kP>0</kP>
-          <mQabsQ>-632.698957</mQabsQ>
-          <mQ>0</mQ>
-          <nRabsR>-632.698957</nRabsR>
-          <nR>0</nR>
-        </plugin> -->
+            <controlMethod>duty_cycle</controlMethod>
+            <minCommand>0.00</minCommand>
+            <minDutyCycle>1000</minDutyCycle>
+            <maxDutyCycle>2000</maxDutyCycle>
+            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+        </plugin>
+        <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
+            <jointName>thruster7_joint</jointName>
+            <linkName>thruster7</linkName>
+            <motorNumber>7</motorNumber>
+            <turningDirection>ccw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>1100.0</maxRotVelocity>
+            <motorConstant>10</motorConstant>
+            <momentConstant>0.01</momentConstant>
+            <commandSubTopic>command/motor_speed</commandSubTopic>
+            <rotorDragCoefficient>0</rotorDragCoefficient>
+            <rollingMomentCoefficient>0</rollingMomentCoefficient>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+            <motorType>force_polynomial</motorType>
+            <controlMethod>duty_cycle</controlMethod>
+            <minCommand>0.00</minCommand>
+            <minDutyCycle>1000</minDutyCycle>
+            <maxDutyCycle>2000</maxDutyCycle>
+            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+        </plugin>
+        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+            <dimensions>3</dimensions>
+        </plugin>
     </model>
 </sdf>

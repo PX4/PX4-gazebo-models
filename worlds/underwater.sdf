@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
   <world name="underwater">
-    <gravity>0 0 0</gravity>
-    <scene>
-      <!-- For turquoise ambient -->
-      <ambient>0.0 1.0 1.0</ambient>
-      <background>0.0 0.7 0.8</background>
-    </scene>
     <physics type="ode">
-      <max_step_size>0.02</max_step_size>
+      <max_step_size>0.004</max_step_size>
       <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
     </physics>
     <plugin name="gz::sim::systems::Physics" filename="gz-sim-physics-system"/>
     <plugin name="gz::sim::systems::UserCommands" filename="gz-sim-user-commands-system"/>
@@ -160,12 +155,15 @@
       </plugin>
       <plugin name="Entity tree" filename="EntityTree"/>
     </gui>
+    <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type="adiabatic"/>
     <scene>
       <grid>false</grid>
-      <ambient>0.4 0.4 0.4 1</ambient>
-      <background>0.7 0.7 0.7 1</background>
+      <!-- <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background> -->
+      <ambient>0.0 1.0 1.0</ambient>
+      <background>0.0 0.7 0.8</background>
       <shadows>true</shadows>
     </scene>
     <light name="sunUTC" type="directional">
@@ -194,12 +192,12 @@
       <longitude_deg> 8.546163739800146</longitude_deg>
       <elevation>0</elevation>
     </spherical_coordinates>
-    <!-- <include>
+    <include>
       <uri>
       https://fuel.gazebosim.org/1.0/OpenRobotics/models/Portuguese Ledge
       </uri>
-    </include> -->
-    <plugin
+    </include>
+    <!-- <plugin
       filename="gz-sim-buoyancy-system"
       name="gz::sim::systems::Buoyancy">
       <uniform_fluid_density>1000</uniform_fluid_density>
@@ -207,6 +205,6 @@
         <above_depth>1</above_depth>
         <density>1</density>
       </density_change>
-    </plugin>
+    </plugin> -->
   </world>
 </sdf>
