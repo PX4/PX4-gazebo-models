@@ -35,6 +35,7 @@
                 </surface>
             </collision>
             <visual name="base_link_visual">
+                <pose>0 0 -0.06 0 -0 0</pose>
                 <geometry>
                     <mesh>
                         <uri>model://uuv_bluerov2_heavy/meshes/BlueROV2heavy.dae</uri>
@@ -128,7 +129,7 @@
             <child>thruster0</child>
         </joint>
         <link name="thruster0">
-            <pose>0.14 -0.10 0 0 1.570796 0.78539815</pose>
+            <pose>0.14 -0.10 -0.06 0 1.570796 0.78539815</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -162,7 +163,7 @@
             <child>thruster1</child>
         </joint>
         <link name="thruster1">
-            <pose>0.14 0.10 0 0 1.570796 -0.78539815</pose>
+            <pose>0.14 0.10 -0.06 0 1.570796 -0.78539815</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -197,7 +198,7 @@
             <child>thruster2</child>
         </joint>
         <link name="thruster2">
-            <pose>-0.14 -0.10 0 0 1.570796 2.356194</pose>
+            <pose>-0.14 -0.10 -0.06 0 1.570796 2.356194</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -231,7 +232,7 @@
             <child>thruster3</child>
         </joint>
         <link name="thruster3">
-            <pose>-0.14 0.10 0 0 1.570796 -2.356194</pose>
+            <pose>-0.14 0.10 -0.06 0 1.570796 -2.356194</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -265,7 +266,7 @@
             <child>thruster4</child>
         </joint>
         <link name="thruster4">
-            <pose>0.12 -0.22 0.06 0 0 0</pose>
+            <pose>0.12 -0.22 0.0 0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -300,7 +301,7 @@
             <child>thruster5</child>
         </joint>
         <link name="thruster5">
-            <pose>0.12 0.22 0.06 0 0 0</pose>
+            <pose>0.12 0.22 0.0 0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -334,7 +335,7 @@
             <child>thruster6</child>
         </joint>
         <link name="thruster6">
-            <pose>-0.12 -0.22 0.06 0 0 0</pose>
+            <pose>-0.12 -0.22 0.0 0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -367,7 +368,7 @@
             <child>thruster7</child>
         </joint>
         <link name="thruster7">
-            <pose>-0.12 0.22 0.06 0 0 0</pose>
+            <pose>-0.12 0.22 0.0 0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -408,8 +409,8 @@
             <minCommand>0.00</minCommand>
             <minDutyCycle>1000</minDutyCycle>
             <maxDutyCycle>2000</maxDutyCycle>
-            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0,  6.57,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  4.95,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster1_joint</jointName>
@@ -430,8 +431,8 @@
             <minCommand>0.00</minCommand>
             <minDutyCycle>1000</minDutyCycle>
             <maxDutyCycle>2000</maxDutyCycle>
-            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0,  6.57,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  4.95,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster2_joint</jointName>
@@ -452,8 +453,8 @@
             <minCommand>0.00</minCommand>
             <minDutyCycle>1000</minDutyCycle>
             <maxDutyCycle>2000</maxDutyCycle>
-            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0,  6.57,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  4.95,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster3_joint</jointName>
@@ -474,8 +475,8 @@
             <minCommand>0.00</minCommand>
             <minDutyCycle>1000</minDutyCycle>
             <maxDutyCycle>2000</maxDutyCycle>
-            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0,  6.57,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  4.95,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster4_joint</jointName>
@@ -496,8 +497,8 @@
             <minCommand>0.00</minCommand>
             <minDutyCycle>1000</minDutyCycle>
             <maxDutyCycle>2000</maxDutyCycle>
-            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0,  6.57,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  4.95,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster5_joint</jointName>
@@ -518,8 +519,8 @@
             <minCommand>0.00</minCommand>
             <minDutyCycle>1000</minDutyCycle>
             <maxDutyCycle>2000</maxDutyCycle>
-            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0,  6.57,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  4.95,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster6_joint</jointName>
@@ -540,8 +541,8 @@
             <minCommand>0.00</minCommand>
             <minDutyCycle>1000</minDutyCycle>
             <maxDutyCycle>2000</maxDutyCycle>
-            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0,  6.57,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  4.95,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster7_joint</jointName>
@@ -562,8 +563,8 @@
             <minCommand>0.00</minCommand>
             <minDutyCycle>1000</minDutyCycle>
             <maxDutyCycle>2000</maxDutyCycle>
-            <positiveThrustPolynomial>[0.0,  65.7,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  49.5,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0,  6.57,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0,  4.95,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
             <dimensions>3</dimensions>
