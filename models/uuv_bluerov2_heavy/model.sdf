@@ -437,7 +437,7 @@
             <jointName>thruster2_joint</jointName>
             <linkName>thruster2</linkName>
             <motorNumber>2</motorNumber>
-            <turningDirection>cw</turningDirection>
+            <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -459,7 +459,7 @@
             <jointName>thruster3_joint</jointName>
             <linkName>thruster3</linkName>
             <motorNumber>3</motorNumber>
-            <turningDirection>cw</turningDirection>
+            <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -503,7 +503,7 @@
             <jointName>thruster5_joint</jointName>
             <linkName>thruster5</linkName>
             <motorNumber>5</motorNumber>
-            <turningDirection>cw</turningDirection>
+            <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -525,7 +525,7 @@
             <jointName>thruster6_joint</jointName>
             <linkName>thruster6</linkName>
             <motorNumber>6</motorNumber>
-            <turningDirection>cw</turningDirection>
+            <turningDirection>ccw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
