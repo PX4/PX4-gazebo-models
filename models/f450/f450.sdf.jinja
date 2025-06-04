@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DO NOT EDIT: Generated from f450.sdf.jinja -->
+
+{# =================================================== #}
+{# --------------------- CONVERSION TABLE ------------ #}
+{# =================================================== #}
+{%- set in2m = 2.54/100 -%}
+{%- set in2_m2 = 0.00065 -%}
+{%- set lb2kg = 0.45359 -%}
+{%- set lbIn2_kgM2 = lb2kg*in2m*in2m -%}
+{%- set ft2m = 0.3048 -%}
+
+{# =================================================== #}
+{# --------------------- DIMENSIONS ------------------ #}
+{# =================================================== #}
+{# --------------------------------------------------- #}
+{# *********************** FRAME ********************* #}
+{# --------------------------------------------------- #}
+{%- set arm_length = 0.225 -%}
+
+
+{# =================================================== #}
+{# --------------------- MASS TERMS ------------------ #}
+{# =================================================== #}
+{%- set base_link_mass = 1.5 -%}
+{%- set propeller_mass = 0.05 -%}
+
+{# =================================================== #}
+{# ------------------ MOTOR PROPERTIES --------------- #}
+{# =================================================== #}
+{# maximum thruster rotational velocity (rpm) #}
+{%- set mot_max_rpm = 10000 -%}
+{# maximum thruster rotational velocity (rad/s) #}
+{%- set mot_max_vel = mot_max_rpm*2*np.pi/60 -%}
+{# main thrusters time constant #}
+{%- set mot_tau = 0.001 -%}
+{# simulation motor slowdown #}
+{%- set sim_rotor_slow = 5 -%}
+{# thruster prop radius (10") #}
+{%- set propeller_diameter = 12*in2m -%} 
+{%- set propeller_pitch = 10*in2m -%} 
+{%- set propeller_radius = propeller_diameter/2 -%} 
+{%- set propeller_height = 0.07 -%}
+{%- set propeller_thickness = 0.02 -%}
+{%- set propeller_width = 0.05 -%}
+{%- set motor_width = 0.35 -%}
+{%- set motor_height = 0.15 -%}
+{%- set motor_depth = 0.15 -%}
+
+{# =================================================== #}
+{# -------------- POSITIONS OF THE FRAMES ------------ #}
+{# =================================================== #}
+{# --------------------------------------------------- #}
+{# ************** OVERALL CG POSITION **************** #}
+{# --------------------------------------------------- #}
+{%- set x_CG =  0 -%}
+{%- set y_CG =  0 -%}
+{%- set z_CG =  0 -%}
+{%- set rho_CG = [x_CG, y_CG, z_CG]  -%}
+{# --------------------------------------------------- #}
+{# ************ FORWARD LEFT MOTOR ASSY ************** #}
+{# --------------------------------------------------- #}
+{%- set x_fwd_left_motor =  arm_length * np.cos(0.25*np.pi) -%}
+{%- set y_fwd_left_motor =  arm_length * np.sin(0.25*np.pi) -%}
+{%- set z_fwd_left_motor =  propeller_height -%}
+{# --------------------------------------------------- #}
+{# ************ BACKWARD LEFT MOTOR ASSY ************* #}
+{# --------------------------------------------------- #}
+{%- set x_bwd_left_motor =  arm_length * np.cos(0.75*np.pi) -%}
+{%- set y_bwd_left_motor =  arm_length * np.sin(0.75*np.pi) -%}
+{%- set z_bwd_left_motor =  propeller_height -%}
+{# --------------------------------------------------- #}
+{# ************ FORWARD RIGHT MOTOR ASSY ************* #}
+{# --------------------------------------------------- #}
+{%- set x_fwd_right_motor =  arm_length * np.cos(-0.25*np.pi) -%}
+{%- set y_fwd_right_motor =  arm_length * np.sin(-0.25*np.pi) -%}
+{%- set z_fwd_right_motor =  propeller_height -%}
+{# --------------------------------------------------- #}
+{# ************ BACKWARD RIGHT MOTOR ASSY ************ #}
+{# --------------------------------------------------- #}
+{%- set x_bwd_right_motor =  arm_length * np.cos(-0.75*np.pi) -%}
+{%- set y_bwd_right_motor =  arm_length * np.sin(-0.75*np.pi) -%}
+{%- set z_bwd_right_motor =  propeller_height -%}
+
+
+{# =================================================== #}
+{# ------------- MOMENT OF INERTIA TERMS ------------- #}
+{# =================================================== #}
+{# --------------------------------------------------- #}
+{# ****************** BASE ASSY ********************** #}
+{# --------------------------------------------------- #}
+{%- set ixx_frame = 0.035 -%}
+{%- set iyy_frame = 0.035 -%}
+{%- set izz_frame = 0.055 -%}
+{%- set ixy_frame = 0 -%}
+{%- set ixz_frame = 0 -%}
+{%- set iyz_frame = 0 -%}
+{# --------------------------------------------------- #}
+{# ******************* MOTOR ASSY ******************** #}
+{# --------------------------------------------------- #}
+{%- set ixx_motor = (1/2)*propeller_mass*( (propeller_radius)**2 )   -%}
+{%- set iyy_motor = (1/12)*propeller_mass*( 3*(propeller_radius)**2 )   -%}
+{%- set izz_motor = (1/12)*propeller_mass*( 3*(propeller_radius)**2 )   -%}
+
+{# =================================================== #}
+{# ------------- AERODYNAMIC PROPERTIES -------------- #}
+{# =================================================== #}
+
+
+
+{# =================================================== #}
+{# ---------------- MACROS / FUNCTIONS --------------- #}
+{# =================================================== #}
+
+{%- macro inertial(m, ixx, iyy, izz) -%}
+<inertial>
+  <pose>0 0 0 0 0 0</pose>
+  <mass>{{m}}</mass>
+  <inertia>
+    <ixx>{{ixx}}</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>{{iyy}}</iyy>
+    <iyz>0</iyz>
+    <izz>{{izz}}</izz>
+  </inertia>
+</inertial>
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro inertial_offset(m, ixx, iyy, izz, ixy, ixz, iyz, x, y, z) -%}
+<inertial>
+  <pose>{{ x }} {{ y }} {{ z }} 0 0 0</pose>
+  <mass>{{m}}</mass>
+  <inertia>
+          <ixx>{{ixx}}</ixx>
+          <ixy>{{ixy}}</ixy>
+          <ixz>{{ixz}}</ixz>
+          <iyy>{{iyy}}</iyy>
+          <iyz>{{iyz}}</iyz>
+          <izz>{{izz}}</izz>
+        </inertia>
+</inertial>
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro cylinder(r, h) -%}
+<geometry>
+  <cylinder>
+    <length>{{h}}</length>
+    <radius>{{r}}</radius>
+  </cylinder>
+</geometry>
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro box(x, y, z) -%}
+<geometry>
+  <box>
+    <size>{{x}} {{y}} {{z}}</size>
+  </box>
+</geometry>
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro thruster(motor_num, direction, reverse, parent, mass, x_motor, y_motor, z_motor, roll, pitch, Ixx, Iyy, Izz, tau, max_vel, propeller_diameter, propeller_pitch, moment_constant, drag_coeff, roll_coeff, color) -%}   
+
+<joint name='rotor_{{ motor_num }}_joint' type='revolute'>
+  <pose relative_to='{{parent}}'>{{x_motor}} {{y_motor}} {{z_motor}} {{roll}} {{pitch}} 0</pose>
+  <parent>{{parent}}</parent>
+  <child>rotor_{{ motor_num }}</child>
+  <axis>
+    <xyz>0 0 1</xyz>
+    <limit>
+      <lower>-1e+16</lower>
+      <upper>1e+16</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+  </axis>
+</joint>
+
+<link name="rotor_{{ motor_num }}">
+  <gravity>true</gravity>
+  <self_collide>false</self_collide>
+  <velocity_decay/>
+
+  <pose relative_to='rotor_{{ motor_num }}_joint'>0 0 0 0 0 0</pose>
+
+  {{ inertial(mass, Ixx, Iyy, Izz)|indent(6) }}
+
+  <visual name="rotor_{{ motor_num }}_visual">
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <mesh>
+        <scale>1 1 1</scale>
+        <uri>model://f450/meshes/prop_{{direction}}.dae</uri>
+      </mesh>
+    </geometry>
+    <material>
+          <script>
+            <name>Gazebo/{{color}}</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+    </material>
+  </visual>
+
+</link>
+
+<!--
+<plugin filename="libDynamicThrustPropellerModel" name="gz::sim::systems::DynamicThrustPropellerModel">
+  <jointName>rotor_{{ motor_num }}_joint</jointName>
+  <linkName>rotor_{{ motor_num }}</linkName>
+  <turningDirection>{{ direction }}</turningDirection>
+  <timeConstantUp>{{ tau }}</timeConstantUp>
+  <timeConstantDown>{{ tau }}</timeConstantDown>
+  <maxRotVelocity>{{ max_vel }}</maxRotVelocity>
+  <propellerDiameter>{{ propeller_diameter }}</propellerDiameter>
+  <propellerPitch>{{ propeller_pitch }}</propellerPitch>
+  <momentConstant>{{ moment_constant }}</momentConstant>
+  <commandSubTopic>command/motor_speed</commandSubTopic>
+  <motorNumber>{{ motor_num }}</motorNumber>
+  <rotorDragCoefficient>{{ drag_coeff }}</rotorDragCoefficient>
+  <rotorVelocitySlowdownSim>{{sim_rotor_slow}}</rotorVelocitySlowdownSim>
+  <motorType>velocity</motorType>
+</plugin>
+-->
+
+  <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <jointName>rotor_{{ motor_num }}_joint</jointName>
+    <linkName>rotor_{{ motor_num }}</linkName>
+    <turningDirection>{{ direction }}</turningDirection>
+    <timeConstantUp>0.0125</timeConstantUp>
+    <timeConstantDown>0.025</timeConstantDown>
+    <maxRotVelocity>1000.0</maxRotVelocity>
+    <motorConstant>8.54858e-06</motorConstant>
+    <momentConstant>0.016</momentConstant>
+    <commandSubTopic>command/motor_speed</commandSubTopic>
+    <motorNumber>{{ motor_num }}</motorNumber>
+    <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+    <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+    <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    <motorType>velocity</motorType>
+  </plugin>
+
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro gps(gps_num, parent,  x, y, z, roll, pitch, yaw) -%}
+
+<include>
+      <uri>model://gps</uri>
+      <pose>0 0 0 {{ roll }} {{ pitch }} {{ yaw }}</pose>
+      <name>gps{{gps_num}}</name>
+</include>
+    
+    
+<joint name='gps{{gps_num}}_joint' type='fixed'>
+  <pose relative_to='{{parent}}'>{{x}} {{ y }} {{ z }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+  <child>gps{{gps_num}}::link</child>
+  <parent>{{parent}}</parent>
+</joint>
+
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro imu(imu_num, parent,  x, y, z, roll, pitch, yaw) -%}
+<link name='imu{{imu_num}}_link'>
+  <pose relative_to='imu{{imu_num}}_joint'>0 0 0 0 0 0</pose>
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='imu{{imu_num}}_visual'>
+    <pose>0 0 0 0 -0 0</pose>
+    {{ cylinder(0.01, 0.002 ) }}
+  </visual>
+</link>
+
+    <plugin name="imu{{imu_num}}_plugin" filename="libgazebo_imu_plugin.so">
+      <robotNamespace></robotNamespace>
+      <linkName>imu{{imu_num}}_link</linkName>
+      <imuTopic>/imu</imuTopic>
+      <gyroscopeNoiseDensity>0.00018665</gyroscopeNoiseDensity>
+      <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
+      <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
+      <gyroscopeTurnOnBiasSigma>0.0087</gyroscopeTurnOnBiasSigma>
+      <accelerometerNoiseDensity>0.00186</accelerometerNoiseDensity>
+      <accelerometerRandomWalk>0.006</accelerometerRandomWalk>
+      <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
+      <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
+    </plugin>
+
+
+<joint name='imu{{imu_num}}_joint' type='revolute'>
+  <pose relative_to='{{parent}}'>{{x}} {{ y }} {{ z }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+  <parent>{{parent}}</parent>
+  <child>imu{{imu_num}}_link</child>
+  <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>{{0*np.pi/180}}</lower>
+          <upper>{{0*np.pi/180}}</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+  </axis>
+</joint>
+
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro baro(baro_num, parent,  x, y, z, roll, pitch, yaw) -%}
+<link name='baro{{baro_num}}_link'>
+  <pose relative_to='baro{{baro_num}}_joint'>0 0 0 0 0 0</pose>
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='baro{{baro_num}}_link_visual'>
+    <pose>0 0 0 0 0 0</pose>
+    {{ cylinder(0.01, 0.002 ) }}
+  </visual>
+
+</link>
+
+<plugin name='barometer{{baro_num}}_plugin' filename='libgazebo_barometer_plugin.so'>
+<robotNamespace/>
+<pubRate>50</pubRate>
+<baroTopic>/baro</baroTopic>
+<baroDriftPaPerSec>0</baroDriftPaPerSec>
+</plugin>
+
+<joint name='baro{{baro_num}}_joint' type='revolute'>
+  <pose relative_to='{{parent}}'>{{x}} {{ y }} {{ z }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+  <parent>{{parent}}</parent>
+  <child>baro{{baro_num}}_link</child>
+  <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>{{0*np.pi/180}}</lower>
+          <upper>{{0*np.pi/180}}</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+  </axis>
+</joint>
+
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro magneto(magneto_num, parent,  x, y, z, roll, pitch, yaw) -%}
+<link name='magneto{{magneto_num}}_link'>
+  <pose relative_to='magneto{{magneto_num}}_joint'>0 0 0 0 0 0</pose>
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='magneto{{magneto_num}}_link_visual'>
+    <pose>0 0 0 0 0 0</pose>
+    {{ cylinder(0.01, 0.002 ) }}
+  </visual>
+
+</link>
+
+<plugin name='magnetometer{{magneto_num}}_plugin' filename='libgazebo_magnetometer_plugin.so'>
+  <robotNamespace/>
+  <pubRate>100</pubRate>
+  <noiseDensity>0.0004</noiseDensity>
+  <randomWalk>6.4e-06</randomWalk>
+  <biasCorrelationTime>600</biasCorrelationTime>
+  <magTopic>/mag</magTopic>
+</plugin>
+
+<joint name='magneto{{magneto_num}}_joint' type='revolute'>
+  <pose relative_to='{{parent}}'>{{x}} {{ y }} {{ z }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+  <parent>{{parent}}</parent>
+  <child>magneto{{magneto_num}}_link</child>
+  <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>{{0*np.pi/180}}</lower>
+          <upper>{{0*np.pi/180}}</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+  </axis>
+</joint>
+
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro camera(cam_num, parent,  x, y, z, roll, pitch, yaw, ADSB_ID) -%}
+
+<joint name="camera_link_{{cam_num}}_yaw_joint" type="revolute">
+  <pose relative_to='{{parent}}'>{{x}} {{ y }} {{ z }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+  <parent>{{parent}}</parent>
+  <child>camera_link_{{cam_num}}_fixed</child>
+  <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>{{0*np.pi/180}}</lower>
+          <upper>{{0*np.pi/180}}</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+  </axis>
+  
+
+<link name='camera_link_{{cam_num}}_fixed'>
+  <pose relative_to='camera_link_{{cam_num}}_yaw_joint'>0 0 0 0 0 0</pose>
+  {{ inertial(0.1, 0.1, 0.1, 0.1 )  }}
+  
+  <visual name='camera_link_{{cam_num}}_fixed_visual'>
+    <pose>0 0 0 0 {{np.pi/2}} 0</pose>
+    {{ cylinder(0.05, 0.001) }}
+  </visual>
+
+</link>
+
+<joint name="camera_link_{{cam_num}}_fixed_joint" type="revolute">
+  <pose relative_to='camera_link_{{cam_num}}_fixed'>0.001 0 0 0 0 0</pose>
+  <parent>camera_link_{{cam_num}}_fixed</parent>
+  <child>camera_link_{{cam_num}}_yaw</child>
+  <axis>
+    <xyz>0 0 1</xyz>
+    <limit>
+      <lower>-{{120*np.pi/180}}</lower>
+      <upper>{{120*np.pi/180}}</upper>
+      <effort>1</effort>
+      <velocity>1</velocity>
+    </limit>
+    <dynamics>
+      <damping>0.1</damping>
+      <friction>0.1</friction>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+  </axis>
+</joint>
+
+<link name='camera_link_{{cam_num}}_yaw'>
+  <pose relative_to='camera_link_{{cam_num}}_fixed_joint'>0 0 0 0 0 0</pose>
+  {{ inertial(0.1, 0.1*(3*(0.05**2)+0.001**2)/12, 0.1*(3*(0.05**2)+0.001**2)/12, 0.1*(0.05**2)/2 )  }}
+  
+  <visual name='camera_link_{{cam_num}}_yaw_visual'>
+    <pose>0 0 0 0 {{np.pi/2}} 0</pose>
+    {{ cylinder(0.05, 0.001) }}
+  </visual>
+
+</link>
+
+
+<joint name="camera_link_{{cam_num}}_pitch_joint" type="revolute">
+  <pose relative_to='camera_link_{{cam_num}}_yaw'>0.001 0 0 0 0 0</pose>
+  <parent>camera_link_{{cam_num}}_yaw</parent>
+  <child>camera_link_{{cam_num}}_pitch</child>
+  <axis>
+    <xyz>0 1 0</xyz>
+    <limit>
+      <lower>-{{120*np.pi/180}}</lower>
+      <upper>{{120*np.pi/180}}</upper>
+      <effort>1</effort>
+      <velocity>1</velocity>
+    </limit>
+    <dynamics>
+      <damping>0.1</damping>
+      <friction>0.1</friction>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+  </axis>
+</joint>
+
+<link name='camera_link_{{cam_num}}_pitch'>
+  <pose relative_to='camera_link_{{cam_num}}_pitch_joint'>0 0 0 0 0 0</pose>
+  {{ inertial(0.1, 0.1*(3*(0.05**2)+0.001**2)/12, 0.1*(3*(0.05**2)+0.001**2)/12, 0.1*(0.05**2)/2 )  }}
+  
+  <visual name='camera_link_{{cam_num}}_pitch_visual'>
+    <pose>0 0 0 0 {{np.pi/2}} 0</pose>
+    {{ cylinder(0.05, 0.001) }}
+  </visual>
+
+</link>
+
+
+<joint name="camera_link_{{cam_num}}_roll_joint" type="revolute">
+  <pose relative_to='camera_link_{{cam_num}}_pitch'>0.25 0 0 0 0 0</pose>
+  <parent>camera_link_{{cam_num}}_pitch</parent>
+  <child>camera_link_{{cam_num}}_roll</child>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-{{180*np.pi/180}}</lower>
+      <upper>{{180*np.pi/180}}</upper>
+      <effort>1</effort>
+      <velocity>1</velocity>
+    </limit>
+    <dynamics>
+      <damping>0.1</damping>
+      <friction>0.1</friction>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+  </axis>
+</joint>
+
+
+<link name='camera_link_{{cam_num}}_roll'>
+  <pose relative_to='camera_link_{{cam_num}}_roll_joint'>0 0 0 0 0 0</pose>
+  {{ inertial_offset(0.2, 0.2*(3*(0.05**2)+0.001**2)/12, 0.2*(3*(0.05**2)+0.001**2)/12, 0.2*(0.05**2)/2, 0,0,0, -0.125, 0, 0 )  }}
+  
+  <visual name='camera_link_{{cam_num}}_roll_visual'>
+    <pose>0 0 0 0 0 0</pose>
+    <geometry>
+      <mesh>
+        <scale>0.8 0.8 0.8</scale>
+        <uri>model://gus_airship/meshes/camera.dae</uri>
+      </mesh>  
+    </geometry>
+  </visual>
+  
+  <sensor name='camera_{{cam_num}}' type='camera'>
+          <camera name='__default__'>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>800</width>
+              <height>600</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>1000</far>
+            </clip>
+            <lens>
+              <type>custom</type>
+              <custom_function>
+                <c1>1.05</c1>
+                <c2>4</c2>
+                <f>1</f>
+                <fun>tan</fun>
+              </custom_function>
+              <scale_to_hfov>1</scale_to_hfov>
+              <cutoff_angle>3.1415</cutoff_angle>
+              <env_texture_size>1080</env_texture_size>
+            </lens>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>1</visualize>
+
+          <plugin name='camera_{{cam_num}}_plugin' filename='libgazebo_ros_camera.so'>
+            <robotNamespace></robotNamespace>
+            <alwaysOn>true</alwaysOn>
+            <imageTopicName>image_raw_{{cam_num}}</imageTopicName>
+            <cameraInfoTopicName>camera_{{cam_num}}_info</cameraInfoTopicName>
+            <updateRate>30.0</updateRate>
+            <cameraName>usb_cam_{{cam_num}}</cameraName>
+            <frameName>/robot_camera_link_{{cam_num}}</frameName>
+            <CxPrime>320.5</CxPrime>
+            <Cx>1224.5</Cx>
+            <Cy>1025.5</Cy>
+            <hackBaseline>0</hackBaseline>
+            <focalLength>692.97</focalLength>
+            <distortionK1>0.0</distortionK1>
+            <distortionK2>0.0</distortionK2>
+            <distortionK3>0.0</distortionK3>
+            <distortionT1>0.0</distortionT1>
+            <distortionT2>0.0</distortionT2>
+          </plugin>
+          
+          <plugin name="GstCameraPlugin" filename="libgazebo_gst_camera_plugin.so">
+            <robotNamespace></robotNamespace>
+            <udpPort>5600</udpPort>
+          </plugin>
+
+        </sensor>
+
+
+</link>
+
+
+      <plugin name='GimbalTrack_{{cam_num}}_plugin' filename='libGimbalObjectTrackingPlugin.so'>
+        <robotNamespace/>
+        <cameraNo>{{cam_num}}</cameraNo>
+	<camera_fixed_linkName>camera_link_{{cam_num}}_fixed</camera_fixed_linkName>
+        <camera_yaw_linkName>camera_link_{{cam_num}}_yaw</camera_yaw_linkName>
+        <camera_pitch_linkName>camera_link_{{cam_num}}_pitch</camera_pitch_linkName>
+        <camera_roll_linkName>camera_link_{{cam_num}}_roll</camera_roll_linkName>
+        <ros_pub_topicName>/command/gimbal/cam_1</ros_pub_topicName>
+        <ros_ADSB_sub_topicName>/ADSB_{{ADSB_ID}}</ros_ADSB_sub_topicName>
+      </plugin>
+
+
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro range_finder(num, parent,  x_rf, y_rf, z_rf, roll, pitch, yaw) -%}
+
+<include>
+  <uri>model://lidar</uri>
+  <pose>{{ x_rf }} {{ y_rf }} {{ z_rf }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+  <name>lidar{{num}}</name>
+</include>
+
+<joint name="lidar{{num}}_joint" type="fixed">
+  <parent>{{parent}}</parent>
+  <child>lidar{{num}}::link</child>
+</joint>
+    
+{%- endmacro -%}
+
+
+{# =================================================== #}
+{# ------------ QUADCOPTER SDF DESCRIPTION ----------- #}
+{# =================================================== #}
+
+<sdf version='1.9'>
+  <model name='f450'>
+
+    <pose>0 0 0 0 0 0</pose>
+    <self_collide>false</self_collide>
+    <static>false</static>
+  
+  {# Base Frame #}
+  
+    <link name='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+      {{ inertial(base_link_mass, ixx_frame, iyy_frame, izz_frame) |indent(6) }}
+      <collision name='base_link_top_collision'>
+        <pose>0 0 0.02 0 0 0</pose>
+        {{ box(0.5, 0.5, 0.01) }}
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_left_fw_leg_collision'>
+        <pose>0.10 0.10 -0.14 0 0 0</pose>
+        {{ box(0.02, 0.02, 0.01) }}
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_right_fw_leg_collision'>
+        <pose>0.10 -0.10 -0.14 0 0 0</pose>
+        {{ box(0.02, 0.02, 0.01) }}
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_left_bw_leg_collision'>
+        <pose>-0.10 0.10 -0.14 0 0 0</pose>
+        {{ box(0.02, 0.02, 0.01) }}
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <collision name='base_link_right_bw_leg_collision'>
+        <pose>-0.10 -0.10 -0.14 0 0 0</pose>
+        {{ box(0.02, 0.02, 0.01) }}
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://f450/meshes/f450_wo_props.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+          <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+          <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+          <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay/>
+
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure>
+          <!-- Noise modeled after BMP390 -->
+          <pressure>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3</stddev>
+            </noise>
+          </pressure>
+        </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- 0.05 deg/s converted to rad/s -->
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- X & Y axis: 0.65 mg-rms converted to m/ss -->
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </y>
+            <!-- Z axis: 0.70 mg-rms converted to m/ss-->
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00686</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+
+    </link>
+    
+    {# Motors #}
+    
+    {# Front Left Motor - Rotor 0 - CW #}
+    
+    {{ thruster(0, "cw", 0, "base_link", propeller_mass, x_fwd_left_motor, y_fwd_left_motor, z_fwd_left_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, 0, 0, 0, "GreenGlow") }}
+        
+    {# Front Right Motor - Rotor 1 - CCW #}
+
+    {{ thruster(1, "ccw", 0, "base_link", propeller_mass, x_fwd_right_motor, y_fwd_right_motor, z_fwd_right_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, 0, 0, 0, "GreenGlow") }}
+
+    {# Back Right Motor - Rotor 2 - CW#}
+
+    {{ thruster(2, "cw", 0, "base_link", propeller_mass, x_bwd_right_motor, y_bwd_right_motor, z_bwd_right_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, 0, 0, 0, "RedGlow") }}
+
+    {# Back Left Motor - Rotor 3 - CCW #}
+    
+    {{ thruster(3, "ccw", 0, "base_link", propeller_mass, x_bwd_left_motor, y_bwd_left_motor, z_bwd_left_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, 0, 0, 0, "RedGlow") }}
+    
+    
+  
+
+    
+    
+  </model>
+  
+</sdf>
