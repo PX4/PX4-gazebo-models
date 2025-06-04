@@ -45,6 +45,8 @@
 
 
 
+
+
 <sdf version='1.9'>
   <model name='crazyflie'>
 
@@ -247,7 +249,7 @@
     <geometry>
       <mesh>
         <scale>0.0225 0.0225 0.0225</scale>
-        <uri>model://crazyflie/meshes/propeller_cw.dae</uri>
+        <uri>model://crazyflie/meshes/propeller_ccw.dae</uri>
       </mesh>
     </geometry>
     <material>
@@ -264,7 +266,7 @@
 <plugin filename="libDynamicThrustPropellerModel" name="gz::sim::systems::DynamicThrustPropellerModel">
   <jointName>rotor_0_joint</jointName>
   <linkName>rotor_0</linkName>
-  <turningDirection>cw</turningDirection>
+  <turningDirection>ccw</turningDirection>
   <timeConstantUp>0.001</timeConstantUp>
   <timeConstantDown>0.001</timeConstantDown>
   <maxRotVelocity>1047.1975511965977</maxRotVelocity>
@@ -277,20 +279,38 @@
   <rotorVelocitySlowdownSim>5</rotorVelocitySlowdownSim>
   <motorType>velocity</motorType>
 </plugin>
--->
+
 
   <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
     <jointName>rotor_0_joint</jointName>
     <linkName>rotor_0</linkName>
-    <turningDirection>cw</turningDirection>
+    <turningDirection>ccw</turningDirection>
     <timeConstantUp>0.0125</timeConstantUp>
     <timeConstantDown>0.025</timeConstantDown>
     <maxRotVelocity>2618</maxRotVelocity>
-    <motorConstant>1.28192e-07</motorConstant>
+    <motorConstant>1.28192e-08</motorConstant>
     <momentConstant>0.005964552</momentConstant>
     <commandSubTopic>command/motor_speed</commandSubTopic>
     <motorNumber>0</motorNumber>
-    <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+    <rotorDragCoefficient>0.0</rotorDragCoefficient>
+    <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+    <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    <motorType>velocity</motorType>
+  </plugin>
+-->
+
+  <plugin filename="libModifiedMotorModel" name="gz::sim::systems::ModifiedMotorModel">
+    <jointName>rotor_0_joint</jointName>
+    <linkName>rotor_0</linkName>
+    <turningDirection>ccw</turningDirection>
+    <timeConstantUp>0.0125</timeConstantUp>
+    <timeConstantDown>0.025</timeConstantDown>
+    <maxRotVelocity>2618</maxRotVelocity>
+    <motorConstant>1.28192e-08</motorConstant>
+    <momentConstant>0.005964552</momentConstant>
+    <commandSubTopic>command/motor_speed</commandSubTopic>
+    <motorNumber>0</motorNumber>
+    <rotorDragCoefficient>0.0</rotorDragCoefficient>
     <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
     <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
     <motorType>velocity</motorType>
@@ -340,7 +360,7 @@
     <geometry>
       <mesh>
         <scale>0.0225 0.0225 0.0225</scale>
-        <uri>model://crazyflie/meshes/propeller_ccw.dae</uri>
+        <uri>model://crazyflie/meshes/propeller_cw.dae</uri>
       </mesh>
     </geometry>
     <material>
@@ -357,7 +377,7 @@
 <plugin filename="libDynamicThrustPropellerModel" name="gz::sim::systems::DynamicThrustPropellerModel">
   <jointName>rotor_1_joint</jointName>
   <linkName>rotor_1</linkName>
-  <turningDirection>ccw</turningDirection>
+  <turningDirection>cw</turningDirection>
   <timeConstantUp>0.001</timeConstantUp>
   <timeConstantDown>0.001</timeConstantDown>
   <maxRotVelocity>1047.1975511965977</maxRotVelocity>
@@ -370,20 +390,38 @@
   <rotorVelocitySlowdownSim>5</rotorVelocitySlowdownSim>
   <motorType>velocity</motorType>
 </plugin>
--->
+
 
   <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
     <jointName>rotor_1_joint</jointName>
     <linkName>rotor_1</linkName>
-    <turningDirection>ccw</turningDirection>
+    <turningDirection>cw</turningDirection>
     <timeConstantUp>0.0125</timeConstantUp>
     <timeConstantDown>0.025</timeConstantDown>
     <maxRotVelocity>2618</maxRotVelocity>
-    <motorConstant>1.28192e-07</motorConstant>
+    <motorConstant>1.28192e-08</motorConstant>
     <momentConstant>0.005964552</momentConstant>
     <commandSubTopic>command/motor_speed</commandSubTopic>
     <motorNumber>1</motorNumber>
-    <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+    <rotorDragCoefficient>0.0</rotorDragCoefficient>
+    <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+    <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    <motorType>velocity</motorType>
+  </plugin>
+-->
+
+  <plugin filename="libModifiedMotorModel" name="gz::sim::systems::ModifiedMotorModel">
+    <jointName>rotor_1_joint</jointName>
+    <linkName>rotor_1</linkName>
+    <turningDirection>cw</turningDirection>
+    <timeConstantUp>0.0125</timeConstantUp>
+    <timeConstantDown>0.025</timeConstantDown>
+    <maxRotVelocity>2618</maxRotVelocity>
+    <motorConstant>1.28192e-08</motorConstant>
+    <momentConstant>0.005964552</momentConstant>
+    <commandSubTopic>command/motor_speed</commandSubTopic>
+    <motorNumber>1</motorNumber>
+    <rotorDragCoefficient>0.0</rotorDragCoefficient>
     <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
     <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
     <motorType>velocity</motorType>
@@ -433,7 +471,7 @@
     <geometry>
       <mesh>
         <scale>0.0225 0.0225 0.0225</scale>
-        <uri>model://crazyflie/meshes/propeller_cw.dae</uri>
+        <uri>model://crazyflie/meshes/propeller_ccw.dae</uri>
       </mesh>
     </geometry>
     <material>
@@ -450,7 +488,7 @@
 <plugin filename="libDynamicThrustPropellerModel" name="gz::sim::systems::DynamicThrustPropellerModel">
   <jointName>rotor_2_joint</jointName>
   <linkName>rotor_2</linkName>
-  <turningDirection>cw</turningDirection>
+  <turningDirection>ccw</turningDirection>
   <timeConstantUp>0.001</timeConstantUp>
   <timeConstantDown>0.001</timeConstantDown>
   <maxRotVelocity>1047.1975511965977</maxRotVelocity>
@@ -463,20 +501,38 @@
   <rotorVelocitySlowdownSim>5</rotorVelocitySlowdownSim>
   <motorType>velocity</motorType>
 </plugin>
--->
+
 
   <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
     <jointName>rotor_2_joint</jointName>
     <linkName>rotor_2</linkName>
-    <turningDirection>cw</turningDirection>
+    <turningDirection>ccw</turningDirection>
     <timeConstantUp>0.0125</timeConstantUp>
     <timeConstantDown>0.025</timeConstantDown>
     <maxRotVelocity>2618</maxRotVelocity>
-    <motorConstant>1.28192e-07</motorConstant>
+    <motorConstant>1.28192e-08</motorConstant>
     <momentConstant>0.005964552</momentConstant>
     <commandSubTopic>command/motor_speed</commandSubTopic>
     <motorNumber>2</motorNumber>
-    <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+    <rotorDragCoefficient>0.0</rotorDragCoefficient>
+    <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+    <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    <motorType>velocity</motorType>
+  </plugin>
+-->
+
+  <plugin filename="libModifiedMotorModel" name="gz::sim::systems::ModifiedMotorModel">
+    <jointName>rotor_2_joint</jointName>
+    <linkName>rotor_2</linkName>
+    <turningDirection>ccw</turningDirection>
+    <timeConstantUp>0.0125</timeConstantUp>
+    <timeConstantDown>0.025</timeConstantDown>
+    <maxRotVelocity>2618</maxRotVelocity>
+    <motorConstant>1.28192e-08</motorConstant>
+    <momentConstant>0.005964552</momentConstant>
+    <commandSubTopic>command/motor_speed</commandSubTopic>
+    <motorNumber>2</motorNumber>
+    <rotorDragCoefficient>0.0</rotorDragCoefficient>
     <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
     <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
     <motorType>velocity</motorType>
@@ -526,7 +582,7 @@
     <geometry>
       <mesh>
         <scale>0.0225 0.0225 0.0225</scale>
-        <uri>model://crazyflie/meshes/propeller_ccw.dae</uri>
+        <uri>model://crazyflie/meshes/propeller_cw.dae</uri>
       </mesh>
     </geometry>
     <material>
@@ -543,7 +599,7 @@
 <plugin filename="libDynamicThrustPropellerModel" name="gz::sim::systems::DynamicThrustPropellerModel">
   <jointName>rotor_3_joint</jointName>
   <linkName>rotor_3</linkName>
-  <turningDirection>ccw</turningDirection>
+  <turningDirection>cw</turningDirection>
   <timeConstantUp>0.001</timeConstantUp>
   <timeConstantDown>0.001</timeConstantDown>
   <maxRotVelocity>1047.1975511965977</maxRotVelocity>
@@ -556,20 +612,38 @@
   <rotorVelocitySlowdownSim>5</rotorVelocitySlowdownSim>
   <motorType>velocity</motorType>
 </plugin>
--->
+
 
   <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
     <jointName>rotor_3_joint</jointName>
     <linkName>rotor_3</linkName>
-    <turningDirection>ccw</turningDirection>
+    <turningDirection>cw</turningDirection>
     <timeConstantUp>0.0125</timeConstantUp>
     <timeConstantDown>0.025</timeConstantDown>
     <maxRotVelocity>2618</maxRotVelocity>
-    <motorConstant>1.28192e-07</motorConstant>
+    <motorConstant>1.28192e-08</motorConstant>
     <momentConstant>0.005964552</momentConstant>
     <commandSubTopic>command/motor_speed</commandSubTopic>
     <motorNumber>3</motorNumber>
-    <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+    <rotorDragCoefficient>0.0</rotorDragCoefficient>
+    <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+    <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    <motorType>velocity</motorType>
+  </plugin>
+-->
+
+  <plugin filename="libModifiedMotorModel" name="gz::sim::systems::ModifiedMotorModel">
+    <jointName>rotor_3_joint</jointName>
+    <linkName>rotor_3</linkName>
+    <turningDirection>cw</turningDirection>
+    <timeConstantUp>0.0125</timeConstantUp>
+    <timeConstantDown>0.025</timeConstantDown>
+    <maxRotVelocity>2618</maxRotVelocity>
+    <motorConstant>1.28192e-08</motorConstant>
+    <momentConstant>0.005964552</momentConstant>
+    <commandSubTopic>command/motor_speed</commandSubTopic>
+    <motorNumber>3</motorNumber>
+    <rotorDragCoefficient>0.0</rotorDragCoefficient>
     <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
     <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
     <motorType>velocity</motorType>

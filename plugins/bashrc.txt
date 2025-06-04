@@ -1,0 +1,24 @@
+source /usr/share/bash-completion/completions/gz
+
+source /opt/ros/humble/setup.bash
+source ~/ros2_ws/install/local_setup.bash
+source ~/Gazebo_Garden/install/setup.bash
+
+
+export MAVLINK_ROUTERD_CONF_FILE=~/mavlink-router/conf/main.conf
+
+export GZ_SIM_SYSTEM_PLUGIN_PATH=~/mypx4/PX4-Autopilot/Tools/simulation/gz/plugins/build/lib
+export GZ_SIM_RESOURCE_PATH=~/mypx4/PX4-Autopilot/Tools/simulation/gz/models:~/mypx4/PX4-Autopilot/Tools/simulation/gz/worlds
+
+
+#export GZ_SIM_RESOURCE_PATH=${GZ_SIM_RESOURCE_PATH}:~/Gazebo_Garden/build:~/Gazebo_Garden/build/gz-sim7/lib:~/Gazebo_Garden/build/gz-sim7/bin:~/Gazebo_Garden/install/bin
+
+# Set the library path for Gazebo libraries
+#export LD_LIBRARY_PATH=~/Gazebo_Garden/install/lib:$LD_LIBRARY_PATH
+
+# place the lines in your .bashrc if you want the change to be permanent
+export __NV_PRIME_RENDER_OFFLOAD=1
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+
+
+

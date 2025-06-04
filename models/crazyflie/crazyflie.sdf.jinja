@@ -2,6 +2,11 @@
 <!-- DO NOT EDIT: Generated from XXX.sdf.jinja -->
 
 {# =================================================== #}
+{# ----------------- CONSTANTS TABLE ----------------- #}
+{# =================================================== #}
+{%- set gravity = 9.8066 -%}
+
+{# =================================================== #}
 {# --------------------- CONVERSION TABLE ------------ #}
 {# =================================================== #}
 {%- set in2m = 2.54/100 -%}
@@ -51,12 +56,12 @@
 {%- set motor_height = 0.15 -%}
 {%- set motor_depth = 0.15 -%}
 
-{%- set motor_constant = 10*1.28192e-08 -%}
+{%- set motor_constant = 1.28192e-08 -%}
 {%- set moment_constant = 5.964552e-03 -%}
 {%- set time_constant_up = 0.0125 -%}
 {%- set time_constant_down = 0.025 -%}
 {%- set max_rot_velocity = 2618 -%}
-{%- set rotor_drag_coefficient = 8.06428e-05 -%}
+{%- set rotor_drag_coefficient = 0*8.06428e-05 -%}
 {%- set rolling_moment_coefficient = 0.000001 -%}
 
 {# =================================================== #}
@@ -242,7 +247,7 @@
   <rotorVelocitySlowdownSim>{{sim_rotor_slow}}</rotorVelocitySlowdownSim>
   <motorType>velocity</motorType>
 </plugin>
--->
+
 
   <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
     <jointName>rotor_{{ motor_num }}_joint</jointName>
@@ -260,7 +265,24 @@
     <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
     <motorType>velocity</motorType>
   </plugin>
+-->
 
+  <plugin filename="libModifiedMotorModel" name="gz::sim::systems::ModifiedMotorModel">
+    <jointName>rotor_{{ motor_num }}_joint</jointName>
+    <linkName>rotor_{{ motor_num }}</linkName>
+    <turningDirection>{{ direction }}</turningDirection>
+    <timeConstantUp>{{time_constant_up}}</timeConstantUp>
+    <timeConstantDown>{{time_constant_down}}</timeConstantDown>
+    <maxRotVelocity>{{max_rot_velocity}}</maxRotVelocity>
+    <motorConstant>{{motor_constant}}</motorConstant>
+    <momentConstant>{{moment_constant}}</momentConstant>
+    <commandSubTopic>command/motor_speed</commandSubTopic>
+    <motorNumber>{{ motor_num }}</motorNumber>
+    <rotorDragCoefficient>{{rotor_drag_coefficient}}</rotorDragCoefficient>
+    <rollingMomentCoefficient>{{rolling_moment_coefficient}}</rollingMomentCoefficient>
+    <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+    <motorType>velocity</motorType>
+  </plugin>
  
 {%- endmacro -%}
 
@@ -825,21 +847,21 @@
     
     {# Motors #}
     
-    {# Front Left Motor - Rotor 0 - CW #}
+    {# Front Left Motor - Rotor 0 - CCW #}
     
-    {{ thruster(0, "cw", 0, "base_link", propeller_mass, x_fwd_left_motor, y_fwd_left_motor, z_fwd_left_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, moment_constant, 0, 0, "GreenGlow") }}
+    {{ thruster(0, "ccw", 0, "base_link", propeller_mass, x_fwd_left_motor, y_fwd_left_motor, z_fwd_left_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, moment_constant, 0, 0, "GreenGlow") }}
         
-    {# Front Right Motor - Rotor 1 - CCW #}
+    {# Front Right Motor - Rotor 1 - CW #}
 
-    {{ thruster(1, "ccw", 0, "base_link", propeller_mass, x_fwd_right_motor, y_fwd_right_motor, z_fwd_right_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, moment_constant, 0, 0, "GreenGlow") }}
+    {{ thruster(1, "cw", 0, "base_link", propeller_mass, x_fwd_right_motor, y_fwd_right_motor, z_fwd_right_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, moment_constant, 0, 0, "GreenGlow") }}
 
-    {# Back Right Motor - Rotor 2 - CW#}
+    {# Back Right Motor - Rotor 2 - CCW#}
 
-    {{ thruster(2, "cw", 0, "base_link", propeller_mass, x_bwd_right_motor, y_bwd_right_motor, z_bwd_right_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, moment_constant, 0, 0, "RedGlow") }}
+    {{ thruster(2, "ccw", 0, "base_link", propeller_mass, x_bwd_right_motor, y_bwd_right_motor, z_bwd_right_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, moment_constant, 0, 0, "RedGlow") }}
 
-    {# Back Left Motor - Rotor 3 - CCW #}
+    {# Back Left Motor - Rotor 3 - CW #}
     
-    {{ thruster(3, "ccw", 0, "base_link", propeller_mass, x_bwd_left_motor, y_bwd_left_motor, z_bwd_left_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, moment_constant, 0, 0, "RedGlow") }}
+    {{ thruster(3, "cw", 0, "base_link", propeller_mass, x_bwd_left_motor, y_bwd_left_motor, z_bwd_left_motor, 0,  0, ixx_motor, iyy_motor, izz_motor, mot_tau, mot_max_vel, propeller_diameter, propeller_pitch, moment_constant, 0, 0, "RedGlow") }}
     
     
   

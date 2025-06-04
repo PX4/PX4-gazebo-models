@@ -1,0 +1,15 @@
+FOR BUILDING:
+
+
+cd gz-sim/examples/plugins/hello_world
+mkdir build
+cd build
+cmake ..
+make
+
+
+
+FOR TESTING:
+
+
+gz sim -v 3 hello_world_plugin.sdf
