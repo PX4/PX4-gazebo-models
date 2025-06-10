@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DO NOT EDIT: Generated from XXX.sdf.jinja -->
+
+{# =================================================== #}
+{# --------------------- CONVERSION TABLE ------------ #}
+{# =================================================== #}
+{%- set in2m = 2.54/100 -%}
+{%- set in2_m2 = 0.00065 -%}
+{%- set lb2kg = 0.45359 -%}
+{%- set lbIn2_kgM2 = lb2kg*in2m*in2m -%}
+{%- set ft2m = 0.3048 -%}
+
+{# =================================================== #}
+{# --------------------- DIMENSIONS ------------------ #}
+{# =================================================== #}
+{# --------------------------------------------------- #}
+{# *********************** FRAME ********************* #}
+{# --------------------------------------------------- #}
+{%- set arm_length = 0.225 -%}
+{%- set base_width = 0.229 -%}
+{%- set base_length = 0.46 -%}
+{%- set base_height = 0.08 -%}
+{%- set bar_length = 0.12 -%}
+{%- set bar_width = 0.01 -%}
+{%- set wheel_radius = 0.06 -%}
+{%- set wheel_width = 0.06 -%}
+{%- set wheel_housing_width = 0.055 -%}
+{%- set wheel_housing_vertical_offset = -0.0375 -%}
+
+{%- set bar_horizontal_offset = wheel_housing_width -%}
+{%- set bar_vertical_offset = 0.0265 -%}
+{%- set bar_neutral_angle = 45*np.pi/180 -%}
+
+
+
+{# =================================================== #}
+{# --------------------- MASS TERMS ------------------ #}
+{# =================================================== #}
+{%- set base_link_mass = 1.5 -%}
+{%- set wheel_housing_mass = 0.05 -%}
+{%- set bar_mass = 0.05 -%}
+{%- set wheel_mass = 0.05 -%}
+
+{# =================================================== #}
+{# ------------------ MOTOR PROPERTIES --------------- #}
+{# =================================================== #}
+{# maximum thruster rotational velocity (rpm) #}
+{%- set mot_max_rpm = 10000 -%}
+{# maximum thruster rotational velocity (rad/s) #}
+{%- set mot_max_vel = mot_max_rpm*2*np.pi/60 -%}
+{# main thrusters time constant #}
+{%- set mot_tau = 0.001 -%}
+{# simulation motor slowdown #}
+{%- set sim_rotor_slow = 5 -%}
+{# thruster prop radius (10") #}
+{%- set propeller_diameter = 12*in2m -%} 
+{%- set propeller_pitch = 10*in2m -%} 
+{%- set propeller_radius = propeller_diameter/2 -%} 
+{%- set propeller_height = 0.07 -%}
+{%- set propeller_thickness = 0.02 -%}
+{%- set propeller_width = 0.05 -%}
+{%- set motor_width = 0.35 -%}
+{%- set motor_height = 0.15 -%}
+{%- set motor_depth = 0.15 -%}
+
+{# =================================================== #}
+{# -------------- POSITIONS OF THE FRAMES ------------ #}
+{# =================================================== #}
+{# --------------------------------------------------- #}
+{# ************** OVERALL CG POSITION **************** #}
+{# --------------------------------------------------- #}
+{%- set x_CG =  0 -%}
+{%- set y_CG =  0 -%}
+{%- set z_CG =  0 -%}
+{%- set rho_CG = [x_CG, y_CG, z_CG]  -%}
+{# --------------------------------------------------- #}
+{# ************ FORWARD LEFT MOTOR ASSY ************** #}
+{# --------------------------------------------------- #}
+{%- set x_fwd_left_motor =  0.5*base_length - 0.5*wheel_housing_width - bar_width -%}
+{%- set y_fwd_left_motor =  0.5*base_width + 0.01175 -%}
+{%- set z_fwd_left_motor =  -0.0075 -%}
+{# --------------------------------------------------- #}
+{# ************ BACKWARD LEFT MOTOR ASSY ************* #}
+{# --------------------------------------------------- #}
+{%- set x_bwd_left_motor =  -0.5*base_length + 0.5*wheel_housing_width + bar_width -%}
+{%- set y_bwd_left_motor =  0.5*base_width + 0.01175 -%}
+{%- set z_bwd_left_motor =  -0.0075 -%}
+{# --------------------------------------------------- #}
+{# ************ FORWARD RIGHT MOTOR ASSY ************* #}
+{# --------------------------------------------------- #}
+{%- set x_fwd_right_motor =  0.5*base_length - 0.5*wheel_housing_width - bar_width -%}
+{%- set y_fwd_right_motor =  -0.5*base_width - 0.01175 -%}
+{%- set z_fwd_right_motor =  -0.0075 -%}
+{# --------------------------------------------------- #}
+{# ************ BACKWARD RIGHT MOTOR ASSY ************ #}
+{# --------------------------------------------------- #}
+{%- set x_bwd_right_motor =  -0.5*base_length + 0.5*wheel_housing_width + bar_width -%}
+{%- set y_bwd_right_motor =  -0.5*base_width - 0.01175 -%}
+{%- set z_bwd_right_motor =  -0.0075 -%}
+
+
+{# =================================================== #}
+{# ------------- MOMENT OF INERTIA TERMS ------------- #}
+{# =================================================== #}
+{# --------------------------------------------------- #}
+{# ****************** BASE ASSY ********************** #}
+{# --------------------------------------------------- #}
+{%- set ixx_frame = 0.035 -%}
+{%- set iyy_frame = 0.035 -%}
+{%- set izz_frame = 0.055 -%}
+{%- set ixy_frame = 0 -%}
+{%- set ixz_frame = 0 -%}
+{%- set iyz_frame = 0 -%}
+{# --------------------------------------------------- #}
+{# ******************* MOTOR ASSY ******************** #}
+{# --------------------------------------------------- #}
+{%- set ixx_motor = (1/2)*wheel_mass*( (propeller_radius)**2 )   -%}
+{%- set iyy_motor = (1/12)*wheel_mass*( 3*(propeller_radius)**2 )   -%}
+{%- set izz_motor = (1/12)*wheel_mass*( 3*(propeller_radius)**2 )   -%}
+
+{# =================================================== #}
+{# ------------- AERODYNAMIC PROPERTIES -------------- #}
+{# =================================================== #}
+
+
+
+{# =================================================== #}
+{# ---------------- MACROS / FUNCTIONS --------------- #}
+{# =================================================== #}
+
+{%- macro inertial(m, ixx, iyy, izz) -%}
+<inertial>
+  <pose>0 0 0 0 0 0</pose>
+  <mass>{{m}}</mass>
+  <inertia>
+    <ixx>{{ixx}}</ixx>
+    <ixy>0</ixy>
+    <ixz>0</ixz>
+    <iyy>{{iyy}}</iyy>
+    <iyz>0</iyz>
+    <izz>{{izz}}</izz>
+  </inertia>
+</inertial>
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro inertial_offset(m, ixx, iyy, izz, ixy, ixz, iyz, x, y, z) -%}
+<inertial>
+  <pose>{{ x }} {{ y }} {{ z }} 0 0 0</pose>
+  <mass>{{m}}</mass>
+  <inertia>
+          <ixx>{{ixx}}</ixx>
+          <ixy>{{ixy}}</ixy>
+          <ixz>{{ixz}}</ixz>
+          <iyy>{{iyy}}</iyy>
+          <iyz>{{iyz}}</iyz>
+          <izz>{{izz}}</izz>
+        </inertia>
+</inertial>
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro cylinder(r, h) -%}
+<geometry>
+  <cylinder>
+    <length>{{h}}</length>
+    <radius>{{r}}</radius>
+  </cylinder>
+</geometry>
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro box(x, y, z) -%}
+<geometry>
+  <box>
+    <size>{{x}} {{y}} {{z}}</size>
+  </box>
+</geometry>
+{%- endmacro -%}
+
+{# =================================================== #}
+
+{%- macro suspension_wheel(num, parent, side, x, y, z, roll, pitch, yaw) -%}
+    
+<joint name='wheel{{num}}_bar_base_joint' type='revolute'>
+{% if side == "left" %}
+  <pose relative_to='{{parent}}'>{{x}} {{ y }} {{ z }} -{{ roll }} {{ pitch }} {{ yaw }}</pose>
+{% elif side == "right" %}
+  <pose relative_to='{{parent}}'>{{x}} {{ y }} {{ z }} {{ np.pi + roll }} {{ pitch }} {{ yaw }}</pose>
+{% endif %}
+  
+  <child>wheel{{num}}_bar_link</child>
+  <parent>{{parent}}</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-{{0*np.pi/180}}</lower>
+      <upper>{{0*np.pi/180}}</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>1000</spring_stiffness>
+      <damping>1</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel{{num}}_bar_link'>
+{% if side == "left" %}
+  <pose relative_to='wheel{{num}}_bar_base_joint'>0 {{0.5*bar_length}} 0 0 0 {{90*np.pi/180}}</pose>
+{% elif side == "right" %}
+  <pose relative_to='wheel{{num}}_bar_base_joint'>0 {{0.5*bar_length}} 0 0 0 {{90*np.pi/180}}</pose>
+{% endif %}
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel{{num}}_bar1_visual'>
+  {% if side == "left" %}
+    <pose relative_to='wheel{{num}}_bar_link'>0 {{0.5*bar_horizontal_offset}} 0 0 0 0</pose>
+  {% elif side == "right" %}
+    <pose relative_to='wheel{{num}}_bar_link'>0 -{{0.5*bar_horizontal_offset}} 0 0 0 0</pose>
+  {% endif %}
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel{{num}}_bar2_visual'>
+  {% if side == "left" %}
+    <pose relative_to='wheel{{num}}_bar_link'>0 -{{0.5*bar_horizontal_offset}} 0 0 0 0</pose>
+  {% elif side == "right" %}
+    <pose relative_to='wheel{{num}}_bar_link'>0 {{0.5*bar_horizontal_offset}} 0 0 0 0</pose>
+  {% endif %}
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel{{num}}_bar3_visual'>
+  {% if side == "left" %}
+    <pose relative_to='wheel{{num}}_bar_link'>{{bar_vertical_offset*np.sin(bar_neutral_angle)}} {{0.5*bar_horizontal_offset}} -{{bar_vertical_offset*np.cos(bar_neutral_angle)}} 0 0 0</pose>
+  {% elif side == "right" %}
+    <pose relative_to='wheel{{num}}_bar_link'>{{bar_vertical_offset*np.sin(bar_neutral_angle)}} -{{0.5*bar_horizontal_offset}} {{bar_vertical_offset*np.cos(bar_neutral_angle)}} 0 0 0</pose>
+  {% endif %}
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel{{num}}_bar4_visual'>
+  {% if side == "left" %}
+    <pose relative_to='wheel{{num}}_bar_link'>{{bar_vertical_offset*np.sin(bar_neutral_angle)}} -{{0.5*bar_horizontal_offset}} -{{bar_vertical_offset*np.cos(bar_neutral_angle)}} 0 0 0</pose>
+  {% elif side == "right" %}
+    <pose relative_to='wheel{{num}}_bar_link'>{{bar_vertical_offset*np.sin(bar_neutral_angle)}} {{0.5*bar_horizontal_offset}} {{bar_vertical_offset*np.cos(bar_neutral_angle)}} 0 0 0</pose>
+  {% endif %}
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+
+<joint name='wheel{{num}}_wheel_housing_bar_joint' type='revolute'>
+{% if side == "left" %}
+  <pose relative_to='wheel{{num}}_bar_link'>{{0.5*bar_length}} 0 0 {{ bar_neutral_angle }} 0 -{{ 90*np.pi/180 }}</pose>
+{% elif side == "right" %}
+  <pose relative_to='wheel{{num}}_bar_link'>{{0.5*bar_length}} 0 0 {{0.5*np.pi + bar_neutral_angle }} 0 -{{ 90*np.pi/180 }}</pose>
+{% endif %}
+  
+  <child>wheel{{num}}_wheel_housing_link</child>
+  <parent>wheel{{num}}_bar_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-{{0*np.pi/180}}</lower>
+      <upper>{{0*np.pi/180}}</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel{{num}}_wheel_housing_link'>
+{% if side == "left" %}
+  <pose relative_to='wheel{{num}}_wheel_housing_bar_joint'>0 0 {{wheel_housing_vertical_offset}} 0 0 0</pose>
+{% elif side == "right" %}
+  <pose relative_to='wheel{{num}}_wheel_housing_bar_joint'>0 0 {{wheel_housing_vertical_offset}} 0 0 0</pose>
+{% endif %}
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel{{num}}_wheel_housing_visual'>
+  {% if side == "left" %}
+    <pose>0 0 0 0 0 {{90*np.pi/180}}</pose>
+  {% elif side == "right" %}
+    <pose>0 0 0 0 0 -{{90*np.pi/180}}</pose>
+  {% endif %}
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/wheel_housing.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+<joint name='wheel{{num}}_wheel_joint' type='revolute'>
+{% if side == "left" %}
+  <pose relative_to='wheel{{num}}_wheel_housing_link'>0 {{0.5*wheel_width + 0.025}} 0 0 0 0</pose>
+{% elif side == "right" %}
+  <pose relative_to='wheel{{num}}_wheel_housing_link'>0 -{{0.5*wheel_width + 0.025}} 0 0 0 0</pose>
+{% endif %}
+  
+  <child>wheel{{num}}_link</child>
+  <parent>wheel{{num}}_wheel_housing_link</parent>
+  <axis>
+    <xyz>0 1 0</xyz>
+    <limit>
+      <lower>-1e+16</lower>
+      <upper>1e+16</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+      <friction>0.001</friction>
+      <damping>0.0</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel{{num}}_link'>
+  <pose relative_to='wheel{{num}}_wheel_joint'>0 0 0 0 0 0</pose>
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel{{num}}_wheel_housing_visual'>
+    <pose>0 0 0 {{90*np.pi/180}} 0 0</pose>
+
+      {{cylinder(wheel_radius, wheel_width)}}
+
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <collision name='wheel{{num}}_link_collision'>
+				<pose>0 0 0 {{90*np.pi/180}} 0 0</pose>
+				{{cylinder(wheel_radius, wheel_width)}}
+				<max_contacts>1</max_contacts>
+				<surface>
+					<friction>
+					<torsional>
+						<coefficient>0.25</coefficient>
+						<use_patch_radius>1</use_patch_radius>
+						<surface_radius>0.0686</surface_radius>
+					</torsional>
+					<ode>
+						<mu>1.0</mu>
+						<mu2>1.0</mu2>
+						<fdir1>1 0 0</fdir1>
+						<slip1>0.0</slip1>
+						<slip2>0.0</slip2>
+					</ode>
+					</friction>
+					<bounce>
+						<restitution_coefficient>0</restitution_coefficient>
+						<threshold>1e6</threshold>
+					</bounce>
+					<contact>
+					<ode>
+						<min_depth>0.001</min_depth>
+						<max_vel>0.0</max_vel>
+						<kp>1.0e6</kp>
+						<kd>100.0</kd>
+					</ode>
+					</contact>
+				</surface>
+			</collision>
+
+</link>
+
+<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+  <joint_name>wheel{{num}}_wheel_joint</joint_name>
+  <sub_topic>command/motor_speed</sub_topic>
+  <use_actuator_msg>true</use_actuator_msg>
+{% if side == "left" %}
+  <actuator_number>0</actuator_number>
+{% elif side == "right" %}
+  <actuator_number>1</actuator_number>
+{% endif %}
+  <p_gain>10.0</p_gain>
+</plugin>
+		
+
+
+{%- endmacro -%}
+
+
+
+
+{# =================================================== #}
+{# ------------ QUADCOPTER SDF DESCRIPTION ----------- #}
+{# =================================================== #}
+
+<sdf version='1.9'>
+  <model name='asl_rover'>
+
+    <pose>0 0 0 0 0 0</pose>
+    <self_collide>false</self_collide>
+    <static>false</static>
+  
+  {# Base Frame #}
+  
+    <link name='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+      {{ inertial(base_link_mass, ixx_frame, iyy_frame, izz_frame) |indent(6) }}
+      <collision name='base_link_top_collision'>
+        <pose>0 0 0.02 0 0 0</pose>
+        {{ box(0.5, 0.5, 0.01) }}
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 0 -{{np.pi/2}}</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://asl_rover/meshes/base.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+          <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+          <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+          <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay/>
+
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure>
+          <!-- Noise modeled after BMP390 -->
+          <pressure>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3</stddev>
+            </noise>
+          </pressure>
+        </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- 0.05 deg/s converted to rad/s -->
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- X & Y axis: 0.65 mg-rms converted to m/ss -->
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </y>
+            <!-- Z axis: 0.70 mg-rms converted to m/ss-->
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00686</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+
+    </link>
+    
+    {# Wheels #}
+    
+    {# Front Left Motor - Wheel 0 - CW #}
+
+    {{ suspension_wheel(0, "base_link", "left",  x_fwd_left_motor, y_fwd_left_motor, z_fwd_left_motor, bar_neutral_angle, 0, 0) }}
+
+    {# Front Right Motor - Wheel 1 - CCW #}
+
+    {{ suspension_wheel(1, "base_link", "right", x_fwd_right_motor, y_fwd_right_motor, z_fwd_right_motor, bar_neutral_angle, 0, 0) }}
+
+    {# Rear Left Motor - Wheel 2 - CW #}
+
+    {{ suspension_wheel(2, "base_link", "left", x_bwd_left_motor, y_bwd_left_motor, z_bwd_left_motor, bar_neutral_angle, 0, 0) }}
+
+    {# Rear Right Motor - Wheel 3 - CCW #}
+
+    {{ suspension_wheel(3, "base_link", "right", x_bwd_right_motor, y_bwd_right_motor, z_bwd_right_motor, bar_neutral_angle, 0, 0) }}
+    
+
+
+    <plugin
+			filename="gz-sim-joint-state-publisher-system"
+			name="gz::sim::systems::JointStatePublisher">
+			<joint_name>wheel0_wheel_joint</joint_name>
+			<joint_name>wheel1_wheel_joint</joint_name>
+			<joint_name>wheel2_wheel_joint</joint_name>
+			<joint_name>wheel3_wheel_joint</joint_name>
+		</plugin>
+    
+  </model>
+  
+</sdf>

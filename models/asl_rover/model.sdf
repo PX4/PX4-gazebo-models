@@ -1,0 +1,1364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DO NOT EDIT: Generated from XXX.sdf.jinja -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<sdf version='1.9'>
+  <model name='asl_rover'>
+
+    <pose>0 0 0 0 0 0</pose>
+    <self_collide>false</self_collide>
+    <static>false</static>
+  
+  
+  
+    <link name='base_link'>
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>1.5</mass>
+        <inertia>
+          <ixx>0.035</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.035</iyy>
+          <iyz>0</iyz>
+          <izz>0.055</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_top_collision'>
+        <pose>0 0 0.02 0 0 0</pose>
+        <geometry>
+  <box>
+    <size>0.5 0.5 0.01</size>
+  </box>
+</geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode/>
+          </friction>
+        </surface>
+      </collision>
+      
+      <visual name='base_link_visual'>
+        <pose>0 0 0 0 0 -1.5707963267948966</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://asl_rover/meshes/base.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+          <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+          <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+          <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay/>
+
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure>
+          <!-- Noise modeled after BMP390 -->
+          <pressure>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3</stddev>
+            </noise>
+          </pressure>
+        </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- 0.05 deg/s converted to rad/s -->
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- X & Y axis: 0.65 mg-rms converted to m/ss -->
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </y>
+            <!-- Z axis: 0.70 mg-rms converted to m/ss-->
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00686</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+
+    </link>
+    
+    
+    
+    
+
+    <joint name='wheel0_bar_base_joint' type='revolute'>
+
+  <pose relative_to='base_link'>0.1925 0.12625 -0.0075 -0.7853981633974483 0 0</pose>
+
+  
+  <child>wheel0_bar_link</child>
+  <parent>base_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-0.0</lower>
+      <upper>0.0</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>1000</spring_stiffness>
+      <damping>1</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel0_bar_link'>
+
+  <pose relative_to='wheel0_bar_base_joint'>0 0.06 0 0 0 1.5707963267948966</pose>
+
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel0_bar1_visual'>
+  
+    <pose relative_to='wheel0_bar_link'>0 0.0275 0 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel0_bar2_visual'>
+  
+    <pose relative_to='wheel0_bar_link'>0 -0.0275 0 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel0_bar3_visual'>
+  
+    <pose relative_to='wheel0_bar_link'>0.01873832970144351 0.0275 -0.01873832970144351 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel0_bar4_visual'>
+  
+    <pose relative_to='wheel0_bar_link'>0.01873832970144351 -0.0275 -0.01873832970144351 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+
+<joint name='wheel0_wheel_housing_bar_joint' type='revolute'>
+
+  <pose relative_to='wheel0_bar_link'>0.06 0 0 0.7853981633974483 0 -1.5707963267948966</pose>
+
+  
+  <child>wheel0_wheel_housing_link</child>
+  <parent>wheel0_bar_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-0.0</lower>
+      <upper>0.0</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel0_wheel_housing_link'>
+
+  <pose relative_to='wheel0_wheel_housing_bar_joint'>0 0 -0.0375 0 0 0</pose>
+
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel0_wheel_housing_visual'>
+  
+    <pose>0 0 0 0 0 1.5707963267948966</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/wheel_housing.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+<joint name='wheel0_wheel_joint' type='revolute'>
+
+  <pose relative_to='wheel0_wheel_housing_link'>0 0.055 0 0 0 0</pose>
+
+  
+  <child>wheel0_link</child>
+  <parent>wheel0_wheel_housing_link</parent>
+  <axis>
+    <xyz>0 1 0</xyz>
+    <limit>
+      <lower>-1e+16</lower>
+      <upper>1e+16</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+      <friction>0.001</friction>
+      <damping>0.0</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel0_link'>
+  <pose relative_to='wheel0_wheel_joint'>0 0 0 0 0 0</pose>
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel0_wheel_housing_visual'>
+    <pose>0 0 0 1.5707963267948966 0 0</pose>
+
+      <geometry>
+  <cylinder>
+    <length>0.06</length>
+    <radius>0.06</radius>
+  </cylinder>
+</geometry>
+
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <collision name='wheel0_link_collision'>
+				<pose>0 0 0 1.5707963267948966 0 0</pose>
+				<geometry>
+  <cylinder>
+    <length>0.06</length>
+    <radius>0.06</radius>
+  </cylinder>
+</geometry>
+				<max_contacts>1</max_contacts>
+				<surface>
+					<friction>
+					<torsional>
+						<coefficient>0.25</coefficient>
+						<use_patch_radius>1</use_patch_radius>
+						<surface_radius>0.0686</surface_radius>
+					</torsional>
+					<ode>
+						<mu>1.0</mu>
+						<mu2>1.0</mu2>
+						<fdir1>1 0 0</fdir1>
+						<slip1>0.0</slip1>
+						<slip2>0.0</slip2>
+					</ode>
+					</friction>
+					<bounce>
+						<restitution_coefficient>0</restitution_coefficient>
+						<threshold>1e6</threshold>
+					</bounce>
+					<contact>
+					<ode>
+						<min_depth>0.001</min_depth>
+						<max_vel>0.0</max_vel>
+						<kp>1.0e6</kp>
+						<kd>100.0</kd>
+					</ode>
+					</contact>
+				</surface>
+			</collision>
+
+</link>
+
+<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+  <joint_name>wheel0_wheel_joint</joint_name>
+  <sub_topic>command/motor_speed</sub_topic>
+  <use_actuator_msg>true</use_actuator_msg>
+
+  <actuator_number>0</actuator_number>
+
+  <p_gain>10.0</p_gain>
+</plugin>
+
+    
+
+    <joint name='wheel1_bar_base_joint' type='revolute'>
+
+  <pose relative_to='base_link'>0.1925 -0.12625 -0.0075 3.9269908169872414 0 0</pose>
+
+  
+  <child>wheel1_bar_link</child>
+  <parent>base_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-0.0</lower>
+      <upper>0.0</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>1000</spring_stiffness>
+      <damping>1</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel1_bar_link'>
+
+  <pose relative_to='wheel1_bar_base_joint'>0 0.06 0 0 0 1.5707963267948966</pose>
+
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel1_bar1_visual'>
+  
+    <pose relative_to='wheel1_bar_link'>0 -0.0275 0 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel1_bar2_visual'>
+  
+    <pose relative_to='wheel1_bar_link'>0 0.0275 0 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel1_bar3_visual'>
+  
+    <pose relative_to='wheel1_bar_link'>0.01873832970144351 -0.0275 0.01873832970144351 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel1_bar4_visual'>
+  
+    <pose relative_to='wheel1_bar_link'>0.01873832970144351 0.0275 0.01873832970144351 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+
+<joint name='wheel1_wheel_housing_bar_joint' type='revolute'>
+
+  <pose relative_to='wheel1_bar_link'>0.06 0 0 2.356194490192345 0 -1.5707963267948966</pose>
+
+  
+  <child>wheel1_wheel_housing_link</child>
+  <parent>wheel1_bar_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-0.0</lower>
+      <upper>0.0</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel1_wheel_housing_link'>
+
+  <pose relative_to='wheel1_wheel_housing_bar_joint'>0 0 -0.0375 0 0 0</pose>
+
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel1_wheel_housing_visual'>
+  
+    <pose>0 0 0 0 0 -1.5707963267948966</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/wheel_housing.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+<joint name='wheel1_wheel_joint' type='revolute'>
+
+  <pose relative_to='wheel1_wheel_housing_link'>0 -0.055 0 0 0 0</pose>
+
+  
+  <child>wheel1_link</child>
+  <parent>wheel1_wheel_housing_link</parent>
+  <axis>
+    <xyz>0 1 0</xyz>
+    <limit>
+      <lower>-1e+16</lower>
+      <upper>1e+16</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+      <friction>0.001</friction>
+      <damping>0.0</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel1_link'>
+  <pose relative_to='wheel1_wheel_joint'>0 0 0 0 0 0</pose>
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel1_wheel_housing_visual'>
+    <pose>0 0 0 1.5707963267948966 0 0</pose>
+
+      <geometry>
+  <cylinder>
+    <length>0.06</length>
+    <radius>0.06</radius>
+  </cylinder>
+</geometry>
+
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <collision name='wheel1_link_collision'>
+				<pose>0 0 0 1.5707963267948966 0 0</pose>
+				<geometry>
+  <cylinder>
+    <length>0.06</length>
+    <radius>0.06</radius>
+  </cylinder>
+</geometry>
+				<max_contacts>1</max_contacts>
+				<surface>
+					<friction>
+					<torsional>
+						<coefficient>0.25</coefficient>
+						<use_patch_radius>1</use_patch_radius>
+						<surface_radius>0.0686</surface_radius>
+					</torsional>
+					<ode>
+						<mu>1.0</mu>
+						<mu2>1.0</mu2>
+						<fdir1>1 0 0</fdir1>
+						<slip1>0.0</slip1>
+						<slip2>0.0</slip2>
+					</ode>
+					</friction>
+					<bounce>
+						<restitution_coefficient>0</restitution_coefficient>
+						<threshold>1e6</threshold>
+					</bounce>
+					<contact>
+					<ode>
+						<min_depth>0.001</min_depth>
+						<max_vel>0.0</max_vel>
+						<kp>1.0e6</kp>
+						<kd>100.0</kd>
+					</ode>
+					</contact>
+				</surface>
+			</collision>
+
+</link>
+
+<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+  <joint_name>wheel1_wheel_joint</joint_name>
+  <sub_topic>command/motor_speed</sub_topic>
+  <use_actuator_msg>true</use_actuator_msg>
+
+  <actuator_number>1</actuator_number>
+
+  <p_gain>10.0</p_gain>
+</plugin>
+
+    
+
+    <joint name='wheel2_bar_base_joint' type='revolute'>
+
+  <pose relative_to='base_link'>-0.1925 0.12625 -0.0075 -0.7853981633974483 0 0</pose>
+
+  
+  <child>wheel2_bar_link</child>
+  <parent>base_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-0.0</lower>
+      <upper>0.0</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>1000</spring_stiffness>
+      <damping>1</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel2_bar_link'>
+
+  <pose relative_to='wheel2_bar_base_joint'>0 0.06 0 0 0 1.5707963267948966</pose>
+
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel2_bar1_visual'>
+  
+    <pose relative_to='wheel2_bar_link'>0 0.0275 0 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel2_bar2_visual'>
+  
+    <pose relative_to='wheel2_bar_link'>0 -0.0275 0 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel2_bar3_visual'>
+  
+    <pose relative_to='wheel2_bar_link'>0.01873832970144351 0.0275 -0.01873832970144351 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel2_bar4_visual'>
+  
+    <pose relative_to='wheel2_bar_link'>0.01873832970144351 -0.0275 -0.01873832970144351 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+
+<joint name='wheel2_wheel_housing_bar_joint' type='revolute'>
+
+  <pose relative_to='wheel2_bar_link'>0.06 0 0 0.7853981633974483 0 -1.5707963267948966</pose>
+
+  
+  <child>wheel2_wheel_housing_link</child>
+  <parent>wheel2_bar_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-0.0</lower>
+      <upper>0.0</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel2_wheel_housing_link'>
+
+  <pose relative_to='wheel2_wheel_housing_bar_joint'>0 0 -0.0375 0 0 0</pose>
+
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel2_wheel_housing_visual'>
+  
+    <pose>0 0 0 0 0 1.5707963267948966</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/wheel_housing.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+<joint name='wheel2_wheel_joint' type='revolute'>
+
+  <pose relative_to='wheel2_wheel_housing_link'>0 0.055 0 0 0 0</pose>
+
+  
+  <child>wheel2_link</child>
+  <parent>wheel2_wheel_housing_link</parent>
+  <axis>
+    <xyz>0 1 0</xyz>
+    <limit>
+      <lower>-1e+16</lower>
+      <upper>1e+16</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+      <friction>0.001</friction>
+      <damping>0.0</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel2_link'>
+  <pose relative_to='wheel2_wheel_joint'>0 0 0 0 0 0</pose>
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel2_wheel_housing_visual'>
+    <pose>0 0 0 1.5707963267948966 0 0</pose>
+
+      <geometry>
+  <cylinder>
+    <length>0.06</length>
+    <radius>0.06</radius>
+  </cylinder>
+</geometry>
+
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <collision name='wheel2_link_collision'>
+				<pose>0 0 0 1.5707963267948966 0 0</pose>
+				<geometry>
+  <cylinder>
+    <length>0.06</length>
+    <radius>0.06</radius>
+  </cylinder>
+</geometry>
+				<max_contacts>1</max_contacts>
+				<surface>
+					<friction>
+					<torsional>
+						<coefficient>0.25</coefficient>
+						<use_patch_radius>1</use_patch_radius>
+						<surface_radius>0.0686</surface_radius>
+					</torsional>
+					<ode>
+						<mu>1.0</mu>
+						<mu2>1.0</mu2>
+						<fdir1>1 0 0</fdir1>
+						<slip1>0.0</slip1>
+						<slip2>0.0</slip2>
+					</ode>
+					</friction>
+					<bounce>
+						<restitution_coefficient>0</restitution_coefficient>
+						<threshold>1e6</threshold>
+					</bounce>
+					<contact>
+					<ode>
+						<min_depth>0.001</min_depth>
+						<max_vel>0.0</max_vel>
+						<kp>1.0e6</kp>
+						<kd>100.0</kd>
+					</ode>
+					</contact>
+				</surface>
+			</collision>
+
+</link>
+
+<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+  <joint_name>wheel2_wheel_joint</joint_name>
+  <sub_topic>command/motor_speed</sub_topic>
+  <use_actuator_msg>true</use_actuator_msg>
+
+  <actuator_number>0</actuator_number>
+
+  <p_gain>10.0</p_gain>
+</plugin>
+
+    
+
+    <joint name='wheel3_bar_base_joint' type='revolute'>
+
+  <pose relative_to='base_link'>-0.1925 -0.12625 -0.0075 3.9269908169872414 0 0</pose>
+
+  
+  <child>wheel3_bar_link</child>
+  <parent>base_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-0.0</lower>
+      <upper>0.0</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>1000</spring_stiffness>
+      <damping>1</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel3_bar_link'>
+
+  <pose relative_to='wheel3_bar_base_joint'>0 0.06 0 0 0 1.5707963267948966</pose>
+
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel3_bar1_visual'>
+  
+    <pose relative_to='wheel3_bar_link'>0 -0.0275 0 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel3_bar2_visual'>
+  
+    <pose relative_to='wheel3_bar_link'>0 0.0275 0 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel3_bar3_visual'>
+  
+    <pose relative_to='wheel3_bar_link'>0.01873832970144351 -0.0275 0.01873832970144351 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <visual name='wheel3_bar4_visual'>
+  
+    <pose relative_to='wheel3_bar_link'>0.01873832970144351 0.0275 0.01873832970144351 0 0 0</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/bar.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+
+<joint name='wheel3_wheel_housing_bar_joint' type='revolute'>
+
+  <pose relative_to='wheel3_bar_link'>0.06 0 0 2.356194490192345 0 -1.5707963267948966</pose>
+
+  
+  <child>wheel3_wheel_housing_link</child>
+  <parent>wheel3_bar_link</parent>
+  <axis>
+    <xyz>1 0 0</xyz>
+    <limit>
+      <lower>-0.0</lower>
+      <upper>0.0</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel3_wheel_housing_link'>
+
+  <pose relative_to='wheel3_wheel_housing_bar_joint'>0 0 -0.0375 0 0 0</pose>
+
+  
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel3_wheel_housing_visual'>
+  
+    <pose>0 0 0 0 0 -1.5707963267948966</pose>
+  
+    
+      <geometry>
+        <mesh>
+          <scale>1 1 1</scale>
+          <uri>model://asl_rover/meshes/wheel_housing.dae</uri>
+        </mesh>
+      </geometry>
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+</link>
+
+<joint name='wheel3_wheel_joint' type='revolute'>
+
+  <pose relative_to='wheel3_wheel_housing_link'>0 -0.055 0 0 0 0</pose>
+
+  
+  <child>wheel3_link</child>
+  <parent>wheel3_wheel_housing_link</parent>
+  <axis>
+    <xyz>0 1 0</xyz>
+    <limit>
+      <lower>-1e+16</lower>
+      <upper>1e+16</upper>
+    </limit>
+    <dynamics>
+      <spring_reference>0</spring_reference>
+      <spring_stiffness>0</spring_stiffness>
+      <friction>0.001</friction>
+      <damping>0.0</damping>
+    </dynamics>
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </axis>
+</joint>
+
+<link name='wheel3_link'>
+  <pose relative_to='wheel3_wheel_joint'>0 0 0 0 0 0</pose>
+  <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>2.1733e-06</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.1733e-06</iyy>
+          <iyz>0</iyz>
+          <izz>1.8e-07</izz>
+        </inertia>
+  </inertial>
+  
+  <visual name='wheel3_wheel_housing_visual'>
+    <pose>0 0 0 1.5707963267948966 0 0</pose>
+
+      <geometry>
+  <cylinder>
+    <length>0.06</length>
+    <radius>0.06</radius>
+  </cylinder>
+</geometry>
+
+      <material>
+        <ambient>0.1 0.1 0.1 1</ambient>   <!-- Very dark gray for ambient lighting -->
+        <diffuse>0.2 0.2 0.2 1</diffuse>   <!-- Slightly lighter dark gray for diffuse color -->
+        <specular>0.6 0.6 0.6 1</specular> <!-- Medium specular to create a subtle shine -->
+        <emissive>0.0 0.0 0.0 1</emissive> <!-- No emissive, to avoid self-illumination -->
+      </material>
+  </visual>
+
+  <collision name='wheel3_link_collision'>
+				<pose>0 0 0 1.5707963267948966 0 0</pose>
+				<geometry>
+  <cylinder>
+    <length>0.06</length>
+    <radius>0.06</radius>
+  </cylinder>
+</geometry>
+				<max_contacts>1</max_contacts>
+				<surface>
+					<friction>
+					<torsional>
+						<coefficient>0.25</coefficient>
+						<use_patch_radius>1</use_patch_radius>
+						<surface_radius>0.0686</surface_radius>
+					</torsional>
+					<ode>
+						<mu>1.0</mu>
+						<mu2>1.0</mu2>
+						<fdir1>1 0 0</fdir1>
+						<slip1>0.0</slip1>
+						<slip2>0.0</slip2>
+					</ode>
+					</friction>
+					<bounce>
+						<restitution_coefficient>0</restitution_coefficient>
+						<threshold>1e6</threshold>
+					</bounce>
+					<contact>
+					<ode>
+						<min_depth>0.001</min_depth>
+						<max_vel>0.0</max_vel>
+						<kp>1.0e6</kp>
+						<kd>100.0</kd>
+					</ode>
+					</contact>
+				</surface>
+			</collision>
+
+</link>
+
+<plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
+  <joint_name>wheel3_wheel_joint</joint_name>
+  <sub_topic>command/motor_speed</sub_topic>
+  <use_actuator_msg>true</use_actuator_msg>
+
+  <actuator_number>1</actuator_number>
+
+  <p_gain>10.0</p_gain>
+</plugin>
+    
+
+
+    <plugin
+			filename="gz-sim-joint-state-publisher-system"
+			name="gz::sim::systems::JointStatePublisher">
+			<joint_name>wheel0_wheel_joint</joint_name>
+			<joint_name>wheel1_wheel_joint</joint_name>
+			<joint_name>wheel2_wheel_joint</joint_name>
+			<joint_name>wheel3_wheel_joint</joint_name>
+		</plugin>
+    
+  </model>
+  
+</sdf>
