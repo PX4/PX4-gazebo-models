@@ -64,7 +64,7 @@
                     <mean>0</mean>
                     <stddev>0.00018665</stddev>
                     <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>1100</dynamic_bias_correlation_time>
+                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
                 </noise>
                 </x>
                 <y>
@@ -72,7 +72,7 @@
                     <mean>0</mean>
                     <stddev>0.00018665</stddev>
                     <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>1100</dynamic_bias_correlation_time>
+                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
                 </noise>
                 </y>
                 <z>
@@ -80,7 +80,7 @@
                     <mean>0</mean>
                     <stddev>0.00018665</stddev>
                     <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>1100</dynamic_bias_correlation_time>
+                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
                 </noise>
                 </z>
             </angular_velocity>
