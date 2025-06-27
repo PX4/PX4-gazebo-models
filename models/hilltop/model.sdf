@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+    <model name="hilltop">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <heightmap>
+              <uri>model://hilltop/textures/hilltop_height_map.png</uri>
+              <size>258 258 32.80000000000109</size>
+              <pos>0 0 -14</pos>
+            </heightmap>
+          </geometry>
+        </collision>
+        <visual name="visual_abcedf">
+          <geometry>
+            <heightmap>
+              <use_terrain_paging>false</use_terrain_paging>
+              <texture>
+                <diffuse>model://hilltop/textures/hilltop_aerial.png</diffuse>
+                <normal>model://hilltop/textures/hilltop_aerial.png</normal>
+                <size>258 258 32.80000000000109</size>
+              </texture>
+             <blend>
+                <min_height>2</min_height>
+                <fade_dist>5</fade_dist>
+              </blend>
+              <blend>
+                <min_height>4</min_height>
+                <fade_dist>5</fade_dist>
+              </blend>
+              <uri>model://hilltop/textures/hilltop_height_map.png</uri>
+              <size>258 258 32.80000000000109</size>
+              <pos>0 0 -14</pos>
+            </heightmap>
+          </geometry>
+        </visual>
+      </link>
+    </model>
+</sdf>
