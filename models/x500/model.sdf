@@ -68,5 +68,12 @@
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
+    <plugin
+      filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>world</odom_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <odom_topic>odom</odom_topic>
+      <dimensions>3</dimensions>
+    </plugin>
   </model>
 </sdf>

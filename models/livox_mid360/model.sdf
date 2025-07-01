@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="livox_mid360">
+    <link name="link">
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0.0435 0 0 0</pose>
+        <mass>0.265</mass>
+        <inertia>
+          <ixx>0.00034437749999999994</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00034437749999999994</iyy>
+          <iyz>0</iyz>
+          <izz>0.00022199999999999998</izz>
+        </inertia>
+      </inertial>
+      <collision name="base_link_collision">
+        <geometry>
+          <mesh>
+            <uri>model://livox_mid360/meshes/livox_resized.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://livox_mid360/meshes/livox_resized.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+        <sensor name="RGLsensor" type="custom">
+          <plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
+            <range>
+              <min>1</min>
+              <max>100</max>
+            </range>
+            <update_rate>10</update_rate>
+            <update_on_paused_sim>false</update_on_paused_sim>
+            <topic>rgl_lidar</topic>
+            <frame>RGLLidar</frame>
+            <pattern_preset>Livox Mid360</pattern_preset>
+          </plugin>
+        </sensor>
+    </link>
+  </model>
+</sdf>
