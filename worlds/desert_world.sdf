@@ -1,0 +1,479 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="desert_world">
+    <physics name="1ms" type="ode">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+<!-- Sky and environment settings -->
+    <scene>
+      <ambient>0.8 0.8 0.8 1.0</ambient>
+      <background>0.7 0.8 1.0 1.0</background>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <shadows>1</shadows>
+    </scene>
+<!-- Sun - Daytime directional light -->
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 500 0 0 0</pose>
+      <intensity>1.2</intensity>
+      <direction>0.001 0.625 -0.78</direction>
+      <diffuse>0.904 0.904 0.904 1</diffuse>
+      <specular>0.271 0.271 0.271 1</specular>
+      <attenuation>
+        <range>2000</range>
+        <linear>0</linear>
+        <constant>1</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+    </light>
+<!-- Ground Plane -->
+    <model name="desert_ground">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>15000 15000</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>15000 15000</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>1.0 0.95 0.8 1</ambient>
+            <diffuse>1.0 0.95 0.8 1</diffuse>
+            <specular>0.3 0.3 0.3 1</specular>
+            <pbr>
+              <metal>
+                <albedo_map>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/desert_sand/materials/textures/sandstone_tiled.png</albedo_map>
+                <roughness>0.7</roughness>
+                <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>23.1086</latitude_deg>
+      <longitude_deg>54.1389</longitude_deg>
+      <elevation>105</elevation>
+    </spherical_coordinates>
+
+<!-- Buildings (10) - Static targets -->
+    <model name="building_1">
+      <static>true</static>
+      <pose>1000 1000 0 0 0 0</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/office</uri>
+        <name>building_1</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="building_2">
+      <static>true</static>
+      <pose>1020 1005 5 0 0 0.3</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>8 12 10</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>8 12 10</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="building_3">
+      <static>true</static>
+      <pose>990 1015 2.5 0 0 0.1</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>15 15 5</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>15 15 5</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="building_4">
+      <static>true</static>
+      <pose>980 990 1.5 0 0 0.5</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>12 18 3</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>12 18 3</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.65 0.65 0.65 1</ambient>
+            <diffuse>0.65 0.65 0.65 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="building_5">
+      <static>true</static>
+      <pose>1010 980 4 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>20 10 8</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>20 10 8</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.55 0.55 1</ambient>
+            <diffuse>0.55 0.55 0.55 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="building_6">
+      <static>true</static>
+      <pose>1040 995 3.5 0 0 0.7</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>8 8 7</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>8 8 7</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.6 0.6 0.6 1</ambient>
+            <diffuse>0.6 0.6 0.6 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="building_7">
+      <static>true</static>
+      <pose>1025 1020 5 0 0 0.2</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>10 10 10</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>10 10 10</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.75 0.75 1</ambient>
+            <diffuse>0.75 0.75 0.75 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="building_8">
+      <static>true</static>
+      <pose>995 975 6 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>15 10 12</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>15 10 12</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.7 0.7 0.7 1</ambient>
+            <diffuse>0.7 0.7 0.7 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="building_9">
+      <static>true</static>
+      <pose>1030 1040 5 0 0 0.4</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>12 12 10</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>12 12 10</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.65 0.65 0.65 1</ambient>
+            <diffuse>0.65 0.65 0.65 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="building_10">
+      <static>true</static>
+      <pose>970 1000 2 0 0 0</pose>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>8 25 4</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>8 25 4</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.55 0.55 0.55 1</ambient>
+            <diffuse>0.55 0.55 0.55 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Vehicles (10) - Static targets -->
+    <model name="vehicle_1">
+      <static>true</static>
+      <pose>1005 1030 0 0 0 1.5</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/pickup_truck</uri>
+        <name>vehicle_1</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_2">
+      <static>true</static>
+      <pose>1015 1028 0 0 0 1.2</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/truck_box</uri>
+        <name>vehicle_2</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_3">
+      <static>true</static>
+      <pose>1010 1035 0 0 0 0.2</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/suv</uri>
+        <name>vehicle_3</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_4">
+      <static>true</static>
+      <pose>985 1030 0 0 0 1.4</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/pickup_truck</uri>
+        <name>vehicle_4</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_5">
+      <static>true</static>
+      <pose>990 1030 0 0 0 1.4</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/pickup_truck</uri>
+        <name>vehicle_5</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_6">
+      <static>true</static>
+      <pose>1020 970 0 0 0 -1.0</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/pickup_truck</uri>
+        <name>vehicle_6</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_7">
+      <static>true</static>
+      <pose>1025 972 0 0 0 -1.1</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/pickup_truck</uri>
+        <name>vehicle_7</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_8">
+      <static>true</static>
+      <pose>1050 1000 0 0 0 0.3</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/suv</uri>
+        <name>vehicle_8</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_9">
+      <static>true</static>
+      <pose>1045 1005 0 0 0 0.4</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/truck_box</uri>
+        <name>vehicle_9</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+
+    <model name="vehicle_10">
+      <static>true</static>
+      <pose>975 980 0 0 0 -2.0</pose>
+      <include>
+        <uri>file:///root/tbs_mmu_workspace/PX4-Autopilot/Tools/simulation/gz/models/suv</uri>
+        <name>vehicle_10</name>
+        <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model>
+    <!-- Physics system -->
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+
+    <!-- User Commands -->
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <!-- Scene broadcaster -->
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+
+    <!-- IMU system -->
+    <plugin
+      filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+
+    <!-- Sensors system -->
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+
+    <!-- Air pressure system -->
+    <plugin
+      filename="gz-sim-air-pressure-system"
+      name="gz::sim::systems::AirPressure">
+    </plugin>
+
+    <!-- Magnetometer system -->
+    <plugin
+      filename="gz-sim-magnetometer-system"
+      name="gz::sim::systems::Magnetometer">
+    </plugin>
+
+    <!-- NavSat system -->
+    <plugin
+      filename="gz-sim-navsat-system"
+      name="gz::sim::systems::NavSat">
+    </plugin>
+  </world>
+</sdf>
