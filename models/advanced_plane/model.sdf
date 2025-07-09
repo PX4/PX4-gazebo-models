@@ -151,6 +151,17 @@
         <update_rate>30</update_rate>
       </sensor>
     </link>
+    
+    <include merge="true">
+      <uri>model://airspeed</uri>
+      <pose>0.16 0 -0.05 0 0 0</pose>
+    </include>
+    <joint name='airspeed_joint' type='fixed'>
+      <parent>base_link</parent>
+      <child>airspeed_link</child>
+      <pose relative_to="base_link">-0 0 0 0 0 0</pose>
+    </joint>
+    
     <link name='rotor_puller'>
       <pose>0.3 0 0.0 0 1.57 0</pose>
       <inertial>

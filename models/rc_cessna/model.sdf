@@ -180,7 +180,8 @@
         </magnetometer>
       </sensor>
     </link>
-    <link name="airspeed">
+    
+    <!-- <link name="airspeed">
       <pose>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -206,7 +207,7 @@
           <diffuse>0 0 0 1.0</diffuse>
         </material>
       </visual>
-      <!-- <sensor name="air_speed" type="air_speed">
+      <sensor name="air_speed" type="air_speed">
         <always_on>1</always_on>
         <update_rate>5.0</update_rate>
         <enable_metrics>false</enable_metrics>
@@ -218,12 +219,23 @@
             </noise>
           </airspeed>
         </air_speed>
-      </sensor> -->
+      </sensor>
     </link>
     <joint name='airspeed_joint' type='fixed'>
       <child>airspeed</child>
       <parent>base_link</parent>
+    </joint>-->
+    
+    <include merge="true">
+      <uri>model://airspeed</uri>
+      <pose>0.16 0 -0.05 0 0 0</pose>
+    </include>
+    <joint name='airspeed_joint' type='fixed'>
+      <parent>base_link</parent>
+      <child>airspeed_link</child>
+      <pose relative_to="base_link">-0 0 0 0 0 0</pose>
     </joint>
+    
     <link name='rotor_puller'>
       <pose>0.22 0 0.0 0 1.57079632679 0</pose>
       <inertial>
