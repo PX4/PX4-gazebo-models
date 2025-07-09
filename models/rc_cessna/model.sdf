@@ -154,6 +154,31 @@
           </pressure>
         </air_pressure>
       </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
     </link>
     <link name="airspeed">
       <pose>0 0 0 0 0 0</pose>
@@ -567,8 +592,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -587,8 +612,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -607,8 +632,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -627,8 +652,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -647,9 +672,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -668,8 +692,8 @@
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -731,16 +755,6 @@
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
       </axis>
-    </joint>
-
-    <include merge='true'>
-      <uri>model://mono_cam</uri>
-      <pose>.20 0 -0.05 0 0 0</pose>
-    </include>
-    <joint name="CameraJoint" type="fixed">
-      <parent>base_link</parent>
-      <child>mono_cam/base_link</child>
-      <pose relative_to="base_link">.20 0 -0.05 0 0 0</pose>
     </joint>
 
     <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
