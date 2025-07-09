@@ -5,21 +5,21 @@
         <link name='base_link'>
             <pose relative_to='__model__'>0 0 0.1 0 0 0</pose>
             <inertial>
-                <mass>5.0</mass>
+                <mass>20.0</mass>
 				<inertia>
-					<ixx>0.030208333</ixx>
+					<ixx>0.4333</ixx>
 					<ixy>0.0</ixy>
 					<ixz>0.0</ixz>
-					<iyy>0.108333333</iyy>
+					<iyy>1.6833</iyy>
 					<iyz>0.0</iyz>
-					<izz>0.130208333</izz>
+					<izz>2.0833</izz>
 				</inertia>
             </inertial>
             <visual name='visual'>
                 <pose>0 0 -0.05 0 0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>model://rover_skid/meshes/rover_skid_base.dae</uri>
+                        <uri>model://rover_mecanum/meshes/rover_mec_base.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -146,7 +146,7 @@
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>model://rover_skid/meshes/rover_skid_wheel.dae</uri>
+                        <uri>model://rover_mecanum/meshes/rover_mec_wheel.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -160,7 +160,7 @@
                 <surface>
 					<friction>
                         <ode>
-                            <mu>1.0</mu>
+                            <mu>3.0</mu>
                             <mu2>0</mu2>
                             <fdir1 gz:expressed_in="base_link">1 1 0</fdir1>
                             <slip1>0.0</slip1>
@@ -188,7 +188,7 @@
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>model://rover_skid/meshes/rover_skid_wheel.dae</uri>
+                        <uri>model://rover_mecanum/meshes/rover_mec_wheel.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -202,7 +202,7 @@
                 <surface>
 					<friction>
                         <ode>
-                            <mu>1.0</mu>
+                            <mu>3.0</mu>
                             <mu2>0</mu2>
                             <fdir1 gz:expressed_in="base_link">1 -1 0</fdir1>
                             <slip1>0.0</slip1>
@@ -230,7 +230,7 @@
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>model://rover_skid/meshes/rover_skid_wheel.dae</uri>
+                        <uri>model://rover_mecanum/meshes/rover_mec_wheel.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -244,7 +244,7 @@
                 <surface>
 					<friction>
                         <ode>
-                            <mu>1.0</mu>
+                            <mu>3.0</mu>
                             <mu2>0</mu2>
                             <fdir1 gz:expressed_in="base_link">1 -1 0</fdir1>
                             <slip1>0.0</slip1>
@@ -272,7 +272,7 @@
                 <pose>0 0 0 0 0 0</pose>
                 <geometry>
                     <mesh>
-                        <uri>model://rover_skid/meshes/rover_skid_wheel.dae</uri>
+                        <uri>model://rover_mecanum/meshes/rover_mec_wheel.dae</uri>
                     </mesh>
                 </geometry>
             </visual>
@@ -286,7 +286,7 @@
                 <surface>
 					<friction>
                         <ode>
-                            <mu>1.0</mu>
+                            <mu>3.0</mu>
                             <mu2>0</mu2>
                             <fdir1 gz:expressed_in="base_link">1 1 0</fdir1>
                             <slip1>0.0</slip1>
