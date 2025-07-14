@@ -303,7 +303,7 @@
       <parent>cgo3_horizontal_arm_link</parent>
       <pose>0 0 0 0 0 0</pose>
       <axis>
-        <xyz>0 1 0</xyz>
+        <xyz>0 -1 0</xyz>
         <limit>
           <lower>-2.35619</lower>
           <upper>0.7854</upper>
