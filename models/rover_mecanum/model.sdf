@@ -142,12 +142,19 @@
         </inertia>
       </inertial>
       <visual name='visual'>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
-          <mesh>
-            <uri>model://rover_mecanum/meshes/rover_mec_wheel.dae</uri>
-          </mesh>
+					<mesh>
+						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+						<!-- scale mesh to radius == 0.1 -->
+						<scale>0.002 0.002 0.002</scale>
+					</mesh>
         </geometry>
+        <material>
+					<ambient>0.2 0.2 0.2 1</ambient>
+					<diffuse>0.2 0.2 0.2 1</diffuse>
+					<specular>0.2 0.2 0.2 1</specular>
+				</material>
       </visual>
       <collision name='collision'>
         <geometry>
@@ -185,12 +192,19 @@
         </inertia>
       </inertial>
       <visual name='visual'>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
-          <mesh>
-            <uri>model://rover_mecanum/meshes/rover_mec_wheel.dae</uri>
-          </mesh>
+					<mesh>
+						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+						<!-- scale mesh to radius == 0.1 -->
+						<scale>0.002 0.002 0.002</scale>
+					</mesh>
         </geometry>
+        <material>
+					<ambient>0.2 0.2 0.2 1</ambient>
+					<diffuse>0.2 0.2 0.2 1</diffuse>
+					<specular>0.2 0.2 0.2 1</specular>
+				</material>
       </visual>
       <collision name='collision'>
         <geometry>
@@ -228,12 +242,19 @@
         </inertia>
       </inertial>
       <visual name='visual'>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
-          <mesh>
-            <uri>model://rover_mecanum/meshes/rover_mec_wheel.dae</uri>
-          </mesh>
+					<mesh>
+						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+						<!-- scale mesh to radius == 0.1 -->
+						<scale>0.002 0.002 0.002</scale>
+					</mesh>
         </geometry>
+        <material>
+					<ambient>0.2 0.2 0.2 1</ambient>
+					<diffuse>0.2 0.2 0.2 1</diffuse>
+					<specular>0.2 0.2 0.2 1</specular>
+				</material>
       </visual>
       <collision name='collision'>
         <geometry>
@@ -271,12 +292,19 @@
         </inertia>
       </inertial>
       <visual name='visual'>
-        <pose>0 0 0 0 0 0</pose>
+        <pose>0 0 0 1.5707 0 0</pose>
         <geometry>
-          <mesh>
-            <uri>model://rover_mecanum/meshes/rover_mec_wheel.dae</uri>
-          </mesh>
+					<mesh>
+						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+						<!-- scale mesh to radius == 0.1 -->
+						<scale>0.002 0.002 0.002</scale>
+					</mesh>
         </geometry>
+        <material>
+					<ambient>0.2 0.2 0.2 1</ambient>
+					<diffuse>0.2 0.2 0.2 1</diffuse>
+					<specular>0.2 0.2 0.2 1</specular>
+				</material>
       </visual>
       <collision name='collision'>
         <geometry>
