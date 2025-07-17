@@ -223,7 +223,7 @@
           <pressure>
             <noise type="gaussian">
               <mean>0</mean>
-              <stddev>3</stddev>
+              <stddev>2</stddev>
             </noise>
           </pressure>
         </air_pressure>
