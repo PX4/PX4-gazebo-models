@@ -120,10 +120,10 @@
     </link>
 
   <!-- Roll joint -->
-    <joint name='cgo3_horizontal_arm_joint' type='revolute'>
+    <joint name='cgo3_horizontal_arm_joint' type='fixed'>
       <child>cgo3_horizontal_arm_link</child>
       <parent>cgo3_vertical_arm_link</parent>
-      <pose>0 0 0 0 0 0</pose>
+      <!-- <pose>0 0 0 0 0 0</pose>
       <axis>
         <xyz>-1 0 0</xyz>
         <limit>
@@ -144,7 +144,7 @@
             <erp>0.2</erp>
           </limit>
         </ode>
-      </physics>
+      </physics> -->
     </joint>
 
    <!-- Camera -->
