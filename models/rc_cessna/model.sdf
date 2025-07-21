@@ -46,6 +46,12 @@
               <min_depth>0.01</min_depth>
             </ode>
           </contact>
+          <friction>
+            <ode>
+              <mu>0.0</mu>         <!-- Static friction -->
+              <mu2>0.0</mu2>       <!-- Dynamic friction -->
+            </ode>
+          </friction>
         </surface>
       </collision>
       <!-- <visual name='fuselodge_collision_visual'>
@@ -905,6 +911,14 @@
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
+
+    <plugin filename="libgz_sim_catapult_system.so" name="gz::sim::systems::GzSimCatapultSystem">
+        <direction>1.0 0.0 2.0</direction>
+        <duration>0.8</duration>
+        <force>100</force>
+        <motor_number>1</motor_number>
+    </plugin>
+
     <static>0</static>
   </model>
 </sdf>
