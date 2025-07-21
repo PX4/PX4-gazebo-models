@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='rc_cessna_gimbal'>
+    <include merge='true'>
+      <uri>model://rc_cessna</uri>
+    </include>
+
+    <include merge='true'>
+      <uri>model://gimbal</uri>
+      <pose>0.48 0 0.01 0 0 0</pose>
+    </include>
+    <joint name="GimbalAttachJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>cgo3_mount_link</child>
+    </joint>
+  </model>
+</sdf>
