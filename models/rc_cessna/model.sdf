@@ -180,52 +180,6 @@
         </magnetometer>
       </sensor>
     </link>
-    
-    <!-- <link name="airspeed">
-      <pose>0 0 0 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>0.015</mass>
-        <inertia>
-          <ixx>1e-05</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-05</iyy>
-          <iyz>0</iyz>
-          <izz>1e-05</izz>
-        </inertia>
-      </inertial>
-      <visual name="airspeed_visual">
-        <geometry>
-          <cylinder>
-            <radius>0.01</radius>
-            <length>0.1</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <ambient>0 0 0 1.0</ambient>
-          <diffuse>0 0 0 1.0</diffuse>
-        </material>
-      </visual>
-      <sensor name="air_speed" type="air_speed">
-        <always_on>1</always_on>
-        <update_rate>5.0</update_rate>
-        <enable_metrics>false</enable_metrics>
-        <air_speed>
-          <airspeed>
-            <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>0.01</stddev>
-            </noise>
-          </airspeed>
-        </air_speed>
-      </sensor>
-    </link>
-    <joint name='airspeed_joint' type='fixed'>
-      <child>airspeed</child>
-      <parent>base_link</parent>
-    </joint>-->
-    
     <include merge="true">
       <uri>model://airspeed</uri>
       <pose>0.16 0 -0.05 0 0 0</pose>
@@ -235,7 +189,6 @@
       <child>airspeed_link</child>
       <pose relative_to="base_link">-0 0 0 0 0 0</pose>
     </joint>
-    
     <link name='rotor_puller'>
       <pose>0.22 0 0.0 0 1.57079632679 0</pose>
       <inertial>
