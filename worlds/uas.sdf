@@ -166,6 +166,11 @@
       <shadows>true</shadows>
     </scene>
 
+    <include>
+      <pose>0 0 21.9 0 0 0</pose>
+      <uri>model://catapult</uri>
+    </include>
+
     <model name="terrain">
       <static>true</static>
       <link name="link">
