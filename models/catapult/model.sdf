@@ -29,9 +29,9 @@
           </mesh>
         </geometry>
         <material>
-          <ambient>0.8 0.8 0.8 1</ambient>
-          <diffuse>0.8 0.8 0.8 1</diffuse>
-          <specular>0.8 0.8 0.8 1</specular>
+          <ambient>0.175 0.175 0.175 1.0</ambient>
+          <diffuse>0.175 0.175 0.175 1.0</diffuse>
+          <specular>0.175 0.175 0.175 1.0</specular>
         </material>
       </visual>
 
