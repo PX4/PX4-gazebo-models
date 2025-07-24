@@ -151,7 +151,7 @@
     <link name="camera_link">
       <inertial>
         <pose>-0.0412 0 -0.162 0 0 0</pose>
-        <mass>0.01</mass>
+        <mass>0.001</mass>
         <inertia>
           <ixx>0.001</ixx>
           <ixy>0</ixy>
