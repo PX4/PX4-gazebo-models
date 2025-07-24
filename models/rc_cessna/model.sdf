@@ -20,7 +20,7 @@
         <pose>-.14 0 0 0 0 0</pose>
         <geometry>
           <box>
-            <size>0.65 .08 0.10</size>
+            <size>0.65 .48 0.30</size>
           </box>
         </geometry>
         <surface>
@@ -30,6 +30,12 @@
               <min_depth>0.01</min_depth>
             </ode>
           </contact>
+          <friction>
+            <ode>
+              <mu>0.0</mu>         <!-- Static friction -->
+              <mu2>0.0</mu2>       <!-- Dynamic friction -->
+            </ode>
+          </friction>
         </surface>
       </collision>
       <collision name='wings_collision'>
@@ -913,9 +919,9 @@
     </plugin>
 
     <plugin filename="libgz-sim-catapult-system.so" name="gz::sim::systems::GzSimCatapultSystem">
-        <direction>1.0 0.0 2.0</direction>
-        <duration>0.8</duration>
-        <force>140</force>
+        <direction>1.0 0.0 1.0</direction>
+        <duration>2.6</duration>
+        <force>70</force>
         <motor_number>1</motor_number>
     </plugin>
 
