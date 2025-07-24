@@ -184,7 +184,7 @@
     </light>
     <include>
       <uri>
-        https://fuel.gazebosim.org/1.0/OpenRobotics/models/baylands
+        https://fuel.gazebosim.org/1.0/bdilman/models/baylands_2
       </uri>
       <name>park</name>
       <pose>205 155 -1 0 0 0</pose>
