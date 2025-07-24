@@ -212,19 +212,19 @@
           <diffuse>0 0 0 1.0</diffuse>
         </material>
       </visual>
-      <!-- <sensor name="air_speed" type="air_speed">
+      <sensor name="air_speed" type="air_speed">
         <always_on>1</always_on>
-        <update_rate>5.0</update_rate>
-        <enable_metrics>false</enable_metrics>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
         <air_speed>
-          <airspeed>
+          <pressure>
             <noise type="gaussian">
               <mean>0</mean>
-              <stddev>0.01</stddev>
+              <stddev>0</stddev>
             </noise>
-          </airspeed>
+          </pressure>
         </air_speed>
-      </sensor> -->
+      </sensor>
     </link>
     <joint name='airspeed_joint' type='fixed'>
       <child>airspeed</child>
