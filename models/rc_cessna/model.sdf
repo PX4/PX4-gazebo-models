@@ -912,10 +912,10 @@
       <motorType>velocity</motorType>
     </plugin>
 
-    <plugin filename="libgz_sim_catapult_system.so" name="gz::sim::systems::GzSimCatapultSystem">
+    <plugin filename="libgz-sim-catapult-system.so" name="gz::sim::systems::GzSimCatapultSystem">
         <direction>1.0 0.0 2.0</direction>
         <duration>0.8</duration>
-        <force>100</force>
+        <force>140</force>
         <motor_number>1</motor_number>
     </plugin>
 
