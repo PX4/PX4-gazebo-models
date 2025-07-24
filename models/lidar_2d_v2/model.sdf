@@ -48,6 +48,7 @@
         </geometry>
       </visual>
       <sensor name="lidar_2d_v2" type="gpu_lidar">
+        <gz_frame_id>link</gz_frame_id>
         <pose>0 0 0.055 0 0 0</pose>
         <ray>
           <scan>

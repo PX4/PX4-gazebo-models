@@ -2,7 +2,7 @@
 <sdf version='1.9'>
   <model name='x500_lidar_down'>
     <self_collide>false</self_collide>
-     <include merge='true'>
+    <include merge='true'>
       <uri>x500</uri>
     </include>
     <include merge='true'>
@@ -31,7 +31,8 @@
           <iyz>0.0</iyz>
         </inertia>
       </inertial>
-      <sensor name='lidar' type='gpu_lidar'>"
+      <sensor name='lidar' type='gpu_lidar'>
+        <gz_frame_id>lidar_sensor_link</gz_frame_id>
         <pose>0 0 0 3.14 0 0</pose>
         <update_rate>50</update_rate>
         <ray>

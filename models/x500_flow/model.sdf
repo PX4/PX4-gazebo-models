@@ -41,6 +41,7 @@
         </inertia>
       </inertial>
       <sensor name='lidar' type='gpu_lidar'>
+        <gz_frame_id>lidar_sensor_link</gz_frame_id>
         <pose>0 0 0 3.14 0 0</pose>
         <update_rate>50</update_rate>
         <ray>
