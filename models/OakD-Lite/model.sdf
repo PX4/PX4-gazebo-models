@@ -73,9 +73,10 @@
         <topic>depth_camera</topic>
       </sensor>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
     </link>
-    <!-- <plugin filename="ignition-gazebo-sensors-system" name="ignition::gazebo::systems::Sensors">
+    <!-- <plugin filename="ignition-gazebo-sensors-system"
+    name="ignition::gazebo::systems::Sensors">
       <render_engine>ogre2</render_engine>
     </plugin> -->
   </model>

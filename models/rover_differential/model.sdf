@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <sdf version="1.6">
   <model name='rover_differential'>
     <!--Links-->
@@ -306,7 +306,7 @@
 
     <!-- Joints -->
     <joint name='wheel_rear_left_joint' type='revolute'>
-      <pose relative_to='wheel_rear_left_link'/>
+      <pose relative_to='wheel_rear_left_link' />
       <parent>base_link</parent>
       <child>wheel_rear_left_link</child>
       <axis>
@@ -315,7 +315,7 @@
     </joint>
 
     <joint name='wheel_rear_right_joint' type='revolute'>
-      <pose relative_to='wheel_rear_right_link'/>
+      <pose relative_to='wheel_rear_right_link' />
       <parent>base_link</parent>
       <child>wheel_rear_right_link</child>
       <axis>
@@ -324,13 +324,13 @@
     </joint>
 
     <joint name='cast_wheel_front_joint' type='ball'>
-      <pose relative_to='cast_wheel_front_link'/>
+      <pose relative_to='cast_wheel_front_link' />
       <parent>base_link</parent>
       <child>cast_wheel_front_link</child>
     </joint>
 
     <joint name='cast_wheel_rear_link' type='ball'>
-      <pose relative_to='cast_wheel_rear_link'/>
+      <pose relative_to='cast_wheel_rear_link' />
       <parent>base_link</parent>
       <child>cast_wheel_rear_link</child>
     </joint>
@@ -352,7 +352,8 @@
       <actuator_number>0</actuator_number>
     </plugin>
 
-    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+    <plugin filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
       <joint_name>wheel_rear_left_joint</joint_name>
       <joint_name>wheel_rear_right_joint</joint_name>
     </plugin>

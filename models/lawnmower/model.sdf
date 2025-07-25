@@ -26,10 +26,10 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode />
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -311,7 +311,8 @@
       <pose>-0.45 0.45 0.0215 0 1.57079632679 1.57079632679</pose>
       <inertial>
         <mass>8.0</mass>
-        <!-- estimated from http://www.rzrforums.net/wheels-tires/1729-tire-wheel-weights-most-sizes.html -->
+        <!-- estimated from
+        http://www.rzrforums.net/wheels-tires/1729-tire-wheel-weights-most-sizes.html -->
         <inertia>
           <ixx>0.5</ixx>
           <ixy>0.0</ixy>
@@ -336,7 +337,7 @@
               <mu2>0.6</mu2>
             </ode>
           </friction>
-          <bounce/>
+          <bounce />
           <contact>
             <ode>
               <min_depth>0.005</min_depth>
@@ -394,7 +395,8 @@
       <pose>-0.45 -0.45 0.0215 0 1.57079632679 1.57079632679</pose>
       <inertial>
         <mass>8.0</mass>
-        <!-- estimated from http://www.rzrforums.net/wheels-tires/1729-tire-wheel-weights-most-sizes.html -->
+        <!-- estimated from
+        http://www.rzrforums.net/wheels-tires/1729-tire-wheel-weights-most-sizes.html -->
         <inertia>
           <ixx>0.5</ixx>
           <ixy>0.0</ixy>
@@ -419,7 +421,7 @@
               <mu2>0.6</mu2>
             </ode>
           </friction>
-          <bounce/>
+          <bounce />
           <contact>
             <ode>
               <min_depth>0.005</min_depth>
@@ -658,7 +660,8 @@
       <cmd_min>1000.0</cmd_min>
       <cmd_offset>0.0</cmd_offset>
     </plugin>
-    <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
+    <plugin filename="gz-sim-joint-state-publisher-system"
+      name="gz::sim::systems::JointStatePublisher">
       <joint_name>left_wheel_joint</joint_name>
       <joint_name>right_wheel_joint</joint_name>
     </plugin>

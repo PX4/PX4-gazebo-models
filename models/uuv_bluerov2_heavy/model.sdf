@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
     <model name="uuv_bluerov2_heavy">
-        <pose>0 0 -96.5   0 0 0</pose>
+        <pose>0 0 -96.5 0 0 0</pose>
         <link name="base_link">
             <pose>0 0 0 0 -0 0</pose>
             <inertial>
@@ -19,7 +19,8 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <box>
-                        <size>0.5 0.5 0.5</size>        <!-- Size of the box: To be adjusted, copy-pasted from omnicopter -->
+                        <size>0.5 0.5 0.5</size>        <!-- Size of the box: To be adjusted, copy-pasted
+                        from omnicopter -->
                     </box>
                 </geometry>
                 <surface>
@@ -30,7 +31,7 @@
                         </ode>
                     </contact>
                     <friction>
-                        <ode/>
+                        <ode />
                     </friction>
                 </surface>
             </collision>
@@ -42,83 +43,83 @@
                     </mesh>
                 </geometry>
             </visual>
-        <sensor name="air_pressure_sensor" type="air_pressure">
-            <gz_frame_id>base_link</gz_frame_id>
-            <always_on>1</always_on>
-            <update_rate>50</update_rate>
-            <air_pressure>
-                <pressure>
-                    <noise type="gaussian">
-                    <mean>0</mean>
-                    <stddev>0.01</stddev>
-                    </noise>
-                </pressure>
-            </air_pressure>
-        </sensor>
-        <sensor name="imu_sensor" type="imu">
-            <gz_frame_id>base_link</gz_frame_id>
-            <always_on>1</always_on>
-            <update_rate>250</update_rate>
-            <imu>
-            <angular_velocity>
-                <x>
-                <noise type="gaussian">
-                    <mean>0</mean>
-                    <stddev>0.00018665</stddev>
-                    <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-                </noise>
-                </x>
-                <y>
-                <noise type="gaussian">
-                    <mean>0</mean>
-                    <stddev>0.00018665</stddev>
-                    <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-                </noise>
-                </y>
-                <z>
-                <noise type="gaussian">
-                    <mean>0</mean>
-                    <stddev>0.00018665</stddev>
-                    <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
-                </noise>
-                </z>
-            </angular_velocity>
-            <linear_acceleration>
-                <x>
-                <noise type="gaussian">
-                    <mean>0</mean>
-                    <stddev>0.00186</stddev>
-                    <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-                </noise>
-                </x>
-                <y>
-                <noise type="gaussian">
-                    <mean>0</mean>
-                    <stddev>0.00186</stddev>
-                    <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-                </noise>
-                </y>
-                <z>
-                <noise type="gaussian">
-                    <mean>0</mean>
-                    <stddev>0.00186</stddev>
-                    <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                    <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
-                </noise>
-                </z>
-            </linear_acceleration>
-            </imu>
-        </sensor>
-        <sensor name="navsat_sensor" type="navsat">
-            <gz_frame_id>base_link</gz_frame_id>
-            <always_on>1</always_on>
-            <update_rate>30</update_rate>
-        </sensor>
+            <sensor name="air_pressure_sensor" type="air_pressure">
+                <gz_frame_id>base_link</gz_frame_id>
+                <always_on>1</always_on>
+                <update_rate>50</update_rate>
+                <air_pressure>
+                    <pressure>
+                        <noise type="gaussian">
+                            <mean>0</mean>
+                            <stddev>0.01</stddev>
+                        </noise>
+                    </pressure>
+                </air_pressure>
+            </sensor>
+            <sensor name="imu_sensor" type="imu">
+                <gz_frame_id>base_link</gz_frame_id>
+                <always_on>1</always_on>
+                <update_rate>250</update_rate>
+                <imu>
+                    <angular_velocity>
+                        <x>
+                            <noise type="gaussian">
+                                <mean>0</mean>
+                                <stddev>0.00018665</stddev>
+                                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                            </noise>
+                        </x>
+                        <y>
+                            <noise type="gaussian">
+                                <mean>0</mean>
+                                <stddev>0.00018665</stddev>
+                                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                            </noise>
+                        </y>
+                        <z>
+                            <noise type="gaussian">
+                                <mean>0</mean>
+                                <stddev>0.00018665</stddev>
+                                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                            </noise>
+                        </z>
+                    </angular_velocity>
+                    <linear_acceleration>
+                        <x>
+                            <noise type="gaussian">
+                                <mean>0</mean>
+                                <stddev>0.00186</stddev>
+                                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                            </noise>
+                        </x>
+                        <y>
+                            <noise type="gaussian">
+                                <mean>0</mean>
+                                <stddev>0.00186</stddev>
+                                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                            </noise>
+                        </y>
+                        <z>
+                            <noise type="gaussian">
+                                <mean>0</mean>
+                                <stddev>0.00186</stddev>
+                                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                            </noise>
+                        </z>
+                    </linear_acceleration>
+                </imu>
+            </sensor>
+            <sensor name="navsat_sensor" type="navsat">
+                <gz_frame_id>base_link</gz_frame_id>
+                <always_on>1</always_on>
+                <update_rate>30</update_rate>
+            </sensor>
         </link>
         <joint name="thruster0_joint" type="revolute">
             <axis>
@@ -413,8 +414,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0,  4.53,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  3.52,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster1_joint</jointName>
@@ -436,8 +437,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0,  4.53,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  3.52,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster2_joint</jointName>
@@ -459,8 +460,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0,  4.53,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  3.52,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster3_joint</jointName>
@@ -482,8 +483,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0,  4.53,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  3.52,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster4_joint</jointName>
@@ -505,8 +506,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0,  4.53,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  3.52,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster5_joint</jointName>
@@ -528,8 +529,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0,  4.53,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  3.52,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster6_joint</jointName>
@@ -551,8 +552,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0,  4.53,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  3.52,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster7_joint</jointName>
@@ -574,10 +575,11 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0,  4.53,  0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0,  3.52,  0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
-        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
+        <plugin filename="gz-sim-odometry-publisher-system"
+            name="gz::sim::systems::OdometryPublisher">
             <dimensions>3</dimensions>
         </plugin>
     </model>
