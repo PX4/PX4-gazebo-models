@@ -78,9 +78,10 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
       <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>
         <imu>
@@ -139,10 +140,12 @@
         </imu>
       </sensor>
       <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>
       <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
@@ -155,6 +158,7 @@
         </air_pressure>
       </sensor>
       <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>100</update_rate>
         <magnetometer>
@@ -207,6 +211,7 @@
         </material>
       </visual>
       <!-- <sensor name="air_speed" type="air_speed">
+        <gz_frame_id>airspeed</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>5.0</update_rate>
         <enable_metrics>false</enable_metrics>
@@ -247,10 +252,10 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode />
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -276,7 +281,7 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
     </link>
     <joint name='rotor_puller_joint' type='revolute'>
@@ -335,7 +340,7 @@
         </inertia>
       </inertial>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <visual name="LeftWheelVisual">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
@@ -378,7 +383,7 @@
         </inertia>
       </inertial>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <visual name="RightWheelVisual">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
@@ -421,7 +426,7 @@
         </inertia>
       </inertial>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <visual name="CenterWheelVisual">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
@@ -775,7 +780,8 @@
       <control_joint_rad_to_cl>-0.3</control_joint_rad_to_cl>
     </plugin>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_0</joint_name>
       <sub_topic>servo_0</sub_topic>
       <p_gain>10.0</p_gain>
@@ -799,7 +805,8 @@
       <control_joint_rad_to_cl>-0.3</control_joint_rad_to_cl>
     </plugin>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_1</joint_name>
       <sub_topic>servo_1</sub_topic>
       <p_gain>10.0</p_gain>
@@ -859,7 +866,8 @@
       <control_joint_rad_to_cl>-4.0</control_joint_rad_to_cl>
     </plugin>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_2</joint_name>
       <sub_topic>servo_2</sub_topic>
       <p_gain>10.0</p_gain>
@@ -883,12 +891,14 @@
       <control_joint_rad_to_cl>0.8</control_joint_rad_to_cl>
     </plugin>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>rudder_joint</joint_name>
       <sub_topic>servo_3</sub_topic>
       <p_gain>10.0</p_gain>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_puller_joint</jointName>
       <linkName>rotor_puller</linkName>
       <turningDirection>cw</turningDirection>
