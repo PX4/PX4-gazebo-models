@@ -25,13 +25,13 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>model://catapult/meshes/catapult.stl</uri>
+            <uri>model://catapult/meshes/catapult2.stl</uri>
           </mesh>
         </geometry>
         <material>
-          <ambient>0.175 0.175 0.175 1.0</ambient>
-          <diffuse>0.175 0.175 0.175 1.0</diffuse>
-          <specular>0.175 0.175 0.175 1.0</specular>
+          <ambient>0.575 0.575 0.575 1.0</ambient>
+          <diffuse>0.575 0.575 0.575 1.0</diffuse>
+          <specular>0.575 0.575 0.575 1.0</specular>
         </material>
       </visual>
 
