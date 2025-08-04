@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='helipad'>
+    <static>true</static>
+    <pose>0 0 0.001 0 0 0</pose>
+    <link name='base'>
+      <visual name='base_visual'>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>5 5</size>
+          </plane>
+        </geometry>
+        <material>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.4 0.4 0.4 1</specular>
+          <pbr>
+            <metal>
+              <albedo_map>model://helipad/helipad.jpg</albedo_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Collision block -->
+      <collision name='base_collision'>
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>5 5</size>
+          </plane>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>
