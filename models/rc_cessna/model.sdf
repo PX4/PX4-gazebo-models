@@ -759,7 +759,7 @@
     <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
       <a0>0.05984281113</a0>
       <cla>4.752798721</cla>
-      <cda>1.5</cda>
+      <cda>0.6417112299</cda>
       <cma>0.0</cma>
       <alpha_stall>0.3391428111</alpha_stall>
       <cla_stall>-3.85</cla_stall>
@@ -772,7 +772,7 @@
       <upward>0 0 1</upward>
       <link_name>base_link</link_name>
       <control_joint_name>servo_0</control_joint_name>
-      <control_joint_rad_to_cl>-0.3</control_joint_rad_to_cl>
+      <control_joint_rad_to_cl>-0.5</control_joint_rad_to_cl>
     </plugin>
     <plugin
       filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
@@ -783,7 +783,7 @@
     <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
       <a0>0.05984281113</a0>
       <cla>4.752798721</cla>
-      <cda>1.5</cda>
+      <cda>0.6417112299</cda>
       <cma>0.0</cma>
       <alpha_stall>0.3391428111</alpha_stall>
       <cla_stall>-3.85</cla_stall>
@@ -796,7 +796,7 @@
       <upward>0 0 1</upward>
       <link_name>base_link</link_name>
       <control_joint_name>servo_1</control_joint_name>
-      <control_joint_rad_to_cl>-0.3</control_joint_rad_to_cl>
+      <control_joint_rad_to_cl>-0.5</control_joint_rad_to_cl>
     </plugin>
     <plugin
       filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
