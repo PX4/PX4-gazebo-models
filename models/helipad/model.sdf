@@ -30,7 +30,6 @@
             <size>5 5</size>
           </plane>
         </geometry>
-        <!-- Optional: add surface friction etc. here -->
       </collision>
 
     </link>
