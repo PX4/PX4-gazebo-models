@@ -23,14 +23,15 @@
       </collision>
       <pose>0 0 2 0 0 0</pose>
       <inertial>
-          <mass>10000</mass>
-          <inertia>
-              <ixx>10000</ixx>
-              <iyy>10000</iyy>
-              <izz>10000</izz>
-          </inertia>
+        <mass>10000</mass>
+        <inertia>
+          <ixx>10000</ixx>
+          <iyy>10000</iyy>
+          <izz>10000</izz>
+        </inertia>
       </inertial>
       <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>platform_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>

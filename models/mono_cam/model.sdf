@@ -48,6 +48,7 @@
         </material>
       </visual>
       <sensor name="imager" type="camera">
+        <gz_frame_id>camera_link</gz_frame_id>
         <pose>0 0 0 0 0 0</pose>
         <camera>
           <horizontal_fov>1.74</horizontal_fov>
@@ -65,7 +66,7 @@
         <visualize>true</visualize>
       </sensor>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
     </link>
   </model>
 </sdf>

@@ -4,7 +4,7 @@
     <self_collide>false</self_collide>
     <static>false</static>
 
-  <!-- Gimbal mount point -->
+    <!-- Gimbal mount point -->
     <link name="cgo3_mount_link">
       <inertial>
         <pose>-0.02552 0 -0.08136 0 0 0</pose>
@@ -26,14 +26,14 @@
           </mesh>
         </geometry>
         <material>
-          <ambient>.175 .175 .175  1.0</ambient>
-          <diffuse>.175 .175 .175  1.0</diffuse>
-          <specular>.175 .175 .175  1.0</specular>
+          <ambient>.175 .175 .175 1.0</ambient>
+          <diffuse>.175 .175 .175 1.0</diffuse>
+          <specular>.175 .175 .175 1.0</specular>
         </material>
       </visual>
     </link>
 
-  <!-- Gimbal vertical arm -->
+    <!-- Gimbal vertical arm -->
     <link name="cgo3_vertical_arm_link">
       <inertial>
         <pose>0 0 -0.1283 0 0 0</pose>
@@ -55,14 +55,14 @@
           </mesh>
         </geometry>
         <material>
-          <ambient>.175 .175 .175  1.0</ambient>
-          <diffuse>.175 .175 .175  1.0</diffuse>
-          <specular>.175 .175 .175  1.0</specular>
+          <ambient>.175 .175 .175 1.0</ambient>
+          <diffuse>.175 .175 .175 1.0</diffuse>
+          <specular>.175 .175 .175 1.0</specular>
         </material>
       </visual>
     </link>
 
-  <!-- Yaw joint -->
+    <!-- Yaw joint -->
     <joint name='cgo3_vertical_arm_joint' type='revolute'>
       <child>cgo3_vertical_arm_link</child>
       <parent>cgo3_mount_link</parent>
@@ -90,7 +90,7 @@
       </physics>
     </joint>
 
-   <!-- Gimbal horizontal arm -->
+    <!-- Gimbal horizontal arm -->
     <link name="cgo3_horizontal_arm_link">
       <inertial>
         <pose>-0.0213 0 -0.162 0 0 0</pose>
@@ -112,14 +112,14 @@
           </mesh>
         </geometry>
         <material>
-          <ambient>.175 .175 .175  1.0</ambient>
-          <diffuse>.175 .175 .175  1.0</diffuse>
-          <specular>.175 .175 .175  1.0</specular>
+          <ambient>.175 .175 .175 1.0</ambient>
+          <diffuse>.175 .175 .175 1.0</diffuse>
+          <specular>.175 .175 .175 1.0</specular>
         </material>
       </visual>
     </link>
 
-  <!-- Roll joint -->
+    <!-- Roll joint -->
     <joint name='cgo3_horizontal_arm_joint' type='revolute'>
       <child>cgo3_horizontal_arm_link</child>
       <parent>cgo3_vertical_arm_link</parent>
@@ -147,7 +147,7 @@
       </physics>
     </joint>
 
-   <!-- Camera -->
+    <!-- Camera -->
     <link name="camera_link">
       <inertial>
         <pose>-0.0412 0 -0.162 0 0 0</pose>
@@ -193,13 +193,14 @@
           </mesh>
         </geometry>
         <material>
-          <ambient>.175 .175 .175  1.0</ambient>
-          <diffuse>.175 .175 .175  1.0</diffuse>
-          <specular>.175 .175 .175  1.0</specular>
+          <ambient>.175 .175 .175 1.0</ambient>
+          <diffuse>.175 .175 .175 1.0</diffuse>
+          <specular>.175 .175 .175 1.0</specular>
         </material>
       </visual>
 
       <sensor name="camera_imu" type="imu">
+        <gz_frame_id>camera_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>
         <pose>-0.0412 0 -0.162 0 0 3.14</pose>
@@ -260,12 +261,13 @@
       </sensor>
 
       <sensor name="camera" type="camera">
+        <gz_frame_id>camera_link</gz_frame_id>
         <pose>-0.074 0 -0.162 0 0 3.14</pose>
         <camera>
           <horizontal_fov>2.0</horizontal_fov>
           <image>
             <format>R8G8B8</format>
-             <format>R8G8B8</format>
+            <format>R8G8B8</format>
             <width>1280</width>
             <height>720</height>
           </image>
@@ -280,7 +282,7 @@
       </sensor>
     </link>
 
-  <!-- Pitch joint -->
+    <!-- Pitch joint -->
     <joint name='cgo3_camera_joint' type='revolute'>
       <child>camera_link</child>
       <parent>cgo3_horizontal_arm_link</parent>
@@ -308,8 +310,7 @@
       </physics>
     </joint>
 
-  <!-- Plugins -->
-
+    <!-- Plugins -->
     <plugin
       filename="gz-sim-joint-position-controller-system"
       name="gz::sim::systems::JointPositionController">
