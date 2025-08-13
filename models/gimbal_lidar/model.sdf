@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='gimbal_lidar'>
+    <self_collide>false</self_collide>
+    <static>false</static>
+
+    <!-- Gimbal mount point -->
+    <link name="cgo3_mount_link">
+      <inertial>
+        <pose>-0.02552 0 -0.08136 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+      <visual name="cgo3_mount_visual">
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://gimbal_lidar/meshes/cgo3_mount_remeshed_v1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>.175 .175 .175  1.0</ambient>
+          <diffuse>.175 .175 .175  1.0</diffuse>
+          <specular>.175 .175 .175  1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Gimbal vertical arm -->
+    <link name="cgo3_vertical_arm_link">
+      <inertial>
+        <pose>0 0 -0.1283 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+      <visual name='cgo3_vertical_arm_visual'>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://gimbal_lidar/meshes/cgo3_vertical_arm_remeshed_v1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>.175 .175 .175  1.0</ambient>
+          <diffuse>.175 .175 .175  1.0</diffuse>
+          <specular>.175 .175 .175  1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Yaw joint -->
+    <joint name='cgo3_vertical_arm_joint' type='revolute'>
+      <child>cgo3_vertical_arm_link</child>
+      <parent>cgo3_mount_link</parent>
+      <pose>-0.02552 0 0 0 0 0</pose>
+      <axis>
+        <xyz>0 0 -1</xyz>
+        <limit>
+          <lower>-1.54</lower>
+          <upper>1.54</upper>
+          <effort>100</effort>
+          <velocity>1.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+          <limit>
+            <cfm>0.1</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+
+    <!-- Gimbal horizontal arm -->
+    <link name="cgo3_horizontal_arm_link">
+      <inertial>
+        <pose>-0.0213 0 -0.162 0 0 0</pose>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.001</iyy>
+          <iyz>0</iyz>
+          <izz>0.001</izz>
+        </inertia>
+      </inertial>
+      <visual name='cgo3_horizontal_arm_visual'>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://gimbal_lidar/meshes/cgo3_horizontal_arm_remeshed_v1.stl</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>.175 .175 .175  1.0</ambient>
+          <diffuse>.175 .175 .175  1.0</diffuse>
+          <specular>.175 .175 .175  1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+    <!-- Roll joint -->
+    <joint name='cgo3_horizontal_arm_joint' type='revolute'>
+      <child>cgo3_horizontal_arm_link</child>
+      <parent>cgo3_vertical_arm_link</parent>
+      <pose>0 0 -0.1619 0 0 0</pose>
+      <axis>
+        <xyz>-1 0 0</xyz>
+        <limit>
+          <lower>-1.57</lower>
+          <upper>1.57</upper>
+          <effort>100</effort>
+          <velocity>1.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+          <limit>
+            <cfm>0.1</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+
+    <!-- Camera body -->
+    <link name="camera_link">
+      <inertial>
+        <pose>-0.0412 0 -0.162 0 0 0</pose>
+        <mass>0.5</mass>
+        <inertia>
+          <ixx>5.375e-4</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>5.375e-4</iyy>
+          <iyz>0</iyz>
+          <izz>4.0e-4</izz>
+        </inertia>
+      </inertial>
+
+      <!-- Keep a simple collision volume at the camera body -->
+      <collision name="lidar_collision">
+        <pose>-0.045 0 -0.180 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04</radius>
+            <length>0.09</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <friction><ode><mu>0.1</mu><mu2>0.1</mu2></ode></friction>
+          <contact><ode><kp>1e6</kp><kd>10</kd></ode></contact>
+        </surface>
+      </collision>
+
+      <!-- IMU aligned with the camera_link (no yaw flip) -->
+      <sensor name="camera_imu" type="imu">
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <pose>-0.045 0 -0.180  0  0.349066  0</pose>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+    </link>
+
+    <!-- Fixed mount for the LiDAR: carries the geometric tilt (pitch), no yaw flip -->
+    <link name="lidar_mount">
+      <!-- same position as before; pitch = 0.349066 rad (~20°), yaw = 0 -->
+      <pose>-0.045 0 -0.180  0  0.349066  0</pose>
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <!-- LiDAR visual (optional) -->
+      <visual name="lidar_visual">
+        <pose>0 0 0  0  -0.7  0</pose>
+        <geometry>
+          <mesh>
+            <scale>0.65 0.65 0.65</scale>
+            <uri>model://vlp16_lidar/meshes/HDL32E_base.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <!-- LiDAR sensor aligned with lidar_mount frame -->
+      <sensor name="lidar3d" type="gpu_lidar">
+        <pose>0 0 0  0  0  3.14159</pose>
+        <topic>lidar/scan</topic>
+        <update_rate>10</update_rate>
+        <always_on>1</always_on>
+        <visualize>true</visualize>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>1024</samples>
+              <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>16</samples>
+              <resolution>1</resolution>
+              <min_angle>-0.261799</min_angle>
+              <max_angle>0.261799</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>100.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+      </sensor>
+    </link>
+
+    <joint name="lidar_mount_fixed" type="fixed">
+      <parent>camera_link</parent>
+      <child>lidar_mount</child>
+    </joint>
+
+    <!-- Pitch joint -->
+    <joint name='cgo3_camera_joint' type='revolute'>
+      <child>camera_link</child>
+      <parent>cgo3_horizontal_arm_link</parent>
+      <pose>-0.0412 0 -0.162 0 0 0</pose>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1.54</lower>
+          <upper>1.54</upper>
+          <effort>100</effort>
+          <velocity>1.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.1</damping>
+        </dynamics>
+      </axis>
+      <physics>
+        <ode>
+          <implicit_spring_damper>1</implicit_spring_damper>
+          <limit>
+            <cfm>0.1</cfm>
+            <erp>0.2</erp>
+          </limit>
+        </ode>
+      </physics>
+    </joint>
+
+    <!-- Plugins -->
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>cgo3_horizontal_arm_joint</joint_name>
+      <sub_topic>command/gimbal_roll</sub_topic>
+      <p_gain>0.8</p_gain>
+      <i_gain>0.035</i_gain>
+      <d_gain>0.02</d_gain>
+      <i_max>0</i_max>
+      <i_min>0</i_min>
+      <cmd_max>1.57</cmd_max>
+      <cmd_min>-1.57</cmd_min>
+    </plugin>
+
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>cgo3_camera_joint</joint_name>
+      <sub_topic>command/gimbal_pitch</sub_topic>
+      <p_gain>0.8</p_gain>
+      <i_gain>0.01245</i_gain>
+      <d_gain>0.015</d_gain>
+      <i_max>0</i_max>
+      <i_min>0</i_min>
+      <cmd_max>1.2</cmd_max>
+      <cmd_min>-1.2</cmd_min>
+    </plugin>
+
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>cgo3_vertical_arm_joint</joint_name>
+      <sub_topic>command/gimbal_yaw</sub_topic>
+      <p_gain>0.3</p_gain>
+      <i_gain>0.01245</i_gain>
+      <d_gain>0.015</d_gain>
+      <i_max>0</i_max>
+      <i_min>0</i_min>
+      <cmd_max>1.57</cmd_max>
+      <cmd_min>-1.57</cmd_min>
+    </plugin>
+
+  </model>
+</sdf>
+
