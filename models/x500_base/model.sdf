@@ -17,7 +17,7 @@
         </inertia>
       </inertial>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <visual name="base_link_visual">
         <pose>0 0 .025 0 0 3.141592654</pose>
         <geometry>
@@ -135,7 +135,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -154,7 +154,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -173,7 +173,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -192,7 +192,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -211,81 +211,104 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
       <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
+          <!-- Noise modeled after BMP390 -->
           <pressure>
             <noise type="gaussian">
               <mean>0</mean>
-              <stddev>0.01</stddev>
+              <stddev>3</stddev>
             </noise>
           </pressure>
         </air_pressure>
       </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
       <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>
         <imu>
           <angular_velocity>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- 0.05 deg/s converted to rad/s -->
             <x>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
               </noise>
             </x>
             <y>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
               </noise>
             </y>
             <z>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00018665</stddev>
-                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
               </noise>
             </z>
           </angular_velocity>
           <linear_acceleration>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- X & Y axis: 0.65 mg-rms converted to m/ss -->
             <x>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
               </noise>
             </x>
             <y>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
               </noise>
             </y>
+            <!-- Z axis: 0.70 mg-rms converted to m/ss-->
             <z>
               <noise type="gaussian">
-                <mean>0</mean>
-                <stddev>0.00186</stddev>
-                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
-                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                <mean>0.0</mean>
+                <stddev>0.00686</stddev>
               </noise>
             </z>
           </linear_acceleration>
         </imu>
       </sensor>
       <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>
@@ -293,16 +316,16 @@
     <link name="rotor_0">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
-      <velocity_decay/>
+      <velocity_decay />
       <pose>0.174 -0.174 0.06 0 0 0</pose>
       <inertial>
-          <mass>0.016076923076923075</mass>
-          <inertia>
-            <ixx>3.8464910483993325e-07</ixx>
-            <iyy>2.6115851691700804e-05</iyy>
-            <izz>2.649858234714004e-05</izz>
-          </inertia>
-        </inertial>
+        <mass>0.016076923076923075</mass>
+        <inertia>
+          <ixx>3.8464910483993325e-07</ixx>
+          <iyy>2.6115851691700804e-05</iyy>
+          <izz>2.649858234714004e-05</izz>
+        </inertia>
+      </inertial>
       <visual name="rotor_0_visual">
         <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
         <geometry>
@@ -342,7 +365,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -365,16 +388,16 @@
     <link name="rotor_1">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
-      <velocity_decay/>
+      <velocity_decay />
       <pose>-0.174 0.174 0.06 0 0 0</pose>
       <inertial>
-          <mass>0.016076923076923075</mass>
-          <inertia>
-            <ixx>3.8464910483993325e-07</ixx>
-            <iyy>2.6115851691700804e-05</iyy>
-            <izz>2.649858234714004e-05</izz>
-          </inertia>
-        </inertial>
+        <mass>0.016076923076923075</mass>
+        <inertia>
+          <ixx>3.8464910483993325e-07</ixx>
+          <iyy>2.6115851691700804e-05</iyy>
+          <izz>2.649858234714004e-05</izz>
+        </inertia>
+      </inertial>
       <visual name="rotor_1_visual">
         <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
         <geometry>
@@ -414,7 +437,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -437,16 +460,16 @@
     <link name="rotor_2">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
-      <velocity_decay/>
+      <velocity_decay />
       <pose>0.174 0.174 0.06 0 0 0</pose>
       <inertial>
-          <mass>0.016076923076923075</mass>
-          <inertia>
-            <ixx>3.8464910483993325e-07</ixx>
-            <iyy>2.6115851691700804e-05</iyy>
-            <izz>2.649858234714004e-05</izz>
-          </inertia>
-        </inertial>
+        <mass>0.016076923076923075</mass>
+        <inertia>
+          <ixx>3.8464910483993325e-07</ixx>
+          <iyy>2.6115851691700804e-05</iyy>
+          <izz>2.649858234714004e-05</izz>
+        </inertia>
+      </inertial>
       <visual name="rotor_2_visual">
         <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
         <geometry>
@@ -486,7 +509,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -509,16 +532,16 @@
     <link name="rotor_3">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
-      <velocity_decay/>
+      <velocity_decay />
       <pose>-0.174 -0.174 0.06 0 0 0</pose>
       <inertial>
-          <mass>0.016076923076923075</mass>
-          <inertia>
-            <ixx>3.8464910483993325e-07</ixx>
-            <iyy>2.6115851691700804e-05</iyy>
-            <izz>2.649858234714004e-05</izz>
-          </inertia>
-        </inertial>
+        <mass>0.016076923076923075</mass>
+        <inertia>
+          <ixx>3.8464910483993325e-07</ixx>
+          <iyy>2.6115851691700804e-05</iyy>
+          <izz>2.649858234714004e-05</izz>
+        </inertia>
+      </inertial>
       <visual name="rotor_3_visual">
         <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
         <geometry>
@@ -558,7 +581,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>

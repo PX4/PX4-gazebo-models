@@ -31,7 +31,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -44,14 +44,15 @@
           </mesh>
         </geometry>
         <material>
-	  <ambient>.175 .175 .175 1.0</ambient>
+          <ambient>.175 .175 .175 1.0</ambient>
           <diffuse>.175 .175 .175 1.0</diffuse>
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
       <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>
         <imu>
@@ -110,6 +111,7 @@
         </imu>
       </sensor>
       <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
@@ -121,7 +123,34 @@
           </pressure>
         </air_pressure>
       </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
       <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>
@@ -150,10 +179,10 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode />
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -166,12 +195,12 @@
           </mesh>
         </geometry>
         <material>
-	  <ambient>.175 .175 .175 1.0</ambient>
+          <ambient>.175 .175 .175 1.0</ambient>
           <diffuse>.175 .175 .175 1.0</diffuse>
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
     </link>
     <joint name='rotor_puller_joint' type='revolute'>
@@ -360,9 +389,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -374,8 +402,67 @@
         </ode>
       </physics>
     </joint>
+    <include merge='true'>
+      <uri>model://LW20</uri>
+      <pose relative_to="base_link">0.05 0 -0.1 0 1.57 0</pose>
+    </include>
+
+    <joint name="lidar_model_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>lw20_link</child>
+      <pose relative_to="base_link">0 0 0 0 0 0</pose>
+    </joint>
+
+    <joint name="lidar_sensor_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>lidar_sensor_link</child>
+    </joint>
+
+    <link name="lidar_sensor_link">
+      <pose relative_to="base_link">0.05 0 0 0 1.57 0</pose>
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>0.00001</ixx>
+          <iyy>0.00001</iyy>
+          <izz>0.00001</izz>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+        </inertia>
+      </inertial>
+      <sensor name='lidar' type='gpu_lidar'>
+        <gz_frame_id>lidar_sensor_link</gz_frame_id>
+        <pose>0 0 0 3.14 0 0</pose>
+        <update_rate>50</update_rate>
+        <ray>
+          <scan>
+            <horizontal>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>0</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>100.0</max>
+            <resolution>0.01</resolution>
+          </range>
+        </ray>
+        <always_on>1</always_on>
+        <visualize>true</visualize>
+      </sensor>
+    </link>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_0</joint_name>
       <sub_topic>servo_0</sub_topic>
       <p_gain>10</p_gain>
@@ -389,9 +476,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -404,7 +490,8 @@
       </physics>
     </joint>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_1</joint_name>
       <sub_topic>servo_1</sub_topic>
       <p_gain>10</p_gain>
@@ -418,9 +505,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -433,7 +519,8 @@
       </physics>
     </joint>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_4</joint_name>
       <sub_topic>servo_4</sub_topic>
       <p_gain>10</p_gain>
@@ -447,9 +534,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -462,7 +548,8 @@
       </physics>
     </joint>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_5</joint_name>
       <sub_topic>servo_5</sub_topic>
       <p_gain>10</p_gain>
@@ -476,9 +563,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -491,7 +577,8 @@
       </physics>
     </joint>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_2</joint_name>
       <sub_topic>servo_2</sub_topic>
       <p_gain>10</p_gain>
@@ -505,9 +592,8 @@
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -520,7 +606,8 @@
       </physics>
     </joint>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_3</joint_name>
       <sub_topic>servo_3</sub_topic>
       <p_gain>10</p_gain>
@@ -615,7 +702,8 @@
         <Cen_ctrl>0.001613</Cen_ctrl>
       </control_surface>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_puller_joint</jointName>
       <linkName>rotor_puller</linkName>
       <turningDirection>cw</turningDirection>

@@ -78,9 +78,10 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
       <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>
         <imu>
@@ -139,10 +140,12 @@
         </imu>
       </sensor>
       <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>
       <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
@@ -153,6 +156,32 @@
             </noise>
           </pressure>
         </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
       </sensor>
     </link>
     <link name="airspeed">
@@ -182,6 +211,7 @@
         </material>
       </visual>
       <!-- <sensor name="air_speed" type="air_speed">
+        <gz_frame_id>airspeed</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>5.0</update_rate>
         <enable_metrics>false</enable_metrics>
@@ -222,10 +252,10 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode />
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -251,7 +281,7 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
     </link>
     <joint name='rotor_puller_joint' type='revolute'>
@@ -310,7 +340,7 @@
         </inertia>
       </inertial>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <visual name="LeftWheelVisual">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
@@ -353,7 +383,7 @@
         </inertia>
       </inertial>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <visual name="RightWheelVisual">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
@@ -396,7 +426,7 @@
         </inertia>
       </inertial>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <visual name="CenterWheelVisual">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
@@ -567,8 +597,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -587,8 +617,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -607,8 +637,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -627,8 +657,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -647,9 +677,8 @@
       <axis>
         <xyz>0 1 0</xyz>
         <limit>
-          <!-- -30/+30 deg. -->
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -668,8 +697,8 @@
       <axis>
         <xyz>0 0 1</xyz>
         <limit>
-          <lower>-0.53</lower>
-          <upper>0.53</upper>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
         </limit>
         <dynamics>
           <damping>1.000</damping>
@@ -692,6 +721,7 @@
           <upper>1.79769e+308</upper>
         </limit>
         <dynamics>
+          <friction>0.02</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -708,6 +738,7 @@
           <upper>1.79769e+308</upper>
         </limit>
         <dynamics>
+          <friction>0.02</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -724,6 +755,7 @@
           <upper>1.79769e+308</upper>
         </limit>
         <dynamics>
+          <friction>0.02</friction>
           <spring_reference>0</spring_reference>
           <spring_stiffness>0</spring_stiffness>
         </dynamics>
@@ -732,7 +764,7 @@
     <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
       <a0>0.05984281113</a0>
       <cla>4.752798721</cla>
-      <cda>0.6417112299</cda>
+      <cda>1.5</cda>
       <cma>0.0</cma>
       <alpha_stall>0.3391428111</alpha_stall>
       <cla_stall>-3.85</cla_stall>
@@ -748,7 +780,8 @@
       <control_joint_rad_to_cl>-0.3</control_joint_rad_to_cl>
     </plugin>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_0</joint_name>
       <sub_topic>servo_0</sub_topic>
       <p_gain>10.0</p_gain>
@@ -756,7 +789,7 @@
     <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
       <a0>0.05984281113</a0>
       <cla>4.752798721</cla>
-      <cda>0.6417112299</cda>
+      <cda>1.5</cda>
       <cma>0.0</cma>
       <alpha_stall>0.3391428111</alpha_stall>
       <cla_stall>-3.85</cla_stall>
@@ -772,7 +805,8 @@
       <control_joint_rad_to_cl>-0.3</control_joint_rad_to_cl>
     </plugin>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_1</joint_name>
       <sub_topic>servo_1</sub_topic>
       <p_gain>10.0</p_gain>
@@ -832,7 +866,8 @@
       <control_joint_rad_to_cl>-4.0</control_joint_rad_to_cl>
     </plugin>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>servo_2</joint_name>
       <sub_topic>servo_2</sub_topic>
       <p_gain>10.0</p_gain>
@@ -847,7 +882,7 @@
       <cda_stall>-0.9233984055</cda_stall>
       <cma_stall>0</cma_stall>
       <cp>-0.5 0 0.05</cp>
-      <area>0.02</area>
+      <area>0.1</area>
       <air_density>1.2041</air_density>
       <forward>1 0 0</forward>
       <upward>0 1 0</upward>
@@ -856,19 +891,21 @@
       <control_joint_rad_to_cl>0.8</control_joint_rad_to_cl>
     </plugin>
     <plugin
-      filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
       <joint_name>rudder_joint</joint_name>
       <sub_topic>servo_3</sub_topic>
       <p_gain>10.0</p_gain>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_puller_joint</jointName>
       <linkName>rotor_puller</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
       <maxRotVelocity>1000</maxRotVelocity>
-      <motorConstant>2.44858e-05</motorConstant>
+      <motorConstant>1.2e-05</motorConstant>
       <momentConstant>0.016</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>0</motorNumber>
