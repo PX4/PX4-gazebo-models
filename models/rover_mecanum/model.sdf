@@ -3,19 +3,19 @@
   <model name='rover_mecanum'>
     <!--Links-->
     <link name='base_link'>
-      <pose relative_to='__model__'>0 0 0.0905 0 0 0</pose>
-			<inertial>
-				<pose>0 0 0 0 0 0</pose>
-				<mass>2</mass>
-				<inertia>
-					<ixx>0.005471</ixx>
-					<ixy>0.0</ixy>
-					<ixz>0.0</ixz>
-					<iyy>0.015906</iyy>
-					<iyz>0.0</iyz>
-					<izz>0.01897</izz>
-				</inertia>
-			</inertial>
+      <pose relative_to='__model__'>0 0 0.08 0 0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>2</mass>
+        <inertia>
+          <ixx>0.005471</ixx>
+          <ixy>0.0</ixy>
+          <ixz>0.0</ixz>
+          <iyy>0.015906</iyy>
+          <iyz>0.0</iyz>
+          <izz>0.01897</izz>
+        </inertia>
+      </inertial>
       <visual name='visual'>
         <pose>0 0 0 0 0 0</pose>
         <geometry>
@@ -28,11 +28,10 @@
       <pose>0 0 0 0 0 0</pose>
         <geometry>
           <box>
-            <size>0.2 0.16 0.085</size>
+            <size>0.297 0.16 0.085</size>
           </box>
         </geometry>
       </collision>
-      <velocity_decay/>
 
       <!--Sensors-->
       <sensor name="air_pressure_sensor" type="air_pressure">
@@ -131,32 +130,32 @@
     </link>
 
     <link name='wheel_rear_left_link'>
-      <pose relative_to="base_link">-0.1 0.104 0 -1.5707 0 0</pose>
-			<inertial>
-				<mass>0.143</mass>
-				<inertia>
-					<ixx>0.00011155</ixx>
-					<ixy>0</ixy>
-					<ixz>0</ixz>
-					<iyy>0.00011155</iyy>
-					<iyz>0</iyz>
-					<izz>0.0001682</izz>
-				</inertia>
-			</inertial>
+      <pose relative_to="base_link">-0.1 0.104 0 -1.57079632679 0 0</pose>
+      <inertial>
+        <mass>0.143</mass>
+        <inertia>
+          <ixx>0.00011155</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00011155</iyy>
+          <iyz>0</iyz>
+          <izz>0.0001682</izz>
+        </inertia>
+      </inertial>
       <visual name='visual'>
-        <pose>0 0 0 1.5707 0 0</pose>
+        <pose>0 0 0 1.57079632679 0 0</pose>
         <geometry>
-					<mesh>
-						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
-						<!-- scale mesh to radius == 0.1 -->
-						<scale>0.001 0.001 0.001</scale>
-					</mesh>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+              <!-- scale mesh to radius == 0.05 -->
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-					<ambient>0.2 0.2 0.2 1</ambient>
-					<diffuse>0.2 0.2 0.2 1</diffuse>
-					<specular>0.2 0.2 0.2 1</specular>
-				</material>
+          <ambient>0.2 0.2 0.2 1</ambient>
+          <diffuse>0.2 0.2 0.2 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
       </visual>
       <collision name='collision'>
         <geometry>
@@ -177,36 +176,35 @@
           </friction>
         </surface>
       </collision>
-      <velocity_decay/>
     </link>
 
     <link name='wheel_rear_right_link'>
-      <pose relative_to="base_link">-0.1 -0.104 0 -1.5707 0 0</pose>
-			<inertial>
-				<mass>0.143</mass>
-				<inertia>
-					<ixx>0.00011155</ixx>
-					<ixy>0</ixy>
-					<ixz>0</ixz>
-					<iyy>0.00011155</iyy>
-					<iyz>0</iyz>
-					<izz>0.0001682</izz>
-				</inertia>
-			</inertial>
+      <pose relative_to="base_link">-0.1 -0.104 0 -1.57079632679 0 0</pose>
+      <inertial>
+        <mass>0.143</mass>
+        <inertia>
+          <ixx>0.00011155</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00011155</iyy>
+          <iyz>0</iyz>
+          <izz>0.0001682</izz>
+        </inertia>
+      </inertial>
       <visual name='visual'>
-        <pose>0 0 0 1.5707 0 0</pose>
+        <pose>0 0 0 1.57079632679 0 0</pose>
         <geometry>
-					<mesh>
-						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
-						<!-- scale mesh to radius == 0.1 -->
-						<scale>0.001 0.001 0.001</scale>
-					</mesh>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+              <!-- scale mesh to radius == 0.05 -->
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-					<ambient>0.2 0.2 0.2 1</ambient>
-					<diffuse>0.2 0.2 0.2 1</diffuse>
-					<specular>0.2 0.2 0.2 1</specular>
-				</material>
+          <ambient>0.2 0.2 0.2 1</ambient>
+          <diffuse>0.2 0.2 0.2 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
       </visual>
       <collision name='collision'>
         <geometry>
@@ -227,36 +225,35 @@
           </friction>
         </surface>
       </collision>
-      <velocity_decay/>
     </link>
 
     <link name='wheel_front_left_link'>
-      <pose relative_to="base_link">0.1 0.104 0 -1.5707 0 0</pose>
-			<inertial>
-				<mass>0.143</mass>
-				<inertia>
-					<ixx>0.00011155</ixx>
-					<ixy>0</ixy>
-					<ixz>0</ixz>
-					<iyy>0.00011155</iyy>
-					<iyz>0</iyz>
-					<izz>0.0001682</izz>
-				</inertia>
-			</inertial>
+      <pose relative_to="base_link">0.1 0.104 0 -1.57079632679 0 0</pose>
+      <inertial>
+        <mass>0.143</mass>
+        <inertia>
+          <ixx>0.00011155</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00011155</iyy>
+          <iyz>0</iyz>
+          <izz>0.0001682</izz>
+        </inertia>
+      </inertial>
       <visual name='visual'>
-        <pose>0 0 0 1.5707 0 0</pose>
+        <pose>0 0 0 1.57079632679 0 0</pose>
         <geometry>
-					<mesh>
-						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
-						<!-- scale mesh to radius == 0.1 -->
-						<scale>0.001 0.001 0.001</scale>
-					</mesh>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+              <!-- scale mesh to radius == 0.05 -->
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-					<ambient>0.2 0.2 0.2 1</ambient>
-					<diffuse>0.2 0.2 0.2 1</diffuse>
-					<specular>0.2 0.2 0.2 1</specular>
-				</material>
+          <ambient>0.2 0.2 0.2 1</ambient>
+          <diffuse>0.2 0.2 0.2 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
       </visual>
       <collision name='collision'>
         <geometry>
@@ -277,36 +274,35 @@
           </friction>
         </surface>
       </collision>
-      <velocity_decay/>
     </link>
 
     <link name='wheel_front_right_link'>
-      <pose relative_to="base_link">0.1 -0.104 0 -1.5707 0 0</pose>
-			<inertial>
-				<mass>0.143</mass>
-				<inertia>
-					<ixx>0.00011155</ixx>
-					<ixy>0</ixy>
-					<ixz>0</ixz>
-					<iyy>0.00011155</iyy>
-					<iyz>0</iyz>
-					<izz>0.0001682</izz>
-				</inertia>
-			</inertial>
+      <pose relative_to="base_link">0.1 -0.104 0 -1.57079632679 0 0</pose>
+      <inertial>
+        <mass>0.143</mass>
+        <inertia>
+          <ixx>0.00011155</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00011155</iyy>
+          <iyz>0</iyz>
+          <izz>0.0001682</izz>
+        </inertia>
+      </inertial>
       <visual name='visual'>
-        <pose>0 0 0 1.5707 0 0</pose>
+        <pose>0 0 0 1.57079632679 0 0</pose>
         <geometry>
-					<mesh>
-						<uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
-						<!-- scale mesh to radius == 0.1 -->
-						<scale>0.001 0.001 0.001</scale>
-					</mesh>
+          <mesh>
+            <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Mecanum lift/tip/files/meshes/mecanum_wheel_right.STL</uri>
+              <!-- scale mesh to radius == 0.05 -->
+            <scale>0.001 0.001 0.001</scale>
+          </mesh>
         </geometry>
         <material>
-					<ambient>0.2 0.2 0.2 1</ambient>
-					<diffuse>0.2 0.2 0.2 1</diffuse>
-					<specular>0.2 0.2 0.2 1</specular>
-				</material>
+          <ambient>0.2 0.2 0.2 1</ambient>
+          <diffuse>0.2 0.2 0.2 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
       </visual>
       <collision name='collision'>
         <geometry>
@@ -327,7 +323,6 @@
           </friction>
         </surface>
       </collision>
-      <velocity_decay/>
     </link>
 
     <!-- Joints -->
@@ -374,6 +369,7 @@
       <control_type>velocity</control_type>
       <use_actuator_msg>true</use_actuator_msg>
       <actuator_number>0</actuator_number>
+      <p_gain>10.0</p_gain>
     </plugin>
 
     <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
@@ -382,6 +378,7 @@
       <control_type>velocity</control_type>
       <use_actuator_msg>true</use_actuator_msg>
       <actuator_number>1</actuator_number>
+      <p_gain>10.0</p_gain>
     </plugin>
 
     <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
@@ -390,6 +387,7 @@
       <control_type>velocity</control_type>
       <use_actuator_msg>true</use_actuator_msg>
       <actuator_number>2</actuator_number>
+      <p_gain>10.0</p_gain>
     </plugin>
 
     <plugin filename="gz-sim-joint-controller-system" name="gz::sim::systems::JointController">
@@ -398,6 +396,7 @@
       <control_type>velocity</control_type>
       <use_actuator_msg>true</use_actuator_msg>
       <actuator_number>3</actuator_number>
+      <p_gain>10.0</p_gain>
     </plugin>
 
     <plugin filename="gz-sim-joint-state-publisher-system" name="gz::sim::systems::JointStatePublisher">
