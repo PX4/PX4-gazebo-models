@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name="mountain">
+    <static>true</static>
+    <link name="link">
+    <collision name="collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1100 1000 1</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <pose>0 0 -30 0 0 0</pose>
+        <geometry>
+          <heightmap>
+            <use_terrain_paging>true</use_terrain_paging>
+            <texture>
+              <diffuse>materials/textures/japanese_albedo.png</diffuse>
+              <normal>materials/textures/japanese_normal.png</normal>
+              <size>200</size>
+            </texture>
+            <texture>
+              <diffuse>materials/textures/mud_cracked_albedo.png</diffuse>
+              <normal>materials/textures/mud_cracked_normal.png</normal>
+              <size>50</size>
+            </texture>
+            <texture>
+              <diffuse>materials/textures/rocky_terrain_albedo.png</diffuse>
+              <normal>materials/textures/rocky_terrain_normal.png</normal>
+              <size>200</size>
+            </texture>
+            <blend>
+              <min_height>3</min_height>
+              <fade_dist>5</fade_dist>
+            </blend>
+            <blend>
+              <min_height>10</min_height>
+              <fade_dist>20</fade_dist>
+            </blend>
+            <blend>
+              <min_height>100</min_height>
+              <fade_dist>20</fade_dist>
+            </blend>
+            <uri>materials/textures/mount.png</uri>
+            <size>1000 1000 150.0</size>
+          </heightmap>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

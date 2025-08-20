@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="realsense">
+    <self_collide>false</self_collide>
+    <static>false</static>
+    <link name="realsense/base_link">
+      <inertial>
+        <mass>0.0615752</mass>
+        <inertia>
+          <ixx>9.108e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>2.51e-06</iyy>
+          <iyz>0</iyz>
+          <izz>8.931e-05</izz>
+        </inertia>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+      </inertial>
+      <collision name="realsense/collision">
+        <pose>0.013 0 0 0 0 1.57</pose>
+        <geometry>
+          <box>
+            <size>0.091 0.026 0.026</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="realsense/visual">
+        <pose>0 0 0 0 0 1.57</pose>
+        <geometry>
+          <mesh>
+            <uri>model://realsense/meshes/realsense.dae</uri>
+            <submesh>
+              <name>RealSense</name>
+              <center>false</center>
+            </submesh>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0</diffuse>
+          <specular>1.0 1.0 1.0</specular>
+          <pbr>
+            <metal>
+              <albedo_map>
+                model://realsense/materials/textures/RealSense_Albedo.png</albedo_map>
+              <normal_map>
+                model://realsense/materials/textures/RealSense_Normal.png</normal_map>
+              <metalness_map>
+                model://realsense/materials/textures/RealSense_Metalness.png</metalness_map>
+              <roughness_map>
+                model://realsense/materials/textures/RealSense_Roughness.png</roughness_map>
+            </metal>
+          </pbr>
+          <script>
+            <uri>model://realsense/materials/scripts/</uri>
+            <uri>model://realsense/materials/textures/</uri>
+            <name>UrbanTile/RealSense_Diffuse</name>
+          </script>
+        </material>
+      </visual>
+
+      <sensor name="imager_left" type="camera">
+        <pose relative_to="realsense/base_link">-0.075 0.0475 0.0 0 0 0</pose>
+        <camera>
+          <horizontal_fov>1.51844</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>3000</far>
+          </clip>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>/realsense/camera/left</topic>
+      </sensor>
+
+      <sensor name="imager_right" type="camera">
+        <pose relative_to="realsense/base_link">-0.075 -0.0475 0.0 0 0 0</pose>
+        <camera>
+          <horizontal_fov>1.51844</horizontal_fov>
+          <image>
+            <width>1280</width>
+            <height>720</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>3000</far>
+          </clip>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>/realsense/camera/right</topic>
+      </sensor>
+
+      <sensor name="imu_sensor" type="imu">
+        <pose>0 0 0 0 -1.5707 0</pose>
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00018665</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.00186</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+        <topic>/realsense/imu</topic>
+      </sensor>
+    </link>
+  </model>
+</sdf>
