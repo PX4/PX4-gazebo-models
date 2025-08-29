@@ -214,7 +214,7 @@
     </model>
 
     <include>
-      <pose>0 0 0 0 0 0</pose>
+      <pose>0 0 0 0 -0.3 0</pose>
       <uri>model://catapult</uri>
     </include>
 

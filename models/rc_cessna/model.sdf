@@ -250,7 +250,7 @@
           <izz>0.000167604</izz>
         </inertia>
       </inertial>
-      <collision name='rotor_puller_collision'>
+      <!-- <collision name='rotor_puller_collision'>
         <pose>0 0 0 0 -1.57079632679 0</pose>
         <geometry>
           <box>
@@ -265,7 +265,7 @@
             <ode/>
           </friction>
         </surface>
-      </collision>
+      </collision> -->
       <!-- <visual name='rotor_puller_collision_visual'>
         <pose>0 0 0 0 -1.57079632679 0</pose>
         <geometry>
@@ -357,7 +357,7 @@
           </cylinder>
         </geometry>
       </visual> -->
-      <collision name="LeftWheelCollision">
+      <!-- <collision name="LeftWheelCollision">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
           <cylinder>
@@ -374,7 +374,7 @@
             </ode>
           </friction>
         </surface>
-      </collision>
+      </collision> -->
     </link>
     <link name="RightWheel">
       <pose relative_to="RightWheelJoint">0 0 0 0 0 0</pose>
@@ -400,7 +400,7 @@
           </cylinder>
         </geometry>
       </visual> -->
-      <collision name="RightWheelCollision">
+      <!-- <collision name="RightWheelCollision">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
           <cylinder>
@@ -417,7 +417,7 @@
             </ode>
           </friction>
         </surface>
-      </collision>
+      </collision> -->
     </link>
     <link name="CenterWheel">
       <pose relative_to="CenterWheelJoint">0 0 0 0 0 0</pose>
@@ -443,7 +443,7 @@
           </cylinder>
         </geometry>
       </visual> -->
-      <collision name="CenterWheelCollision">
+      <!-- <collision name="CenterWheelCollision">
         <pose>0 0 0 -1.57079632679 0 0</pose>
         <geometry>
           <cylinder>
@@ -460,7 +460,7 @@
             </ode>
           </friction>
         </surface>
-      </collision>
+      </collision> -->
     </link>
     <link name="right_elevon">
       <inertial>
@@ -919,7 +919,7 @@
     </plugin>
 
     <plugin filename="libgz-sim-catapult-system.so" name="gz::sim::systems::GzSimCatapultSystem">
-        <direction>1.0 0.0 1.0</direction>
+        <direction>1.0 0.0 2.0</direction>
         <duration>1.21</duration>
         <force>75</force>
         <motor_number>1</motor_number>
