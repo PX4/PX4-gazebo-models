@@ -333,13 +333,8 @@
       name="gz::sim::systems::JointPositionController">
       <joint_name>cgo3_horizontal_arm_joint</joint_name>
       <sub_topic>command/gimbal_roll</sub_topic>
-      <p_gain>0.8</p_gain>
-      <i_gain>0.035</i_gain>
-      <d_gain>0.02</d_gain>
-      <i_max>0</i_max>
-      <i_min>0</i_min>
-      <cmd_max>1.57</cmd_max>
-      <cmd_min>-1.57</cmd_min>
+      <use_velocity_commands>true</use_velocity_commands>
+      <cmd_max>1.0</cmd_max>
     </plugin>
 
     <plugin
@@ -347,28 +342,19 @@
       name="gz::sim::systems::JointPositionController">
       <joint_name>cgo3_camera_joint</joint_name>
       <sub_topic>command/gimbal_pitch</sub_topic>
-      <p_gain>0.8</p_gain>
-      <i_gain>0.01245</i_gain>
-      <d_gain>0.015</d_gain>
-      <i_max>0</i_max>
-      <i_min>0</i_min>
-      <cmd_max>1.2</cmd_max>
-      <cmd_min>-1.2</cmd_min>
+      <use_velocity_commands>true</use_velocity_commands>
     </plugin>
 
-    <plugin
-      filename="gz-sim-joint-position-controller-system"
-      name="gz::sim::systems::JointPositionController">
-      <joint_name>cgo3_vertical_arm_joint</joint_name>
-      <sub_topic>command/gimbal_yaw</sub_topic>
-      <p_gain>0.3</p_gain>
-      <i_gain>0.01245</i_gain>
-      <d_gain>0.015</d_gain>
-      <i_max>0</i_max>
-      <i_min>0</i_min>
-      <cmd_max>1.57</cmd_max>
-      <cmd_min>-1.57</cmd_min>
-    </plugin>
+      <plugin
+  filename="gz-sim-joint-position-controller-system"
+  name="gz::sim::systems::JointPositionController">
+  <joint_name>cgo3_vertical_arm_joint</joint_name>
+  <sub_topic>command/gimbal_yaw</sub_topic>
+  <use_velocity_commands>true</use_velocity_commands>
+  <cmd_max>1.0</cmd_max>
+</plugin>
+
+
 
   </model>
 </sdf>
