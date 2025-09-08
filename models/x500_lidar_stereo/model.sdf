@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='x500_lidar_stereo'>
+    <include merge='true'>
+      <uri>x500</uri>
+    </include>
+    <!-- Left Livox MID360 -->
+    <include>
+      <uri>model://livox_mid360</uri>
+      <name>livox_left</name>
+      <pose relative_to="base_link">0 0.2 0.15 -0.789 0 0</pose>
+      <plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
+        <range>
+          <min>1</min>
+          <max>100</max>
+        </range>
+        <update_rate>10</update_rate>
+        <update_on_paused_sim>false</update_on_paused_sim>
+        <topic>rgl_lidar/left</topic>
+        <frame>RGLLidar_left</frame>
+        <pattern_preset>Livox Mid360</pattern_preset>
+      </plugin>
+    </include>
+
+    <joint name="livox_left_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>livox_left::link</child>
+    </joint>
+
+
+    <!-- Right Livox MID360 -->
+    <include>
+      <uri>model://livox_mid360</uri>
+      <name>livox_right</name>
+      <pose relative_to="base_link">0 -0.2 0.15 0.789 0 0</pose>
+      <plugin filename="RGLServerPluginInstance" name="rgl::RGLServerPluginInstance">
+        <range>
+          <min>1</min>
+          <max>100</max>
+        </range>
+        <update_rate>10</update_rate>
+        <update_on_paused_sim>false</update_on_paused_sim>
+        <topic>rgl_lidar/right</topic>
+        <frame>RGLLidar_right</frame>
+        <pattern_preset>Livox Mid360</pattern_preset>
+      </plugin>
+    </include>
+
+    <joint name="livox_right_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>livox_right::link</child>
+    </joint>
+
+  </model>
+</sdf>
