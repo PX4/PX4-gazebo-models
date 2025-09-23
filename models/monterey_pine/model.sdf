@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="monterey_pine">
+    <link name="pine_link">
+
+      <visual name="pine_visual">
+        <geometry>
+          <mesh>
+            <uri>model://monterey_pine/meshes/pine_tree.glb</uri>
+            <scale>0.05 0.05 0.05</scale>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <!-- Collision: keep it simple (don’t use the full mesh!) -->
+      <collision name="pine_collision">
+        <geometry>
+          <!-- Simple bounding box for physics -->
+          <box>
+            <size>2 2 12</size>
+          </box>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>

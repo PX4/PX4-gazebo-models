@@ -14,6 +14,11 @@
       <background>0.699999988 0.699999988 0.699999988 1</background>
       <shadows>true</shadows>
     </scene>
+    <include>
+      <uri>model://monterey_pine</uri>
+      <name>monterey pine tree</name>
+      <pose>2.71574 -2.80395 0 1.57 0 0.006057</pose>
+    </include>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <world_frame_orientation>ENU</world_frame_orientation>
@@ -72,7 +77,7 @@
       <self_collide>false</self_collide>
     </model>
     <include>
-      <uri>file:///home/bhenriquezsoto/Documents/ur_ws/PX4-tarlab/Tools/simulation/gz/models/x500_gimbal_lidar</uri>
+      <uri>model://x500_gimbal_lidar</uri>
       <name>x500_gimbal_lidar_0</name>
       <pose>-1.7699923780426647e-10 1.4530344684798604e-13 -0.013000178695103864 1.102662532942879e-11 1.3431614392467661e-08 -1.1666091109295777e-17</pose>
     </include>
