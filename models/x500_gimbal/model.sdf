@@ -6,7 +6,7 @@
     </include>
     <include merge='true'>
       <uri>model://gimbal</uri>
-      <pose>0 0 0.26 0 0 3.14</pose>
+      <pose>0 0 0.1 0 0 0</pose>
     </include>
     <joint name="GimbalAttachJoint" type="fixed">
       <parent>base_link</parent>

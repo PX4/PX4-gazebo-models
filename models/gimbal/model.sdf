@@ -66,7 +66,7 @@
     <joint name='cgo3_vertical_arm_joint' type='revolute'>
       <child>cgo3_vertical_arm_link</child>
       <parent>cgo3_mount_link</parent>
-      <pose>-0.02552 0 0 0 0 0</pose>
+      <pose>-0.01652 0 0 0 0 0</pose>
       <axis>
         <xyz>0 0 -1</xyz>
         <limit>
@@ -123,7 +123,7 @@
     <joint name='cgo3_horizontal_arm_joint' type='revolute'>
       <child>cgo3_horizontal_arm_link</child>
       <parent>cgo3_vertical_arm_link</parent>
-      <pose>0 0 -0.1619 0 0 0</pose>
+      <pose>0 0 0 0 0 0</pose>
       <axis>
         <xyz>-1 0 0</xyz>
         <limit>
@@ -162,7 +162,6 @@
         </inertia>
       </inertial>
       <collision name='cgo3_camera_collision'>
-        <pose>-0.0412 0 -0.162 0 0 0</pose>
         <geometry>
           <sphere>
             <radius>0.035</radius>
@@ -203,7 +202,7 @@
         <gz_frame_id>camera_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>
-        <pose>-0.0412 0 -0.162 0 0 3.14</pose>
+        <pose>0 0 0 0 0 3.14</pose>
         <imu>
           <angular_velocity>
             <x>
@@ -262,11 +261,9 @@
 
       <sensor name="camera" type="camera">
         <gz_frame_id>camera_link</gz_frame_id>
-        <pose>-0.0412 0 -0.162 0 0 3.14</pose>
         <camera>
           <horizontal_fov>2.0</horizontal_fov>
           <image>
-            <format>R8G8B8</format>
             <format>R8G8B8</format>
             <width>1280</width>
             <height>720</height>
@@ -286,9 +283,9 @@
     <joint name='cgo3_camera_joint' type='revolute'>
       <child>camera_link</child>
       <parent>cgo3_horizontal_arm_link</parent>
-      <pose>-0.0412 0 -0.162 0 0 0</pose>
+      <pose>0 0 0 0 0 0</pose>
       <axis>
-        <xyz>0 1 0</xyz>
+        <xyz>0 -1 0</xyz>
         <limit>
           <lower>-2.35619</lower>
           <upper>0.7854</upper>
