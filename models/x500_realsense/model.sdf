@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='x500_realsense'>
+    <include merge='true'>
+      <uri>x500</uri>
+    </include>
+    <include merge='true'>
+      <uri>model://realsense</uri>
+      <pose>.13 .0 .23 0 1.57  0</pose>
+    </include>
+    <joint name="CameraJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>realsense/base_link</child>
+      <pose relative_to="base_link">.12 .03 .1 0 0 0</pose>
+    </joint>
+    <plugin
+      filename="gz-sim-odometry-publisher-system"
+      name="gz::sim::systems::OdometryPublisher">
+      <dimensions>3</dimensions>
+    </plugin>
+  </model>
+</sdf>
