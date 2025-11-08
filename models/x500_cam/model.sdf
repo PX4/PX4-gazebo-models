@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <model name="x500_cam">
+
+    <include merge="true">
+      <uri>model://x500</uri>
+    </include>
+
+    <link name="front_camera_link">
+      <pose>0.05 0 0.03 0 0 0</pose>
+      
+      <sensor name="front_camera" type="camera">
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <camera>
+          <horizontal_fov>2.705</horizontal_fov>
+          <image>
+            <width>640</width>
+            
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.01</near>
+            <far>100</far>
+          </clip>
+          <lens>
+            <type>equidistant</type>
+            <scale_to_hfov>true</scale_to_hfov>
+          </lens>
+        </camera>
+        <topic>/drone/camera/image</topic>
+      </sensor>
+    </link>
+
+    <joint name="front_camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>front_camera_link</child>
+    </joint>
+
+  </model>
+</sdf>
