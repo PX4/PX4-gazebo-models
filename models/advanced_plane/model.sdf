@@ -614,7 +614,9 @@
       <i_gain>0</i_gain>
       <d_gain>0</d_gain>
     </plugin>
-
+    <plugin filename="libAirSpeedPlugin.so" name="px4::AirSpeed">
+      <link_name>base_link</link_name>
+    </plugin>
     <plugin filename="gz-sim-advanced-lift-drag-system" name="gz::sim::systems::AdvancedLiftDrag">
       <a0>0.0</a0>
       <CL0>0.15188</CL0>
