@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
     <model name="atmos_dual">
+        <pose>0 0 0.1 0 -0 0</pose>
         <link name="base_link">
             <gravity>true</gravity>
             <inertial>
-                <pose>0 0 0.25 0 -0 0</pose>
+                <pose>0 0 0.0 0 -0 0</pose>
                 <mass>16.8</mass>
                 <inertia>
                     <ixx>0.1454</ixx>
@@ -16,10 +17,10 @@
                 </inertia>
             </inertial>
             <collision name="base_link_collision">
-                <pose>0 0 0.25 0 -0 0</pose>
+                <pose>0 0 0.4 0 -0 0</pose>
                 <geometry>
                     <cylinder>
-                        <length>0.5</length>
+                        <length>0.8</length>
                         <radius>0.2</radius>
                     </cylinder>
                 </geometry>
@@ -40,7 +41,7 @@
                 </surface>
             </collision>
             <visual name="base_link_visual">
-                <pose>0 0 0.1 0 0 -1.57079</pose>
+                <pose>0 0 0.05 0 0 -1.57079</pose>
                 <geometry>
                     <mesh>
                         <uri>model://atmos_dual/meshes/atmos_dual.glb</uri>
@@ -439,7 +440,7 @@
             <gravity>true</gravity>
             <self_collide>false</self_collide>
             <velocity_decay />
-            <pose>0.105 0 0.495 1.5708 0 0</pose>
+            <pose>0.105 0 0.545 1.5708 0 0</pose>
             <inertial>
                 <mass>0.016076923076923075</mass>
                 <inertia>
@@ -483,7 +484,7 @@
             <gravity>true</gravity>
             <self_collide>false</self_collide>
             <velocity_decay />
-            <pose>-0.105 0 0.495 1.5708 0 3.1415</pose>
+            <pose>-0.105 0 0.545 1.5708 0 3.1415</pose>
             <inertial>
                 <mass>0.016076923076923075</mass>
                 <inertia>
@@ -527,7 +528,7 @@
             <gravity>true</gravity>
             <self_collide>false</self_collide>
             <velocity_decay />
-            <pose>0 0.105 0.495 1.5708 0 1.5708</pose>
+            <pose>0 0.105 0.545 1.5708 0 1.5708</pose>
             <inertial>
                 <mass>0.016076923076923075</mass>
                 <inertia>
@@ -571,7 +572,7 @@
             <gravity>true</gravity>
             <self_collide>false</self_collide>
             <velocity_decay />
-            <pose>0 -0.105 0.495 1.5708 0 -1.5708</pose>
+            <pose>0 -0.105 0.545 1.5708 0 -1.5708</pose>
             <inertial>
                 <mass>0.016076923076923075</mass>
                 <inertia>
