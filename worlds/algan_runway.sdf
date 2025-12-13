@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="algan_runway">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Sun</uri>
+    </include>
+
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Ground Plane</uri>
+    </include>
+
+    <include>
+      <uri>model://algan_runway</uri>
+      <name>algan_runway</name>
+      <pose>0 0 0.02 0 0 0</pose> </include>
+
+    <include>
+      <uri>model://algan_qr</uri>
+      <name>algan_qr</name>
+      <pose>0 30 0.06 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>
