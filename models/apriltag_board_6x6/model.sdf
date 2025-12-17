@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <model name="apriltag_board_6x6">
+    <static>true</static>
+    <link name="link">
+      <visual name="apriltag_visual">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>0.841 1.189</size>
+          </plane>
+        </geometry>
+        <material>
+          <ambient>0.6 0.6 0.6 1</ambient>
+          <diffuse>0.85 0.85 0.85 1</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://apriltag_board_6x6/image.png</albedo_map>
+              <metalness>0.0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="collision">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>2 2</size>
+          </plane>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>
