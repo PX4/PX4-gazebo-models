@@ -173,7 +173,7 @@
     <!-- ========================= -->
     <link name="motor_0">
       <!-- base_link 기준 위치 -->
-      <pose>0 0 0.025 0 0 0</pose>
+      <pose>-0.42048 -0.76466 0.22569 0 0 0</pose>
       <inertial>
         <mass>0.05</mass>
         <inertia> <!--모터 중심에서 모터 끝까지?-->
@@ -203,6 +203,7 @@
       </collision>
 
       <visual name="motor_0_visual">
+        <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -242,7 +243,8 @@
     <!-- ========================= -->
     <link name="rotor_0">
       <!-- motor 기준 상대 위치 -->
-      <pose>0 0 0.025 0 0 0</pose>
+      <!--<pose>-0.44136 -0.76466 0.22011 0 0 0</pose>-->
+      <pose>-0.43092 -0.76458 0.22011 0 0 0</pose>
 
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -256,23 +258,6 @@
           <izz>0.000167604</izz>
         </inertia>
       </inertial>
-
-      <collision name="rotor_0_collision">
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.1</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode />
-          </contact>
-          <friction>
-            <ode />
-          </friction>
-        </surface>
-      </collision>
 
       <visual name="rotor_0_visual">
         <geometry>
@@ -295,6 +280,9 @@
     <joint name="rotor_0_joint" type="revolute">
       <child>rotor_0</child>
       <parent>motor_0</parent>
+
+      <pose relative_to="rotor_0">0 0 0 0 0 0</pose>
+
       <axis>
         <!-- 회전 축 (Z축) -->
         <xyz>0 0 1</xyz>
@@ -314,7 +302,7 @@
     <!-- ========================= -->
     <link name="motor_1">
       <!-- base_link 기준 위치 -->
-      <pose>0 0 0.025 0 0 0</pose>
+      <pose>-0.42047 0.55542 0.45677 0 0 0</pose>
       <inertial>
         <mass>0.05</mass>
         <inertia> <!--모터 중심에서 모터 끝까지?-->
@@ -383,7 +371,7 @@
     <!-- ========================= -->
     <link name="rotor_1">
       <!-- motor 기준 상대 위치 -->
-      <pose>0 0 0.025 0 0 0</pose>
+      <pose>-0.43107 0.55543 0.45068 0 0 0</pose>
 
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -397,23 +385,6 @@
           <izz>0.000167604</izz>
         </inertia>
       </inertial>
-
-      <collision name="rotor_1_collision">
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.1</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode />
-          </contact>
-          <friction>
-            <ode />
-          </friction>
-        </surface>
-      </collision>
 
       <visual name="rotor_1_visual">
         <geometry>
@@ -436,6 +407,8 @@
     <joint name="rotor_1_joint" type="revolute">
       <child>rotor_1</child>
       <parent>motor_1</parent>
+
+      <pose relative_to="rotor_1">0 0 0 0 0 0</pose>
       <axis>
         <!-- 회전 축 (Z축) -->
         <xyz>0 0 1</xyz>
@@ -456,7 +429,7 @@
     <!-- ========================= -->
     <link name="motor_2">
       <!-- base_link 기준 위치 -->
-      <pose>0 0 0.025 0 0 0</pose>
+      <pose>0.41824 0.55538 0.45673 0 0 0</pose>
       <inertial>
         <mass>0.05</mass>
         <inertia> <!--모터 중심에서 모터 끝까지?-->
@@ -525,7 +498,7 @@
     <!-- ========================= -->
     <link name="rotor_2">
       <!-- motor 기준 상대 위치 -->
-      <pose>0 0 0.025 0 0 0</pose>
+      <pose>0.42885 0.5554 0.45121 0 0 0</pose>
 
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -539,23 +512,6 @@
           <izz>0.000167604</izz>
         </inertia>
       </inertial>
-
-      <collision name="rotor_2_collision">
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.1</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode />
-          </contact>
-          <friction>
-            <ode />
-          </friction>
-        </surface>
-      </collision>
 
       <visual name="rotor_2_visual">
         <geometry>
@@ -578,6 +534,8 @@
     <joint name="rotor_2_joint" type="revolute">
       <child>rotor_2</child>
       <parent>motor_2</parent>
+
+      <pose relative_to="rotor_2">0 0 0 0 0 0</pose>
       <axis>
         <!-- 회전 축 (Z축) -->
         <xyz>0 0 1</xyz>
@@ -598,7 +556,7 @@
     <!-- ========================= -->
     <link name="motor_3">
       <!-- base_link 기준 위치 -->
-      <pose>0 0 0.025 0 0 0</pose>
+      <pose>0.41824 -0.77069 0.21975 0 0 0</pose>
       <inertial>
         <mass>0.05</mass>
         <inertia> <!--모터 중심에서 모터 끝까지?-->
@@ -667,7 +625,7 @@
     <!-- ========================= -->
     <link name="rotor_3">
       <!-- motor 기준 상대 위치 -->
-      <pose>0 0 0.025 0 0 0</pose>
+      <pose>0.42893 -0.7706 0.21357 0 0 0</pose>
 
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -681,23 +639,6 @@
           <izz>0.000167604</izz>
         </inertia>
       </inertial>
-
-      <collision name="rotor_3_collision">
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.1</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode />
-          </contact>
-          <friction>
-            <ode />
-          </friction>
-        </surface>
-      </collision>
 
       <visual name="rotor_3_visual">
         <geometry>
@@ -720,6 +661,8 @@
     <joint name="rotor_3_joint" type="revolute">
       <child>rotor_3</child>
       <parent>motor_3</parent>
+
+      <pose relative_to="rotor_3">0 0 0.025 0 0 0</pose>
       <axis>
         <!-- 회전 축 (Z축) -->
         <xyz>0 0 1</xyz>
@@ -737,6 +680,7 @@
 
 
     <link name="right_ailerone">
+      <pose>-1.0775 0.11176 0.34152 0 0 0</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -752,10 +696,11 @@
 
 
       <visual name="right_ailerone_visual">
+        <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://my_tilt_vtol/meshes/U60_Right_Aileron.dae</uri>
+            <uri>model://my_tilt_vtol/meshes/U60_Right_Ailerone.dae</uri>
           </mesh>
         </geometry>
         <material>  <!-- Blue -->
@@ -784,6 +729,7 @@
     </joint>
 
     <link name="left_ailerone">
+      <pose>1.0753 0.11176 0.34152 0 0 0</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -798,10 +744,11 @@
       </inertial>
 
     <visual name="left_ailerone_visual">
+      <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://my_tilt_vtol/meshes/U60_Left_Aileron.dae</uri>
+            <uri>model://my_tilt_vtol/meshes/U60_Left_Ailerone.dae</uri>
           </mesh>
         </geometry>
         <material>  <!-- Blue -->
@@ -832,6 +779,7 @@
 
 
     <link name="right_flap">
+      <pose>-0.50626 0.18437 0.33834 0 0 0</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -846,6 +794,7 @@
       </inertial>
 
     <visual name="right_flap_visual">
+      <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -878,6 +827,7 @@
     </joint>
 
     <link name="left_flap">
+      <pose>0.50402 0.18423 0.33783 0 0 0</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -892,6 +842,7 @@
       </inertial>
 
     <visual name="left_flap_visual">
+      <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -924,6 +875,7 @@
     </joint>
 
     <link name="right_ruddervator">
+      <pose>-0.36456 1.0628 0.65279 0 0 0</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -938,6 +890,7 @@
       </inertial>
 
     <visual name="right_rudder_visual">
+      <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -971,6 +924,7 @@
 
 
     <link name="left_ruddervator">
+      <pose>0.36223 1.0626 0.65284 0 0 0</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -985,6 +939,7 @@
       </inertial>
 
     <visual name="left_rudder_visual">
+      <pose>0 0 0 0 0 0</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -1015,6 +970,235 @@
         </dynamics>
       </axis>
     </joint>
+
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>0.05984281113</a0> <!--초기 받음각 즉, 양력이 0이되는 받음각-->
+      <cla>4.752798721</cla> <!--받음각 1도가 증가하면 CL 값이 얼마나 증가하는지. cl은 양력 계수로 알고 있음.-->
+      <cda>0.6417112299</cda> <!--실속 전 구간의 항력 기울기 | 뭔지 모르겠는데 받음각 1도 증가에 따른 항력 계수 값인가?-->
+      <cma>0.0</cma> <!-- 받음각에 따른 피칭 모멘트 계수 변화-->
+      <alpha_stall>0.3391428111</alpha_stall> <!--실속이 시작되는 받음각-->
+      <cla_stall>-3.85</cla_stall> <!--실속 후 구간의 양력 기울기-->
+      <cda_stall>-0.9233984055</cda_stall> <!--실속 후 구간의 항력 기울기-->
+      <cma_stall>0</cma_stall> <!--실속 후 모멘트 관련 기울기(계수)로 쓰이는 자리 | 뭔지 모르겠다~-->
+      <cp>-0.05 0.3 0.05</cp> <!--center of Pressure-->
+      <area>0.5</area> <!--플랫폼 면적-->
+      <air_density>1.2041</air_density> <!--공기 밀도-->
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+      <control_joint_name>
+        left_ailerone_joint
+      </control_joint_name>
+      <control_joint_rad_to_cl>-1.0</control_joint_rad_to_cl>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>left_ailerone_joint</joint_name>
+      <sub_topic>servo_0</sub_topic>
+    </plugin>
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>0.05984281113</a0> <!--각각 의미하는 바 적기-->
+      <cla>4.752798721</cla>
+      <cda>0.6417112299</cda>
+      <cma>0.0</cma>
+      <alpha_stall>0.3391428111</alpha_stall>
+      <cla_stall>-3.85</cla_stall>
+      <cda_stall>-0.9233984055</cda_stall>
+      <cma_stall>0</cma_stall>
+      <cp>-0.05 -0.3 0.05</cp>
+      <area>0.5</area>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+      <control_joint_name>
+        right_ailerone_joint
+      </control_joint_name>
+      <control_joint_rad_to_cl>-1.0</control_joint_rad_to_cl>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>right_ailerone_joint</joint_name>
+      <sub_topic>servo_1</sub_topic>
+    </plugin>
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>-0.2</a0> <!--위에 것이랑 무슨 차이가 있는 거지?-->
+      <cla>4.752798721</cla>
+      <cda>0.6417112299</cda>
+      <cma>0.0</cma>
+      <alpha_stall>0.3391428111</alpha_stall>
+      <cla_stall>-3.85</cla_stall>
+      <cda_stall>-0.9233984055</cda_stall>
+      <cma_stall>0</cma_stall>
+      <cp>-0.5 0 0</cp>
+      <area>0.01</area>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+      <control_joint_name>
+        left_ailerone_joint
+      </control_joint_name>
+      <control_joint_rad_to_cl>-12.0</control_joint_rad_to_cl>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>left_ailerone_joint</joint_name>
+      <sub_topic>servo_2</sub_topic>
+    </plugin>
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>0.0</a0>
+      <cla>4.752798721</cla>
+      <cda>0.6417112299</cda>
+      <cma>0.0</cma>
+      <alpha_stall>0.3391428111</alpha_stall>
+      <cla_stall>-3.85</cla_stall>
+      <cda_stall>-0.9233984055</cda_stall>
+      <cma_stall>0</cma_stall>
+      <cp>-0.5 0 0.05</cp>
+      <area>0.02</area>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 1 0</upward>
+      <link_name>base_link</link_name>
+      <!-- <control_joint_name>
+        rudder_joint
+      </control_joint_name> -->
+    </plugin>
+    <!-- <plugin
+      filename="gz-sim-joint-position-controller-system"
+    name="gz::sim::systems::JointPositionController">
+      <joint_name>rudder_joint</joint_name>
+      <sub_topic>servo_5</sub_topic>
+    </plugin> -->
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel"> <!--의미하는 바 적기-->
+      <jointName>rotor_0_joint</jointName>
+      <linkName>rotor_0</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>2e-05</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>0.0000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>20</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>motor_0_joint</joint_name>
+      <sub_topic>servo_3</sub_topic>
+      <p_gain>100</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+      <i_max>0.0</i_max>
+      <i_min>0.0</i_min>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+      <err_max>0.2</err_max>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>rotor_1_joint</jointName>
+      <linkName>rotor_1</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>2e-05</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>1</motorNumber>
+      <rotorDragCoefficient>0.0000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>20</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>motor_1_joint</joint_name>
+      <sub_topic>servo_4</sub_topic>
+      <p_gain>100</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+      <i_max>0.0</i_max>
+      <i_min>0.0</i_min>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+      <err_max>0.2</err_max>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>rotor_2_joint</jointName>
+      <linkName>rotor_2</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>2e-05</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>2</motorNumber>
+      <rotorDragCoefficient>0.0000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>20</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>motor_2_joint</joint_name>
+      <sub_topic>servo_5</sub_topic>
+      <p_gain>100</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+      <i_max>0.0</i_max>
+      <i_min>0.0</i_min>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+      <err_max>0.2</err_max>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>rotor_3_joint</jointName>
+      <linkName>rotor_3</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>2e-05</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>3</motorNumber>
+      <rotorDragCoefficient>0.0000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>20</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>motor_3_joint</joint_name>
+      <sub_topic>servo_6</sub_topic>
+      <p_gain>100</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+      <i_max>0.0</i_max>
+      <i_min>0.0</i_min>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+      <err_max>0.2</err_max>
+    </plugin>
+    <static>0</static>
 
   </model>
 </sdf>
