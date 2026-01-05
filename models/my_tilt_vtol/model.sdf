@@ -6,8 +6,8 @@
     <link name="base_link">
       <pose>0 0 0 0 0 0</pose>
       <inertial>
-        <mass>5.0</mass>
-        <inertia> <!--회전 관성 모멘트 기준점이 뭐지?-->
+        <mass>60.0</mass> <!-- 단위:kg -->
+        <inertia>
           <ixx>0.197563</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
@@ -173,7 +173,7 @@
     <!-- ========================= -->
     <link name="motor_0">
       <!-- base_link 기준 위치 -->
-      <pose>-0.42048 -0.76466 0.22569 0 0 0</pose>
+      <pose>-0.43192 0.32782 0.46634 0 0 0</pose>
       <inertial>
         <mass>0.05</mass>
         <inertia> <!--모터 중심에서 모터 끝까지?-->
@@ -186,12 +186,6 @@
         </inertia>
       </inertial>
       <collision name="motor_0_collision">
-        <geometry>
-          <cylinder> <!--모터 실린거 사이즈 필요. 이게 뭔데?-->
-            <length>0.035</length>
-            <radius>0.02</radius>
-          </cylinder>
-        </geometry>
         <surface>
           <contact>
             <ode />
@@ -224,7 +218,7 @@
       <child>motor_0</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>0.</lower>
           <upper>1.57</upper> <!--0도 ~ 90도-->
@@ -244,7 +238,7 @@
     <link name="rotor_0">
       <!-- motor 기준 상대 위치 -->
       <!--<pose>-0.44136 -0.76466 0.22011 0 0 0</pose>-->
-      <pose>-0.43092 -0.76458 0.22011 0 0 0</pose>
+      <pose>-0.43192 0.32782 0.46634 0 0 0</pose>
 
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -302,7 +296,7 @@
     <!-- ========================= -->
     <link name="motor_1">
       <!-- base_link 기준 위치 -->
-      <pose>-0.42047 0.55542 0.45677 0 0 0</pose>
+      <pose>-0.43214 1.6479 0.70337 0 0 0</pose>
       <inertial>
         <mass>0.05</mass>
         <inertia> <!--모터 중심에서 모터 끝까지?-->
@@ -315,12 +309,7 @@
         </inertia>
       </inertial>
       <collision name="motor_1_collision">
-        <geometry>
-          <cylinder> <!--모터 실린거 사이즈 필요. 이게 뭔데?-->
-            <length>0.035</length>
-            <radius>0.02</radius>
-          </cylinder>
-        </geometry>
+
         <surface>
           <contact>
             <ode />
@@ -352,7 +341,7 @@
       <child>motor_1</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>0.</lower>
           <upper>1.57</upper> <!--0도 ~ 90도-->
@@ -371,7 +360,7 @@
     <!-- ========================= -->
     <link name="rotor_1">
       <!-- motor 기준 상대 위치 -->
-      <pose>-0.43107 0.55543 0.45068 0 0 0</pose>
+      <pose>-0.43214 1.6479 0.70337 0 0 0</pose>
 
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -429,7 +418,7 @@
     <!-- ========================= -->
     <link name="motor_2">
       <!-- base_link 기준 위치 -->
-      <pose>0.41824 0.55538 0.45673 0 0 0</pose>
+      <pose>0.42774 1.6492 0.70337 0 0 0</pose>
       <inertial>
         <mass>0.05</mass>
         <inertia> <!--모터 중심에서 모터 끝까지?-->
@@ -442,12 +431,7 @@
         </inertia>
       </inertial>
       <collision name="motor_2_collision">
-        <geometry>
-          <cylinder> <!--모터 실린거 사이즈 필요. 이게 뭔데?-->
-            <length>0.035</length>
-            <radius>0.02</radius>
-          </cylinder>
-        </geometry>
+
         <surface>
           <contact>
             <ode />
@@ -479,7 +463,7 @@
       <child>motor_2</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>0.</lower>
           <upper>1.57</upper> <!--0도 ~ 90도-->
@@ -498,7 +482,7 @@
     <!-- ========================= -->
     <link name="rotor_2">
       <!-- motor 기준 상대 위치 -->
-      <pose>0.42885 0.5554 0.45121 0 0 0</pose>
+      <pose>0.42774 1.6492 0.70337 0 0 0</pose>
 
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -556,7 +540,7 @@
     <!-- ========================= -->
     <link name="motor_3">
       <!-- base_link 기준 위치 -->
-      <pose>0.41824 -0.77069 0.21975 0 0 0</pose>
+      <pose>0.42798 0.32182 0.46641 0 0 0</pose>
       <inertial>
         <mass>0.05</mass>
         <inertia> <!--모터 중심에서 모터 끝까지?-->
@@ -569,12 +553,7 @@
         </inertia>
       </inertial>
       <collision name="motor_3_collision">
-        <geometry>
-          <cylinder> <!--모터 실린거 사이즈 필요. 이게 뭔데?-->
-            <length>0.035</length>
-            <radius>0.02</radius>
-          </cylinder>
-        </geometry>
+
         <surface>
           <contact>
             <ode />
@@ -606,7 +585,7 @@
       <child>motor_3</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>0.</lower>
           <upper>1.57</upper> <!--0도 ~ 90도-->
@@ -625,7 +604,7 @@
     <!-- ========================= -->
     <link name="rotor_3">
       <!-- motor 기준 상대 위치 -->
-      <pose>0.42893 -0.7706 0.21357 0 0 0</pose>
+      <pose>0.42798 0.32182 0.46641 0 0 0</pose>
 
       <inertial>
         <pose>0 0 0 0 0 0</pose>
@@ -680,7 +659,7 @@
 
 
     <link name="right_ailerone">
-      <pose>-1.0775 0.11176 0.34152 0 0 0</pose>
+      <pose>-1.0907 1.1638 0.62175 -0.0357966 0.0037797 0.105172</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -717,7 +696,7 @@
       <child>right_ailerone</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz>
         <limit>
           <lower>-0.78</lower>
           <upper>0.78</upper>
@@ -729,7 +708,7 @@
     </joint>
 
     <link name="left_ailerone">
-      <pose>1.0753 0.11176 0.34152 0 0 0</pose>
+      <pose>1.0907 1.1638 0.62175 -0.0357950 -0.0037795 -0.105174</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -765,7 +744,7 @@
       <child>left_ailerone</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>-0.78</lower>
           <upper>0.78</upper>
@@ -779,7 +758,7 @@
 
 
     <link name="right_flap">
-      <pose>-0.50626 0.18437 0.33834 0 0 0</pose>
+      <pose>-0.5062 1.2256 0.62119 -0.0227277 0.0026229 0.114879</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -815,7 +794,7 @@
       <child>right_flap</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>-0.78</lower>
           <upper>0.78</upper> <!--나중에 각도 볼 필요 있음.-->
@@ -827,7 +806,7 @@
     </joint>
 
     <link name="left_flap">
-      <pose>0.50402 0.18423 0.33783 0 0 0</pose>
+      <pose>0.5062 1.2301 0.6206 -0.41236 -0.009305 -0.11270</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -863,7 +842,7 @@
       <child>left_flap</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>-0.78</lower>
           <upper>0.78</upper> <!--나중에 각도 볼 필요 있음.-->
@@ -875,7 +854,7 @@
     </joint>
 
     <link name="right_ruddervator">
-      <pose>-0.36456 1.0628 0.65279 0 0 0</pose>
+      <pose>-0.32678 2.1154 0.90021 -0.247400 0.508554 -0.845997</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -911,7 +890,7 @@
       <child>right_ruddervator</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>-0.78</lower>
           <upper>0.78</upper> <!--나중에 각도 볼 필요 있음.-->
@@ -924,7 +903,7 @@
 
 
     <link name="left_ruddervator">
-      <pose>0.36223 1.0626 0.65284 0 0 0</pose>
+      <pose>0.32678 2.1154 0.9002 -0.247400 -0.491102 0.845997</pose>
       <!-- base_link 기준 위치 -->
       <inertial>
         <mass>0.001</mass>
@@ -960,7 +939,7 @@
       <child>left_ruddervator</child>
       <parent>base_link</parent>
       <axis>
-        <xyz>0 1 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
         <limit>
           <lower>-0.78</lower>
           <upper>0.78</upper>
@@ -1078,7 +1057,7 @@
       name="gz::sim::systems::MulticopterMotorModel"> <!--의미하는 바 적기-->
       <jointName>rotor_0_joint</jointName>
       <linkName>rotor_0</linkName>
-      <turningDirection>ccw</turningDirection>
+      <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
       <maxRotVelocity>1500</maxRotVelocity>
@@ -1171,7 +1150,7 @@
       name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_3_joint</jointName>
       <linkName>rotor_3</linkName>
-      <turningDirection>cw</turningDirection>
+      <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
       <maxRotVelocity>1500</maxRotVelocity>
