@@ -1,668 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
   <model name='omniquad'>
-    <pose>0 0 .12 0 0 0</pose>
-    <link name='base_link'>
-      <self_collide>false</self_collide>
-      <inertial>
-        <mass>2.260803677220633</mass>
-        <inertia>
-          <ixx>0.088329</ixx>
-          <ixy>0.000113</ixy>
-          <ixz>-2.4e-05</ixz>
-          <iyy>0.101628</iyy>
-          <iyz>0.7e-06</iyz>
-          <izz>0.104362</izz>
-        </inertia>
-      </inertial>
-      <gravity>true</gravity>
-      <velocity_decay/>
-      <visual name='base_link_visual'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/base.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <collision name='base_link_collision'>
-        <geometry>
-          <box>
-            <size>0.25 0.25 0.25</size>
-          </box>
-        </geometry>
-        <surface>
-          <contact>
-            <ode>
-              <min_depth>0.001</min_depth>
-              <max_vel>0</max_vel>
-            </ode>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <self_collide>false</self_collide>
-      <!-- Sensor suite from x500  -->
-      <sensor name="air_pressure_sensor" type="air_pressure">
-        <always_on>1</always_on>
-        <update_rate>50</update_rate>
-        <air_pressure>
-          <pressure>
-            <noise type="gaussian">
-              <mean>0</mean>
-              <stddev>3</stddev>
-            </noise>
-          </pressure>
-        </air_pressure>
-      </sensor>
-      <sensor name="magnetometer_sensor" type="magnetometer">
-        <always_on>1</always_on>
-        <update_rate>100</update_rate>
-        <magnetometer>
-          <x>
-            <noise type="gaussian">
-              <stddev>0.0001</stddev>
-            </noise>
-          </x>
-          <y>
-            <noise type="gaussian">
-              <stddev>0.0001</stddev>
-            </noise>
-          </y>
-          <z>
-            <noise type="gaussian">
-              <stddev>0.0001</stddev>
-            </noise>
-          </z>
-        </magnetometer>
-      </sensor>
-      <sensor name="imu_sensor" type="imu">
-        <always_on>1</always_on>
-        <update_rate>250</update_rate>
-        <imu>
-          <angular_velocity>
-            <x>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.0008726646</stddev>
-              </noise>
-            </x>
-            <y>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.0008726646</stddev>
-              </noise>
-            </y>
-            <z>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.0008726646</stddev>
-              </noise>
-            </z>
-          </angular_velocity>
-          <linear_acceleration>
-            <x>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.00637</stddev>
-              </noise>
-            </x>
-            <y>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.00637</stddev>
-              </noise>
-            </y>
-            <z>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.00686</stddev>
-              </noise>
-            </z>
-          </linear_acceleration>
-        </imu>
-      </sensor>
-    </link>
+    <include merge='true'>
+      <uri>model://omniquad_base</uri>
+      <pose>0 0 .2 0 0 0</pose>
+    </include>
 
-    <!-- tilt arms -->
-    <link name='tilt_arm_1'>
-      <pose>0.05 -0.05 0.015 0 0 -0.786</pose>
-      <inertial>
-        <mass>0.2031180930624021</mass>
-        <inertia>
-          <ixx>0.0015</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.0015</iyy>
-          <iyz>0</iyz>
-          <izz>0.0015</izz>
-        </inertia>
-      </inertial>
-      <collision name='tilt_arm_1_collision'>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/arm.stl</uri>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='tilt_arm_1_visual'>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/arm.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <gravity>true</gravity>
-      <velocity_decay/>
-      <self_collide>false</self_collide>
-    </link>
-
-    <joint name='tilt_arm_1_joint' type='revolute'>
-      <child>tilt_arm_1</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>0.785 -0.785 0</xyz>
-        <limit>
-          <lower>-2</lower>
-          <upper>2</upper>
-        </limit>
-        <dynamics>
-          <friction>1.0</friction>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <!-- <use_parent_model_frame>1</use_parent_model_frame> -->
-      </axis>
-    </joint>
-
-    <link name='tilt_arm_2'>
-      <pose>0.05 0.05 0.015 0 0 0.785</pose>
-      <inertial>
-        <mass>0.2031180930624021</mass>
-        <inertia>
-          <ixx>0.0015</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.0015</iyy>
-          <iyz>0</iyz>
-          <izz>0.0015</izz>
-        </inertia>
-      </inertial>
-      <collision name='tilt_arm_2_collision'>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/arm.stl</uri>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='tilt_arm_2_visual'>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/arm.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <gravity>true</gravity>
-      <velocity_decay/>
-      <self_collide>false</self_collide>
-    </link>
-
-    <joint name='tilt_arm_2_joint' type='revolute'>
-      <pose>0 0 0 0 0 0.0</pose>
-      <child>tilt_arm_2</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>0.785 0.785 0</xyz>
-        <limit>
-          <lower>-2</lower>
-          <upper>2</upper>
-        </limit>
-        <dynamics>
-          <friction>1.0</friction>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <!-- <use_parent_model_frame>1</use_parent_model_frame> -->
-      </axis>
-    </joint>
-
-    <link name='tilt_arm_3'>
-      <pose>-0.05 0.05 0.015 0 0 2.356</pose>
-      <inertial>
-        <mass>0.2031180930624021</mass>
-        <inertia>
-          <ixx>0.0015</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.0015</iyy>
-          <iyz>0</iyz>
-          <izz>0.0015</izz>
-        </inertia>
-      </inertial>
-      <collision name='tilt_arm_3_collision'>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/arm.stl</uri>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='tilt_arm_3_visual'>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/arm.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <gravity>true</gravity>
-      <velocity_decay/>
-      <self_collide>false</self_collide>
-    </link>
-
-    <joint name='tilt_arm_3_joint' type='revolute'>
-      <pose>0 0 0 0 0 0</pose>
-      <child>tilt_arm_3</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>-0.785 0.785 0</xyz>
-        <limit>
-          <lower>-2</lower>
-          <upper>2</upper>
-        </limit>
-        <dynamics>
-          <friction>1.0</friction>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <!-- <use_parent_model_frame>1</use_parent_model_frame> -->
-      </axis>
-    </joint>
-
-    <link name='tilt_arm_4'>
-      <pose>-0.05 -0.05 0.015 0 0 3.925</pose>
-      <inertial>
-        <mass>0.2031180930624021</mass>
-        <inertia>
-          <ixx>0.0015</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.0015</iyy>
-          <iyz>0</iyz>
-          <izz>0.0015</izz>
-        </inertia>
-      </inertial>
-      <collision name='tilt_arm_4_collision'>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/arm.stl</uri>
-          </mesh>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='tilt_arm_4_visual'>
-        <geometry>
-          <mesh>
-            <scale>1e-3 1e-3 1e-3</scale>
-            <uri>model://omniquad/meshes/arm.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/DarkGrey</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <gravity>true</gravity>
-      <velocity_decay/>
-      <self_collide>false</self_collide>
-    </link>
-
-    <joint name='tilt_arm_4_joint' type='revolute'>
-      <pose>0 0 0 0 0 0.0</pose>
-      <child>tilt_arm_4</child>
-      <parent>base_link</parent>
-      <axis>
-        <xyz>-0.785 -0.785 0</xyz>
-        <limit>
-          <lower>-2</lower>
-          <upper>2</upper>
-        </limit>
-        <dynamics>
-          <friction>1.0</friction>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <!-- <use_parent_model_frame>1</use_parent_model_frame> -->
-      </axis>
-    </joint>
-
-    <!-- Rotors -->
-    <link name='rotor_1'>
-      <pose>0.175 -0.175 0.045 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>0.005</mass>
-        <inertia>
-          <ixx>9.75e-07</ixx>
-          <iyy>0.000273104</iyy>
-          <izz>0.000274004</izz>
-        </inertia>
-      </inertial>
-      <collision name='rotor_1_collision'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.096</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='rotor_1_visual'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>0.75 0.75 0.75</scale>
-            <uri>model://omniquad/meshes/prop_ccw.dae</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Green</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <gravity>true</gravity>
-      <velocity_decay/>
-    </link>
-    <joint name='rotor_1_joint' type='revolute'>
-      <child>rotor_1</child>
-      <parent>tilt_arm_1</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <!-- <use_parent_model_frame>1</use_parent_model_frame> -->
-      </axis>
-    </joint>
-
-    <link name='rotor_2'>
-      <pose>0.175 0.175 0.045 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>0.005</mass>
-        <inertia>
-          <ixx>9.75e-07</ixx>
-          <iyy>0.000273104</iyy>
-          <izz>0.000274004</izz>
-        </inertia>
-      </inertial>
-      <collision name='rotor_2_collision'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.096</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='rotor_2_visual'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>0.75 0.75 0.75</scale>
-            <uri>model://omniquad/meshes/prop_cw.dae</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Green</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <gravity>true</gravity>
-      <velocity_decay/>
-    </link>
-    <joint name='rotor_2_joint' type='revolute'>
-      <child>rotor_2</child>
-      <parent>tilt_arm_2</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <!-- <use_parent_model_frame>1</use_parent_model_frame> -->
-      </axis>
-    </joint>
-
-    <link name='rotor_3'>
-      <pose>-0.175 0.175 0.045 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>0.005</mass>
-        <inertia>
-          <ixx>9.75e-07</ixx>
-          <iyy>0.000273104</iyy>
-          <izz>0.000274004</izz>
-        </inertia>
-      </inertial>
-      <collision name='rotor_3_collision'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.096</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='rotor_3_visual'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>0.75 0.75 0.75</scale>
-            <uri>model://omniquad/meshes/prop_ccw.dae</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Green</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
-    </link>
-    <joint name='rotor_3_joint' type='revolute'>
-      <child>rotor_3</child>
-      <parent>tilt_arm_3</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <!-- <use_parent_model_frame>1</use_parent_model_frame> -->
-      </axis>
-    </joint>
-
-    <link name='rotor_4'>
-      <pose>-0.175 -0.175 0.045 0 0 0</pose>
-      <inertial>
-        <pose>0 0 0 0 0 0</pose>
-        <mass>0.005</mass>
-        <inertia>
-          <ixx>9.75e-07</ixx>
-          <iyy>0.000273104</iyy>
-          <izz>0.000274004</izz>
-        </inertia>
-      </inertial>
-      <collision name='rotor_4_collision'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <length>0.005</length>
-            <radius>0.096</radius>
-          </cylinder>
-        </geometry>
-        <surface>
-          <contact>
-            <ode/>
-          </contact>
-          <friction>
-            <ode/>
-          </friction>
-        </surface>
-      </collision>
-      <visual name='rotor_4_visual'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <mesh>
-            <scale>0.75 0.75 0.75</scale>
-            <uri>model://omniquad/meshes/prop_cw.dae</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <script>
-            <name>Gazebo/Green</name>
-            <uri>file://media/materials/scripts/gazebo.material</uri>
-          </script>
-        </material>
-      </visual>
-      <gravity>1</gravity>
-      <velocity_decay/>
-    </link>
-    <joint name='rotor_4_joint' type='revolute'>
-      <child>rotor_4</child>
-      <parent>tilt_arm_4</parent>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>-1e+16</lower>
-          <upper>1e+16</upper>
-        </limit>
-        <dynamics>
-          <spring_reference>0</spring_reference>
-          <spring_stiffness>0</spring_stiffness>
-        </dynamics>
-        <!-- <use_parent_model_frame>1</use_parent_model_frame> -->
-      </axis>
-    </joint>
-
-    <!-- Plugins -->
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
-      <robotNamespace/>
+    <!-- motor -->
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_1_joint</jointName>
       <linkName>rotor_1</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100</maxRotVelocity>
+      <maxRotVelocity>1100.0</maxRotVelocity>
       <motorConstant>9.84e-06</motorConstant>
       <momentConstant>0.09</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
@@ -672,14 +24,14 @@
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
-      <robotNamespace/>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_2_joint</jointName>
       <linkName>rotor_2</linkName>
-      <turningDirection>cw</turningDirection>
+      <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100</maxRotVelocity>
+      <maxRotVelocity>1000.0</maxRotVelocity>
       <motorConstant>9.84e-06</motorConstant>
       <momentConstant>0.09</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
@@ -689,14 +41,14 @@
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
-      <robotNamespace/>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_3_joint</jointName>
       <linkName>rotor_3</linkName>
-      <turningDirection>ccw</turningDirection>
+      <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100</maxRotVelocity>
+      <maxRotVelocity>1000.0</maxRotVelocity>
       <motorConstant>9.84e-06</motorConstant>
       <momentConstant>0.09</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
@@ -706,14 +58,14 @@
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
-      <robotNamespace/>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_4_joint</jointName>
       <linkName>rotor_4</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100</maxRotVelocity>
+      <maxRotVelocity>1000.0</maxRotVelocity>
       <motorConstant>9.84e-06</motorConstant>
       <momentConstant>0.09</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
@@ -722,6 +74,47 @@
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
+    </plugin>
+    <!-- servo -->
+    <plugin filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_1_joint</joint_name>
+      <sub_topic>servo_0</sub_topic>
+      <p_gain>10.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.25</d_gain>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_2_joint</joint_name>
+      <sub_topic>servo_1</sub_topic>
+      <p_gain>10.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.25</d_gain>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_3_joint</joint_name>
+      <sub_topic>servo_2</sub_topic>
+      <p_gain>10.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.25</d_gain>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+    </plugin>
+    <plugin filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_4_joint</joint_name>
+      <sub_topic>servo_3</sub_topic>
+      <p_gain>10.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.25</d_gain>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
     </plugin>
   </model>
 </sdf>
