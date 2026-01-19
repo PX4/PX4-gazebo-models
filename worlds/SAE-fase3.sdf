@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <sdf version="1.9">
-  <world name="SAE-fase2">
+  <world name="SAE-fase3">
     <physics type="ode">
       <max_step_size>0.004</max_step_size>
       <real_time_factor>1.0</real_time_factor>
@@ -182,19 +182,34 @@
     </include>
     <include>
       <uri>models://common/TakeoffBase.sdf</uri>
-      <pose>4 7 0 0 0 0</pose>
+      <pose>4.000000 7.000000 0.000000 0 0 -0.078265</pose>
     </include>
     <include>
-      <uri>models://M2/AH.sdf</uri>
-      <pose>0 0 0 0 0 0</pose>
+      <uri>models://M3/M3Pole.sdf</uri>
+      <name>Pole1</name>
+      <pose>1.537012 1.174737 -0.010000 0 0 -0.078265</pose>
     </include>
     <include>
-      <uri>models://M2/AF.sdf</uri>
-      <pose>0 0 0 0 0 0</pose>
+      <uri>models://M3/ManometroL1.sdf</uri>
+      <pose>1.537012 1.174737 1.700000 0 0 -0.078265</pose>
     </include>
     <include>
-      <uri>models://M2/Sphere.sdf</uri>
-      <pose>7.214119553277662 4.87217406398695 1.7 0 0 0</pose>
+      <uri>models://M3/M3Pole.sdf</uri>
+      <name>Pole2</name>
+      <pose>6.492347 6.804537 -0.010000 0 0 -0.078265</pose>
+    </include>
+    <include>
+      <uri>models://M3/ManometroL2.sdf</uri>
+      <pose>6.492347 6.804537 1.700000 0 0 -0.078265</pose>
+    </include>
+    <include>
+      <uri>models://M3/M3Pole.sdf</uri>
+      <name>Pole3</name>
+      <pose>2.895517 12.101972 -0.010000 0 0 -0.078265</pose>
+    </include>
+    <include>
+      <uri>models://M3/ManometroL3.sdf</uri>
+      <pose>2.895517 12.101972 1.700000 0 0 -0.078265</pose>
     </include>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
