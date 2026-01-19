@@ -182,6 +182,10 @@
         <quadratic>0</quadratic>
       </attenuation>
     </light>
+
+    <include>
+      <uri>models://sae26/M1/TrianguloNumeroA.sdf</uri>
+    </include>
     
     
     <spherical_coordinates>
