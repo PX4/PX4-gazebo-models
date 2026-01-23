@@ -330,15 +330,14 @@
       name="gz::sim::systems::JointPositionController">
       <joint_name>cgo3_camera_joint</joint_name>
       <sub_topic>command/gimbal_pitch</sub_topic>
-      <p_gain>0.8</p_gain>
-      <i_gain>0.01245</i_gain>
-      <d_gain>0.015</d_gain>
-      <i_max>0</i_max>
-      <i_min>0</i_min>
-      <cmd_max>0.3</cmd_max>
-      <cmd_min>-0.3</cmd_min>
+      <p_gain>2.0</p_gain>      <!-- Back to working value -->
+      <i_gain>0.3</i_gain>      <!-- Slightly lower than 0.5, but not 0.1 -->
+      <d_gain>0.05</d_gain>     <!-- Much lower - D was causing oscillation -->
+      <i_max>1.0</i_max>        <!-- Back to working value -->
+      <i_min>-1.0</i_min>
+      <cmd_max>3.0</cmd_max>
+      <cmd_min>-3.0</cmd_min>
     </plugin>
-
     <plugin
       filename="gz-sim-joint-position-controller-system"
       name="gz::sim::systems::JointPositionController">
