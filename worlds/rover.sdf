@@ -28,8 +28,8 @@
           <surface>
             <friction>
               <ode>
-                <mu>1</mu>
-                <mu2>1</mu2>
+                <mu>2</mu>
+                <mu2>2</mu2>
               </ode>
             </friction>
             <bounce/>
@@ -51,9 +51,9 @@
             </plane>
           </geometry>
           <material>
-            <ambient>0.8 0.8 0.8 1</ambient>
-            <diffuse>0.8 0.8 0.8 1</diffuse>
-            <specular>0.8 0.8 0.8 1</specular>
+            <diffuse>0.6 1.0 0.25 0.5</diffuse>
+            <specular>0 0 0 0</specular>
+            <emissive>0 0 0 0</emissive>
           </material>
         </visual>
         <pose>0 0 0 0 -0 0</pose>

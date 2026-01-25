@@ -41,9 +41,9 @@
             </plane>
           </geometry>
           <material>
-            <ambient>0.8 0.8 0.8 1</ambient>
-            <diffuse>0.8 0.8 0.8 1</diffuse>
-            <specular>0.8 0.8 0.8 1</specular>
+            <ambient>0.8 0.8 0.8 0.5</ambient>
+            <diffuse>0.8 0.8 0.8 0.5</diffuse>
+            <specular>0.8 0.8 0.8 0.5</specular>
           </material>
         </visual>
         <pose>0 0 0 0 -0 0</pose>

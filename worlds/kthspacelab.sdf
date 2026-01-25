@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <world name="kthspacelab">
+    <physics type="ode">
+      <max_step_size>0.006</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>200</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <scene>
+      <grid>false</grid>
+      <ambient>0.8 0.8 0.8 1</ambient>
+      <background>0.05 0.05 0.07 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>6 6</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>6 6</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.95 1</ambient>
+            <diffuse>0.5 0.5 0.55 1</diffuse>
+            <specular>0.2 0.2 0.2 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+        <pose>2.0 0.5 0 0 0 0</pose>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <light name="sunUTC" type="directional">
+      <pose>0 0 500 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1.5</intensity>
+      <direction>0.2 0.6 -0.8</direction>
+      <diffuse>1 1 0.98 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>2000</range>
+        <linear>0</linear>
+        <constant>1</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+    </light>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg> 8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+
+    <!-- KTH Space Robotics Lab Floor Area -->
+    <model name="wall_perimeter">
+      <static>true</static>
+      <link name="segment_0">
+        <pose>2.05000 -1.60500 0.050 0 0 0.00000</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>4.10000 0.05 0.1</size></box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>1.0</restitution_coefficient>
+              <threshold>0.0</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>0.0</mu>
+                <mu2>0.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000</kp>
+                <kd>500</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>4.10000 0.05 0.1</size></box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+      <link name="segment_1">
+        <pose>4.12500 0.12000 0.050 0 0 1.57080</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>3.40000 0.05 0.1</size></box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>1.0</restitution_coefficient>
+              <threshold>0.0</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>0.0</mu>
+                <mu2>0.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000</kp>
+                <kd>500</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>3.40000 0.05 0.1</size></box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+      <link name="segment_2">
+        <pose>3.77442 2.08042 0.050 0 0 2.52693</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.83235 0.05 0.1</size></box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>1.0</restitution_coefficient>
+              <threshold>0.0</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>0.0</mu>
+                <mu2>0.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000</kp>
+                <kd>500</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.83235 0.05 0.1</size></box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+      <link name="segment_3">
+        <pose>2.69000 2.32500 0.050 0 0 3.14159</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>1.46000 0.05 0.1</size></box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>1.0</restitution_coefficient>
+              <threshold>0.0</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>0.0</mu>
+                <mu2>0.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000</kp>
+                <kd>500</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>1.46000 0.05 0.1</size></box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+      <link name="segment_4">
+        <pose>1.93500 2.02000 0.050 0 0 -1.57080</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>0.56000 0.05 0.1</size></box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>1.0</restitution_coefficient>
+              <threshold>0.0</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>0.0</mu>
+                <mu2>0.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000</kp>
+                <kd>500</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>0.56000 0.05 0.1</size></box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+      <link name="segment_5">
+        <pose>0.98000 1.76500 0.050 0 0 3.14159</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>1.96000 0.05 0.1</size></box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>1.0</restitution_coefficient>
+              <threshold>0.0</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>0.0</mu>
+                <mu2>0.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000</kp>
+                <kd>500</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>1.96000 0.05 0.1</size></box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+      <link name="segment_6">
+        <pose>-0.02500 0.08000 0.050 0 0 -1.57080</pose>
+        <collision name="collision">
+          <geometry>
+            <box><size>3.32000 0.05 0.1</size></box>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>1.0</restitution_coefficient>
+              <threshold>0.0</threshold>
+            </bounce>
+            <friction>
+              <ode>
+                <mu>0.0</mu>
+                <mu2>0.0</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode>
+                <kp>10000</kp>
+                <kd>500</kd>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <box><size>3.32000 0.05 0.1</size></box>
+          </geometry>
+          <material>
+            <ambient>0.2 0.2 0.2 1</ambient>
+            <diffuse>0.25 0.25 0.25 1</diffuse>
+            <specular>0.05 0.05 0.05 1</specular>
+            <emissive>0 0 0 1</emissive>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>

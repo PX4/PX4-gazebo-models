@@ -17,7 +17,7 @@
         </inertia>
       </inertial>
       <gravity>true</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <visual name="base_link_visual">
         <pose>0 0 .025 0 0 3.141592654</pose>
         <geometry>
@@ -135,7 +135,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -154,7 +154,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -173,7 +173,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -192,7 +192,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -211,11 +211,12 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
       <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
@@ -229,6 +230,7 @@
         </air_pressure>
       </sensor>
       <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>100</update_rate>
         <magnetometer>
@@ -254,6 +256,7 @@
         </magnetometer>
       </sensor>
       <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>
         <imu>
@@ -305,6 +308,7 @@
         </imu>
       </sensor>
       <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>
@@ -312,16 +316,16 @@
     <link name="rotor_0">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
-      <velocity_decay/>
+      <velocity_decay />
       <pose>0.174 -0.174 0.06 0 0 0</pose>
       <inertial>
-          <mass>0.016076923076923075</mass>
-          <inertia>
-            <ixx>3.8464910483993325e-07</ixx>
-            <iyy>2.6115851691700804e-05</iyy>
-            <izz>2.649858234714004e-05</izz>
-          </inertia>
-        </inertial>
+        <mass>0.016076923076923075</mass>
+        <inertia>
+          <ixx>3.8464910483993325e-07</ixx>
+          <iyy>2.6115851691700804e-05</iyy>
+          <izz>2.649858234714004e-05</izz>
+        </inertia>
+      </inertial>
       <visual name="rotor_0_visual">
         <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
         <geometry>
@@ -361,7 +365,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -384,16 +388,16 @@
     <link name="rotor_1">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
-      <velocity_decay/>
+      <velocity_decay />
       <pose>-0.174 0.174 0.06 0 0 0</pose>
       <inertial>
-          <mass>0.016076923076923075</mass>
-          <inertia>
-            <ixx>3.8464910483993325e-07</ixx>
-            <iyy>2.6115851691700804e-05</iyy>
-            <izz>2.649858234714004e-05</izz>
-          </inertia>
-        </inertial>
+        <mass>0.016076923076923075</mass>
+        <inertia>
+          <ixx>3.8464910483993325e-07</ixx>
+          <iyy>2.6115851691700804e-05</iyy>
+          <izz>2.649858234714004e-05</izz>
+        </inertia>
+      </inertial>
       <visual name="rotor_1_visual">
         <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
         <geometry>
@@ -433,7 +437,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -456,16 +460,16 @@
     <link name="rotor_2">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
-      <velocity_decay/>
+      <velocity_decay />
       <pose>0.174 0.174 0.06 0 0 0</pose>
       <inertial>
-          <mass>0.016076923076923075</mass>
-          <inertia>
-            <ixx>3.8464910483993325e-07</ixx>
-            <iyy>2.6115851691700804e-05</iyy>
-            <izz>2.649858234714004e-05</izz>
-          </inertia>
-        </inertial>
+        <mass>0.016076923076923075</mass>
+        <inertia>
+          <ixx>3.8464910483993325e-07</ixx>
+          <iyy>2.6115851691700804e-05</iyy>
+          <izz>2.649858234714004e-05</izz>
+        </inertia>
+      </inertial>
       <visual name="rotor_2_visual">
         <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
         <geometry>
@@ -505,7 +509,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -528,16 +532,16 @@
     <link name="rotor_3">
       <gravity>true</gravity>
       <self_collide>false</self_collide>
-      <velocity_decay/>
+      <velocity_decay />
       <pose>-0.174 -0.174 0.06 0 0 0</pose>
       <inertial>
-          <mass>0.016076923076923075</mass>
-          <inertia>
-            <ixx>3.8464910483993325e-07</ixx>
-            <iyy>2.6115851691700804e-05</iyy>
-            <izz>2.649858234714004e-05</izz>
-          </inertia>
-        </inertial>
+        <mass>0.016076923076923075</mass>
+        <inertia>
+          <ixx>3.8464910483993325e-07</ixx>
+          <iyy>2.6115851691700804e-05</iyy>
+          <izz>2.649858234714004e-05</izz>
+        </inertia>
+      </inertial>
       <visual name="rotor_3_visual">
         <pose>-0.022 -0.14638461538461536 -0.016 0 0 0</pose>
         <geometry>
@@ -577,7 +581,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>

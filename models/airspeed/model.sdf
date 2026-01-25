@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <sdf version="1.6">
   <model name="airspeed">
     <link name="airspeed_link">
@@ -29,6 +29,7 @@
         </material>
       </visual>
       <sensor name="air_speed" type="air_speed">
+        <gz_frame_id>airspeed_link</gz_frame_id>
         <pose>0 0 0 0 0 0</pose>
         <update_rate>5.0</update_rate>
         <always_on>1</always_on>

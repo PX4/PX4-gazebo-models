@@ -26,33 +26,34 @@
           <iyz>0.0</iyz>
         </inertia>
       </inertial>
-      <sensor name='lidar' type='gpu_lidar'>"
+      <sensor name='lidar' type='gpu_lidar'>
+        <gz_frame_id>lidar_sensor_link</gz_frame_id>
         <pose relative_to="base_link">.15 0 .01 1.57 0 0</pose>
         <update_rate>50</update_rate>
         <ray>
-            <scan>
-                <horizontal>
-                    <samples>1</samples>
-                    <resolution>1</resolution>
-                    <min_angle>0</min_angle>
-                    <max_angle>0</max_angle>
-                </horizontal>
-                <vertical>
-                    <samples>1</samples>
-                    <resolution>1</resolution>
-                    <min_angle>0</min_angle>
-                    <max_angle>0</max_angle>
-                </vertical>
-            </scan>
-            <range>
-                <min>0.1</min>
-                <max>100.0</max>
-                <resolution>0.01</resolution>
-            </range>
+          <scan>
+            <horizontal>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>0</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>1</samples>
+              <resolution>1</resolution>
+              <min_angle>0</min_angle>
+              <max_angle>0</max_angle>
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min>
+            <max>100.0</max>
+            <resolution>0.01</resolution>
+          </range>
         </ray>
         <always_on>1</always_on>
         <visualize>true</visualize>
-    </sensor>
+      </sensor>
     </link>
     <joint name="lidar_sensor_joint" type="fixed">
       <parent>base_link</parent>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <include>
+    <pose>0 0 0 0 0 0</pose>
+    <!-- model from a single instance -->
+    <uri>https://fuel.gazebosim.org/1.0/proque/models/atmos</uri>
+  </include>
+</sdf>

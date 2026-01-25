@@ -35,7 +35,7 @@
             </ode>
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -53,10 +53,11 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
 
-       <sensor name="imu_sensor" type="imu">
+      <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>
         <imu>
@@ -115,6 +116,7 @@
         </imu>
       </sensor>
       <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
@@ -127,6 +129,7 @@
         </air_pressure>
       </sensor>
       <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>100</update_rate>
         <magnetometer>
@@ -152,6 +155,7 @@
         </magnetometer>
       </sensor>
       <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>
@@ -159,7 +163,7 @@
 
     <include merge="true">
       <uri>model://airspeed</uri>
-      <pose >0 0 0.7 0 -1.57 0</pose>
+      <pose>0 0 0.7 0 -1.57 0</pose>
     </include>
     <joint name='airspeed_joint' type='fixed'>
       <parent>base_link</parent>
@@ -191,10 +195,10 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode />
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -212,7 +216,7 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
     </link>
     <joint name='rotor_0_joint' type='revolute'>
@@ -254,10 +258,10 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode />
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -275,7 +279,7 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
     </link>
     <joint name='rotor_1_joint' type='revolute'>
@@ -294,7 +298,7 @@
       </axis>
     </joint>
     <link name='rotor_2'>
-      <pose>0.145 0.23 0.46 -0.17 -0.17  0</pose>
+      <pose>0.145 0.23 0.46 -0.17 -0.17 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.005</mass>
@@ -317,10 +321,10 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode />
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -338,7 +342,7 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
     </link>
     <joint name='rotor_2_joint' type='revolute'>
@@ -380,10 +384,10 @@
         </geometry>
         <surface>
           <contact>
-            <ode/>
+            <ode />
           </contact>
           <friction>
-            <ode/>
+            <ode />
           </friction>
         </surface>
       </collision>
@@ -401,7 +405,7 @@
         </material>
       </visual>
       <gravity>1</gravity>
-      <velocity_decay/>
+      <velocity_decay />
       <self_collide>0</self_collide>
     </link>
     <joint name='rotor_3_joint' type='revolute'>
@@ -463,7 +467,8 @@
       <link_name>base_link</link_name>
       <num_ctrl_surfaces>0</num_ctrl_surfaces>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_0_joint</jointName>
       <linkName>rotor_0</linkName>
       <turningDirection>ccw</turningDirection>
@@ -479,7 +484,8 @@
       <rotorVelocitySlowdownSim>5</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_1_joint</jointName>
       <linkName>rotor_1</linkName>
       <turningDirection>ccw</turningDirection>
@@ -495,7 +501,8 @@
       <rotorVelocitySlowdownSim>5</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_2_joint</jointName>
       <linkName>rotor_2</linkName>
       <turningDirection>cw</turningDirection>
@@ -511,7 +518,8 @@
       <rotorVelocitySlowdownSim>5</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_3_joint</jointName>
       <linkName>rotor_3</linkName>
       <turningDirection>cw</turningDirection>
