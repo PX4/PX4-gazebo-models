@@ -53,6 +53,7 @@
         </material>
       </visual>
       <sensor name="flow_camera" type="camera">
+        <gz_frame_id>flow_link</gz_frame_id>
         <pose>0 0 0 0 1.5707 0</pose>
         <camera>
           <horizontal_fov>0.733038</horizontal_fov>
@@ -70,6 +71,7 @@
         <visualize>true</visualize>
       </sensor>
       <sensor name="optical_flow" type="custom" gz:type="optical_flow">
+        <gz_frame_id>flow_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>50</update_rate>
         <visualize>true</visualize>
