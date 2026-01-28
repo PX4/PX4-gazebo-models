@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
     <model name="uuv_bluerov2_heavy">
-        <pose>0 0 -95.5 0 0 0</pose>
+        <pose>0 0 -96.5 0 0 0</pose>
         <link name="base_link">
             <pose>0 0 0 0 -0 0</pose>
             <inertial>
@@ -19,8 +19,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <box>
-                        <size>0.5 0.5 0.5
-                        </size>        <!-- Size of the box: To be adjusted, copy-pasted from omnicopter -->
+                        <size>0.5 0.5 0.5</size>        <!-- Size of the box: To be adjusted -->
                     </box>
                 </geometry>
                 <surface>
@@ -130,7 +129,6 @@
             <child>thruster0</child>
         </joint>
         <link name="thruster0">
-<!--            <pose>0.14 -0.10 -0.06 0 1.570796 -2.356194</pose>-->
             <pose>0.14 -0.10 -0.06 0 1.570796 0.78539865359</pose>
             <inertial>
                 <mass>1e-10</mass>
@@ -165,7 +163,6 @@
             <child>thruster1</child>
         </joint>
         <link name="thruster1">
-<!--            <pose>0.14 0.10 -0.06 0 1.570796 2.356194</pose>-->
             <pose>0.14 0.10 -0.06 0 1.570796 -0.78539865359</pose>
             <inertial>
                 <mass>1e-10</mass>
@@ -269,7 +266,6 @@
             <child>thruster4</child>
         </joint>
         <link name="thruster4">
-<!--            <pose>0.12 -0.22 0.0 3.1415 0 0</pose>-->
             <pose>0.12 -0.22 0.0 0.0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
@@ -372,7 +368,6 @@
             <child>thruster7</child>
         </joint>
         <link name="thruster7">
-<!--            <pose>-0.12 0.22 0.0 3.1415 0 0</pose>-->
             <pose>-0.12 0.22 0.0 0.0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
