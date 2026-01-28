@@ -19,8 +19,7 @@
                 <pose>0 0 0 0 -0 0</pose>
                 <geometry>
                     <box>
-                        <size>0.5 0.5 0.5</size>        <!-- Size of the box: To be adjusted, copy-pasted
-                        from omnicopter -->
+                        <size>0.5 0.5 0.5</size>        <!-- Size of the box: To be adjusted -->
                     </box>
                 </geometry>
                 <surface>
@@ -31,7 +30,7 @@
                         </ode>
                     </contact>
                     <friction>
-                        <ode />
+                        <ode/>
                     </friction>
                 </surface>
             </collision>
@@ -44,7 +43,6 @@
                 </geometry>
             </visual>
             <sensor name="air_pressure_sensor" type="air_pressure">
-                <gz_frame_id>base_link</gz_frame_id>
                 <always_on>1</always_on>
                 <update_rate>50</update_rate>
                 <air_pressure>
@@ -57,7 +55,6 @@
                 </air_pressure>
             </sensor>
             <sensor name="imu_sensor" type="imu">
-                <gz_frame_id>base_link</gz_frame_id>
                 <always_on>1</always_on>
                 <update_rate>250</update_rate>
                 <imu>
@@ -116,7 +113,6 @@
                 </imu>
             </sensor>
             <sensor name="navsat_sensor" type="navsat">
-                <gz_frame_id>base_link</gz_frame_id>
                 <always_on>1</always_on>
                 <update_rate>30</update_rate>
             </sensor>
@@ -133,7 +129,7 @@
             <child>thruster0</child>
         </joint>
         <link name="thruster0">
-            <pose>0.14 -0.10 -0.06 0 1.570796 -2.356194</pose>
+            <pose>0.14 -0.10 -0.06 0 1.570796 0.78539865359</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -167,7 +163,7 @@
             <child>thruster1</child>
         </joint>
         <link name="thruster1">
-            <pose>0.14 0.10 -0.06 0 1.570796 2.356194</pose>
+            <pose>0.14 0.10 -0.06 0 1.570796 -0.78539865359</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -270,7 +266,7 @@
             <child>thruster4</child>
         </joint>
         <link name="thruster4">
-            <pose>0.12 -0.22 0.0 3.1415 0 0</pose>
+            <pose>0.12 -0.22 0.0 0.0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -372,7 +368,7 @@
             <child>thruster7</child>
         </joint>
         <link name="thruster7">
-            <pose>-0.12 0.22 0.0 3.1415 0 0</pose>
+            <pose>-0.12 0.22 0.0 0.0 0 0</pose>
             <inertial>
                 <mass>1e-10</mass>
                 <inertia>
@@ -407,7 +403,7 @@
             <commandSubTopic>command/motor_speed</commandSubTopic>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
+            <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
             <motorType>force_polynomial</motorType>
             <controlMethod>duty_cycle</controlMethod>
             <minCommand>0.00</minCommand>
@@ -513,7 +509,7 @@
             <jointName>thruster5_joint</jointName>
             <linkName>thruster5</linkName>
             <motorNumber>5</motorNumber>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -536,7 +532,7 @@
             <jointName>thruster6_joint</jointName>
             <linkName>thruster6</linkName>
             <motorNumber>6</motorNumber>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -578,9 +574,33 @@
             <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
             <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
         </plugin>
-        <plugin filename="gz-sim-odometry-publisher-system"
-            name="gz::sim::systems::OdometryPublisher">
+        <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
             <dimensions>3</dimensions>
         </plugin>
+
+        <plugin
+                filename="gz-sim-hydrodynamics-system"
+                name="gz::sim::systems::Hydrodynamics">
+            <link_name>base_link</link_name>
+            <xDotU>-1.11</xDotU>
+            <yDotV>-2.8</yDotV>
+            <zDotW>-2.8</zDotW>
+            <kDotP>-0.00451</kDotP>
+            <mDotQ>-0.0163</mDotQ>
+            <nDotR>-0.0163</nDotR>
+            <xUabsU>-0.2</xUabsU>
+            <xU>-5.39</xU>
+            <yVabsV>-0.2</yVabsV>
+            <yV>-17.36</yV>
+            <zWabsW>-0.2</zWabsW>
+            <zW>-17.36</zW>
+            <kPabsP>-0.2</kPabsP>
+            <kP>-0.00114</kP>
+            <mQabsQ>-0.2</mQabsQ>
+            <mQ>-0.007</mQ>
+            <nRabsR>-0.2</nRabsR>
+            <nR>-0.007</nR>
+        </plugin>
+
     </model>
 </sdf>
