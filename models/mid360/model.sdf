@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="mid360">
+    <static>false</static>
+    <link name="livox_frame">
+      <inertial>
+        <mass>0.1</mass>
+        <inertia>
+          <ixx>0.0001</ixx> <ixy>0</ixy> <ixz>0</ixz>
+          <iyy>0.0001</iyy> <iyz>0</iyz>
+          <izz>0.0001</izz>
+        </inertia>
+      </inertial>
+      
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.02</radius> <length>0.06</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.2 0.2 0.2 1</ambient>
+          <diffuse>0.2 0.2 0.2 1</diffuse>
+        </material>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.02</radius> <length>0.06</length>
+          </cylinder>
+        </geometry>
+      </collision>
+
+      <sensor name="livox_imu" type="imu">
+        <always_on>true</always_on> <update_rate>200</update_rate>
+        <topic>/livox/imu</topic>
+        <imu>
+          <angular_velocity>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.0001</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.0001</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.0001</stddev></noise></z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.001</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.001</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.001</stddev></noise></z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+
+      <sensor name="livox_lidar" type="gpu_lidar">
+        <topic>/livox/lidar</topic> <update_rate>10</update_rate>
+        <lidar>
+          <scan>
+            <horizontal>
+              <samples>1800</samples> <resolution>1</resolution>
+              <min_angle>-3.14159</min_angle>
+              <max_angle>3.14159</max_angle>
+            </horizontal>
+            <vertical>
+              <samples>64</samples> 
+              <resolution>1</resolution>
+              <min_angle>-0.12217</min_angle> 
+              <max_angle>0.90757</max_angle> 
+            </vertical>
+          </scan>
+          <range>
+            <min>0.1</min> <max>40.0</max>
+          </range>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.005</stddev> </noise>
+        </lidar>
+        <visualize>true</visualize>
+      </sensor>
+    </link>
+  </model>
+</sdf>

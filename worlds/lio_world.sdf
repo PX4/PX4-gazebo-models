@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="lio_test_world">
+    
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors"/>
+    
+    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
+
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+          <material><ambient>0.8 0.8 0.8 1</ambient></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="wall_1">
+      <static>true</static>
+      <pose>5 0 1 0 0 0</pose>
+      <link name="link">
+        <visual name="v"><geometry><box><size>1 5 2</size></box></geometry></visual>
+        <collision name="c"><geometry><box><size>1 5 2</size></box></geometry></collision>
+      </link>
+    </model>
+
+    <model name="wall_2">
+      <static>true</static>
+      <pose>0 5 1 0 0 0</pose>
+      <link name="link">
+        <visual name="v"><geometry><box><size>5 1 2</size></box></geometry></visual>
+        <collision name="c"><geometry><box><size>5 1 2</size></box></geometry></collision>
+      </link>
+    </model>
+
+  </world>
+</sdf>
