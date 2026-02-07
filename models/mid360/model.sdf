@@ -14,9 +14,10 @@
       
       <visual name="visual">
         <geometry>
-          <cylinder>
-            <radius>0.02</radius> <length>0.06</length>
-          </cylinder>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://mid360/meshes/mid360.obj</uri>
+          </mesh>
         </geometry>
         <material>
           <ambient>0.2 0.2 0.2 1</ambient>
@@ -26,9 +27,10 @@
 
       <collision name="collision">
         <geometry>
-          <cylinder>
-            <radius>0.02</radius> <length>0.06</length>
-          </cylinder>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://mid360/meshes/mid360collision.obj</uri>
+          </mesh>
         </geometry>
       </collision>
 
