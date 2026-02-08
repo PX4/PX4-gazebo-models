@@ -51,31 +51,20 @@
         </imu>
       </sensor>
 
-      <sensor name="livox_lidar" type="gpu_lidar">
-        <topic>/livox/lidar</topic> <update_rate>10</update_rate>
-        <lidar>
-          <scan>
-            <horizontal>
-              <samples>1800</samples> <resolution>1</resolution>
-              <min_angle>-3.14159</min_angle>
-              <max_angle>3.14159</max_angle>
-            </horizontal>
-            <vertical>
-              <samples>64</samples> 
-              <resolution>1</resolution>
-              <min_angle>-0.12217</min_angle> 
-              <max_angle>0.90757</max_angle> 
-            </vertical>
-          </scan>
+      <sensor name="livox_lidar" type="custom">
+        <!--<pose>0 0 0.0204789 0 0 0</pose>-->
+        <plugin filename="libRGLServerPluginInstance.so" name="rgl::RGLServerPluginInstance">
           <range>
-            <min>0.1</min> <max>40.0</max>
+            <min>0.1</min> <!-- questionable-->
+            <max>100</max> <!-- questionable-->
           </range>
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.005</stddev> </noise>
-        </lidar>
-        <visualize>true</visualize>
+          <update_rate>50</update_rate> <!-- questionable-->
+          <update_on_paused_sim>false</update_on_paused_sim>
+          <topic>/livox/lidar</topic>
+          <frame>livox_lidar</frame>
+          <!--<do_ignore_entities_in_lidar_link>true</do_ignore_entities_in_lidar_link>-->
+          <pattern_preset>Livox Mid360</pattern_preset>
+        </plugin>
       </sensor>
     </link>
   </model>
