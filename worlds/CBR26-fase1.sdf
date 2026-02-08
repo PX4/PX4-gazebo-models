@@ -207,7 +207,7 @@
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>models://cbr26/common/cbr26_base.dae</uri>
+              <uri>models://cbr26/common/cbr26_base_collision.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -229,7 +229,7 @@
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>models://cbr26/fase1/cbr26_fase1.dae</uri>
+              <uri>models://cbr26/fase1/cbr26_fase1_collision.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>

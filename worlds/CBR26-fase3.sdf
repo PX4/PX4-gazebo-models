@@ -206,7 +206,7 @@
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>models://cbr26/common/cbr26_base.dae</uri>
+              <uri>models://cbr26/common/cbr26_base_collision.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -228,7 +228,7 @@
         <collision name="collision">
           <geometry>
             <mesh>
-              <uri>models://cbr26/fase3/cbr26_fase3.dae</uri>
+              <uri>models://cbr26/fase3/cbr26_fase3_collision.obj</uri>
               <scale>1 1 1</scale>
             </mesh>
           </geometry>
@@ -243,61 +243,5 @@
       </camera>
     </gui>
     <!--}-->
-
-    <model name="collision_takeoff_sus">
-      <static>true</static>
-      <link name="link_takeoff_sus">
-        <pose>7.25 1 0.25 0 0 0</pose>
-        <collision name="collision_takeoff_sus">
-          <geometry>
-            <box>
-              <size>1.5 2 0.55</size>
-            </box>
-          </geometry>
-        </collision>
-      </link>
-    </model>
-
-    <model name="collision_base1_sus">
-      <static>true</static>
-      <link name="link_base1_sus">
-        <pose>1.15 2.05 0.46 0 0 0</pose>
-        <collision name="collision_base1_sus">
-          <geometry>
-            <box>
-              <size>1 1 0.82</size>
-            </box>
-          </geometry>
-        </collision>
-      </link>
-    </model>
-
-    <model name="collision_base2_sus">
-      <static>true</static>
-      <link name="link_base2_sus">
-        <pose>3.6 7.1 0.56 0 0 0</pose>
-        <collision name="collision_base2_sus">
-          <geometry>
-            <box>
-              <size>1 1 0.6</size>
-            </box>
-          </geometry>
-        </collision>
-      </link>
-    </model>
-
-    <model name="collision_base3_sus">
-      <static>true</static>
-      <link name="link_base3_sus">
-        <pose>7.5 5.5 1.26 0 0 0</pose>
-        <collision name="collision_base3_sus">
-          <geometry>
-            <box>
-              <size>1 1 0.6</size>
-            </box>
-          </geometry>
-        </collision>
-      </link>
-    </model>
   </world>
 </sdf>
