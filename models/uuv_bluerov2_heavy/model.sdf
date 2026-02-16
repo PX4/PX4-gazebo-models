@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.9">
     <model name="uuv_bluerov2_heavy">
-        <pose>0 0 -96.5 0 0 0</pose>
+        <pose>0 0 -95.5 0 0 0</pose>
         <link name="base_link">
             <pose>0 0 0 0 -0 0</pose>
             <inertial>
-                <mass>11</mass>
+                <mass>13</mass>
                 <inertia>
-                    <ixx>0.1</ixx>
+                    <ixx>0.250</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>0.1</iyy>
+                    <iyy>0.221</iyy>
                     <iyz>0</iyz>
-                    <izz>0.1</izz>
+                    <izz>0.356</izz>
                 </inertia>
             </inertial>
             <collision name='base_link_collision'>
-                <pose>0 0 0 0 -0 0</pose>
+                <pose>0 0 0.02 0 -0 0</pose>
                 <geometry>
                     <box>
-                        <size>0.5 0.5 0.5</size>        <!-- Size of the box: To be adjusted -->
+                        <size>0.50 0.25 0.108</size>         <!-- V = 0.0135 m^3. Keep X=0.50, Y=0.25 and solve Z -->
                     </box>
                 </geometry>
                 <surface>
@@ -129,16 +129,16 @@
             <child>thruster0</child>
         </joint>
         <link name="thruster0">
-            <pose>0.14 -0.10 -0.06 0 1.570796 0.78539865359</pose>
+            <pose>0.14 -0.10 -0.06 0 1.570796 0.785398</pose>
             <inertial>
-                <mass>1e-10</mass>
+                <mass>0.05</mass>
                 <inertia>
-                    <ixx>1e-06</ixx>
+                    <ixx>1e-04</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
+                    <iyy>1e-04</iyy>
                     <iyz>0</iyz>
-                    <izz>1e-06</izz>
+                    <izz>1e-04</izz>
                 </inertia>
             </inertial>
             <visual name="thruster0_visual">
@@ -163,16 +163,16 @@
             <child>thruster1</child>
         </joint>
         <link name="thruster1">
-            <pose>0.14 0.10 -0.06 0 1.570796 -0.78539865359</pose>
+            <pose>0.14 0.10 -0.06 0 1.570796 -0.785398</pose>
             <inertial>
-                <mass>1e-10</mass>
+                <mass>0.05</mass>
                 <inertia>
-                    <ixx>1e-06</ixx>
+                    <ixx>1e-04</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
+                    <iyy>1e-04</iyy>
                     <iyz>0</iyz>
-                    <izz>1e-06</izz>
+                    <izz>1e-04</izz>
                 </inertia>
             </inertial>
             <visual name="thruster1_visual">
@@ -198,16 +198,16 @@
             <child>thruster2</child>
         </joint>
         <link name="thruster2">
-            <pose>-0.14 -0.10 -0.06 0 1.570796 -0.78539815</pose>
+            <pose>-0.14 -0.10 -0.06 0 1.570796 -0.785398</pose>
             <inertial>
-                <mass>1e-10</mass>
+                <mass>0.05</mass>
                 <inertia>
-                    <ixx>1e-06</ixx>
+                    <ixx>1e-04</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
+                    <iyy>1e-04</iyy>
                     <iyz>0</iyz>
-                    <izz>1e-06</izz>
+                    <izz>1e-04</izz>
                 </inertia>
             </inertial>
             <visual name="thruster2_visual">
@@ -232,16 +232,16 @@
             <child>thruster3</child>
         </joint>
         <link name="thruster3">
-            <pose>-0.14 0.10 -0.06 0 1.570796 0.78539815</pose>
+            <pose>-0.14 0.10 -0.06 0 1.570796 0.785398</pose>
             <inertial>
-                <mass>1e-10</mass>
+                <mass>0.05</mass>
                 <inertia>
-                    <ixx>1e-06</ixx>
+                    <ixx>1e-04</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
+                    <iyy>1e-04</iyy>
                     <iyz>0</iyz>
-                    <izz>1e-06</izz>
+                    <izz>1e-04</izz>
                 </inertia>
             </inertial>
             <visual name="thruster3_visual">
@@ -268,14 +268,14 @@
         <link name="thruster4">
             <pose>0.12 -0.22 0.0 0.0 0 0</pose>
             <inertial>
-                <mass>1e-10</mass>
+                <mass>0.05</mass>
                 <inertia>
-                    <ixx>1e-06</ixx>
+                    <ixx>1e-04</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
+                    <iyy>1e-04</iyy>
                     <iyz>0</iyz>
-                    <izz>1e-06</izz>
+                    <izz>1e-04</izz>
                 </inertia>
             </inertial>
             <visual name="thruster4_visual">
@@ -303,14 +303,14 @@
         <link name="thruster5">
             <pose>0.12 0.22 0.0 3.1415 0 0</pose>
             <inertial>
-                <mass>1e-10</mass>
+                <mass>0.05</mass>
                 <inertia>
-                    <ixx>1e-06</ixx>
+                    <ixx>1e-04</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
+                    <iyy>1e-04</iyy>
                     <iyz>0</iyz>
-                    <izz>1e-06</izz>
+                    <izz>1e-04</izz>
                 </inertia>
             </inertial>
             <visual name="thruster5_visual">
@@ -337,14 +337,14 @@
         <link name="thruster6">
             <pose>-0.12 -0.22 0.0 3.1415 0 0</pose>
             <inertial>
-                <mass>1e-10</mass>
+                <mass>0.05</mass>
                 <inertia>
-                    <ixx>1e-06</ixx>
+                    <ixx>1e-04</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
+                    <iyy>1e-04</iyy>
                     <iyz>0</iyz>
-                    <izz>1e-06</izz>
+                    <izz>1e-04</izz>
                 </inertia>
             </inertial>
             <visual name="thruster6_visual">
@@ -370,14 +370,14 @@
         <link name="thruster7">
             <pose>-0.12 0.22 0.0 0.0 0 0</pose>
             <inertial>
-                <mass>1e-10</mass>
+                <mass>0.05</mass>
                 <inertia>
-                    <ixx>1e-06</ixx>
+                    <ixx>1e-04</ixx>
                     <ixy>0</ixy>
                     <ixz>0</ixz>
-                    <iyy>1e-06</iyy>
+                    <iyy>1e-04</iyy>
                     <iyz>0</iyz>
-                    <izz>1e-06</izz>
+                    <izz>1e-04</izz>
                 </inertia>
             </inertial>
             <visual name="thruster7_visual">
@@ -410,8 +410,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 2.37936891e+00, 1.49248519e+02, -3.27398031e+02, 4.36609803e+02, -1.94364029e+02]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.42623942e-01, 1.34413692e+02, -2.84606487e+02, 3.51715475e+02, -1.52174269e+02]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster1_joint</jointName>
@@ -433,14 +433,14 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 2.37936891e+00, 1.49248519e+02, -3.27398031e+02, 4.36609803e+02, -1.94364029e+02]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.42623942e-01, 1.34413692e+02, -2.84606487e+02, 3.51715475e+02, -1.52174269e+02]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster2_joint</jointName>
             <linkName>thruster2</linkName>
             <motorNumber>2</motorNumber>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -456,14 +456,14 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 2.37936891e+00, 1.49248519e+02, -3.27398031e+02, 4.36609803e+02, -1.94364029e+02]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.42623942e-01, 1.34413692e+02, -2.84606487e+02, 3.51715475e+02, -1.52174269e+02]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster3_joint</jointName>
             <linkName>thruster3</linkName>
             <motorNumber>3</motorNumber>
-            <turningDirection>ccw</turningDirection>
+            <turningDirection>cw</turningDirection>
             <timeConstantUp>0.0125</timeConstantUp>
             <timeConstantDown>0.025</timeConstantDown>
             <maxRotVelocity>1100.0</maxRotVelocity>
@@ -479,8 +479,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 2.37936891e+00, 1.49248519e+02, -3.27398031e+02, 4.36609803e+02, -1.94364029e+02]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.42623942e-01, 1.34413692e+02, -2.84606487e+02, 3.51715475e+02, -1.52174269e+02]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster4_joint</jointName>
@@ -502,8 +502,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 2.37936891e+00, 1.49248519e+02, -3.27398031e+02, 4.36609803e+02, -1.94364029e+02]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.42623942e-01, 1.34413692e+02, -2.84606487e+02, 3.51715475e+02, -1.52174269e+02]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster5_joint</jointName>
@@ -525,8 +525,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 2.37936891e+00, 1.49248519e+02, -3.27398031e+02, 4.36609803e+02, -1.94364029e+02]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.42623942e-01, 1.34413692e+02, -2.84606487e+02, 3.51715475e+02, -1.52174269e+02]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster6_joint</jointName>
@@ -548,8 +548,8 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 2.37936891e+00, 1.49248519e+02, -3.27398031e+02, 4.36609803e+02, -1.94364029e+02]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.42623942e-01, 1.34413692e+02, -2.84606487e+02, 3.51715475e+02, -1.52174269e+02]</negativeThrustPolynomial>
         </plugin>
         <plugin filename="libGenericMotorModelPlugin.so" name="gz::sim::systems::GenericMotorModel">
             <jointName>thruster7_joint</jointName>
@@ -571,35 +571,38 @@
             <minDutyCycle>1100</minDutyCycle>
             <maxDutyCycle>1900</maxDutyCycle>
             <bidirectionalMotor>1</bidirectionalMotor>
-            <positiveThrustPolynomial>[0.0, 4.53, 0.0, 0.0, 0.0, 0.0]</positiveThrustPolynomial>
-            <negativeThrustPolynomial>[0.0, 3.52, 0.0, 0.0, 0.0, 0.0]</negativeThrustPolynomial>
+            <positiveThrustPolynomial>[0.0, 2.37936891e+00, 1.49248519e+02, -3.27398031e+02, 4.36609803e+02, -1.94364029e+02]</positiveThrustPolynomial>
+            <negativeThrustPolynomial>[0.0, 3.42623942e-01, 1.34413692e+02, -2.84606487e+02, 3.51715475e+02, -1.52174269e+02]</negativeThrustPolynomial>
         </plugin>
+
         <plugin filename="gz-sim-odometry-publisher-system" name="gz::sim::systems::OdometryPublisher">
             <dimensions>3</dimensions>
         </plugin>
 
-        <plugin
-                filename="gz-sim-hydrodynamics-system"
-                name="gz::sim::systems::Hydrodynamics">
+        <plugin filename="gz-sim-hydrodynamics-system" name="gz::sim::systems::Hydrodynamics">
             <link_name>base_link</link_name>
-            <xDotU>-1.11</xDotU>
-            <yDotV>-2.8</yDotV>
-            <zDotW>-2.8</zDotW>
-            <kDotP>-0.00451</kDotP>
-            <mDotQ>-0.0163</mDotQ>
-            <nDotR>-0.0163</nDotR>
-            <xUabsU>-0.2</xUabsU>
-            <xU>-5.39</xU>
-            <yVabsV>-0.2</yVabsV>
-            <yV>-17.36</yV>
-            <zWabsW>-0.2</zWabsW>
-            <zW>-17.36</zW>
-            <kPabsP>-0.2</kPabsP>
-            <kP>-0.00114</kP>
-            <mQabsQ>-0.2</mQabsQ>
-            <mQ>-0.007</mQ>
-            <nRabsR>-0.2</nRabsR>
-            <nR>-0.007</nR>
+
+            <!-- Linear damping -->
+            <xU>-13.7</xU>
+            <yV>-0.0</yV>
+            <zW>-23.0</zW>
+            <kP>-0.0</kP>
+            <mQ>-0.8</mQ>
+            <nR>-0.0</nR>
+            <!-- Quadratic damping -->
+            <xUabsU>-14.1</xUabsU>
+            <yVabsV>-21.7</yVabsV>
+            <zWabsW>-19.0</zWabsW>
+            <kPabsP>-0.119</kPabsP>
+            <mQabsQ>-0.047</mQabsQ>
+            <nRabsR>-0.15</nRabsR>
+            <!-- Added mass -->
+            <xDotU>-1.272</xDotU>
+            <yDotV>-1.424</yDotV>
+            <zDotW>-3.736</zDotW>
+            <kDotP>-0.0378</kDotP>
+            <mDotQ>-0.027</mDotQ>
+            <nDotR>-0.0444</nDotR>
         </plugin>
 
     </model>

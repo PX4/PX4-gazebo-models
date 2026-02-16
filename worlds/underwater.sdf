@@ -197,8 +197,12 @@
       https://fuel.gazebosim.org/1.0/OpenRobotics/models/Portuguese Ledge
       </uri>
     </include>
-    <plugin filename="libBuoyancySystemPlugin.so" name="gz::sim::systems::BuoyancySystem">
-        <basicBuoyancy>1</basicBuoyancy>
+    <plugin filename="gz-sim-buoyancy-system" name="gz::sim::systems::Buoyancy">
+      <uniform_fluid_density>1000</uniform_fluid_density>
+      <!-- Restrict buoyancy to just the robot link(s) -->
+      <enable>uuv_bluerov2_heavy::base_link</enable>
+      <!-- PX4 often spawns with a suffix like _0 -->
+      <enable>uuv_bluerov2_heavy_0::base_link</enable>
     </plugin>
   </world>
 </sdf>
