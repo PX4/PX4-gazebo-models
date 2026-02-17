@@ -403,7 +403,7 @@
             <commandSubTopic>command/motor_speed</commandSubTopic>
             <rotorDragCoefficient>0</rotorDragCoefficient>
             <rollingMomentCoefficient>0</rollingMomentCoefficient>
-            <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+            <rotorVelocitySlowdownSim>0.025</rotorVelocitySlowdownSim>
             <motorType>force_polynomial</motorType>
             <controlMethod>duty_cycle</controlMethod>
             <minCommand>0.00</minCommand>
