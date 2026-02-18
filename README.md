@@ -41,6 +41,16 @@ Follow instructions on PX4 website to setup
    cd ../../..
    ```
 
+### New branches revert gz content?
+
+PX4-Autopilot records the gz submodule as a **specific commit**. When you create or switch to a branch that still has the old commit pinned (e.g. upstream’s pin), Git checks out that commit in the submodule and you get the old world files.
+
+  ```
+  cd Tools/simulation/gz
+  git fetch origin && git checkout main && git pull origin main
+  cd ../../..
+  ```
+
 
 ## Starting GZ simulation
 
