@@ -45,6 +45,7 @@ Follow instructions on PX4 website to setup
 
 PX4-Autopilot records the gz submodule as a **specific commit**. When you create or switch to a branch that still has the old commit pinned (e.g. upstream’s pin), Git checks out that commit in the submodule and you get the old world files.
 
+- **Quick fix:** After creating or switching to a branch, run **step 3** again so the submodule is on this fork’s `main`:
   ```
   cd Tools/simulation/gz
   git fetch origin && git checkout main && git pull origin main
