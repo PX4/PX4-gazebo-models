@@ -23,12 +23,22 @@ Follow instructions on PX4 website to setup
    git submodule sync
    git submodule update --init --recursive
    ```
+3. **Use the fork's `main` branch** (required for correct worlds, e.g. `baylands.sdf` with BV models). After step 2 the submodule stays at the commit pinned by PX4-Autopilot; switch to this repo's `main`:
+   ```
+   cd Tools/simulation/gz
+   git fetch origin
+   git checkout main
+   git pull origin main
+   cd ../../..
+   ```
 4. Verify the submodule
    ```
    cd Tools/simulation/gz
-    git remote -v
-    # should list origin = https://github.com/BuckeyeVertical/PX4-gazebo-models.git
-    cd ../../..
+   git remote -v
+   # should list origin = https://github.com/BuckeyeVertical/PX4-gazebo-models.git
+   git branch
+   # should show * main
+   cd ../../..
    ```
 
 
