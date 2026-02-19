@@ -45,10 +45,11 @@
         <relative_to>park</relative_to>
       </pose>
     </include>
-    <!-- Objects from bv_mission placed near spawn, line runs northeast (45° from east toward north), 50 m apart, from (0,10) -->
+    <!-- Objects from bv_mission placed near spawn, line runs northeast (45° from east toward north), 25 m apart, from (0,10) -->
     <include>
       <uri>model://hatchback_red</uri>
       <name>bv_line_hatchback</name>
+      <static>true</static>
       <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
         <label>0</label>
       </plugin>
@@ -57,47 +58,53 @@
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/RoboCup 3D Simulation Ball</uri>
       <name>bv_line_ball</name>
+      <static>true</static>
       <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
         <label>1</label>
       </plugin>
-      <pose relative_to='world'>35.355 45.355 2 0 0 0</pose>
+      <pose relative_to='world'>17.678 27.678 2 0 0 0</pose>
     </include>
     <include>
       <uri>model://rc_cessna</uri>
       <name>bv_line_rc_cessna</name>
+      <static>true</static>
       <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
         <label>2</label>
       </plugin>
-      <pose relative_to='world'>70.711 80.711 2 0 0 0</pose>
+      <pose relative_to='world'>35.355 45.355 2 0 0 0</pose>
     </include>
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Walking person</uri>
       <name>bv_line_person</name>
+      <static>true</static>
       <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
         <label>3</label>
       </plugin>
-      <pose relative_to='world'>106.066 116.066 2 0 0 0</pose>
+      <pose relative_to='world'>53.033 63.033 2 0 0 0</pose>
     </include>
     <include>
       <uri>model://bus</uri>
       <name>bv_line_bus</name>
+      <static>true</static>
       <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
         <label>4</label>
       </plugin>
-      <pose relative_to='world'>141.421 151.421 2 0 0 0</pose>
+      <pose relative_to='world'>70.711 80.711 2 0 0 0</pose>
     </include>
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Stop Sign</uri>
       <name>bv_line_stop_sign</name>
+      <static>true</static>
       <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
         <label>5</label>
       </plugin>
-      <pose relative_to='world'>176.777 186.777 2 0 0 0</pose>
+      <pose relative_to='world'>88.388 98.388 2 0 0 0</pose>
     </include>
     <include>
       <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Suitcase1H</uri>
       <name>bv_line_suitcase</name>
-      <pose relative_to='world'>212.132 222.132 2 0 0 0</pose>
+      <static>true</static>
+      <pose relative_to='world'>106.066 116.066 2 0 0 0</pose>
       <plugin filename="gz-sim-label-system" name="gz::sim::systems::Label">
         <label>6</label>
       </plugin>
