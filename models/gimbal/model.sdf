@@ -353,5 +353,13 @@
       <cmd_min>-0.3</cmd_min>
     </plugin>
 
+    <plugin filename="GimbalStabilizerPlugin"
+            name="gz::sim::systems::GimbalStabilizerSystem">
+      <imu_topic>/world/baylands/model/x500_gimbal_0/link/camera_link/sensor/camera_imu/imu</imu_topic>
+      <roll_topic>/model/x500_gimbal_0/command/gimbal_roll</roll_topic>
+      <pitch_topic>/model/x500_gimbal_0/command/gimbal_pitch</pitch_topic>
+      <control_rate>50</control_rate>
+    </plugin>
+
   </model>
 </sdf>
