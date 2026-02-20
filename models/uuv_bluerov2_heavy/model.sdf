@@ -584,11 +584,11 @@
 
             <!-- Linear damping -->
             <xU>-13.7</xU>
-            <yV>-0.0</yV>
+            <yV>-1.0</yV>
             <zW>-23.0</zW>
-            <kP>-0.0</kP>
+            <kP>-0.5</kP>
             <mQ>-0.8</mQ>
-            <nR>-0.0</nR>
+            <nR>-0.1</nR>
             <!-- Quadratic damping -->
             <xUabsU>-14.1</xUabsU>
             <yVabsV>-21.7</yVabsV>
