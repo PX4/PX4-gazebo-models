@@ -52,7 +52,7 @@ void GimbalStabilizerSystem::HandleImu(const gz::msgs::IMU &_msg)
 	QuaternionToRollPitch(q.x(), q.y(), q.z(), q.w(), roll, pitch);
 
 	std::lock_guard<std::mutex> lock(mutex_);
-	roll_cmd_ = 0.0;
+	roll_cmd_ = -roll;
 	pitch_cmd_ = pitch;
 }
 
