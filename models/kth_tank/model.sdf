@@ -1,0 +1,112 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="kth_tank">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <link name="tank_link">
+      <!-- Visual representation using the OBJ mesh -->
+      <visual name="visual">
+        <pose>0 0 0 1.571 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://kth_tank/meshes/kth_tank_complete.obj</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <!-- Dark grey -->
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.25 0.25 0.25 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+
+      <!-- Water volume visual -->
+      <visual name="water_volume_visual">
+        <pose>-2.175 -1.15 1.3 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <box>
+            <size>7.4 4.55 2.55</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.3 0.5 1</ambient>
+          <diffuse>0.0 0.5 0.8 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+        <transparency>0.5</transparency>
+      </visual>
+
+      <!-- Simple box collisions -->
+      <!-- Bottom / floor (Z min) -->
+      <collision name="tank_floor_box">
+        <pose>-2.175 -1.15 0.17 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>7.4 4.55 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- West wall (X min / negative X) -->
+      <collision name="tank_wall_x_min">
+        <pose>-5.9 -1.2 1.3 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 4.8 2.5</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- East wall (X max / positive X) -->
+      <collision name="tank_wall_x_max">
+        <pose>1.55 -1.2 1.3 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.05 4.8 2.5</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="tank_wall_x_max_visual">
+        <!-- slight outward offset to avoid z-fighting -->
+        <pose>1.60 -1.2 1.3 0 0 0</pose>
+        <geometry>
+          <box>
+            <!-- slightly thicker than collision for visibility -->
+            <size>0.08 4.8 2.5</size>
+          </box>
+        </geometry>
+        <material>
+          <!-- Same dark grey as tank mesh -->
+          <ambient>0.15 0.15 0.15 1</ambient>
+          <diffuse>0.25 0.25 0.25 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+        </material>
+      </visual>
+
+      <!-- South wall (Y min / negative Y) -->
+      <collision name="tank_wall_y_min">
+        <pose>-2.2 -3.45 1.3 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>7.9 0.05 2.5</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- North wall (Y max / positive Y) -->
+      <collision name="tank_wall_y_max">
+        <pose>-2.2 1.15 1.3 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>7.9 0.05 2.5</size>
+          </box>
+        </geometry>
+      </collision>
+
+    </link>
+
+  </model>
+</sdf>
