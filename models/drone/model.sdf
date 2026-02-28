@@ -25,7 +25,7 @@
       <visual name="base_visual">
         <geometry>
           <mesh>
-            <scale>0.1 0.1 0.1</scale>
+            <scale>0.01 0.01 0.01</scale>
             <uri>model://drone/meshes/drone.obj</uri>
           </mesh>
         </geometry>
@@ -41,29 +41,32 @@
       <!--                        SENSORS                       -->
       <!-- ===================================================== -->
 
-      <!-- IMU (MPU6000 noise approximation) -->
+      <!-- IMU (noise modelled after IIM42653, same as x500_base) -->
       <sensor name="imu_sensor" type="imu">
-        <always_on>true</always_on>
+        <gz_frame_id>base_link</gz_frame_id>
+        <topic>/drone/imu</topic>
+        <always_on>1</always_on>
         <update_rate>250</update_rate>
         <imu>
           <angular_velocity>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <stddev>0.0014</stddev>
-            </noise>
+            <!-- 0.05 deg/s RMS → rad/s -->
+            <x><noise type="gaussian"><mean>0.0</mean><stddev>0.0008726646</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0.0</mean><stddev>0.0008726646</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0.0</mean><stddev>0.0008726646</stddev></noise></z>
           </angular_velocity>
           <linear_acceleration>
-            <noise type="gaussian">
-              <mean>0.0</mean>
-              <stddev>0.03</stddev>
-            </noise>
+            <!-- 0.65 mg-rms (XY) / 0.70 mg-rms (Z) → m/s² -->
+            <x><noise type="gaussian"><mean>0.0</mean><stddev>0.00637</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0.0</mean><stddev>0.00637</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0.0</mean><stddev>0.00686</stddev></noise></z>
           </linear_acceleration>
         </imu>
       </sensor>
 
-      <!-- Magnetometer -->
+      <!-- Magnetometer (noise modelled after IIS2MDC, same as x500_base) -->
       <sensor name="magnetometer_sensor" type="magnetometer">
-        <always_on>true</always_on>
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
         <update_rate>100</update_rate>
         <magnetometer>
           <x><noise type="gaussian"><stddev>0.0001</stddev></noise></x>
@@ -72,32 +75,26 @@
         </magnetometer>
       </sensor>
 
-      <!-- Barometer (BMP280) -->
-      <sensor name="barometer_sensor" type="air_pressure">
-        <always_on>true</always_on>
+      <!-- Barometer (noise modelled after BMP390, same as x500_base) -->
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
         <update_rate>50</update_rate>
         <air_pressure>
           <pressure>
             <noise type="gaussian">
               <mean>0</mean>
-              <stddev>1.3</stddev>
+              <stddev>3</stddev>
             </noise>
           </pressure>
         </air_pressure>
       </sensor>
 
       <!-- GPS (Enabled, needed for Offboard / ALTCTL / POSCTL in SITL) -->
-      <sensor name="gps_sensor" type="navsat">
-        <always_on>true</always_on>
+      <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
         <update_rate>10</update_rate>
-        <navsat>
-          <position>
-            <noise type="gaussian"><stddev>0.7</stddev></noise>
-          </position>
-          <velocity>
-            <noise type="gaussian"><stddev>0.1</stddev></noise>
-          </velocity>
-        </navsat>
       </sensor>
 
       <!-- ===================================================== -->
@@ -124,7 +121,7 @@
           </lens>
         </camera>
 
-        <topic>/drone/camera/image_raw</topic>
+        <topic>/drone/camera/image</topic>
       </sensor>
 
     </link>
@@ -132,16 +129,21 @@
     <!-- ===================================================== -->
     <!--                      ROTOR LINKS                      -->
     <!-- ===================================================== -->
-    <link name="rotor_0"><pose>0.05 0.05 0.02 0 0 0</pose><inertial><mass>0.01</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial></link>
+    <!-- Gazebo Y+ = left, PX4 Y+ = right → SDF_Y = -PX4_Y                -->
+    <!-- rotor_0 = ch0 = front-right (PX4 +x +y) → SDF (+x, -y)          -->
+    <!-- rotor_1 = ch1 = rear-right  (PX4 -x +y) → SDF (-x, -y)          -->
+    <!-- rotor_2 = ch2 = rear-left   (PX4 -x -y) → SDF (-x, +y)          -->
+    <!-- rotor_3 = ch3 = front-left  (PX4 +x -y) → SDF (+x, +y)          -->
+    <link name="rotor_0"><pose>0.05 -0.05 0.02 0 0 0</pose><inertial><mass>0.01</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial></link>
     <joint name="rotor_0_joint" type="revolute"><parent>base_link</parent><child>rotor_0</child><axis><xyz>0 0 1</xyz></axis></joint>
 
-    <link name="rotor_1"><pose>-0.05 0.05 0.02 0 0 0</pose><inertial><mass>0.01</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial></link>
+    <link name="rotor_1"><pose>-0.05 -0.05 0.02 0 0 0</pose><inertial><mass>0.01</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial></link>
     <joint name="rotor_1_joint" type="revolute"><parent>base_link</parent><child>rotor_1</child><axis><xyz>0 0 1</xyz></axis></joint>
 
-    <link name="rotor_2"><pose>-0.05 -0.05 0.02 0 0 0</pose><inertial><mass>0.01</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial></link>
+    <link name="rotor_2"><pose>-0.05 0.05 0.02 0 0 0</pose><inertial><mass>0.01</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial></link>
     <joint name="rotor_2_joint" type="revolute"><parent>base_link</parent><child>rotor_2</child><axis><xyz>0 0 1</xyz></axis></joint>
 
-    <link name="rotor_3"><pose>0.05 -0.05 0.02 0 0 0</pose><inertial><mass>0.01</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial></link>
+    <link name="rotor_3"><pose>0.05 0.05 0.02 0 0 0</pose><inertial><mass>0.01</mass><inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz></inertia></inertial></link>
     <joint name="rotor_3_joint" type="revolute"><parent>base_link</parent><child>rotor_3</child><axis><xyz>0 0 1</xyz></axis></joint>
 
     <!-- ===================================================== -->
@@ -154,14 +156,14 @@
       <linkName>rotor_0</linkName>
       <turningDirection>ccw</turningDirection>
       <commandSubTopic>command/motor_speed</commandSubTopic>
-      <maxRotVelocity>4000</maxRotVelocity>
-      <motorConstant>2.0e-7</motorConstant>
-      <momentConstant>0.006</momentConstant>
+      <maxRotVelocity>1000.0</maxRotVelocity>
+      <motorConstant>1.2867e-5</motorConstant>
+      <momentConstant>0.016</momentConstant>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-      <timeConstantUp>0.005</timeConstantUp>
-      <timeConstantDown>0.010</timeConstantDown>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
       <motorType>velocity</motorType>
     </plugin>
 
@@ -172,14 +174,14 @@
       <linkName>rotor_1</linkName>
       <turningDirection>cw</turningDirection>
       <commandSubTopic>command/motor_speed</commandSubTopic>
-      <maxRotVelocity>4000</maxRotVelocity>
-      <motorConstant>2.0e-7</motorConstant>
-      <momentConstant>0.006</momentConstant>
+      <maxRotVelocity>1000.0</maxRotVelocity>
+      <motorConstant>1.2867e-5</motorConstant>
+      <momentConstant>0.016</momentConstant>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-      <timeConstantUp>0.005</timeConstantUp>
-      <timeConstantDown>0.010</timeConstantDown>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
       <motorType>velocity</motorType>
     </plugin>
 
@@ -190,14 +192,14 @@
       <linkName>rotor_2</linkName>
       <turningDirection>ccw</turningDirection>
       <commandSubTopic>command/motor_speed</commandSubTopic>
-      <maxRotVelocity>4000</maxRotVelocity>
-      <motorConstant>2.0e-7</motorConstant>
-      <momentConstant>0.006</momentConstant>
+      <maxRotVelocity>1000.0</maxRotVelocity>
+      <motorConstant>1.2867e-5</motorConstant>
+      <momentConstant>0.016</momentConstant>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-      <timeConstantUp>0.005</timeConstantUp>
-      <timeConstantDown>0.010</timeConstantDown>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
       <motorType>velocity</motorType>
     </plugin>
 
@@ -208,15 +210,22 @@
       <linkName>rotor_3</linkName>
       <turningDirection>cw</turningDirection>
       <commandSubTopic>command/motor_speed</commandSubTopic>
-      <maxRotVelocity>4000</maxRotVelocity>
-      <motorConstant>2.0e-7</motorConstant>
-      <momentConstant>0.006</momentConstant>
+      <maxRotVelocity>1000.0</maxRotVelocity>
+      <motorConstant>1.2867e-5</motorConstant>
+      <momentConstant>0.016</momentConstant>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
-      <timeConstantUp>0.005</timeConstantUp>
-      <timeConstantDown>0.010</timeConstantDown>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
       <motorType>velocity</motorType>
+    </plugin>
+
+    <plugin
+      filename="gz-sim-odometry-publisher-system"
+      name="gz::sim::systems::OdometryPublisher">
+      <dimensions>3</dimensions>
+      <odom_topic>/drone/odometry</odom_topic>
     </plugin>
 
   </model>
