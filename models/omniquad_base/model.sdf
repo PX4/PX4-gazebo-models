@@ -153,7 +153,7 @@
     </link>
     <!-- arm -->
      <link name='tilt_arm_1'>
-      <pose>0.05 -0.05 0.025 3.1415 0 -0.786</pose>
+      <pose>0.06 -0.05 0.0085 3.1415 0 -0.786</pose>
       <inertial>
         <pose>0.0 0.0 0.0 0 0 0</pose>
         <mass>0.2031180930624021</mass>
@@ -220,7 +220,7 @@
     </joint>
 
     <link name='tilt_arm_2'>
-      <pose>-0.05 0.05 0.025 3.1415 0 2.35619</pose>
+      <pose>-0.04 0.05 0.0085 3.1415 0 2.35619</pose>
       <inertial>
         <pose>0.0 0.0 0.0 0 0 0</pose>
         <mass>0.2031180930624021</mass>
@@ -287,7 +287,7 @@
     </joint>
 
     <link name='tilt_arm_3'>
-      <pose>0.05 0.05 0.025 3.1415 0 0.785398</pose>
+      <pose>0.06 0.05 0.0085 3.1415 0 0.785398</pose>
       <inertial>
         <pose>0.0 0.0 0.0 0 0 0</pose>
         <mass>0.2031180930624021</mass>
@@ -354,7 +354,7 @@
     </joint>
 
     <link name='tilt_arm_4'>
-      <pose>-0.05 -0.05 0.025 3.1415 0 3.925</pose>
+      <pose>-0.04 -0.05 0.0085 3.1415 0 3.925</pose>
       <inertial>
         <pose>0.0 0.0 0.0 0 0 0</pose>
         <mass>0.2031180930624021</mass>
