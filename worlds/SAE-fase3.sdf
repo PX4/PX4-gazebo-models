@@ -42,6 +42,13 @@
           <property key="showTitleBar" type="bool">false</property>
         </gz-gui>
       </plugin>
+      <plugin name="3D View" filename="GzScene3D">
+        <gz-gui>
+          <title>3D View</title>
+          <property type="bool" key="show_grid">true</property>
+          <property type="bool" key="show_origin">true</property>
+        </gz-gui>
+      </plugin>
       <plugin filename="GzSceneManager" name="Scene Manager">
         <gz-gui>
           <property key="resizable" type="bool">false</property>
@@ -182,34 +189,34 @@
     </include>
     <include>
       <uri>models://common/TakeoffBase.sdf</uri>
-      <pose>4.000000 7.000000 0.000000 0 0 -0.078265</pose>
+      <pose>4.000000 7.000000 0.000000 0 0 0.073245</pose>
     </include>
     <include>
       <uri>models://M3/M3Pole.sdf</uri>
       <name>Pole1</name>
-      <pose>1.537012 1.174737 -0.010000 0 0 -0.078265</pose>
+      <pose>5.555559 13.130272 -0.010000 0 0 0.073245</pose>
     </include>
     <include>
       <uri>models://M3/ManometroL1.sdf</uri>
-      <pose>1.537012 1.174737 1.700000 0 0 -0.078265</pose>
+      <pose>5.555559 13.130272 1.700000 0 0 0.073245</pose>
     </include>
     <include>
       <uri>models://M3/M3Pole.sdf</uri>
       <name>Pole2</name>
-      <pose>6.492347 6.804537 -0.010000 0 0 -0.078265</pose>
+      <pose>1.506703 6.817051 -0.010000 0 0 0.073245</pose>
     </include>
     <include>
       <uri>models://M3/ManometroL2.sdf</uri>
-      <pose>6.492347 6.804537 1.700000 0 0 -0.078265</pose>
+      <pose>1.506703 6.817051 1.700000 0 0 0.073245</pose>
     </include>
     <include>
       <uri>models://M3/M3Pole.sdf</uri>
       <name>Pole3</name>
-      <pose>2.895517 12.101972 -0.010000 0 0 -0.078265</pose>
+      <pose>6.859195 2.196355 -0.010000 0 0 0.073245</pose>
     </include>
     <include>
       <uri>models://M3/ManometroL3.sdf</uri>
-      <pose>2.895517 12.101972 1.700000 0 0 -0.078265</pose>
+      <pose>6.859195 2.196355 1.700000 0 0 0.073245</pose>
     </include>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>

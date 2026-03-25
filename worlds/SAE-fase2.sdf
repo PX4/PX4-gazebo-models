@@ -185,16 +185,16 @@
       <pose>4 7 0 0 0 0</pose>
     </include>
     <include>
-      <uri>models://M2/AH.sdf</uri>
+      <uri>models://M2/BE.sdf</uri>
       <pose>0 0 0 0 0 0</pose>
     </include>
     <include>
-      <uri>models://M2/AF.sdf</uri>
+      <uri>models://M2/EH.sdf</uri>
       <pose>0 0 0 0 0 0</pose>
     </include>
     <include>
       <uri>models://M2/Sphere.sdf</uri>
-      <pose>7.214119553277662 4.87217406398695 1.7 0 0 0</pose>
+      <pose>4.493288176841414 10.920393934294134 1.7 0 0 0</pose>
     </include>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
