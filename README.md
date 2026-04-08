@@ -41,6 +41,41 @@ Follow instructions on PX4 website to setup
    cd ../../..
    ```
 
+### New branches revert gz content?
+
+PX4-Autopilot records the gz submodule as a **specific commit**. When you create or switch to a branch that still has the old commit pinned (e.g. upstream’s pin), Git checks out that commit in the submodule and you get the old world files.
+
+- **Quick fix:** After creating or switching to a branch, run **step 3** again so the submodule is on this fork’s `main`:
+  ```
+  cd Tools/simulation/gz
+  git fetch origin && git checkout main && git pull origin main
+  cd ../../..
+  ```
+
+
+## Building Plugins
+
+Build the custom Gazebo plugins:
+```
+cd Tools/simulation/gz/plugins
+mkdir -p build && cd build
+cmake .. && make
+```
+
+## Environment Variables
+
+Add the following to your `~/.bashrc`:
+```bash
+# Gazebo plugin path (adjust to your PX4-Autopilot location)
+export GZ_SIM_SYSTEM_PLUGIN_PATH=$GZ_SIM_SYSTEM_PLUGIN_PATH:~/workspace/PX4-Autopilot/Tools/simulation/gz/plugins/build/gimbal_stabilizer
+
+# PX4 simulation defaults
+export PX4_GZ_WORLD=baylands
+export PX4_HOME_LAT=38.3876112
+export PX4_HOME_LON=-76.4190542
+export PX4_HOME_ALT=0
+export PX4_GZ_MODEL_POSE=0,0,0,0,0,0
+```
 
 ## Starting GZ simulation
 
