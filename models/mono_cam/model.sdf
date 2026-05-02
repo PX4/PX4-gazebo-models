@@ -32,7 +32,7 @@
           </image>
 
           <clip>
-            <near>0.1</near>
+            <near>0.015</near>
             <far>3000</far>
           </clip>
 
