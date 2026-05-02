@@ -401,13 +401,12 @@
           </geometry>
         </visual>
         
-        <!-- COLLISION: Using the .dae as requested -->
         <collision name="hook_collision">
           <pose>0 0 0 0 0 0</pose>
           <geometry>
             <mesh>
               <scale>1 1 1</scale>
-              <uri>model://piazinho_base/meshes/hook.dae</uri>
+              <uri>model://piazinho_base/meshes/hook_Collision.stl</uri>
             </mesh>
           </geometry>
           <surface>
