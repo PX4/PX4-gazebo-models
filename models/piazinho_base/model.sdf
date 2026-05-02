@@ -126,7 +126,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>0.174868 -0.175017 0.282644 0 0 0</pose>
+      <pose>0.169826 -0.168623 0.282644 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -190,7 +190,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>-0.174939 0.175006 0.282644 0 0 0</pose>
+      <pose>-0.1717 0.172902 0.282644 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -254,7 +254,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>0.174901 0.175035 0.282644 0 0 0</pose>
+      <pose>0.169826 0.172902 0.282644 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -318,7 +318,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>-0.174963 -0.1750460 0.282644 0 0 0</pose>
+      <pose>-0.1717 -0.168623 0.282644 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -378,5 +378,62 @@
         </dynamics>
       </axis>
     </joint>
+
+    <model name="payload_model">
+      <pose relative_to="base_link">0.119381 -0.021485 0.169178 0 0 0</pose>
+      <link name="payload_hook">
+        <inertial>
+          <mass>0.2</mass>
+          <inertia>
+            <ixx>0.001</ixx><ixy>0</ixy><ixz>0</ixz>
+            <iyy>0.001</iyy><iyz>0</iyz><izz>0.001</izz>
+          </inertia>
+        </inertial>
+        
+        <!-- VISUAL -->
+        <visual name="hook_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://piazinho_base/meshes/hook.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        
+        <!-- COLLISION: Using the .dae as requested -->
+        <collision name="hook_collision">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://piazinho_base/meshes/hook.dae</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <min_depth>0.001</min_depth>
+                <max_vel>0</max_vel>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>1.0</mu>
+                <mu2>1.0</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+      </link>
+    </model>
+
+    <plugin filename="gz-sim-detachable-joint-system" name="gz::sim::systems::DetachableJoint">
+      <parent_link>base_link</parent_link>
+      <child_model>payload_model</child_model>
+      <child_link>payload_hook</child_link>
+      <detach_topic>/sim/hook</detach_topic>
+    </plugin>
+    
   </model>
 </sdf>
