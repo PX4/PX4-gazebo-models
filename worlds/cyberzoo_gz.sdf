@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  cyberzoo_gz.sdf — TU Delft CyberZoo for Gazebo Harmonic / PX4 SITL
+  ====================================================================
+  Converted from cyberzoo2019_orange_poles_panels_mats.world (SDF 1.6, Gazebo Classic).
+
+  Key changes from original:
+    - SDF 1.9, ODE 250 Hz physics matching PX4 convention
+    - No <plugin> elements — PX4 gz_bridge injects them automatically
+    - Ogre1 .material scripts replaced with inline PBR in model SDFs
+    - ground_plane removed (cyberzoo model has its own floor)
+    - spherical_coordinates: ENU frame, TU Delft GPS origin
+    - gravity, magnetic_field, atmosphere added (required by PX4 sensors)
+    - 4 indoor ceiling point lights tuned for CyberZoo LED panels
+    - Floor tape markings added for VIO feature richness
+
+  Arena: ~10×10 m floor, ~4 m ceiling height, safety net walls.
+  NOTE: cyberzoo model 0.454 rad yaw aligns arena with compass north — DO NOT remove.
+
+  Drone spawn: 0 0 0.1 0 0 0 (centre of arena, 10 cm off floor)
+
+  Launch:
+    PX4_GZ_WORLD=cyberzoo_gz make px4_sitl gz_x500
+-->
+<sdf version="1.9">
+  <world name="cyberzoo_gz">
+
+    <!-- ── Physics (ODE 250 Hz — matches all other PX4 worlds) ──────────── -->
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+
+    <!-- ── GPS origin: TU Delft CyberZoo, Delft, Netherlands ───────────── -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>51.9906361</latitude_deg>
+      <longitude_deg>4.3767874</longitude_deg>
+      <elevation>45.110</elevation>
+    </spherical_coordinates>
+
+    <!-- ── Scene: indoor arena, diffuse even lighting, no sun ───────────── -->
+    <scene>
+      <grid>false</grid>
+      <ambient>0.6 0.6 0.6 1</ambient>
+      <background>0.2 0.2 0.2 1</background>
+      <shadows>false</shadows>
+    </scene>
+
+    <!-- ── Ceiling LED panel lights ─────────────────────────────────────── -->
+    <!-- 4 point lights at 4 m height, ±3.5 m offset, covering 10×10 m.   -->
+    <!-- Warm white (0.9 0.9 0.85) matches real CyberZoo LED strips.       -->
+    <light name="light_nw" type="point">
+      <pose>-3.5 3.5 4.0 0 0 0</pose>
+      <diffuse>0.9 0.9 0.85 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.8</constant>
+        <linear>0.05</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="light_ne" type="point">
+      <pose>3.5 3.5 4.0 0 0 0</pose>
+      <diffuse>0.9 0.9 0.85 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.8</constant>
+        <linear>0.05</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="light_sw" type="point">
+      <pose>-3.5 -3.5 4.0 0 0 0</pose>
+      <diffuse>0.9 0.9 0.85 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.8</constant>
+        <linear>0.05</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="light_se" type="point">
+      <pose>3.5 -3.5 4.0 0 0 0</pose>
+      <diffuse>0.9 0.9 0.85 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>12</range>
+        <constant>0.8</constant>
+        <linear>0.05</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <!-- ================================================================== -->
+    <!-- Arena models                                                        -->
+    <!-- NOTE: 0.454 rad yaw on cyberzoo model aligns it with compass north -->
+    <!-- ================================================================== -->
+
+    <include>
+      <uri>model://cyberzoo</uri>
+      <pose>0 0 0 0 0 0.454</pose>
+    </include>
+
+    <!-- Orange obstacle poles -->
+    <include>
+      <uri>model://orange_pole</uri>
+      <name>orange_pole1</name>
+      <pose>-0.05 -1.9 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://orange_pole</uri>
+      <name>orange_pole2</name>
+      <pose>3.6 -0.15 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://orange_pole</uri>
+      <name>orange_pole3</name>
+      <pose>0.4 0.3 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>model://orange_pole</uri>
+      <name>orange_pole4</name>
+      <pose>-3.3 0.2 0 0 0 0</pose>
+    </include>
+
+    <!-- Drone racing gate -->
+    <include>
+      <uri>model://dronerace_gate</uri>
+      <name>dronerace_gate1</name>
+      <pose>-2.0 4.0 0 0 0 0.454</pose>
+    </include>
+
+    <!-- Metal wall panels (high-contrast PBR, good VIO feature points) -->
+    <include>
+      <uri>model://metal_panel1</uri>
+      <name>metal_panel1_1</name>
+      <pose>-2.95 -1.48 0 0 0 1.31</pose>
+    </include>
+    <include>
+      <uri>model://metal_panel2</uri>
+      <name>metal_panel2_1</name>
+      <pose>2.67 1.93 0 0 0 1.40</pose>
+    </include>
+
+    <!-- Traffic mat floor markers -->
+    <include>
+      <uri>model://traffic_mat</uri>
+      <name>traffic_mat1</name>
+      <pose>-1.57 -2.16 0 0 0 1.62</pose>
+    </include>
+    <include>
+      <uri>model://traffic_mat</uri>
+      <name>traffic_mat2</name>
+      <pose>-2.09 1.44 0 0 0 1.99</pose>
+    </include>
+    <include>
+      <uri>model://traffic_mat</uri>
+      <name>traffic_mat3</name>
+      <pose>1.14 1.29 0 0 0 3.75</pose>
+    </include>
+
+    <!-- ── Floor tape markings (VIO feature richness) ───────────────────── -->
+    <!-- Orange X-pattern + white centre spot, z=0.001 to avoid z-fighting  -->
+    <model name="floor_mark_n">
+      <static>true</static>
+      <pose>0 2.0 0.001 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.05 2.0 0.001</size></box></geometry>
+          <material>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="floor_mark_s">
+      <static>true</static>
+      <pose>0 -2.0 0.001 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.05 2.0 0.001</size></box></geometry>
+          <material>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="floor_mark_e">
+      <static>true</static>
+      <pose>2.0 0 0.001 0 0 1.5708</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.05 2.0 0.001</size></box></geometry>
+          <material>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="floor_mark_w">
+      <static>true</static>
+      <pose>-2.0 0 0.001 0 0 1.5708</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.05 2.0 0.001</size></box></geometry>
+          <material>
+            <ambient>1 0.5 0 1</ambient>
+            <diffuse>1 0.5 0 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="floor_mark_diag_ne">
+      <static>true</static>
+      <pose>1.5 1.5 0.001 0 0 0.7854</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.05 1.5 0.001</size></box></geometry>
+          <material>
+            <ambient>0.9 0.9 0.1 1</ambient>
+            <diffuse>0.9 0.9 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="floor_mark_diag_sw">
+      <static>true</static>
+      <pose>-1.5 -1.5 0.001 0 0 0.7854</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.05 1.5 0.001</size></box></geometry>
+          <material>
+            <ambient>0.9 0.9 0.1 1</ambient>
+            <diffuse>0.9 0.9 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="floor_mark_diag_nw">
+      <static>true</static>
+      <pose>-1.5 1.5 0.001 0 0 -0.7854</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.05 1.5 0.001</size></box></geometry>
+          <material>
+            <ambient>0.9 0.9 0.1 1</ambient>
+            <diffuse>0.9 0.9 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="floor_mark_center">
+      <static>true</static>
+      <pose>0 0 0.001 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.3 0.3 0.001</size></box></geometry>
+          <material>
+            <ambient>1 1 1 1</ambient>
+            <diffuse>1 1 1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

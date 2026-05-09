@@ -1,0 +1,218 @@
+<?xml version='1.0'?>
+<!--
+  cyberzoo.sdf — Gazebo Harmonic (Ogre2) compatible version
+  Original used Ogre1 .material scripts; replaced here with inline SDF PBR materials.
+
+  Ogre1 → Ogre2 conversions applied:
+    Cyberzoo/Poles   (cyberzoo_poles/pole.png,              alpha_rejection)  → PBR albedo
+    Cyberzoo/Net     (cyberzoo_net/net.png,                 alpha_rejection)  → PBR albedo
+    Cyberzoo/Glow    (cyberzoo_lighting_glow/tl_glow.png,   scene_blend add)  → PBR emissive
+    Cyberzoo/Toolcart(cyberzoo_toolcart/toolcart_transparent.png, alpha_rej)  → PBR albedo
+
+  Note: alpha transparency in Ogre2 is handled automatically when the PNG contains
+  an alpha channel; no explicit alpha_rejection script is needed.
+-->
+<sdf version='1.9'>
+  <model name="cyberzoo_model">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <link name="cyberzoo_link">
+
+      <!-- Floor: textured with grass/mat textures baked into the .dae -->
+      <visual name="floor">
+        <pose>-5 -5 0.01 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_floor.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="floor_collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>10 10 0.02</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <!-- Safety net poles (alpha-transparent PNG texture) -->
+      <visual name="poles">
+        <pose>-5 -5 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_poles.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+          <pbr>
+            <metal>
+              <albedo_map>cyberzoo_poles/pole.png</albedo_map>
+            </metal>
+          </pbr>
+        </material>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+
+      <!-- Support wires (no material script — textures embedded in .dae) -->
+      <visual name="wires">
+        <pose>-5 -5 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_wires.dae</uri>
+          </mesh>
+        </geometry>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+
+      <!-- OptiTrack cameras (no material script) -->
+      <visual name="cams">
+        <pose>-5 -5 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_cams.dae</uri>
+          </mesh>
+        </geometry>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+
+      <!-- Ceiling LED lighting fixtures (no material script) -->
+      <visual name="lighting">
+        <pose>-5 -5 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_lighting.dae</uri>
+          </mesh>
+        </geometry>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+
+      <!-- Lighting glow effect (Ogre1 scene_blend add → emissive map in Ogre2) -->
+      <visual name="glow">
+        <pose>-5 -5 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_lighting_glow.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0 0 0 1</diffuse>
+          <specular>0 0 0 1</specular>
+          <emissive>1.0 1.0 0.9 1</emissive>
+          <pbr>
+            <metal>
+              <emissive_map>cyberzoo_lighting_glow/tl_glow.png</emissive_map>
+            </metal>
+          </pbr>
+        </material>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+
+      <!-- Arena walls and ceiling panels -->
+      <visual name="walls">
+        <pose>-5 -5 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_walls.dae</uri>
+          </mesh>
+        </geometry>
+        <meta>
+          <layer>1</layer>
+        </meta>
+      </visual>
+
+      <!-- Safety net mesh (alpha-transparent PNG) -->
+      <visual name="net">
+        <pose>-5 -5 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_net.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+          <pbr>
+            <metal>
+              <albedo_map>cyberzoo_net/net.png</albedo_map>
+            </metal>
+          </pbr>
+        </material>
+        <meta>
+          <layer>1</layer>
+        </meta>
+      </visual>
+
+      <!-- Surrounding lab environment (balcony, cabinets, etc.) -->
+      <visual name="surroundings">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_surroundings.dae</uri>
+          </mesh>
+        </geometry>
+        <meta>
+          <layer>2</layer>
+        </meta>
+      </visual>
+
+      <!-- Tool cart (alpha-transparent PNG) -->
+      <visual name="toolcart">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_toolcart.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+          <specular>0.05 0.05 0.05 1</specular>
+          <pbr>
+            <metal>
+              <albedo_map>cyberzoo_toolcart/toolcart_transparent.png</albedo_map>
+            </metal>
+          </pbr>
+        </material>
+        <meta>
+          <layer>2</layer>
+        </meta>
+      </visual>
+
+      <!-- Outer building walls -->
+      <visual name="outer_walls">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <mesh>
+            <uri>model://cyberzoo/cyberzoo_outer_walls.dae</uri>
+          </mesh>
+        </geometry>
+        <meta>
+          <layer>3</layer>
+        </meta>
+      </visual>
+
+    </link>
+
+  </model>
+</sdf>

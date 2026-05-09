@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  small_warehouse_gz.sdf — AWS RoboMaker Warehouse for Gazebo Harmonic / PX4 SITL
+  ==================================================================================
+  Converted from small_warehouse.world (SDF 1.6, Gazebo Classic).
+
+  Key changes from original:
+    - SDF 1.9, flat <include> at world level (proper syntax)
+    - ODE 250 Hz physics to match PX4 convention
+    - No system plugins — PX4 gz_bridge injects them automatically
+    - Single central light → 6 ceiling point lights (indoor VIO environment)
+    - magnetic_field / atmosphere / spherical_coordinates added (required by PX4 sensors)
+    - 10 extra props for VIO feature richness
+
+  Models are resolved via GZ_SIM_RESOURCE_PATH — the aws-robomaker models/ dir
+  must be on the path.  setup_for_px4.sh handles this automatically.
+
+  Launch:
+    PX4_GZ_WORLD=small_warehouse_gz make px4_sitl gz_x500
+
+  Standalone test:
+    GZ_SIM_RESOURCE_PATH=/path/to/aws-robomaker.../models gz sim worlds/small_warehouse_gz.sdf
+
+  Drone spawn: (0 0 0.3) — centre of clear floor area.
+-->
+<sdf version="1.9">
+  <world name="small_warehouse_gz">
+
+    <!-- ── Physics (ODE 250 Hz — matches all other PX4 worlds) ─────────── -->
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+
+    <!-- ── GPS origin (ETH Zurich, matches other PX4 worlds) ───────────── -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg>8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+
+    <!-- ── Scene ────────────────────────────────────────────────────────── -->
+    <scene>
+      <grid>false</grid>
+      <!-- Moderate ambient — indoor warehouse, no sky contribution -->
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.1 0.1 0.1 1</background>
+      <shadows>true</shadows>
+    </scene>
+
+    <!-- ── Ceiling lights (6 point lights simulating fluorescent strips) ── -->
+    <!-- Warehouse footprint: X ≈ -6…+7 m, Y ≈ -10…+10 m, ceiling ≈ 9 m  -->
+    <!-- cast_shadows=false keeps frame rate reasonable for drone sims.     -->
+    <light name="ceiling_light_center" type="point">
+      <pose>0 0 9 0 0 0</pose>
+      <diffuse>1.0 0.95 0.85 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.1</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="ceiling_light_left_back" type="point">
+      <pose>-4 -7 9 0 0 0</pose>
+      <diffuse>1.0 0.95 0.85 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.1</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="ceiling_light_left_center" type="point">
+      <pose>-4 0 9 0 0 0</pose>
+      <diffuse>1.0 0.95 0.85 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.1</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="ceiling_light_left_front" type="point">
+      <pose>-4 7 9 0 0 0</pose>
+      <diffuse>1.0 0.95 0.85 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.1</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="ceiling_light_right_back" type="point">
+      <pose>4 -7 9 0 0 0</pose>
+      <diffuse>1.0 0.95 0.85 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.1</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <light name="ceiling_light_right_front" type="point">
+      <pose>4 7 9 0 0 0</pose>
+      <diffuse>1.0 0.95 0.85 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <attenuation>
+        <range>20</range>
+        <constant>0.5</constant>
+        <linear>0.1</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <cast_shadows>false</cast_shadows>
+    </light>
+
+    <!-- ================================================================== -->
+    <!-- Models — all poses preserved exactly from small_warehouse.world     -->
+    <!--                                                                     -->
+    <!-- Requires GZ_SIM_RESOURCE_PATH to include the aws-robomaker models/ -->
+    <!-- directory.  setup_for_px4.sh handles this automatically.           -->
+    <!-- ================================================================== -->
+
+    <!-- Structural -->
+    <include>
+      <uri>model://aws_robomaker_warehouse_RoofB_01</uri>
+      <name>aws_robomaker_warehouse_RoofB_01_001</name>
+      <pose>0.0 0.0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_WallB_01</uri>
+      <name>aws_robomaker_warehouse_WallB_01_001</name>
+      <pose>0.0 0.0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_GroundB_01</uri>
+      <name>aws_robomaker_warehouse_GroundB_01_001</name>
+      <pose>0.0 0.0 -0.090092 0 0 0</pose>
+    </include>
+
+    <!-- Lamp model buried underground (z=-4) — mesh hidden intentionally;
+         real lighting comes from the <light> elements above. -->
+    <include>
+      <uri>model://aws_robomaker_warehouse_Lamp_01</uri>
+      <name>aws_robomaker_warehouse_Lamp_01_005</name>
+      <pose>0 0 -4 0 0 0</pose>
+    </include>
+
+    <!-- Shelving -->
+    <include>
+      <uri>model://aws_robomaker_warehouse_ShelfF_01</uri>
+      <name>aws_robomaker_warehouse_ShelfF_01_001</name>
+      <pose>-5.795143 -0.956635 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ShelfE_01</uri>
+      <name>aws_robomaker_warehouse_ShelfE_01_001</name>
+      <pose>4.73156 0.57943 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ShelfE_01</uri>
+      <name>aws_robomaker_warehouse_ShelfE_01_002</name>
+      <pose>4.73156 -4.827049 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ShelfE_01</uri>
+      <name>aws_robomaker_warehouse_ShelfE_01_003</name>
+      <pose>4.73156 -8.6651 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ShelfD_01</uri>
+      <name>aws_robomaker_warehouse_ShelfD_01_001</name>
+      <pose>4.73156 -1.242668 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ShelfD_01</uri>
+      <name>aws_robomaker_warehouse_ShelfD_01_002</name>
+      <pose>4.73156 -3.038551 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ShelfD_01</uri>
+      <name>aws_robomaker_warehouse_ShelfD_01_003</name>
+      <pose>4.73156 -6.750542 0 0 0 0</pose>
+    </include>
+
+    <!-- Buckets -->
+    <include>
+      <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+      <name>aws_robomaker_warehouse_Bucket_01_020</name>
+      <pose>0.433449 9.631706 0 0 0 -1.563161</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+      <name>aws_robomaker_warehouse_Bucket_01_021</name>
+      <pose>-1.8321 -6.3752 0 0 0 -1.563161</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+      <name>aws_robomaker_warehouse_Bucket_01_022</name>
+      <pose>0.433449 8.59 0 0 0 -1.563161</pose>
+    </include>
+
+    <!-- Cluttering A -->
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringA_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringA_01_016</name>
+      <pose>5.708138 8.616844 -0.017477 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringA_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringA_01_017</name>
+      <pose>3.408638 8.616844 -0.017477 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringA_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringA_01_018</name>
+      <pose>-1.491287 5.222435 -0.017477 0 0 -1.583185</pose>
+    </include>
+
+    <!-- Cluttering C -->
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringC_01_027</name>
+      <pose>3.324959 3.822449 -0.012064 0 0 1.563871</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringC_01_028</name>
+      <pose>5.54171 3.816475 -0.015663 0 0 -1.583191</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringC_01_029</name>
+      <pose>5.384239 6.137154 0 0 0 3.150000</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringC_01_030</name>
+      <pose>3.236 6.137154 0 0 0 3.150000</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringC_01_031</name>
+      <pose>-1.573677 2.301994 -0.015663 0 0 -3.133191</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringC_01_032</name>
+      <pose>-1.2196 9.407 -0.015663 0 0 1.563871</pose>
+    </include>
+
+    <!-- Cluttering D -->
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringD_01</uri>
+      <name>aws_robomaker_warehouse_ClutteringD_01_005</name>
+      <pose>-1.634682 -7.811813 -0.319559 0 0 0</pose>
+    </include>
+
+    <!-- Misc props -->
+    <include>
+      <uri>model://aws_robomaker_warehouse_TrashCanC_01</uri>
+      <name>aws_robomaker_warehouse_TrashCanC_01_002</name>
+      <pose>-1.592441 7.715420 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_PalletJackB_01</uri>
+      <name>aws_robomaker_warehouse_PalletJackB_01_001</name>
+      <pose>-0.276098 -9.481944 0.023266 0 0 0</pose>
+    </include>
+
+    <!-- ── Extra props for VIO feature richness ─────────────────────────── -->
+    <!-- Drone spawn at (0 0 0.3) is kept >1.5 m clear of each prop.       -->
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+      <name>vio_bucket_01</name>
+      <pose>-2.5 -2.0 0 0 0 0.785398</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+      <name>vio_bucket_02</name>
+      <pose>2.0 -2.5 0 0 0 1.5708</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+      <name>vio_bucket_03</name>
+      <pose>-3.0 1.5 0 0 0 -0.7854</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_Bucket_01</uri>
+      <name>vio_bucket_04</name>
+      <pose>2.0 -5.5 0 0 0 2.3562</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_TrashCanC_01</uri>
+      <name>vio_trashcan_01</name>
+      <pose>1.5 3.0 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_TrashCanC_01</uri>
+      <name>vio_trashcan_02</name>
+      <pose>-3.5 -4.5 0 0 0 1.5708</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_TrashCanC_01</uri>
+      <name>vio_trashcan_03</name>
+      <pose>-4.0 2.5 0 0 0 3.1416</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+      <name>vio_clutter_c_01</name>
+      <pose>-2.8 -0.5 -0.012064 0 0 0.7854</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringC_01</uri>
+      <name>vio_clutter_c_02</name>
+      <pose>1.5 -4.0 -0.012064 0 0 -0.5236</pose>
+    </include>
+
+    <include>
+      <uri>model://aws_robomaker_warehouse_ClutteringA_01</uri>
+      <name>vio_clutter_a_01</name>
+      <pose>-3.5 3.5 -0.017477 0 0 0.5236</pose>
+    </include>
+
+  </world>
+</sdf>

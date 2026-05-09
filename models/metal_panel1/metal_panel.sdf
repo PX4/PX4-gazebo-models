@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<!--
+  metal_panel1.sdf — Gazebo Harmonic (Ogre2) compatible
+  Added PBR material with metalness/roughness for high-contrast VIO features.
+  Texture: metal_panel/metal_panel1.png (baked into .dae as well)
+-->
+<sdf version='1.9'>
+  <model name="metal panel">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <link name="metal panel">
+      <visual name="panel">
+        <geometry>
+          <mesh>
+            <uri>model://metal_panel1/metal_panel.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <diffuse>0.7 0.7 0.75 1</diffuse>
+          <specular>0.8 0.8 0.8 1</specular>
+          <pbr>
+            <metal>
+              <albedo_map>metal_panel/metal_panel1.png</albedo_map>
+              <metalness>0.8</metalness>
+              <roughness>0.3</roughness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="panel_collision">
+        <!-- Box primitive: mesh collision crashes DART on malformed normals.
+             Dims from mesh (inch×0.0254): 1.0 m wide, 0.43 m deep, 2.0 m tall. -->
+        <pose>0.03 0 1.0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.0 0.43 2.0</size>
+          </box>
+        </geometry>
+      </collision>
+    </link>
+
+  </model>
+</sdf>

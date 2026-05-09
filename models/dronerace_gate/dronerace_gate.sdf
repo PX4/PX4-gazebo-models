@@ -1,0 +1,24 @@
+<?xml version='1.0'?>
+<!--
+  dronerace_gate: fly-through obstacle — mesh collision removed.
+  Gate frame (1.08 × 0.45 × 2.13 m) cannot be approximated with a simple
+  primitive without blocking the opening, so no collision is the correct
+  choice for a racing gate.
+-->
+<sdf version='1.9'>
+  <model name="dronerace gate">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <link name="dronerace gate">
+      <visual name="gate">
+        <geometry>
+          <mesh>
+            <uri>model://dronerace_gate/dronerace_gate.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+
+  </model>
+</sdf>
