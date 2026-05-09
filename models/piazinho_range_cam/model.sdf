@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
-  <model name='piazinho_flow_cam'>
+  <model name='piazinho_range_cam'>
     <self_collide>false</self_collide>
     <include merge='true'>
       <uri>piazinho_mono_cam</uri>
