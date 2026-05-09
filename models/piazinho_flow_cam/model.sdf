@@ -6,59 +6,12 @@
       <uri>piazinho_mono_cam</uri>
     </include>
     <include merge='true'>
-      <uri>model://optical_flow</uri>
-      <pose relative_to="base_link">-0.063051 0.002355 -0.077551 0 0 0</pose>
+      <uri>model://piazinho_lidar</uri>
+      <pose>-0.058351 0.002478 -0.099586 0 -1.5708 0</pose>
     </include>
-    <joint name="optical_flow_joint" type="fixed">
-      <parent>base_link</parent>
-      <child>flow_link</child>
-      <pose relative_to="base_link">-0.063051 0.002355 -0.077551 0 1.5707 0</pose>
-    </joint>
-    <joint name="lidar_sensor_joint" type="fixed">
+    <joint name="lidar_joint" type="fixed">
       <parent>base_link</parent>
       <child>lidar_sensor_link</child>
     </joint>
-    <link name="lidar_sensor_link">
-      <pose relative_to="base_link">-0.054988 0.002355 -0.077551 0 1.57 0</pose>
-      <inertial>
-        <mass>0.001</mass>
-        <inertia>
-          <ixx>0.00001</ixx>
-          <iyy>0.00001</iyy>
-          <izz>0.00001</izz>
-          <ixy>0.0</ixy>
-          <ixz>0.0</ixz>
-          <iyz>0.0</iyz>
-        </inertia>
-      </inertial>
-      <sensor name='lidar' type='gpu_lidar'>
-        <gz_frame_id>lidar_sensor_link</gz_frame_id>
-        <pose>0 0 0 3.14 0 0</pose>
-        <update_rate>100</update_rate>
-        <ray>
-          <scan>
-            <horizontal>
-              <samples>1</samples>
-              <resolution>1</resolution>
-              <min_angle>0</min_angle>
-              <max_angle>0</max_angle>
-            </horizontal>
-            <vertical>
-              <samples>1</samples>
-              <resolution>1</resolution>
-              <min_angle>0</min_angle>
-              <max_angle>0</max_angle>
-            </vertical>
-          </scan>
-          <range>
-            <min>0.05</min>
-            <max>8.0</max>
-            <resolution>0.01</resolution>
-          </range>
-        </ray>
-        <always_on>1</always_on>
-        <visualize>true</visualize>
-      </sensor>
-    </link>
   </model>
 </sdf>
