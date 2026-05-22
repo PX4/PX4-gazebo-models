@@ -52,7 +52,7 @@
       </sensor>
 
       <sensor name="livox_lidar" type="custom">
-        <!--<pose>0 0 0.0204789 0 0 0</pose>-->
+        <pose>0 0 0 0 0 -1.57</pose>
         <plugin filename="libRGLServerPluginInstance.so" name="rgl::RGLServerPluginInstance">
           <range>
             <min>0.1</min> <!-- questionable-->
