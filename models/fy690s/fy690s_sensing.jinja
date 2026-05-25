@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+
+    <link name="rukobi_holder">
+      <pose>0.10 0 0.014 0 0 0</pose>
+      
+      <inertial>
+        <pose>{{ stick_length / 2 }} 0 0 0 0 0</pose>
+        <mass>{{ mass_stick }}</mass>
+        {{ x_cylinder_inertia(mass_stick, stick_radius, stick_length) }}
+      </inertial>
+
+      <visual name="rukobi_holder_visual">
+        <pose>{{stick_length + 0.1 }} 0 0.02 0 0 {{ -pi / 2 }}</pose>
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi_holder.dae</uri></mesh></geometry>
+        <material><script><name>Gazebo/FlatBlack</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+      </visual>
+    </link>
+
+    <joint name="rukobi_holder_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>rukobi_holder</child>
+    </joint>
+  </model>
+</sdf>

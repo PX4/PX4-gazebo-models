@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  {# --- CONFIGURATION & MASS MACROS --- #}
+  {% set mass_battery = 0.6114 %}
+  {% set mass_sensors = 0.447 + 0.0158 + 0.470 %}
+  {% set mass_motor = 0.097 %} 
+  {% set mass_rotor = 0.0142 %}
+
+  {# --- FRAME MASSES --- #}
+  {% set mass_base = 0.290 %}         <!-- includes mass of clamps & folding hardware  & plates + battery -->
+  {% set mass_arm = 0.014 %}
+  {% set mass_motor_mount = 0.021 %}
+  {% set mass_lg = 0.05 %}                            <!-- there are 2 landing gears -->
+  <!--TOTAL: 0.290 + 6 * (0.014 + 0.021) + 2 * (0.05) [kg] = 0.600 [kg] -->
+
+  {% set radius = 0.345 %}
+  
+  {% set base_h = 0.10 %}
+  {% set base_r = 0.1 %}
+  
+  {% set arm_length = 0.275 %}
+  {% set arm_radius = 0.008 %}
+
+  {% set motor_radius = 0.0209 %}
+  {% set motor_height =  0.0371 %}
+
+  {% set rotor_length = 0.3302 %}     <!-- 13 in * 2.54 cm / in =  33.02 cm -->
+  {% set rotor_width = 0.035 %}       <!-- ~3.5cm -->
+  {% set rotor_thickness = 0.001 %}
+
+  {% set mass_stick = 0.050 %}
+  {% set stick_length = 0.693 %}
+  {% set stick_radius = 0.008 %}
+
+
+  {% set pi = 3.14159265359 %}
+
+  {# Trigonometric constants for 30 +/- 60n degrees #}
+  {# Indices: 0:30, 1:90, 2:150, 3:210, 4:270, 5:330 #}
+  {% set cos_vals = [0.866025, 0.0, -0.866025, -0.866025, 0.0, 0.866025] %}
+  {% set sin_vals = [0.5, 1.0, 0.5, -0.5, -1.0, -0.5] %}
+
+  {# --- INERTIA EQUATION MACROS --- #}
+  
+  {# Solid Cylinder: Ixx = Iyy = 1/12 * m * (3r^2 + h^2) | Izz = 1/2 * m * r^2 #}
+  {% macro cylinder_inertia(m, r, h) %}
+    <inertia>
+      <ixx>{{ (1/12) * m * (3 * r**2 + h**2) }}</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>{{ (1/12) * m * (3 * r**2 + h**2) }}</iyy>
+      <iyz>0</iyz>
+      <izz>{{ 0.5 * m * r**2 }}</izz>
+    </inertia>
+  {% endmacro %}
+
+  {# Rectangular Prism (Rotors): Ixx = 1/12 * m * (y^2 + z^2) | Iyy = 1/12 * m * (x^2 + z^2) | Izz = 1/12 * m * (x^2 + y^2) #}
+  {% macro box_inertia(m, x, y, z) %}
+    <inertia>
+      <ixx>{{ (1/12) * m * (y**2 + z**2) }}</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>{{ (1/12) * m * (x**2 + z**2) }}</iyy>
+      <iyz>0</iyz>
+      <izz>{{ (1/12) * m * (x**2 + y**2) }}</izz>
+    </inertia>
+  {% endmacro %}
+
+  {# Cylinder aligned with the X-axis #}
+  {% macro x_cylinder_inertia(m, r, h) %}
+    <inertia>
+      <ixx>{{ 0.5 * m * r**2 }}</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>{{ (1/12) * m * (3 * r**2 + h**2) }}</iyy>
+      <iyz>0</iyz>
+      <izz>{{ (1/12) * m * (3 * r**2 + h**2) }}</izz>
+    </inertia>
+  {% endmacro %}
+
+  <model name='fy690s'>
+    <pose>0 0 0.4 0 0 0</pose>
+    <self_collide>false</self_collide>
+    <static>false</static>
+
+    {# --- ARM ENDPOINT FRAMES --- #}
+    {% for n in range(6) %}
+    {% set angle_rad = (30 + (n * 60)) * pi / 180 %}
+    <frame name="arm_{{ n }}_endpoint" attached_to="base_link">
+        <pose>{{ radius * cos_vals[n] }} {{ radius * sin_vals[n] }} 0.014 0 0 {{ angle_rad - pi }}</pose>
+    </frame>
+
+    {% endfor %}
+
+    <link name="base_link">
+      <inertial>
+        <mass>{{ mass_base + mass_battery + mass_sensors }}</mass>
+        {{ cylinder_inertia(mass_base + mass_battery + mass_sensors, base_r, base_h) }}
+      </inertial>
+      <visual name="base_link_visual">
+        <pose>0 0 .025 0 0 0</pose>
+        <geometry><mesh><uri>model://fy690s/meshes/body.dae</uri></mesh></geometry>
+      </visual>
+
+      <collision name="base_link_collision">
+        <geometry><cylinder><radius>{{ base_r }}</radius><length>{{ base_h }}</length></cylinder></geometry>
+      </collision>
+
+      {# Sensors #}
+      <sensor name="air_pressure_sensor" type="air_pressure">
+      <gz_frame_id>base_link</gz_frame_id>
+      <always_on>1</always_on>
+      <update_rate>50</update_rate>
+      <air_pressure>
+        <pressure>
+          <noise type="gaussian">
+            <mean>0</mean>
+            <stddev>3</stddev>
+          </noise>
+        </pressure>
+      </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+      <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00686</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+    </link>
+
+    {# --- ROTOR LINKS & JOINTS --- #}
+    {% for n in range(6) %}
+
+    {% set angle_rad = (30 + (n * 60)) * pi / 180 %}
+
+    <!-- FIXED JOINT FOR NOW -->
+    <joint name="arm_{{ n }}_joint" type="fixed">
+    <pose>0 0 {{ arm_length}} 0 0 0</pose>
+      <parent>base_link</parent> 
+      <child>arm_{{ n }}_link</child>
+    </joint>
+
+    <link name="arm_{{ n }}_link">
+      <pose>{{ radius * cos_vals[n] }} {{ radius * sin_vals[n] }} 0.014 {{ -(pi/2) }} 0 {{ angle_rad + (pi/2) }}</pose>
+      <inertial>
+        <pose>0 0 {{ arm_length / 2 }} 0 0 0</pose> <!-- offset to CoM -->
+        <mass>{{ mass_arm }}</mass>
+        {{ cylinder_inertia(mass_arm, arm_radius, arm_length) }}
+      </inertial>
+      <visual name="arm_{{ n }}_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><mesh><uri>model://fy690s/meshes/arm.dae</uri></mesh></geometry>
+      </visual>
+    </link>
+
+    <joint name="motor_{{ n }}_joint" type="fixed">
+    <pose>0 0 -0.03 0 0 0</pose>
+      <parent>arm_{{ n }}_link</parent> 
+      <child>motor_{{ n }}</child>
+    </joint>
+
+    <link name="motor_{{ n }}">
+      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <inertial>
+        <mass>{{ mass_motor + mass_motor_mount }}</mass>
+        {{ cylinder_inertia(mass_motor + mass_motor_mount, motor_radius, motor_height) }}
+      </inertial>
+      <visual name="motor_{{ n }}_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
+      </visual>
+      <visual name="motor_mount_{{ n }}_visual">
+        <pose relative_to="arm_{{ n }}_endpoint">0.02 0 0 0 0 0</pose>
+        <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
+      </visual>
+    </link>
+
+    <link name="rotor_{{ n }}">
+      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <inertial>
+        <mass>{{ mass_rotor }}</mass>
+        {{ box_inertia(mass_rotor, rotor_length, rotor_width, rotor_thickness) }}
+      </inertial>
+      <visual name="rotor_{{ n }}_visual">
+        <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
+        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+      </visual>
+      <collision name="rotor_{{ n }}_collision">
+        <geometry><box><size>{{ rotor_length }} {{ rotor_width }} {{ rotor_thickness }}</size></box></geometry>
+      </collision>
+    </link>
+
+    <joint name="rotor_{{ n }}_joint" type="revolute">
+      <parent>motor_{{ n }}</parent>
+      <child>rotor_{{ n }}</child>
+      <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
+    </joint>
+
+    {% endfor %}
+
+    {# --- LANDING GEAR --- #}
+    {% for i in [1, 2] %}
+    {% set flip = 1 if i == 1 else -1 %}
+    <link name="landing_gear_{{ i }}">
+      <pose>0 {{ 0.10 * flip }} 0 {{ 0.2618 * flip }} 0 0</pose>
+      
+      <inertial>
+        <pose>0 0 -0.198 0 0 0</pose>
+        <mass>{{ mass_lg }}</mass>
+        <inertia>
+          <ixx>0.00030</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00060</iyy>
+          <iyz>0</iyz>
+          <izz>0.00030</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="lg_{{ i }}_v">
+        <pose>0 0 -0.125 0 0 0</pose>
+        <geometry><cylinder><radius>0.008</radius><length>0.25</length></cylinder></geometry>
+      </visual>
+      <visual name="lg_{{ i }}_h">
+        <pose>0 0 -0.25 0 {{ (pi/2) }} 0</pose>
+        <geometry><cylinder><radius>0.008</radius><length>0.35</length></cylinder></geometry>
+      </visual>
+      <collision name="lg_{{ i }}_c">
+        <pose>0 0 -0.25 0 {{ (pi/2) }} 0</pose>
+        <geometry><cylinder><radius>0.008</radius><length>0.35</length></cylinder></geometry>
+      </collision>
+    </link>
+    <joint name="lg_{{ i }}_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>landing_gear_{{ i }}</child>
+    </joint>
+    {% endfor %}
+
+    {# --- PLUGINS --- #}
+    <!-- TODO: change to actually model the given motors -->
+    {% for n in range(6) %}
+    <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>rotor_{{ n }}_joint</jointName>
+      <linkName>rotor_{{ n }}</linkName>
+      <turningDirection>{{ 'ccw' if n in [0, 1, 4] else 'cw' }}</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1000.0</maxRotVelocity>
+      <motorConstant>8.54858e-06</motorConstant>
+      <momentConstant>0.016</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>{{ n }}</motorNumber>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    {% endfor %}
+  </model>
+</sdf>
