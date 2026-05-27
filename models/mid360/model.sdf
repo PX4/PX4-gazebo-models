@@ -55,7 +55,7 @@
         <pose>0 0 0 0 0 -1.57</pose>
         <plugin filename="libRGLServerPluginInstance.so" name="rgl::RGLServerPluginInstance">
           <range>
-            <min>0.1</min> <!-- questionable-->
+            <min>0.4</min> <!-- questionable-->
             <max>100</max> <!-- questionable-->
           </range>
           <update_rate>50</update_rate> <!-- questionable-->
