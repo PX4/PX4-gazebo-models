@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
   
-  
-  
+   <!--LiDAR: 447g, PixHawk: 15.8g, Garmin: 22g-->
    
   
 
   
-           <!-- includes mass of clamps & folding hardware  & plates + battery -->
+  
+           <!-- includes mass of clamps & folding hardware  & plates + battery holder -->
   
   
                               <!-- there are 2 landing gears -->
@@ -19,7 +19,7 @@
   
   
   
-  
+   
 
   
   
@@ -213,17 +213,21 @@
 
     
 
-    <!-- FIXED JOINT FOR NOW -->
-    <joint name="arm_0_joint" type="fixed">
-    <pose>0 0 0.275 0 0 0</pose>
-      <parent>base_link</parent> 
-      <child>arm_0_link</child>
+    <joint name="arm_0_joint" type="revolute">
+    <parent>base_link</parent> 
+    <child>arm_0_link</child>
+    <axis>
+        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
+        <lower>-1.570796326795</lower>
+        <upper>0</upper>
+        </limit>
+    </axis>
     </joint>
 
     <link name="arm_0_link">
       <pose>0.298778625 0.1725 0.014 -1.570796326795 0 2.0943951023933334</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose> <!-- offset to CoM -->
+        <pose>0 0 0.1375 0 0 0</pose>
         <mass>0.014</mass>
         
     <inertia>
@@ -242,10 +246,55 @@
       </visual>
     </link>
 
-    <joint name="motor_0_joint" type="fixed">
-    <pose>0 0 -0.03 0 0 0</pose>
+   <joint name="tilt_arm_axis_0_joint" type="revolute">
       <parent>arm_0_link</parent> 
+      <child>motor_gimbal_link_0</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>  
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="motor_gimbal_link_0">
+      <pose relative_to="arm_0_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <inertial>
+        <mass>0.005</mass> 
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-5</iyy>
+          <iyz>0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="tilt_outward_axis_0_joint" type="revolute">
+      <parent>motor_gimbal_link_0</parent>
       <child>motor_0</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
     </joint>
 
     <link name="motor_0">
@@ -307,17 +356,21 @@
 
     
 
-    <!-- FIXED JOINT FOR NOW -->
-    <joint name="arm_1_joint" type="fixed">
-    <pose>0 0 0.275 0 0 0</pose>
-      <parent>base_link</parent> 
-      <child>arm_1_link</child>
+    <joint name="arm_1_joint" type="revolute">
+    <parent>base_link</parent> 
+    <child>arm_1_link</child>
+    <axis>
+        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
+        <lower>-1.570796326795</lower>
+        <upper>0</upper>
+        </limit>
+    </axis>
     </joint>
 
     <link name="arm_1_link">
       <pose>0.0 0.345 0.014 -1.570796326795 0 3.14159265359</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose> <!-- offset to CoM -->
+        <pose>0 0 0.1375 0 0 0</pose>
         <mass>0.014</mass>
         
     <inertia>
@@ -336,10 +389,55 @@
       </visual>
     </link>
 
-    <joint name="motor_1_joint" type="fixed">
-    <pose>0 0 -0.03 0 0 0</pose>
+   <joint name="tilt_arm_axis_1_joint" type="revolute">
       <parent>arm_1_link</parent> 
+      <child>motor_gimbal_link_1</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>  
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="motor_gimbal_link_1">
+      <pose relative_to="arm_1_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <inertial>
+        <mass>0.005</mass> 
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-5</iyy>
+          <iyz>0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="tilt_outward_axis_1_joint" type="revolute">
+      <parent>motor_gimbal_link_1</parent>
       <child>motor_1</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
     </joint>
 
     <link name="motor_1">
@@ -401,17 +499,21 @@
 
     
 
-    <!-- FIXED JOINT FOR NOW -->
-    <joint name="arm_2_joint" type="fixed">
-    <pose>0 0 0.275 0 0 0</pose>
-      <parent>base_link</parent> 
-      <child>arm_2_link</child>
+    <joint name="arm_2_joint" type="revolute">
+    <parent>base_link</parent> 
+    <child>arm_2_link</child>
+    <axis>
+        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
+        <lower>-1.570796326795</lower>
+        <upper>0</upper>
+        </limit>
+    </axis>
     </joint>
 
     <link name="arm_2_link">
       <pose>-0.298778625 0.1725 0.014 -1.570796326795 0 4.188790204786667</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose> <!-- offset to CoM -->
+        <pose>0 0 0.1375 0 0 0</pose>
         <mass>0.014</mass>
         
     <inertia>
@@ -430,10 +532,55 @@
       </visual>
     </link>
 
-    <joint name="motor_2_joint" type="fixed">
-    <pose>0 0 -0.03 0 0 0</pose>
+   <joint name="tilt_arm_axis_2_joint" type="revolute">
       <parent>arm_2_link</parent> 
+      <child>motor_gimbal_link_2</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>  
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="motor_gimbal_link_2">
+      <pose relative_to="arm_2_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <inertial>
+        <mass>0.005</mass> 
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-5</iyy>
+          <iyz>0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="tilt_outward_axis_2_joint" type="revolute">
+      <parent>motor_gimbal_link_2</parent>
       <child>motor_2</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
     </joint>
 
     <link name="motor_2">
@@ -495,17 +642,21 @@
 
     
 
-    <!-- FIXED JOINT FOR NOW -->
-    <joint name="arm_3_joint" type="fixed">
-    <pose>0 0 0.275 0 0 0</pose>
-      <parent>base_link</parent> 
-      <child>arm_3_link</child>
+    <joint name="arm_3_joint" type="revolute">
+    <parent>base_link</parent> 
+    <child>arm_3_link</child>
+    <axis>
+        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
+        <lower>-1.570796326795</lower>
+        <upper>0</upper>
+        </limit>
+    </axis>
     </joint>
 
     <link name="arm_3_link">
       <pose>-0.298778625 -0.1725 0.014 -1.570796326795 0 5.235987755983333</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose> <!-- offset to CoM -->
+        <pose>0 0 0.1375 0 0 0</pose>
         <mass>0.014</mass>
         
     <inertia>
@@ -524,10 +675,55 @@
       </visual>
     </link>
 
-    <joint name="motor_3_joint" type="fixed">
-    <pose>0 0 -0.03 0 0 0</pose>
+   <joint name="tilt_arm_axis_3_joint" type="revolute">
       <parent>arm_3_link</parent> 
+      <child>motor_gimbal_link_3</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>  
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="motor_gimbal_link_3">
+      <pose relative_to="arm_3_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <inertial>
+        <mass>0.005</mass> 
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-5</iyy>
+          <iyz>0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="tilt_outward_axis_3_joint" type="revolute">
+      <parent>motor_gimbal_link_3</parent>
       <child>motor_3</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
     </joint>
 
     <link name="motor_3">
@@ -589,17 +785,21 @@
 
     
 
-    <!-- FIXED JOINT FOR NOW -->
-    <joint name="arm_4_joint" type="fixed">
-    <pose>0 0 0.275 0 0 0</pose>
-      <parent>base_link</parent> 
-      <child>arm_4_link</child>
+    <joint name="arm_4_joint" type="revolute">
+    <parent>base_link</parent> 
+    <child>arm_4_link</child>
+    <axis>
+        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
+        <lower>-1.570796326795</lower>
+        <upper>0</upper>
+        </limit>
+    </axis>
     </joint>
 
     <link name="arm_4_link">
       <pose>0.0 -0.345 0.014 -1.570796326795 0 6.28318530718</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose> <!-- offset to CoM -->
+        <pose>0 0 0.1375 0 0 0</pose>
         <mass>0.014</mass>
         
     <inertia>
@@ -618,10 +818,55 @@
       </visual>
     </link>
 
-    <joint name="motor_4_joint" type="fixed">
-    <pose>0 0 -0.03 0 0 0</pose>
+   <joint name="tilt_arm_axis_4_joint" type="revolute">
       <parent>arm_4_link</parent> 
+      <child>motor_gimbal_link_4</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>  
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="motor_gimbal_link_4">
+      <pose relative_to="arm_4_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <inertial>
+        <mass>0.005</mass> 
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-5</iyy>
+          <iyz>0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="tilt_outward_axis_4_joint" type="revolute">
+      <parent>motor_gimbal_link_4</parent>
       <child>motor_4</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
     </joint>
 
     <link name="motor_4">
@@ -683,17 +928,21 @@
 
     
 
-    <!-- FIXED JOINT FOR NOW -->
-    <joint name="arm_5_joint" type="fixed">
-    <pose>0 0 0.275 0 0 0</pose>
-      <parent>base_link</parent> 
-      <child>arm_5_link</child>
+    <joint name="arm_5_joint" type="revolute">
+    <parent>base_link</parent> 
+    <child>arm_5_link</child>
+    <axis>
+        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
+        <lower>-1.570796326795</lower>
+        <upper>0</upper>
+        </limit>
+    </axis>
     </joint>
 
     <link name="arm_5_link">
       <pose>0.298778625 -0.1725 0.014 -1.570796326795 0 7.330382858376668</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose> <!-- offset to CoM -->
+        <pose>0 0 0.1375 0 0 0</pose>
         <mass>0.014</mass>
         
     <inertia>
@@ -712,10 +961,55 @@
       </visual>
     </link>
 
-    <joint name="motor_5_joint" type="fixed">
-    <pose>0 0 -0.03 0 0 0</pose>
+   <joint name="tilt_arm_axis_5_joint" type="revolute">
       <parent>arm_5_link</parent> 
+      <child>motor_gimbal_link_5</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>  
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="motor_gimbal_link_5">
+      <pose relative_to="arm_5_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <inertial>
+        <mass>0.005</mass> 
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-5</iyy>
+          <iyz>0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+    </link>
+
+    <joint name="tilt_outward_axis_5_joint" type="revolute">
+      <parent>motor_gimbal_link_5</parent>
       <child>motor_5</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-0.7853981633975</lower> 
+          <upper>0.7853981633975</upper>
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
     </joint>
 
     <link name="motor_5">
@@ -851,100 +1145,256 @@
     
     <!-- TODO: change to actually model the given motors -->
     
+
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_0_joint</jointName>
       <linkName>rotor_0</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
+      <maxRotVelocity>1100.0</maxRotVelocity>
       <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <momentConstant>0.01362</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>0</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
+
+    <!-- Actuating tilt joint plugins -->
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_axis_0_joint</joint_name>
+      <topic>command/tilt_arm_axis_0</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_outward_axis_0_joint</joint_name>
+      <topic>command/tilt_outward_axis_0</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
     
+
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_1_joint</jointName>
       <linkName>rotor_1</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
+      <maxRotVelocity>1100.0</maxRotVelocity>
       <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <momentConstant>0.01362</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>1</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
+
+    <!-- Actuating tilt joint plugins -->
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_axis_1_joint</joint_name>
+      <topic>command/tilt_arm_axis_1</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_outward_axis_1_joint</joint_name>
+      <topic>command/tilt_outward_axis_1</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
     
+
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_2_joint</jointName>
       <linkName>rotor_2</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
+      <maxRotVelocity>1100.0</maxRotVelocity>
       <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <momentConstant>0.01362</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>2</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
+
+    <!-- Actuating tilt joint plugins -->
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_axis_2_joint</joint_name>
+      <topic>command/tilt_arm_axis_2</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_outward_axis_2_joint</joint_name>
+      <topic>command/tilt_outward_axis_2</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
     
+
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_3_joint</jointName>
       <linkName>rotor_3</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
+      <maxRotVelocity>1100.0</maxRotVelocity>
       <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <momentConstant>0.01362</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>3</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
+
+    <!-- Actuating tilt joint plugins -->
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_axis_3_joint</joint_name>
+      <topic>command/tilt_arm_axis_3</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_outward_axis_3_joint</joint_name>
+      <topic>command/tilt_outward_axis_3</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
     
+
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_4_joint</jointName>
       <linkName>rotor_4</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
+      <maxRotVelocity>1100.0</maxRotVelocity>
       <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <momentConstant>0.01362</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>4</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
+
+    <!-- Actuating tilt joint plugins -->
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_axis_4_joint</joint_name>
+      <topic>command/tilt_arm_axis_4</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_outward_axis_4_joint</joint_name>
+      <topic>command/tilt_outward_axis_4</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
     
+
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_5_joint</jointName>
       <linkName>rotor_5</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
+      <maxRotVelocity>1100.0</maxRotVelocity>
       <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <momentConstant>0.01362</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>5</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
+    </plugin>
+
+    <!-- Actuating tilt joint plugins -->
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_arm_axis_5_joint</joint_name>
+      <topic>command/tilt_arm_axis_5</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
+    </plugin>
+
+    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
+      <joint_name>tilt_outward_axis_5_joint</joint_name>
+      <topic>command/tilt_outward_axis_5</topic>
+      <p_gain>2.0</p_gain>
+      <i_gain>0.0</i_gain>
+      <d_gain>0.1</d_gain>
+      <i_max>1</i_max>
+      <i_min>-1</i_min>
+      <cmd_max>1.0</cmd_max>
+      <cmd_min>-1.0</cmd_min>
     </plugin>
     
   </model>
