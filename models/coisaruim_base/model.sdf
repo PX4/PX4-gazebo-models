@@ -19,7 +19,7 @@
       <gravity>true</gravity>
       <velocity_decay/>
       <visual name="base_link_visual">
-        <pose>0 0 0.005 0 0 0</pose>
+        <pose>0 0 0.005 0 0 -1.5707</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -28,7 +28,7 @@
         </geometry>
       </visual>
       <collision name="base_link_collision">
-        <pose>0 0 0.005 0 0 0</pose>
+        <pose>0 0 0.005 0 0 -1.5707</pose>
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
@@ -126,7 +126,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>0.110373 -0.086818 0.004017 0 0 0</pose>
+      <pose>0.110821 -0.106648 0.004049 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -190,7 +190,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>-0.110749 0.106613 0.004017 0 0 0</pose>
+      <pose>-0.110301 0.086783 0.004049 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -254,7 +254,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>0.110815 0.106378 0.004017 0 0 0</pose>
+      <pose>0.110702 0.087353 0.004049 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -318,7 +318,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>-0.11063 -0.087388 0.004017 0 0 0</pose>
+      <pose>-0.110743 -0.106413 0.004049 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
