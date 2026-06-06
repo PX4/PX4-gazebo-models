@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
   <model name='coisaruim_base'>
-    <pose>0 0 0.24 0 0 0</pose>
+    <pose>0 0 0.09 0 0 0</pose>
     <self_collide>false</self_collide>
     <static>false</static>
     <link name="base_link">
@@ -126,7 +126,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>0.169826 -0.168623 0.282644 0 0 0</pose>
+      <pose>0.110373 -0.086818 0.004017 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -140,7 +140,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://coisaruim_base/meshes/1045_prop_CCW.stl</uri>
+            <uri>model://coisaruim_base/meshes/7040_prop_CCW.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -155,7 +155,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://coisaruim_base/meshes/Prop_Collision.stl</uri>
+            <uri>model://coisaruim_base/meshes/7inProp_Collision.stl</uri>
           </mesh>
         </geometry>
         <surface>
@@ -190,7 +190,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>-0.1717 0.172902 0.282644 0 0 0</pose>
+      <pose>-0.110749 0.106613 0.004017 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -204,7 +204,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://coisaruim_base/meshes/1045_prop_CCW.stl</uri>
+            <uri>model://coisaruim_base/meshes/7040_prop_CCW.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -219,7 +219,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://coisaruim_base/meshes/Prop_Collision.stl</uri>
+            <uri>model://coisaruim_base/meshes/7inProp_Collision.stl</uri>
           </mesh>
         </geometry>
         <surface>
@@ -254,7 +254,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>0.169826 0.172902 0.282644 0 0 0</pose>
+      <pose>0.110815 0.106378 0.004017 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -268,7 +268,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://coisaruim_base/meshes/1045_prop_CW.stl</uri>
+            <uri>model://coisaruim_base/meshes/7040_prop_CW.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -283,7 +283,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://coisaruim_base/meshes/Prop_Collision.stl</uri>
+            <uri>model://coisaruim_base/meshes/7inProp_Collision.stl</uri>
           </mesh>
         </geometry>
         <surface>
@@ -318,7 +318,7 @@
       <gravity>true</gravity>
       <self_collide>false</self_collide>
       <velocity_decay/>
-      <pose>-0.1717 -0.168623 0.282644 0 0 0</pose>
+      <pose>-0.11063 -0.087388 0.004017 0 0 0</pose>
       <inertial>
           <mass>0.016076923076923075</mass>
           <inertia>
@@ -332,7 +332,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://coisaruim_base/meshes/1045_prop_CW.stl</uri>
+            <uri>model://coisaruim_base/meshes/7040_prop_CW.stl</uri>
           </mesh>
         </geometry>
         <material>
@@ -347,7 +347,7 @@
         <geometry>
           <mesh>
             <scale>1 1 1</scale>
-            <uri>model://coisaruim_base/meshes/Prop_Collision.stl</uri>
+            <uri>model://coisaruim_base/meshes/7inProp_Collision.stl</uri>
           </mesh>
         </geometry>
         <surface>
