@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='coisaruim_mono_cam'>
+    <include merge='true'>
+      <uri>piazinho</uri>
+    </include>
+    <include merge='true'>
+      <uri>model://mono_cam</uri>
+      <pose relative_to="base_link">0.000709 0.001927 0.077389 0 1.57079632679 0</pose>
+    </include>
+    <joint name="CameraJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>mono_cam/base_link</child>
+    </joint>
+
+  </model>
+</sdf>

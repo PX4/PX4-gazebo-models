@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='coisaruim_range_cam'>
+    <self_collide>false</self_collide>
+    <include merge='true'>
+      <uri>coisaruim_mono_cam</uri>
+    </include>
+    <include merge='true'>
+      <uri>model://coisaruim_lidar</uri>
+      <pose>0.0 -0.117311 -0.046866 0 -1.5708 0</pose>
+    </include>
+    <joint name="lidar_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>lidar_sensor_link</child>
+    </joint>
+  </model>
+</sdf>
