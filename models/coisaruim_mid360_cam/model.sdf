@@ -6,7 +6,7 @@
     </include>
     <include merge='true'>
       <uri>model://mid360</uri>
-      <pose relative_to="base_link">0 0 .316916 0 0 1.57079</pose>
+      <pose relative_to="base_link">0 0 .112 0 0 0.0</pose>
     </include>
     <joint name="LidarJoint" type="fixed">
       <parent>base_link</parent>

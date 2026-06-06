@@ -145,7 +145,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/DarkGrey</name>
+            <name>Gazebo/Indigo</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
         </material>
@@ -209,7 +209,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/DarkGrey</name>
+            <name>Gazebo/Indigo</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
         </material>
@@ -273,7 +273,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/DarkGrey</name>
+            <name>Gazebo/Indigo</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
         </material>
@@ -337,7 +337,7 @@
         </geometry>
         <material>
           <script>
-            <name>Gazebo/DarkGrey</name>
+            <name>Gazebo/Indigo</name>
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
         </material>
@@ -389,7 +389,7 @@
             <iyy>0.001</iyy><iyz>0</iyz><izz>0.001</izz>
           </inertia>
         </inertial>
-        
+
          VISUAL
         <visual name="hook_visual">
           <pose>0 0 0 0 0 0</pose>
@@ -400,7 +400,7 @@
             </mesh>
           </geometry>
         </visual>
-        
+
         <collision name="hook_collision">
           <pose>0 0 0 0 0 0</pose>
           <geometry>
