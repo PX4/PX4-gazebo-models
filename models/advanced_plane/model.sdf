@@ -3,6 +3,7 @@
   <model name='advanced_plane'>
     <pose>0 0 0.246 0 0 0</pose>
     <link name='base_link'>
+      <enable_wind>false</enable_wind>
       <pose>0 0 0 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
