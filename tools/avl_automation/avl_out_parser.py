@@ -19,20 +19,15 @@ Return:
 	value (str): The value associated with the desired coefficient.
 
 """
-def get_coef(file: TextIO,token: str) -> str:
-
-    linesplit = []
+def get_coef(file: TextIO, token: str) -> str:
+    line_parts = []
     for line in file:
         if f' {token} ' in line:
-            linesplit = line.split()
-            break
-
-    index = 0
-    for i,v in enumerate(linesplit):
-        if v == token:
-            index = i
-    value = linesplit[index+2]
-    return value
+            line_parts = line.split(f'{token} =') 
+            if len(line_parts) > 1:
+                value = line_parts[1].split()[0]  # Extract the value after the '='
+                return value
+    raise ValueError(f"Token '{token}' not found in file")
 
 
 
@@ -54,8 +49,6 @@ def write_coef(file: TextIO, token_str: str, token: str):
     with fileinput.FileInput(file, inplace=True) as output_file:
         for line in output_file:
             print(line.replace(old_line, new_line), end='')
-
-
 
 """
 Write all gathered, control surface specific parameters to the sdf file.
@@ -80,14 +73,13 @@ def ctrl_surface_coef(file: TextIO,ctrl_surface_vec: list,index: str, direction:
 	# Insert necessary coefficient values, index and direction in correct sdf location.
     extracted_text = extracted_text.replace("<name></name>",f'<name>servo_{index}</name>')
     extracted_text = extracted_text.replace("<index></index>",f'<index>{index}</index>')
-    extracted_text = extracted_text.replace("<direction></direction>",f'<directon>{direction}</direction>')
+    extracted_text = extracted_text.replace("<direction></direction>",f'<direction>{direction}</direction>')
     extracted_text = extracted_text.replace("<CD_ctrl></CD_ctrl>",f'<CD_ctrl>{ctrl_surface_vec[0]}</CD_ctrl>')
     extracted_text = extracted_text.replace("<CY_ctrl></CY_ctrl>",f'<CY_ctrl>{ctrl_surface_vec[1]}</CY_ctrl>')
     extracted_text = extracted_text.replace("<CL_ctrl></CL_ctrl>",f'<CL_ctrl>{ctrl_surface_vec[2]}</CL_ctrl>')
     extracted_text = extracted_text.replace("<Cell_ctrl></Cell_ctrl>",f'<Cell_ctrl>{ctrl_surface_vec[3]}</Cell_ctrl>')
     extracted_text = extracted_text.replace("<Cem_ctrl></Cem_ctrl>",f'<Cem_ctrl>{ctrl_surface_vec[4]}</Cem_ctrl>')
     extracted_text = extracted_text.replace("<Cen_ctrl></Cen_ctrl>",f'<Cen_ctrl>{ctrl_surface_vec[5]}</Cen_ctrl>')
-
 
     # Create model specific template
     with open(file,'a') as plugin_file:
@@ -108,7 +100,7 @@ Args:
     ref_pt_z (str): The z coordinate of the reference point, at which forces and moments are applied.
     num_ctrl_surfaces (str): The number of control surfaces that the model uses.
     area (str): The wing surface area.
-	ctrl_surface_order (list): A list containing the types of control surfaces, in theorder in which
+	ctrl_surface_order (list): A list containing the types of control surfaces, in the order in which
     	they have been defined in the .avl file.
     avl_path (str): A string containing the directory where the AVL directory should be moved to.
 
@@ -194,11 +186,11 @@ def main(file_name: TextIO, vehicle_type: str, AR: str, mac: str, ref_pt_x: str,
 
 	# Maybe in the future you want more types of set aircraft. Thus us a case differentiator.
     match plane_type:
-
         case "custom":
             ctrl_surface_vec = []
             with open(f'{filedir}custom_vehicle_body_axis_derivatives.txt') as bodyax_file:
                 original_position = bodyax_file.tell()
+                #NOTE: when creating 2 ailerons (left and right) only one ctrl_surface_vec is created (Is this correct??)
                 for i in range(1,(len(set(ctrl_surface_order)))+1):
                     ctrl_surface_vec = []
                     ctrl_surface_vec.append(get_coef(bodyax_file,f'CXd{i}'))
@@ -215,7 +207,10 @@ def main(file_name: TextIO, vehicle_type: str, AR: str, mac: str, ref_pt_x: str,
     if not os.path.exists(f'{savedir}/{file_name}'):
         os.makedirs(f'{savedir}/{file_name}')
     file_name = f'{savedir}/{file_name}/{file_name}.sdf'
-    shutil.copy(f'{savedir}/templates/advanced_lift_drag_template.sdf',file_name)
+
+    with open('./templates/advanced_lift_drag_template.sdf', 'r') as source, open(file_name, 'a') as target:
+        content = source.read()
+        target.write(content)
 
     # Get argument coefficients taken directly from the input file.
     write_coef(file_name,"a0",alpha)
@@ -285,34 +280,24 @@ def main(file_name: TextIO, vehicle_type: str, AR: str, mac: str, ref_pt_x: str,
 
 	# More set types in the future?
     match plane_type:
-
         case "custom":
-            for i, ctrl_surface in enumerate(ctrl_surface_order):
-
+            for i, ctrl_surface_type in enumerate(ctrl_surface_order):
                 # Check whether a particular type of control surface has been seen before. If it has,
                 # then the current control surface is the (right) counterpart. Depending on the exact
                 # nature of the encountered type you then need to negate the correct parameters.
-                if ctrl_surface in type_seen:
-                    # Work out what the corresponding index for the first encounter of the ctrl surface is.
-                    seen_index = type_seen.index(ctrl_surface)
-
-                    if ctrl_surface == 'aileron':
-                        #Change for right wing aileron by flipping sign
-                        ctrl_surface_mat[seen_index][3] = -float(ctrl_surface_mat[0][3])
-                        ctrl_surface_mat[seen_index][5] = -float(ctrl_surface_mat[0][5])
-
-                    # Split Elevators are assumed to never run differentially. Feel free to add a
-                    # condition if your plane does require differential elevator action.
-
-                else:
+                if ctrl_surface_type not in type_seen:
                     # If a ctrl surface has not been encountered add it to the type_seen list and
                     # set the index to the length of the list - 1 as this corresponds to the newest
                     # unseen element in ctrl_surface_mat .
-                    type_seen.append(ctrl_surface)
+                    type_seen.append(ctrl_surface_type)
                     seen_index = len(type_seen) - 1
 
-                ctrl_surface_coef(file_name,ctrl_surface_mat[seen_index],i,ctrl_direction[ctrl_surface])
+                if ctrl_surface_type == 'aileron':   
+                    #Change for right wing aileron by flipping sign
+                    ctrl_surface_mat[seen_index][1] = -float(ctrl_surface_mat[seen_index][1])
+                    ctrl_surface_mat[seen_index][3] = -float(ctrl_surface_mat[seen_index][3])
 
+                ctrl_surface_coef(file_name,ctrl_surface_mat[seen_index],i,ctrl_direction[ctrl_surface_type])
 
     # close the sdf file with plugin
     with open(file_name,'a') as plugin_file:
@@ -332,7 +317,7 @@ if __name__ == '__main__':
     parser.add_argument("ref_pt_z", help="The z coordinate of the reference point, at which forces and moments are applied.")
     parser.add_argument("num_ctrl_surfaces", help="The number of control surfaces that the model uses.")
     parser.add_argument("area", help= "The wing surface area.")
-    parser.add_argument("ctrl_surface_order", help=" A list containing the types of control surfaces, in theorder in which \
+    parser.add_argument("ctrl_surface_order", help=" A list containing the types of control surfaces, in the order in which \
     	they have been defined in the .avl file.")
     parser.add_argument("avl_path",help="A string containing the directory where the AVL directory should be moved to.")
 

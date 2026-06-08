@@ -1,5 +1,5 @@
 # Enter a name for your vehicle
-vehicle_name: plane_example_2
+vehicle_name: plane_example_0
 
 # Enter the type of airframe you would like to use:
 frame_type: custom
@@ -17,7 +17,7 @@ reference_point:
 num_ctrl_surfaces: 4
 control_surfaces:
   - name: right_wing
-    type: aileron
+    type: right_aileron
     nchord: 1
     cspace: 1
     nspan: 16
@@ -50,7 +50,7 @@ control_surfaces:
 
 
   - name: left_wing
-    type: aileron
+    type: left_aileron
     nchord: 1
     cspace: 1
     nspan: 16
