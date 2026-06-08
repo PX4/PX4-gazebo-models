@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version='1.9'>
+  <model name='coisaruim_mid360_cam'>
+    <include merge='true'>
+      <uri>coisaruim</uri>
+    </include>
+    <include merge='true'>
+      <uri>model://mid360</uri>
+      <pose relative_to="base_link">0 0 .112 0 0 1.57079632679</pose>
+    </include>
+    <joint name="LidarJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>livox_frame</child>
+    </joint>
+    <include merge='true'>
+      <uri>model://coisaruim_lidar</uri>
+      <pose>0.0 -0.117311 -0.046866 0 -1.5708 0</pose>
+    </include>
+    <include merge='true'>
+      <uri>model://mono_cam</uri>
+      <pose relative_to="base_link">0.06 0 0.2 0 1.57079632679 0</pose>
+    </include>
+    <joint name="CameraJoint" type="fixed">
+      <parent>base_link</parent>
+      <child>mono_cam/base_link</child>
+    </joint>
+  </model>
+</sdf>
