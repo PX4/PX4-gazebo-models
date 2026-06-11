@@ -82,6 +82,32 @@
       </link>
     </model>
 
+    <model name="CBR26-base-clutter-roof">
+      <static>true</static>
+      <pose>7 5 1.54 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>2 6 0.05</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.75 0.75 0.75 1</ambient>
+            <diffuse>0.75 0.75 0.75 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>2 6 0.05</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
     <model name="fase4">
       <static>true</static>
       <link name="link">
