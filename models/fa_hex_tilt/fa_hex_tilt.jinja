@@ -39,6 +39,10 @@
   {# Indices: 0:30, 1:90, 2:150, 3:210, 4:270, 5:330 #}
   {% set cos_vals = [0.866025, 0.0, -0.866025, -0.866025, 0.0, 0.866025] %}
   {% set sin_vals = [0.5, 1.0, 0.5, -0.5, -1.0, -0.5] %}
+  
+  {# --- CANTED ROTOR TEST ANGLES (Degrees) --- #}
+  {% set alphas = [25.0, -25.0, 25.0, -25.0, 25.0, -25.0] %}
+  {% set betas = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0] %}
 
   {# --- INERTIA EQUATION MACROS --- #}
   
@@ -199,21 +203,10 @@
     {# --- ROTOR LINKS & JOINTS --- #}
     {% for n in range(6) %}
 
-    {% set angle_rad = (30 + (n * 60)) * pi / 180 %}
-    <joint name="arm_{{ n }}_joint" type="revolute">
-      <parent>base_link</parent> 
-      <child>arm_{{ n }}_link</child>
-      
-      <pose relative_to="base_link">{{ 0.07 * cos_vals[n] }} {{ 0.07 * sin_vals[n] }} 0.014 0 0 0</pose>
-      
-      <axis>
-        <xyz expressed_in="base_link">0 0 1</xyz> 
-        <limit>
-          <lower>{{ -pi / 2 }}</lower>
-          <upper>0</upper>
-        </limit>
-      </axis>
-    </joint>
+    <!-- fixed for now -->
+    {% set angle_rad = (30 + (n * 60)) * pi / 180 %}  
+    {% set alpha_rad = alphas[n] * pi / 180.0 %}
+    {% set beta_rad = betas[n] * pi / 180.0 %}
     
     <link name="arm_{{ n }}_link">
       <pose>{{ radius * cos_vals[n] }} {{ radius * sin_vals[n] }} 0.014 {{ -(pi/2) }} 0 {{ angle_rad + (pi/2) }}</pose>
@@ -228,26 +221,8 @@
       </visual>
     </link>
 
-   <joint name="tilt_arm_axis_{{ n }}_joint" type="revolute">
-      <parent>arm_{{ n }}_link</parent> 
-      <child>motor_gimbal_link_{{ n }}</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>{{ -pi / 4 }}</lower> 
-          <upper>{{ pi / 4 }}</upper>  
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-
     <link name="motor_gimbal_link_{{ n }}">
-      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 0 0 0</pose>
+      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>
       <inertial>
         <mass>0.005</mass> 
         <inertia>
@@ -261,7 +236,61 @@
       </inertial>
     </link>
 
-    <joint name="tilt_outward_axis_{{ n }}_joint" type="revolute">
+    <link name="motor_{{ n }}">
+        <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>      
+        <inertial>
+        <mass>{{ mass_motor + mass_motor_mount }}</mass>
+        {{ cylinder_inertia(mass_motor + mass_motor_mount, motor_radius, motor_height) }}
+        </inertial>
+        <visual name="motor_{{ n }}_visual">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
+        </visual>
+        <visual name="motor_mount_{{ n }}_visual">
+          <pose relative_to="arm_{{ n }}_endpoint">0.02 0 0 0 0 0</pose>
+          <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
+        </visual>
+    </link>
+
+    <link name="rotor_{{ n }}">
+      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>
+      <inertial>
+        <mass>{{ mass_rotor }}</mass>
+        {{ box_inertia(mass_rotor, rotor_length, rotor_width, rotor_thickness) }}
+      </inertial>
+      <visual name="rotor_{{ n }}_visual">
+        <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
+        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+      </visual>
+      <collision name="rotor_{{ n }}_collision">
+        <geometry><box><size>{{ rotor_length }} {{ rotor_width }} {{ rotor_thickness }}</size></box></geometry>
+      </collision>
+    </link>
+
+    <joint name="arm_{{ n }}_joint" type="fixed">
+      <parent>base_link</parent> 
+      <child>arm_{{ n }}_link</child>
+      
+      <pose relative_to="base_link">{{ 0.07 * cos_vals[n] }} {{ 0.07 * sin_vals[n] }} 0.014 0 0 0</pose>
+      
+      <axis>
+        <xyz expressed_in="base_link">0 0 1</xyz> 
+        <limit>
+          <lower>{{ -pi / 2 }}</lower>
+          <upper>0</upper>
+        </limit>
+      </axis>
+    </joint>
+
+    <joint name="rotor_{{ n }}_joint" type="revolute">
+      <parent>motor_{{ n }}</parent>
+      <child>rotor_{{ n }}</child>
+      <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
+    </joint>
+
+    <!-- Fixed for static rotations
+
+     <joint name="tilt_outward_axis_{{ n }}_joint" type="revolute">
       <parent>motor_gimbal_link_{{ n }}</parent>
       <child>motor_{{ n }}</child>
       <axis>
@@ -279,41 +308,33 @@
       </axis>
     </joint>
 
-    <link name="motor_{{ n }}">
-      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 0 0 0</pose>
-      <inertial>
-        <mass>{{ mass_motor + mass_motor_mount }}</mass>
-        {{ cylinder_inertia(mass_motor + mass_motor_mount, motor_radius, motor_height) }}
-      </inertial>
-      <visual name="motor_{{ n }}_visual">
-        <pose>0 0 0 0 0 0</pose>
-        <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
-      </visual>
-      <visual name="motor_mount_{{ n }}_visual">
-        <pose relative_to="arm_{{ n }}_endpoint">0.02 0 0 0 0 0</pose>
-        <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
-      </visual>
-    </link>
+    <joint name="tilt_arm_axis_{{ n }}_joint" type="revolute">
+      <parent>arm_{{ n }}_link</parent> 
+      <child>motor_gimbal_link_{{ n }}</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>{{ -pi / 4 }}</lower> 
+          <upper>{{ pi / 4 }}</upper>  
+          <effort>1.0</effort>
+          <velocity>5.0</velocity>
+        </limit>
+        <dynamics>
+          <damping>0.01</damping>
+          <friction>0.01</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    -->
 
-    <link name="rotor_{{ n }}">
-      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 0 0 0</pose>
-      <inertial>
-        <mass>{{ mass_rotor }}</mass>
-        {{ box_inertia(mass_rotor, rotor_length, rotor_width, rotor_thickness) }}
-      </inertial>
-      <visual name="rotor_{{ n }}_visual">
-        <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
-        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
-      </visual>
-      <collision name="rotor_{{ n }}_collision">
-        <geometry><box><size>{{ rotor_length }} {{ rotor_width }} {{ rotor_thickness }}</size></box></geometry>
-      </collision>
-    </link>
+    <joint name="tilt_arm_axis_{{ n }}_joint" type="fixed">
+      <parent>arm_{{ n }}_link</parent> 
+      <child>motor_gimbal_link_{{ n }}</child>
+    </joint>
 
-    <joint name="rotor_{{ n }}_joint" type="revolute">
-      <parent>motor_{{ n }}</parent>
-      <child>rotor_{{ n }}</child>
-      <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
+    <joint name="tilt_outward_axis_{{ n }}_joint" type="fixed">
+      <parent>motor_gimbal_link_{{ n }}</parent>
+      <child>motor_{{ n }}</child>
     </joint>
 
     {% endfor %}
@@ -363,7 +384,7 @@
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_{{ n }}_joint</jointName>
       <linkName>rotor_{{ n }}</linkName>
-      <turningDirection>{{ 'ccw' if n in [0, 1, 4] else 'cw' }}</turningDirection>
+      <turningDirection>{{ 'ccw' if n in [0, 2, 4] else 'cw' }}</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
       <maxRotVelocity>1100.0</maxRotVelocity>
@@ -377,6 +398,7 @@
     </plugin>
 
     <!-- Actuating tilt joint plugins -->
+    <!-- FIXED for now
     <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
       <joint_name>tilt_arm_axis_{{ n }}_joint</joint_name>
       <topic>command/tilt_arm_axis_{{ n }}</topic>
@@ -400,6 +422,16 @@
       <cmd_max>1.0</cmd_max>
       <cmd_min>-1.0</cmd_min>
     </plugin>
+    -->
     {% endfor %}
-  </model>
+    <!-- Pose publisher plugin (Not necessary, may remove in the future) -->
+    <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+      <publish_link_pose>true</publish_link_pose>
+      <publish_sensor_pose>true</publish_sensor_pose>
+      <publish_collision_pose>false</publish_collision_pose>
+      <use_pose_vector_msg>true</use_pose_vector_msg>
+      <static_publisher>true</static_publisher>
+    </plugin>
+    
+    </model>
 </sdf>
