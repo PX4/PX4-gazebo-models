@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DO NOT EDIT: Generated from tiltrotor.sdf.jinja -->
+<sdf version='1.5'>
+  <model name='my_tilt_vtol'>
+    <pose>0 0 0.246 0 0 0</pose> <!--Gazebo 월드 기준 초기 위치-->
+    <link name="base_link">
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+        <mass>60.0</mass> <!-- 단위:kg -->
+        <inertia>
+          <ixx>0.197563</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.1458929</iyy>
+          <iyz>0</iyz>
+          <izz>0.1477</izz>
+        </inertia>
+      </inertial>
+
+      <collision name='base_link_collision'> <!--충돌 박스를 둠, 외형 메쉬 그대로 collision 쓰면 연산량 폭증, 불안정 등 현상 발생 가능성 있음.-->
+        <pose>-0.01 0 -0.08 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.55 2.144 0.05</size>
+          </box>
+        </geometry>
+        <surface> <!--지면 접촉 충돌(착륙 시 튕김 관련 정보?)-->
+          <contact>
+            <ode>
+              <kp>100000</kp>
+              <kd>1.0</kd>
+              <max_vel>0.1</max_vel>
+              <min_depth>0.001</min_depth>
+            </ode>
+          </contact>
+          <friction>
+            <ode />
+          </friction>
+        </surface>
+      </collision>
+
+      <!-- body mesh -->
+      <visual name='base_link_visual'> <!--외형-->
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://my_tilt_vtol/meshes/U60_Body.dae</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material> <!-- DarkGrey-->
+          <ambient>0.175 0.175 0.175 1.0</ambient>
+          <diffuse>0.175 0.175 0.175 1.0</diffuse>
+        </material>
+      </visual>
+      <sensor name="imu_sensor" type="imu"> <!--PX4 EKF가 사용하는 IMU-->
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0003394</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0003394</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.0003394</stddev>
+                <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.004</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.004</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.004</stddev>
+                <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure>
+          <pressure>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>0.01</stddev>
+            </noise>
+          </pressure>
+        </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+    </link>
+
+    <include merge="true">
+      <uri>model://airspeed</uri>
+      <pose>0. 0. 0. 0. 0. 0.</pose>
+    </include>
+    <joint name='airspeed_joint' type='fixed'>
+      <parent>base_link</parent>
+      <child>airspeed_link</child>
+      <pose relative_to="base_link">-0 0 0 0 0 0</pose>
+    </joint>
+
+    <!-- ========================= -->
+    <!-- ======== FR MOTOR ======= -->
+    <!-- ========================= -->
+    <link name="motor_0">
+      <!-- base_link 기준 위치 -->
+      <pose>-0.43192 0.32782 0.46634 0 0 0</pose>
+      <inertial>
+        <mass>0.05</mass>
+        <inertia> <!--모터 중심에서 모터 끝까지?-->
+          <ixx>0.0166704</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0166704</iyy>
+          <iyz>0</iyz>
+          <izz>0.0167604</izz>
+        </inertia>
+      </inertial>
+      <collision name="motor_0_collision">
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode />
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="motor_0_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_FR_Ducted.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.175 0.175 0.175 1.0</ambient>
+          <diffuse>0.175 0.175 0.175 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='motor_0_joint' type='revolute'>
+      <child>motor_0</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>0.</lower>
+          <upper>1.57</upper> <!--0도 ~ 90도-->
+        </limit>
+        <dynamics> <!--dynamic 부분 수정 필요-->
+          <friction>1.0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <!-- ========================= -->
+    <!-- ======== FR ROTOR ======= -->
+    <!-- ========================= -->
+    <link name="rotor_0">
+      <!-- motor 기준 상대 위치 -->
+      <!--<pose>-0.44136 -0.76466 0.22011 0 0 0</pose>-->
+      <pose>-0.43192 0.32782 0.46634 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.005</mass>
+        <inertia>
+          <ixx>9.75e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000166704</iyy>
+          <iyz>0</iyz>
+          <izz>0.000167604</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="rotor_0_visual">
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_FR_Rotor.dae</uri> <!--FR 로터 .dae 파일 수정 필요-->
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 0 1 1.0</ambient>
+          <diffuse>0 0 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <!-- rotor spin joint -->
+    <joint name="rotor_0_joint" type="revolute">
+      <child>rotor_0</child>
+      <parent>motor_0</parent>
+
+      <pose relative_to="rotor_0">0 0 0 0 0 0</pose>
+
+      <axis>
+        <!-- 회전 축 (Z축) -->
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+    <!-- ========================= -->
+    <!-- ======== RR MOTOR ======= -->
+    <!-- ========================= -->
+    <link name="motor_1">
+      <!-- base_link 기준 위치 -->
+      <pose>-0.43214 1.6479 0.70337 0 0 0</pose>
+      <inertial>
+        <mass>0.05</mass>
+        <inertia> <!--모터 중심에서 모터 끝까지?-->
+          <ixx>0.0166704</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0166704</iyy>
+          <iyz>0</iyz>
+          <izz>0.0167604</izz>
+        </inertia>
+      </inertial>
+      <collision name="motor_1_collision">
+
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode />
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="motor_1_visual">
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_RR_Ducted.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.175 0.175 0.175 1.0</ambient>
+          <diffuse>0.175 0.175 0.175 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='motor_1_joint' type='revolute'>
+      <child>motor_1</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>0.</lower>
+          <upper>1.57</upper> <!--0도 ~ 90도-->
+        </limit>
+        <dynamics> <!--dynamic 부분 수정 필요-->
+          <friction>1.0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <!-- ========================= -->
+    <!-- ======== RR ROTOR ======= -->
+    <!-- ========================= -->
+    <link name="rotor_1">
+      <!-- motor 기준 상대 위치 -->
+      <pose>-0.43214 1.6479 0.70337 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.005</mass>
+        <inertia>
+          <ixx>9.75e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000166704</iyy>
+          <iyz>0</iyz>
+          <izz>0.000167604</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="rotor_1_visual">
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_RR_Rotor.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 0 1 1.0</ambient>
+          <diffuse>0 0 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <!-- rotor spin joint -->
+    <joint name="rotor_1_joint" type="revolute">
+      <child>rotor_1</child>
+      <parent>motor_1</parent>
+
+      <pose relative_to="rotor_1">0 0 0 0 0 0</pose>
+      <axis>
+        <!-- 회전 축 (Z축) -->
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <!-- ========================= -->
+    <!-- ======== RL MOTOR ======= -->
+    <!-- ========================= -->
+    <link name="motor_2">
+      <!-- base_link 기준 위치 -->
+      <pose>0.42774 1.6492 0.70337 0 0 0</pose>
+      <inertial>
+        <mass>0.05</mass>
+        <inertia> <!--모터 중심에서 모터 끝까지?-->
+          <ixx>0.0166704</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0166704</iyy>
+          <iyz>0</iyz>
+          <izz>0.0167604</izz>
+        </inertia>
+      </inertial>
+      <collision name="motor_2_collision">
+
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode />
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="motor_2_visual">
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_RL_Ducted.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.175 0.175 0.175 1.0</ambient>
+          <diffuse>0.175 0.175 0.175 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='motor_2_joint' type='revolute'>
+      <child>motor_2</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>0.</lower>
+          <upper>1.57</upper> <!--0도 ~ 90도-->
+        </limit>
+        <dynamics> <!--dynamic 부분 수정 필요-->
+          <friction>1.0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <!-- ========================= -->
+    <!-- ======== RL ROTOR ======= -->
+    <!-- ========================= -->
+    <link name="rotor_2">
+      <!-- motor 기준 상대 위치 -->
+      <pose>0.42774 1.6492 0.70337 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.005</mass>
+        <inertia>
+          <ixx>9.75e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000166704</iyy>
+          <iyz>0</iyz>
+          <izz>0.000167604</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="rotor_2_visual">
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_RL_Rotor.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 0 1 1.0</ambient>
+          <diffuse>0 0 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <!-- rotor spin joint -->
+    <joint name="rotor_2_joint" type="revolute">
+      <child>rotor_2</child>
+      <parent>motor_2</parent>
+
+      <pose relative_to="rotor_2">0 0 0 0 0 0</pose>
+      <axis>
+        <!-- 회전 축 (Z축) -->
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <!-- ========================= -->
+    <!-- ======== FL MOTOR ======= -->
+    <!-- ========================= -->
+    <link name="motor_3">
+      <!-- base_link 기준 위치 -->
+      <pose>0.42798 0.32182 0.46641 0 0 0</pose>
+      <inertial>
+        <mass>0.05</mass>
+        <inertia> <!--모터 중심에서 모터 끝까지?-->
+          <ixx>0.0166704</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.0166704</iyy>
+          <iyz>0</iyz>
+          <izz>0.0167604</izz>
+        </inertia>
+      </inertial>
+      <collision name="motor_3_collision">
+
+        <surface>
+          <contact>
+            <ode />
+          </contact>
+          <friction>
+            <ode />
+          </friction>
+        </surface>
+      </collision>
+
+      <visual name="motor_3_visual">
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_FL_Ducted.dae</uri>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.175 0.175 0.175 1.0</ambient>
+          <diffuse>0.175 0.175 0.175 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='motor_3_joint' type='revolute'>
+      <child>motor_3</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>0.</lower>
+          <upper>1.57</upper> <!--0도 ~ 90도-->
+        </limit>
+        <dynamics> <!--dynamic 부분 수정 필요-->
+          <friction>1.0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+    <!-- ========================= -->
+    <!-- ======== FL ROTOR ======= -->
+    <!-- ========================= -->
+    <link name="rotor_3">
+      <!-- motor 기준 상대 위치 -->
+      <pose>0.42798 0.32182 0.46641 0 0 0</pose>
+
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.005</mass>
+        <inertia>
+          <ixx>9.75e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000166704</iyy>
+          <iyz>0</iyz>
+          <izz>0.000167604</izz>
+        </inertia>
+      </inertial>
+
+      <visual name="rotor_3_visual">
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_FL_Rotor.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 0 1 1.0</ambient>
+          <diffuse>0 0 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <!-- rotor spin joint -->
+    <joint name="rotor_3_joint" type="revolute">
+      <child>rotor_3</child>
+      <parent>motor_3</parent>
+
+      <pose relative_to="rotor_3">0 0 0.025 0 0 0</pose>
+      <axis>
+        <!-- 회전 축 (Z축) -->
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+        <use_parent_model_frame>1</use_parent_model_frame>
+      </axis>
+    </joint>
+
+
+    <link name="right_ailerone">
+      <pose>-1.0907 1.1638 0.62175 -0.0357966 0.0037797 0.105172</pose>
+      <!-- base_link 기준 위치 -->
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0.0</ixy>
+          <iyy>1e-5</iyy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+
+
+      <visual name="right_ailerone_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_Right_Ailerone.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 1 1 1.0</ambient>
+          <diffuse>0 1 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='right_ailerone_joint' type='revolute'>
+      <child>right_ailerone</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="left_ailerone">
+      <pose>1.0907 1.1638 0.62175 -0.0357950 -0.0037795 -0.105174</pose>
+      <!-- base_link 기준 위치 -->
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0.0</ixy>
+          <iyy>1e-5</iyy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+
+    <visual name="left_ailerone_visual">
+      <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_Left_Ailerone.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 1 1 1.0</ambient>
+          <diffuse>0 1 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='left_ailerone_joint' type='revolute'>
+      <child>left_ailerone</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+
+
+    <link name="right_flap">
+      <pose>-0.5062 1.2256 0.62119 -0.0227277 0.0026229 0.114879</pose>
+      <!-- base_link 기준 위치 -->
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0.0</ixy>
+          <iyy>1e-5</iyy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+
+    <visual name="right_flap_visual">
+      <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_Right_Flap.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 1 1 1.0</ambient>
+          <diffuse>0 1 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='right_flap_joint' type='revolute'>
+      <child>right_flap</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>-0.78</lower>
+          <upper>0.78</upper> <!--나중에 각도 볼 필요 있음.-->
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="left_flap">
+      <pose>0.5062 1.2301 0.6206 -0.41236 -0.009305 -0.11270</pose>
+      <!-- base_link 기준 위치 -->
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0.0</ixy>
+          <iyy>1e-5</iyy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+
+    <visual name="left_flap_visual">
+      <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_Left_Flap.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 1 1 1.0</ambient>
+          <diffuse>0 1 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='left_flap_joint' type='revolute'>
+      <child>left_flap</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>-0.78</lower>
+          <upper>0.78</upper> <!--나중에 각도 볼 필요 있음.-->
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <link name="right_ruddervator">
+      <pose>-0.32678 2.1154 0.90021 -0.247400 0.508554 -0.845997</pose>
+      <!-- base_link 기준 위치 -->
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0.0</ixy>
+          <iyy>1e-5</iyy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+
+    <visual name="right_rudder_visual">
+      <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_Right_Ruddervator.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 1 1 1.0</ambient>
+          <diffuse>0 1 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='right_ruddervator_joint' type='revolute'>
+      <child>right_ruddervator</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>-0.78</lower>
+          <upper>0.78</upper> <!--나중에 각도 볼 필요 있음.-->
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+
+    <link name="left_ruddervator">
+      <pose>0.32678 2.1154 0.9002 -0.247400 -0.491102 0.845997</pose>
+      <!-- base_link 기준 위치 -->
+      <inertial>
+        <mass>0.001</mass>
+        <inertia>
+          <ixx>1e-5</ixx>
+          <ixy>0.0</ixy>
+          <iyy>1e-5</iyy>
+          <ixz>0.0</ixz>
+          <iyz>0.0</iyz>
+          <izz>1e-5</izz>
+        </inertia>
+      </inertial>
+
+    <visual name="left_rudder_visual">
+      <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://my_tilt_vtol/meshes/U60_Left_Ruddervator.dae</uri>
+          </mesh>
+        </geometry>
+        <material>  <!-- Blue -->
+          <ambient>0 1 1 1.0</ambient>
+          <diffuse>0 1 1 1.0</diffuse>
+        </material>
+      </visual>
+      <gravity>1</gravity>
+      <velocity_decay />
+      <self_collide>0</self_collide>
+    </link>
+
+    <joint name='left_ruddervator_joint' type='revolute'>
+      <child>left_ruddervator</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>1 0 0</xyz> <!--Y축 기준 회전 (틸트로터)-->
+        <limit>
+          <lower>-0.78</lower>
+          <upper>0.78</upper>
+        </limit>
+        <dynamics>
+          <damping>1.000</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>0.05984281113</a0> <!--초기 받음각 즉, 양력이 0이되는 받음각-->
+      <cla>4.752798721</cla> <!--받음각 1도가 증가하면 CL 값이 얼마나 증가하는지. cl은 양력 계수로 알고 있음.-->
+      <cda>0.6417112299</cda> <!--실속 전 구간의 항력 기울기 | 뭔지 모르겠는데 받음각 1도 증가에 따른 항력 계수 값인가?-->
+      <cma>0.0</cma> <!-- 받음각에 따른 피칭 모멘트 계수 변화-->
+      <alpha_stall>0.3391428111</alpha_stall> <!--실속이 시작되는 받음각-->
+      <cla_stall>-3.85</cla_stall> <!--실속 후 구간의 양력 기울기-->
+      <cda_stall>-0.9233984055</cda_stall> <!--실속 후 구간의 항력 기울기-->
+      <cma_stall>0</cma_stall> <!--실속 후 모멘트 관련 기울기(계수)로 쓰이는 자리 | 뭔지 모르겠다~-->
+      <cp>-0.05 0.3 0.05</cp> <!--center of Pressure-->
+      <area>0.5</area> <!--플랫폼 면적-->
+      <air_density>1.2041</air_density> <!--공기 밀도-->
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+      <control_joint_name>
+        left_ailerone_joint
+      </control_joint_name>
+      <control_joint_rad_to_cl>-1.0</control_joint_rad_to_cl>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>left_ailerone_joint</joint_name>
+      <sub_topic>servo_0</sub_topic>
+    </plugin>
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>0.05984281113</a0> <!--각각 의미하는 바 적기-->
+      <cla>4.752798721</cla>
+      <cda>0.6417112299</cda>
+      <cma>0.0</cma>
+      <alpha_stall>0.3391428111</alpha_stall>
+      <cla_stall>-3.85</cla_stall>
+      <cda_stall>-0.9233984055</cda_stall>
+      <cma_stall>0</cma_stall>
+      <cp>-0.05 -0.3 0.05</cp>
+      <area>0.5</area>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+      <control_joint_name>
+        right_ailerone_joint
+      </control_joint_name>
+      <control_joint_rad_to_cl>-1.0</control_joint_rad_to_cl>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>right_ailerone_joint</joint_name>
+      <sub_topic>servo_1</sub_topic>
+    </plugin>
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>-0.2</a0> <!--위에 것이랑 무슨 차이가 있는 거지?-->
+      <cla>4.752798721</cla>
+      <cda>0.6417112299</cda>
+      <cma>0.0</cma>
+      <alpha_stall>0.3391428111</alpha_stall>
+      <cla_stall>-3.85</cla_stall>
+      <cda_stall>-0.9233984055</cda_stall>
+      <cma_stall>0</cma_stall>
+      <cp>-0.5 0 0</cp>
+      <area>0.01</area>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 0 1</upward>
+      <link_name>base_link</link_name>
+      <control_joint_name>
+        left_ailerone_joint
+      </control_joint_name>
+      <control_joint_rad_to_cl>-12.0</control_joint_rad_to_cl>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>left_ailerone_joint</joint_name>
+      <sub_topic>servo_2</sub_topic>
+    </plugin>
+    <plugin filename="gz-sim-lift-drag-system" name="gz::sim::systems::LiftDrag">
+      <a0>0.0</a0>
+      <cla>4.752798721</cla>
+      <cda>0.6417112299</cda>
+      <cma>0.0</cma>
+      <alpha_stall>0.3391428111</alpha_stall>
+      <cla_stall>-3.85</cla_stall>
+      <cda_stall>-0.9233984055</cda_stall>
+      <cma_stall>0</cma_stall>
+      <cp>-0.5 0 0.05</cp>
+      <area>0.02</area>
+      <air_density>1.2041</air_density>
+      <forward>1 0 0</forward>
+      <upward>0 1 0</upward>
+      <link_name>base_link</link_name>
+      <!-- <control_joint_name>
+        rudder_joint
+      </control_joint_name> -->
+    </plugin>
+    <!-- <plugin
+      filename="gz-sim-joint-position-controller-system"
+    name="gz::sim::systems::JointPositionController">
+      <joint_name>rudder_joint</joint_name>
+      <sub_topic>servo_5</sub_topic>
+    </plugin> -->
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel"> <!--의미하는 바 적기-->
+      <jointName>rotor_0_joint</jointName>
+      <linkName>rotor_0</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>2e-05</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>0.0000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>20</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>motor_0_joint</joint_name>
+      <sub_topic>servo_3</sub_topic>
+      <p_gain>100</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+      <i_max>0.0</i_max>
+      <i_min>0.0</i_min>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+      <err_max>0.2</err_max>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>rotor_1_joint</jointName>
+      <linkName>rotor_1</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>2e-05</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>1</motorNumber>
+      <rotorDragCoefficient>0.0000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>20</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>motor_1_joint</joint_name>
+      <sub_topic>servo_4</sub_topic>
+      <p_gain>100</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+      <i_max>0.0</i_max>
+      <i_min>0.0</i_min>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+      <err_max>0.2</err_max>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>rotor_2_joint</jointName>
+      <linkName>rotor_2</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>2e-05</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>2</motorNumber>
+      <rotorDragCoefficient>0.0000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>20</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>motor_2_joint</joint_name>
+      <sub_topic>servo_5</sub_topic>
+      <p_gain>100</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+      <i_max>0.0</i_max>
+      <i_min>0.0</i_min>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+      <err_max>0.2</err_max>
+    </plugin>
+    <plugin filename="gz-sim-multicopter-motor-model-system"
+      name="gz::sim::systems::MulticopterMotorModel">
+      <jointName>rotor_3_joint</jointName>
+      <linkName>rotor_3</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1500</maxRotVelocity>
+      <motorConstant>2e-05</motorConstant>
+      <momentConstant>0.06</momentConstant>
+      <commandSubTopic>command/motor_speed</commandSubTopic>
+      <motorNumber>3</motorNumber>
+      <rotorDragCoefficient>0.0000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <rotorVelocitySlowdownSim>20</rotorVelocitySlowdownSim>
+      <motorType>velocity</motorType>
+    </plugin>
+    <plugin
+      filename="gz-sim-joint-position-controller-system"
+      name="gz::sim::systems::JointPositionController">
+      <joint_name>motor_3_joint</joint_name>
+      <sub_topic>servo_6</sub_topic>
+      <p_gain>100</p_gain>
+      <i_gain>0</i_gain>
+      <d_gain>0</d_gain>
+      <i_max>0.0</i_max>
+      <i_min>0.0</i_min>
+      <cmd_max>2</cmd_max>
+      <cmd_min>-2</cmd_min>
+      <err_max>0.2</err_max>
+    </plugin>
+    <static>0</static>
+
+  </model>
+</sdf>
