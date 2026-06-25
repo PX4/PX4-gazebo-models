@@ -82,7 +82,7 @@
     </inertia>
   {% endmacro %}
 
-  <model name'fy690s_tilt'>
+  <model name='fy690s_tilt'>
     <pose>0 0 0.4 0 0 0</pose>
     <self_collide>false</self_collide>
     <static>false</static>
@@ -222,7 +222,7 @@
     </link>
 
     <link name="motor_gimbal_link_{{ n }}">
-      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>
+      <pose relative_to="arm_{{ n }}_endpoint">-0.015 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>
       <inertial>
         <mass>0.005</mass> 
         <inertia>
@@ -237,7 +237,7 @@
     </link>
 
     <link name="motor_{{ n }}">
-        <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>      
+        <pose relative_to="arm_{{ n }}_endpoint">-0.015 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>      
         <inertial>
         <mass>{{ mass_motor + mass_motor_mount }}</mass>
         {{ cylinder_inertia(mass_motor + mass_motor_mount, motor_radius, motor_height) }}
@@ -247,13 +247,13 @@
           <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
         </visual>
         <visual name="motor_mount_{{ n }}_visual">
-          <pose relative_to="arm_{{ n }}_endpoint">0.02 0 0 0 0 0</pose>
+          <pose relative_to="arm_{{ n }}_endpoint">0.055 0 0 0 0 0</pose>
           <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
         </visual>
     </link>
 
     <link name="rotor_{{ n }}">
-      <pose relative_to="arm_{{ n }}_endpoint">-0.05 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>
+      <pose relative_to="arm_{{ n }}_endpoint">-0.015 0 0.03 {{ alpha_rad }} {{ beta_rad }} 0</pose>
       <inertial>
         <mass>{{ mass_rotor }}</mass>
         {{ box_inertia(mass_rotor, rotor_length, rotor_width, rotor_thickness) }}
@@ -378,24 +378,22 @@
     {% endfor %}
 
     {# --- PLUGINS --- #}
-    <!-- TODO: change to actually model the given motors -->
     {% for n in range(6) %}
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_{{ n }}_joint</jointName>
       <linkName>rotor_{{ n }}</linkName>
       <turningDirection>{{ 'ccw' if n in [0, 2, 4] else 'cw' }}</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>822.05</maxRotVelocity>
+      <motorConstant>2.61e-05</motorConstant>
+      <momentConstant>0.0185</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>{{ n }}</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-    </plugin>
+</plugin>
 
     <!-- Actuating tilt joint plugins -->
     <!-- FIXED for now

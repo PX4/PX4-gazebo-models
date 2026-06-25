@@ -55,7 +55,7 @@
   
   
 
-  <model name='fa_hex_tilt'>
+  <model name='fy690s_tilt'>
     <pose>0 0 0.4 0 0 0</pose>
     <self_collide>false</self_collide>
     <static>false</static>
@@ -243,7 +243,7 @@
     </link>
 
     <link name="motor_gimbal_link_0">
-      <pose relative_to="arm_0_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_0_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.005</mass> 
         <inertia>
@@ -258,7 +258,7 @@
     </link>
 
     <link name="motor_0">
-        <pose relative_to="arm_0_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>      
+        <pose relative_to="arm_0_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>      
         <inertial>
         <mass>0.11800000000000001</mass>
         
@@ -277,13 +277,13 @@
           <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
         </visual>
         <visual name="motor_mount_0_visual">
-          <pose relative_to="arm_0_endpoint">0.02 0 0 0 0 0</pose>
+          <pose relative_to="arm_0_endpoint">0.055 0 0 0 0 0</pose>
           <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
         </visual>
     </link>
 
     <link name="rotor_0">
-      <pose relative_to="arm_0_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_0_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.0142</mass>
         
@@ -406,7 +406,7 @@
     </link>
 
     <link name="motor_gimbal_link_1">
-      <pose relative_to="arm_1_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_1_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.005</mass> 
         <inertia>
@@ -421,7 +421,7 @@
     </link>
 
     <link name="motor_1">
-        <pose relative_to="arm_1_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>      
+        <pose relative_to="arm_1_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>      
         <inertial>
         <mass>0.11800000000000001</mass>
         
@@ -440,13 +440,13 @@
           <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
         </visual>
         <visual name="motor_mount_1_visual">
-          <pose relative_to="arm_1_endpoint">0.02 0 0 0 0 0</pose>
+          <pose relative_to="arm_1_endpoint">0.055 0 0 0 0 0</pose>
           <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
         </visual>
     </link>
 
     <link name="rotor_1">
-      <pose relative_to="arm_1_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_1_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.0142</mass>
         
@@ -569,7 +569,7 @@
     </link>
 
     <link name="motor_gimbal_link_2">
-      <pose relative_to="arm_2_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_2_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.005</mass> 
         <inertia>
@@ -584,7 +584,7 @@
     </link>
 
     <link name="motor_2">
-        <pose relative_to="arm_2_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>      
+        <pose relative_to="arm_2_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>      
         <inertial>
         <mass>0.11800000000000001</mass>
         
@@ -603,13 +603,13 @@
           <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
         </visual>
         <visual name="motor_mount_2_visual">
-          <pose relative_to="arm_2_endpoint">0.02 0 0 0 0 0</pose>
+          <pose relative_to="arm_2_endpoint">0.055 0 0 0 0 0</pose>
           <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
         </visual>
     </link>
 
     <link name="rotor_2">
-      <pose relative_to="arm_2_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_2_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.0142</mass>
         
@@ -732,7 +732,7 @@
     </link>
 
     <link name="motor_gimbal_link_3">
-      <pose relative_to="arm_3_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_3_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.005</mass> 
         <inertia>
@@ -747,7 +747,7 @@
     </link>
 
     <link name="motor_3">
-        <pose relative_to="arm_3_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>      
+        <pose relative_to="arm_3_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>      
         <inertial>
         <mass>0.11800000000000001</mass>
         
@@ -766,13 +766,13 @@
           <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
         </visual>
         <visual name="motor_mount_3_visual">
-          <pose relative_to="arm_3_endpoint">0.02 0 0 0 0 0</pose>
+          <pose relative_to="arm_3_endpoint">0.055 0 0 0 0 0</pose>
           <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
         </visual>
     </link>
 
     <link name="rotor_3">
-      <pose relative_to="arm_3_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_3_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.0142</mass>
         
@@ -895,7 +895,7 @@
     </link>
 
     <link name="motor_gimbal_link_4">
-      <pose relative_to="arm_4_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_4_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.005</mass> 
         <inertia>
@@ -910,7 +910,7 @@
     </link>
 
     <link name="motor_4">
-        <pose relative_to="arm_4_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>      
+        <pose relative_to="arm_4_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>      
         <inertial>
         <mass>0.11800000000000001</mass>
         
@@ -929,13 +929,13 @@
           <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
         </visual>
         <visual name="motor_mount_4_visual">
-          <pose relative_to="arm_4_endpoint">0.02 0 0 0 0 0</pose>
+          <pose relative_to="arm_4_endpoint">0.055 0 0 0 0 0</pose>
           <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
         </visual>
     </link>
 
     <link name="rotor_4">
-      <pose relative_to="arm_4_endpoint">-0.05 0 0.03 0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_4_endpoint">-0.015 0 0.03 0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.0142</mass>
         
@@ -1058,7 +1058,7 @@
     </link>
 
     <link name="motor_gimbal_link_5">
-      <pose relative_to="arm_5_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_5_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.005</mass> 
         <inertia>
@@ -1073,7 +1073,7 @@
     </link>
 
     <link name="motor_5">
-        <pose relative_to="arm_5_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>      
+        <pose relative_to="arm_5_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>      
         <inertial>
         <mass>0.11800000000000001</mass>
         
@@ -1092,13 +1092,13 @@
           <geometry><mesh><uri>model://fy690s/meshes/motor.dae</uri></mesh></geometry>
         </visual>
         <visual name="motor_mount_5_visual">
-          <pose relative_to="arm_5_endpoint">0.02 0 0 0 0 0</pose>
+          <pose relative_to="arm_5_endpoint">0.055 0 0 0 0 0</pose>
           <geometry><mesh><uri>model://fy690s/meshes/motor_mount_red.dae</uri></mesh></geometry>
         </visual>
     </link>
 
     <link name="rotor_5">
-      <pose relative_to="arm_5_endpoint">-0.05 0 0.03 -0.43633231299861114 0.0 0</pose>
+      <pose relative_to="arm_5_endpoint">-0.015 0 0.03 -0.43633231299861114 0.0 0</pose>
       <inertial>
         <mass>0.0142</mass>
         
@@ -1267,24 +1267,22 @@
     
 
     
-    <!-- TODO: change to actually model the given motors -->
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_0_joint</jointName>
       <linkName>rotor_0</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>822.05</maxRotVelocity>
+      <motorConstant>2.61e-05</motorConstant>
+      <momentConstant>0.0185</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>0</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-    </plugin>
+</plugin>
 
     <!-- Actuating tilt joint plugins -->
     <!-- FIXED for now
@@ -1313,22 +1311,21 @@
     </plugin>
     -->
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_1_joint</jointName>
       <linkName>rotor_1</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>822.05</maxRotVelocity>
+      <motorConstant>2.61e-05</motorConstant>
+      <momentConstant>0.0185</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>1</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-    </plugin>
+</plugin>
 
     <!-- Actuating tilt joint plugins -->
     <!-- FIXED for now
@@ -1357,22 +1354,21 @@
     </plugin>
     -->
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_2_joint</jointName>
       <linkName>rotor_2</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>822.05</maxRotVelocity>
+      <motorConstant>2.61e-05</motorConstant>
+      <momentConstant>0.0185</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>2</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-    </plugin>
+</plugin>
 
     <!-- Actuating tilt joint plugins -->
     <!-- FIXED for now
@@ -1401,22 +1397,21 @@
     </plugin>
     -->
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_3_joint</jointName>
       <linkName>rotor_3</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>822.05</maxRotVelocity>
+      <motorConstant>2.61e-05</motorConstant>
+      <momentConstant>0.0185</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>3</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-    </plugin>
+</plugin>
 
     <!-- Actuating tilt joint plugins -->
     <!-- FIXED for now
@@ -1445,22 +1440,21 @@
     </plugin>
     -->
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_4_joint</jointName>
       <linkName>rotor_4</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>822.05</maxRotVelocity>
+      <motorConstant>2.61e-05</motorConstant>
+      <momentConstant>0.0185</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>4</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-    </plugin>
+</plugin>
 
     <!-- Actuating tilt joint plugins -->
     <!-- FIXED for now
@@ -1489,22 +1483,21 @@
     </plugin>
     -->
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_5_joint</jointName>
       <linkName>rotor_5</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>822.05</maxRotVelocity>
+      <motorConstant>2.61e-05</motorConstant>
+      <momentConstant>0.0185</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>5</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-    </plugin>
+</plugin>
 
     <!-- Actuating tilt joint plugins -->
     <!-- FIXED for now
