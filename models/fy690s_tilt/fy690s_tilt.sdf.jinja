@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
   {# --- CONFIGURATION & MASS MACROS --- #}
-  {% set mass_sensors = 0.447 + 0.0158 + 0.470 %} <!--LiDAR: 447g, PixHawk: 15.8g, Garmin: 22g-->
+  {# --- NON-FRAME MASSES --- #}
+  {% set mass_sensors = 0.447 + 0.0158 + 0.470 + 0.86 %} <!--LiDAR: 447g, PixHawk: 15.8g, Garmin: 22g, extras 860g -->
   {% set mass_motor = 0.097 %} 
   {% set mass_rotor = 0.0142 %}
 
@@ -12,6 +13,8 @@
   {% set mass_motor_mount = 0.021 %}
   {% set mass_lg = 0.05 %}                            <!-- there are 2 landing gears -->
   <!--TOTAL: 0.290 + 6 * (0.014 + 0.021) + 2 * (0.05) [kg] = 0.600 [kg] -->
+
+  <!-- TOTAL MASS: 3.70 kg -->
 
   {% set radius = 0.345 %}
   
@@ -31,7 +34,6 @@
   {% set mass_stick = 0.050 %}
   {% set stick_length = 0.693 %}
   {% set stick_radius = 0.008 %}
-
 
   {% set pi = 3.14159265359 %}
 
@@ -288,45 +290,6 @@
       <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
     </joint>
 
-    <!-- Fixed for static rotations
-
-     <joint name="tilt_outward_axis_{{ n }}_joint" type="revolute">
-      <parent>motor_gimbal_link_{{ n }}</parent>
-      <child>motor_{{ n }}</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>{{ -pi / 4 }}</lower> 
-          <upper>{{ pi / 4 }}</upper>
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-
-    <joint name="tilt_arm_axis_{{ n }}_joint" type="revolute">
-      <parent>arm_{{ n }}_link</parent> 
-      <child>motor_gimbal_link_{{ n }}</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>{{ -pi / 4 }}</lower> 
-          <upper>{{ pi / 4 }}</upper>  
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-    -->
-
     <joint name="tilt_arm_axis_{{ n }}_joint" type="fixed">
       <parent>arm_{{ n }}_link</parent> 
       <child>motor_gimbal_link_{{ n }}</child>
@@ -394,33 +357,6 @@
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
 </plugin>
-
-    <!-- Actuating tilt joint plugins -->
-    <!-- FIXED for now
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_arm_axis_{{ n }}_joint</joint_name>
-      <topic>command/tilt_arm_axis_{{ n }}</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
-
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_outward_axis_{{ n }}_joint</joint_name>
-      <topic>command/tilt_outward_axis_{{ n }}</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
-    -->
     {% endfor %}
     <!-- Pose publisher plugin (Not necessary, may remove in the future) -->
     <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
