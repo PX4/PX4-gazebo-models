@@ -8,8 +8,7 @@
 
   {# --- FRAME MASSES --- #}
   {% set mass_battery = 0.6114 %}
-  {% set mass_base = 0.290 %}         <!-- includes mass of clamps & folding hardware  & plates + battery holder -->
-  {% set mass_arm = 0.014 %}
+  {% set mass_base = 0.290 %}           {% set mass_arm = 0.014 %}
   {% set mass_motor_mount = 0.021 %}
   {% set mass_lg = 0.05 %}                            <!-- there are 2 landing gears -->
   <!--TOTAL: 0.290 + 6 * (0.014 + 0.021) + 2 * (0.05) [kg] = 0.600 [kg] -->
@@ -27,9 +26,7 @@
   {% set motor_radius = 0.0209 %}
   {% set motor_height =  0.0371 %}
 
-  {% set rotor_length = 0.3302 %}     <!-- 13 in * 2.54 cm / in =  33.02 cm -->
-  {% set rotor_width = 0.035 %}       <!-- ~3.5cm -->
-  {% set rotor_thickness = 0.001 %}
+  {% set rotor_length = 0.3302 %}       {% set rotor_width = 0.035 %}         {% set rotor_thickness = 0.001 %}
 
   {% set mass_stick = 0.050 %}
   {% set stick_length = 0.693 %}
@@ -104,7 +101,7 @@
         {{ cylinder_inertia(mass_base + mass_battery + mass_sensors, base_r, base_h) }}
       </inertial>
       <visual name="base_link_visual">
-        <pose>0 0 .025 0 0 0</pose>
+        <pose>0 0 .025 0 0 {{ pi / 2 }}</pose>
         <geometry><mesh><uri>model://fy690s/meshes/body.dae</uri></mesh></geometry>
       </visual>
 
@@ -205,8 +202,7 @@
     {# --- ROTOR LINKS & JOINTS --- #}
     {% for n in range(6) %}
 
-    <!-- fixed for now -->
-    {% set angle_rad = (30 + (n * 60)) * pi / 180 %}  
+        {% set angle_rad = (30 + (n * 60)) * pi / 180 %}  
     {% set alpha_rad = alphas[n] * pi / 180.0 %}
     {% set beta_rad = betas[n] * pi / 180.0 %}
     
@@ -339,6 +335,61 @@
       <child>landing_gear_{{ i }}</child>
     </joint>
     {% endfor %}
+
+    {# --- ROKUBI FORCE TORQUE SENSOR --- #}
+    <link name="rukobi_holder_link">
+      <pose>0.92 0 0.0265 0 0 {{ -pi/2 }}</pose>
+      <inertial>
+        <mass>0.05</mass>
+        {{ cylinder_inertia(0.05, 0.02, 0.02) }}
+      </inertial>
+      <visual name="rukobi_holder_visual">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi_holder.dae</uri></mesh></geometry>
+        <material>
+          <ambient>0.25 0.25 0.25 1.0</ambient>
+          <diffuse>0.25 0.25 0.25 1.0</diffuse>
+        </material>
+      </visual>
+      <collision name="rukobi_holder_collision">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi_holder.dae</uri></mesh></geometry>
+      </collision>
+    </link>
+
+    <joint name="base_to_rukobi_holder_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>rukobi_holder_link</child>
+    </joint>
+
+    <link name="rukobi_sensor_link">
+      <pose>0.92 0 0.0265 0 0 {{ -pi/2 }}</pose>
+      <inertial>
+        <mass>0.15</mass>
+        {{ cylinder_inertia(0.15, 0.03, 0.04) }}
+      </inertial>
+      <visual name="rukobi_visual">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi.dae</uri></mesh></geometry>
+        <material>
+          <ambient>0.85 0.35 0.35 1.0</ambient>
+          <diffuse>0.85 0.35 0.35 1.0</diffuse>
+        </material>
+      </visual>
+      <collision name="rukobi_sensor_collision">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi.dae</uri></mesh></geometry>
+      </collision>
+    </link>
+
+    <joint name="rukobi_joint" type="fixed">
+      <parent>rukobi_holder_link</parent>
+      <child>rukobi_sensor_link</child>
+      <sensor name="rukobi_ft_sensor" type="force_torque">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <force_torque>
+          <frame>child</frame>
+          <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+      </sensor>
+    </joint>
 
     {# --- PLUGINS --- #}
     {% for n in range(6) %}

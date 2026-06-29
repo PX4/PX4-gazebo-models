@@ -17,6 +17,7 @@
   <!-- TOTAL MASS: 3.70 kg -->
 
   
+                                  
   
   
   
@@ -27,9 +28,7 @@
   
   
 
-       <!-- 13 in * 2.54 cm / in =  33.02 cm -->
-         <!-- ~3.5cm -->
-  
+                  
 
   
   
@@ -116,7 +115,7 @@
   
       </inertial>
       <visual name="base_link_visual">
-        <pose>0 0 .025 0 0 0</pose>
+        <pose>0 0 .025 0 0 1.570796326795</pose>
         <geometry><mesh><uri>model://fy690s/meshes/body.dae</uri></mesh></geometry>
       </visual>
 
@@ -217,8 +216,7 @@
     
     
 
-    <!-- fixed for now -->
-      
+          
     
     
     
@@ -341,8 +339,7 @@
 
     
 
-    <!-- fixed for now -->
-      
+          
     
     
     
@@ -465,8 +462,7 @@
 
     
 
-    <!-- fixed for now -->
-      
+          
     
     
     
@@ -589,8 +585,7 @@
 
     
 
-    <!-- fixed for now -->
-      
+          
     
     
     
@@ -713,8 +708,7 @@
 
     
 
-    <!-- fixed for now -->
-      
+          
     
     
     
@@ -837,8 +831,7 @@
 
     
 
-    <!-- fixed for now -->
-      
+          
     
     
     
@@ -1033,6 +1026,79 @@
       <child>landing_gear_2</child>
     </joint>
     
+
+    
+    <link name="rukobi_holder_link">
+      <pose>0.92 0 0.0265 0 0 -1.570796326795</pose>
+      <inertial>
+        <mass>0.05</mass>
+        
+    <inertia>
+      <ixx>6.666666666666667e-06</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>6.666666666666667e-06</iyy>
+      <iyz>0</iyz>
+      <izz>1e-05</izz>
+    </inertia>
+  
+      </inertial>
+      <visual name="rukobi_holder_visual">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi_holder.dae</uri></mesh></geometry>
+        <material>
+          <ambient>0.25 0.25 0.25 1.0</ambient>
+          <diffuse>0.25 0.25 0.25 1.0</diffuse>
+        </material>
+      </visual>
+      <collision name="rukobi_holder_collision">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi_holder.dae</uri></mesh></geometry>
+      </collision>
+    </link>
+
+    <joint name="base_to_rukobi_holder_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>rukobi_holder_link</child>
+    </joint>
+
+    <link name="rukobi_sensor_link">
+      <pose>0.92 0 0.0265 0 0 -1.570796326795</pose>
+      <inertial>
+        <mass>0.15</mass>
+        
+    <inertia>
+      <ixx>5.375e-05</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>5.375e-05</iyy>
+      <iyz>0</iyz>
+      <izz>6.75e-05</izz>
+    </inertia>
+  
+      </inertial>
+      <visual name="rukobi_visual">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi.dae</uri></mesh></geometry>
+        <material>
+          <ambient>0.85 0.35 0.35 1.0</ambient>
+          <diffuse>0.85 0.35 0.35 1.0</diffuse>
+        </material>
+      </visual>
+      <collision name="rukobi_sensor_collision">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi.dae</uri></mesh></geometry>
+      </collision>
+    </link>
+
+    <joint name="rukobi_joint" type="fixed">
+      <parent>rukobi_holder_link</parent>
+      <child>rukobi_sensor_link</child>
+      <sensor name="rukobi_ft_sensor" type="force_torque">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <force_torque>
+          <frame>child</frame>
+          <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+      </sensor>
+    </joint>
 
     
     
