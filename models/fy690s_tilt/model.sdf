@@ -1050,7 +1050,7 @@
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-</plugin>
+    </plugin>
     
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_1_joint</jointName>
@@ -1066,7 +1066,7 @@
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-</plugin>
+    </plugin>
     
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_2_joint</jointName>
@@ -1082,7 +1082,7 @@
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-</plugin>
+    </plugin>
     
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_3_joint</jointName>
@@ -1098,7 +1098,7 @@
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-</plugin>
+    </plugin>
     
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_4_joint</jointName>
@@ -1114,7 +1114,7 @@
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-</plugin>
+    </plugin>
     
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_5_joint</jointName>
@@ -1130,7 +1130,7 @@
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-</plugin>
+    </plugin>
     
     <!-- Pose publisher plugin (Not necessary, may remove in the future) -->
     <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
