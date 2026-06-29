@@ -1,40 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version='1.9'>
   
-   <!--LiDAR: 447g, PixHawk: 15.8g, Garmin: 22g-->
+  
+  
+  
+
+                       
+  
+                           
+  
+                            
    
   
-
   
-  
-           <!-- includes mass of clamps & folding hardware  & plates + battery holder -->
-  
-  
-                              <!-- there are 2 landing gears -->
-  <!--TOTAL: 0.290 + 6 * (0.014 + 0.021) + 2 * (0.05) [kg] = 0.600 [kg] -->
-
+                              
   
   
   
-  
-  
-  
-   
-
-  
-  
-
-       <!-- 13 in * 2.54 cm / in =  33.02 cm -->
-         <!-- ~3.5cm -->
-  
-
-  
-  
-  
-
-
-  
-
   
   
   
@@ -42,9 +24,30 @@
 
   
   
+
+                       
   
   
 
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+
+  
+  
   
   
 
@@ -62,96 +65,89 @@
     <frame name="arm_0_endpoint" attached_to="base_link">
         <pose>0.298778625 0.1725 0.014 0 0 -2.6179938779916667</pose>
     </frame>
-
     
     
     <frame name="arm_1_endpoint" attached_to="base_link">
         <pose>0.0 0.345 0.014 0 0 -1.5707963267949998</pose>
     </frame>
-
     
     
     <frame name="arm_2_endpoint" attached_to="base_link">
         <pose>-0.298778625 0.1725 0.014 0 0 -0.5235987755983333</pose>
     </frame>
-
     
     
     <frame name="arm_3_endpoint" attached_to="base_link">
         <pose>-0.298778625 -0.1725 0.014 0 0 0.5235987755983333</pose>
     </frame>
-
     
     
     <frame name="arm_4_endpoint" attached_to="base_link">
         <pose>0.0 -0.345 0.014 0 0 1.5707963267950005</pose>
     </frame>
-
     
     
     <frame name="arm_5_endpoint" attached_to="base_link">
         <pose>0.298778625 -0.1725 0.014 0 0 2.617993877991667</pose>
     </frame>
-
     
 
     <link name="base_link">
       <inertial>
-        <mass>1.8342</mass>
+        <pose>0 0 -0.02 0 0 0</pose> 
+        <mass>2.4342</mass>
         
     <inertia>
-      <ixx>0.0061140000000000005</ixx>
+      <ixx>0.008114000000000001</ixx>
       <ixy>0</ixy>
       <ixz>0</ixz>
-      <iyy>0.0061140000000000005</iyy>
+      <iyy>0.008114000000000001</iyy>
       <iyz>0</iyz>
-      <izz>0.009171000000000002</izz>
+      <izz>0.012171000000000003</izz>
     </inertia>
   
       </inertial>
+      
       <visual name="base_link_visual">
-        <pose>0 0 .025 0 0 0</pose>
+        <pose>0 0 0.025 0 0 1.570796326795</pose>
         <geometry><mesh><uri>model://fy690s/meshes/body.dae</uri></mesh></geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1.0</ambient>
+          <diffuse>0.5 0.5 0.5 1.0</diffuse>
+        </material>
+      </visual>
+
+      <visual name="body_top_visual">
+        <pose>0 0 0.025 0 0 0</pose> 
+        <geometry>
+          <mesh><uri>model://fy690s/meshes/body_top.dae</uri></mesh>
+        </geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1.0</ambient>
+          <diffuse>0.5 0.5 0.5 1.0</diffuse>
+        </material>
       </visual>
 
       <collision name="base_link_collision">
-        <geometry><cylinder><radius>0.1</radius><length>0.1</length></cylinder></geometry>
+        <pose>0 0 0.1 0 0 0</pose> 
+        <geometry><cylinder><radius>0.1</radius><length>0.2</length></cylinder></geometry>
       </collision>
 
       
       <sensor name="air_pressure_sensor" type="air_pressure">
-      <gz_frame_id>base_link</gz_frame_id>
-      <always_on>1</always_on>
-      <update_rate>50</update_rate>
-      <air_pressure>
-        <pressure>
-          <noise type="gaussian">
-            <mean>0</mean>
-            <stddev>3</stddev>
-          </noise>
-        </pressure>
-      </air_pressure>
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure><pressure><noise type="gaussian"><mean>0</mean><stddev>3</stddev></noise></pressure></air_pressure>
       </sensor>
       <sensor name="magnetometer_sensor" type="magnetometer">
         <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>100</update_rate>
         <magnetometer>
-          <x>
-            <noise type="gaussian">
-              <stddev>0.0001</stddev>
-            </noise>
-          </x>
-          <y>
-            <noise type="gaussian">
-              <stddev>0.0001</stddev>
-            </noise>
-          </y>
-          <z>
-            <noise type="gaussian">
-              <stddev>0.0001</stddev>
-            </noise>
-          </z>
+          <x><noise type="gaussian"><stddev>0.0001</stddev></noise></x>
+          <y><noise type="gaussian"><stddev>0.0001</stddev></noise></y>
+          <z><noise type="gaussian"><stddev>0.0001</stddev></noise></z>
         </magnetometer>
       </sensor>
       <sensor name="imu_sensor" type="imu">
@@ -160,44 +156,14 @@
         <update_rate>250</update_rate>
         <imu>
           <angular_velocity>
-            <x>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.0008726646</stddev>
-              </noise>
-            </x>
-            <y>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.0008726646</stddev>
-              </noise>
-            </y>
-            <z>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.0008726646</stddev>
-              </noise>
-            </z>
+            <x><noise type="gaussian"><mean>0.0</mean><stddev>0.0008726646</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0.0</mean><stddev>0.0008726646</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0.0</mean><stddev>0.0008726646</stddev></noise></z>
           </angular_velocity>
           <linear_acceleration>
-            <x>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.00637</stddev>
-              </noise>
-            </x>
-            <y>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.00637</stddev>
-              </noise>
-            </y>
-            <z>
-              <noise type="gaussian">
-                <mean>0.0</mean>
-                <stddev>0.00686</stddev>
-              </noise>
-            </z>
+            <x><noise type="gaussian"><mean>0.0</mean><stddev>0.00637</stddev></noise></x>
+            <y><noise type="gaussian"><mean>0.0</mean><stddev>0.00637</stddev></noise></y>
+            <z><noise type="gaussian"><mean>0.0</mean><stddev>0.00686</stddev></noise></z>
           </linear_acceleration>
         </imu>
       </sensor>
@@ -210,33 +176,27 @@
 
     
     
-
     
 
-    <joint name="arm_0_joint" type="revolute">
-    <parent>base_link</parent> 
-    <child>arm_0_link</child>
-    <axis>
-        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
-        <lower>-1.570796326795</lower>
-        <upper>0</upper>
-        </limit>
-    </axis>
+    <joint name="arm_0_joint" type="fixed">
+      <pose>0 0 0.275 0 0 0</pose>
+      <parent>base_link</parent> 
+      <child>arm_0_link</child>
     </joint>
 
     <link name="arm_0_link">
       <pose>0.298778625 0.1725 0.014 -1.570796326795 0 2.0943951023933334</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose>
-        <mass>0.014</mass>
+        <pose>0 0 0.1375 0 0 0</pose> 
+        <mass>0.064</mass> 
         
     <inertia>
-      <ixx>8.845316666666666e-05</ixx>
+      <ixx>0.00040435733333333337</ixx>
       <ixy>0</ixy>
       <ixz>0</ixz>
-      <iyy>8.845316666666666e-05</iyy>
+      <iyy>0.00040435733333333337</iyy>
       <iyz>0</iyz>
-      <izz>4.48e-07</izz>
+      <izz>2.048e-06</izz>
     </inertia>
   
       </inertial>
@@ -246,55 +206,10 @@
       </visual>
     </link>
 
-   <joint name="tilt_arm_axis_0_joint" type="revolute">
+    <joint name="motor_0_joint" type="fixed">
+      <pose>0 0 -0.03 0 0 0</pose>
       <parent>arm_0_link</parent> 
-      <child>motor_gimbal_link_0</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>  
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-
-    <link name="motor_gimbal_link_0">
-      <pose relative_to="arm_0_endpoint">-0.05 0 0.03 0 0 0</pose>
-      <inertial>
-        <mass>0.005</mass> 
-        <inertia>
-          <ixx>1e-5</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-5</iyy>
-          <iyz>0</iyz>
-          <izz>1e-5</izz>
-        </inertia>
-      </inertial>
-    </link>
-
-    <joint name="tilt_outward_axis_0_joint" type="revolute">
-      <parent>motor_gimbal_link_0</parent>
       <child>motor_0</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
     </joint>
 
     <link name="motor_0">
@@ -339,7 +254,10 @@
       </inertial>
       <visual name="rotor_0_visual">
         <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
-        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        <material>
+          <ambient>0.05 0.05 0.05 1.0</ambient>
+          <diffuse>0.05 0.05 0.05 1.0</diffuse>
+        </material>
       </visual>
       <collision name="rotor_0_collision">
         <geometry><box><size>0.3302 0.035 0.001</size></box></geometry>
@@ -351,35 +269,28 @@
       <child>rotor_0</child>
       <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
     </joint>
-
+    
     
 
-    
-
-    <joint name="arm_1_joint" type="revolute">
-    <parent>base_link</parent> 
-    <child>arm_1_link</child>
-    <axis>
-        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
-        <lower>-1.570796326795</lower>
-        <upper>0</upper>
-        </limit>
-    </axis>
+    <joint name="arm_1_joint" type="fixed">
+      <pose>0 0 0.275 0 0 0</pose>
+      <parent>base_link</parent> 
+      <child>arm_1_link</child>
     </joint>
 
     <link name="arm_1_link">
       <pose>0.0 0.345 0.014 -1.570796326795 0 3.14159265359</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose>
-        <mass>0.014</mass>
+        <pose>0 0 0.1375 0 0 0</pose> 
+        <mass>0.064</mass> 
         
     <inertia>
-      <ixx>8.845316666666666e-05</ixx>
+      <ixx>0.00040435733333333337</ixx>
       <ixy>0</ixy>
       <ixz>0</ixz>
-      <iyy>8.845316666666666e-05</iyy>
+      <iyy>0.00040435733333333337</iyy>
       <iyz>0</iyz>
-      <izz>4.48e-07</izz>
+      <izz>2.048e-06</izz>
     </inertia>
   
       </inertial>
@@ -389,55 +300,10 @@
       </visual>
     </link>
 
-   <joint name="tilt_arm_axis_1_joint" type="revolute">
+    <joint name="motor_1_joint" type="fixed">
+      <pose>0 0 -0.03 0 0 0</pose>
       <parent>arm_1_link</parent> 
-      <child>motor_gimbal_link_1</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>  
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-
-    <link name="motor_gimbal_link_1">
-      <pose relative_to="arm_1_endpoint">-0.05 0 0.03 0 0 0</pose>
-      <inertial>
-        <mass>0.005</mass> 
-        <inertia>
-          <ixx>1e-5</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-5</iyy>
-          <iyz>0</iyz>
-          <izz>1e-5</izz>
-        </inertia>
-      </inertial>
-    </link>
-
-    <joint name="tilt_outward_axis_1_joint" type="revolute">
-      <parent>motor_gimbal_link_1</parent>
       <child>motor_1</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
     </joint>
 
     <link name="motor_1">
@@ -482,7 +348,10 @@
       </inertial>
       <visual name="rotor_1_visual">
         <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
-        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        <material>
+          <ambient>0.05 0.05 0.05 1.0</ambient>
+          <diffuse>0.05 0.05 0.05 1.0</diffuse>
+        </material>
       </visual>
       <collision name="rotor_1_collision">
         <geometry><box><size>0.3302 0.035 0.001</size></box></geometry>
@@ -494,35 +363,28 @@
       <child>rotor_1</child>
       <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
     </joint>
-
+    
     
 
-    
-
-    <joint name="arm_2_joint" type="revolute">
-    <parent>base_link</parent> 
-    <child>arm_2_link</child>
-    <axis>
-        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
-        <lower>-1.570796326795</lower>
-        <upper>0</upper>
-        </limit>
-    </axis>
+    <joint name="arm_2_joint" type="fixed">
+      <pose>0 0 0.275 0 0 0</pose>
+      <parent>base_link</parent> 
+      <child>arm_2_link</child>
     </joint>
 
     <link name="arm_2_link">
       <pose>-0.298778625 0.1725 0.014 -1.570796326795 0 4.188790204786667</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose>
-        <mass>0.014</mass>
+        <pose>0 0 0.1375 0 0 0</pose> 
+        <mass>0.064</mass> 
         
     <inertia>
-      <ixx>8.845316666666666e-05</ixx>
+      <ixx>0.00040435733333333337</ixx>
       <ixy>0</ixy>
       <ixz>0</ixz>
-      <iyy>8.845316666666666e-05</iyy>
+      <iyy>0.00040435733333333337</iyy>
       <iyz>0</iyz>
-      <izz>4.48e-07</izz>
+      <izz>2.048e-06</izz>
     </inertia>
   
       </inertial>
@@ -532,55 +394,10 @@
       </visual>
     </link>
 
-   <joint name="tilt_arm_axis_2_joint" type="revolute">
+    <joint name="motor_2_joint" type="fixed">
+      <pose>0 0 -0.03 0 0 0</pose>
       <parent>arm_2_link</parent> 
-      <child>motor_gimbal_link_2</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>  
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-
-    <link name="motor_gimbal_link_2">
-      <pose relative_to="arm_2_endpoint">-0.05 0 0.03 0 0 0</pose>
-      <inertial>
-        <mass>0.005</mass> 
-        <inertia>
-          <ixx>1e-5</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-5</iyy>
-          <iyz>0</iyz>
-          <izz>1e-5</izz>
-        </inertia>
-      </inertial>
-    </link>
-
-    <joint name="tilt_outward_axis_2_joint" type="revolute">
-      <parent>motor_gimbal_link_2</parent>
       <child>motor_2</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
     </joint>
 
     <link name="motor_2">
@@ -625,7 +442,10 @@
       </inertial>
       <visual name="rotor_2_visual">
         <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
-        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        <material>
+          <ambient>0.05 0.05 0.05 1.0</ambient>
+          <diffuse>0.05 0.05 0.05 1.0</diffuse>
+        </material>
       </visual>
       <collision name="rotor_2_collision">
         <geometry><box><size>0.3302 0.035 0.001</size></box></geometry>
@@ -637,35 +457,28 @@
       <child>rotor_2</child>
       <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
     </joint>
-
+    
     
 
-    
-
-    <joint name="arm_3_joint" type="revolute">
-    <parent>base_link</parent> 
-    <child>arm_3_link</child>
-    <axis>
-        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
-        <lower>-1.570796326795</lower>
-        <upper>0</upper>
-        </limit>
-    </axis>
+    <joint name="arm_3_joint" type="fixed">
+      <pose>0 0 0.275 0 0 0</pose>
+      <parent>base_link</parent> 
+      <child>arm_3_link</child>
     </joint>
 
     <link name="arm_3_link">
       <pose>-0.298778625 -0.1725 0.014 -1.570796326795 0 5.235987755983333</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose>
-        <mass>0.014</mass>
+        <pose>0 0 0.1375 0 0 0</pose> 
+        <mass>0.064</mass> 
         
     <inertia>
-      <ixx>8.845316666666666e-05</ixx>
+      <ixx>0.00040435733333333337</ixx>
       <ixy>0</ixy>
       <ixz>0</ixz>
-      <iyy>8.845316666666666e-05</iyy>
+      <iyy>0.00040435733333333337</iyy>
       <iyz>0</iyz>
-      <izz>4.48e-07</izz>
+      <izz>2.048e-06</izz>
     </inertia>
   
       </inertial>
@@ -675,55 +488,10 @@
       </visual>
     </link>
 
-   <joint name="tilt_arm_axis_3_joint" type="revolute">
+    <joint name="motor_3_joint" type="fixed">
+      <pose>0 0 -0.03 0 0 0</pose>
       <parent>arm_3_link</parent> 
-      <child>motor_gimbal_link_3</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>  
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-
-    <link name="motor_gimbal_link_3">
-      <pose relative_to="arm_3_endpoint">-0.05 0 0.03 0 0 0</pose>
-      <inertial>
-        <mass>0.005</mass> 
-        <inertia>
-          <ixx>1e-5</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-5</iyy>
-          <iyz>0</iyz>
-          <izz>1e-5</izz>
-        </inertia>
-      </inertial>
-    </link>
-
-    <joint name="tilt_outward_axis_3_joint" type="revolute">
-      <parent>motor_gimbal_link_3</parent>
       <child>motor_3</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
     </joint>
 
     <link name="motor_3">
@@ -768,7 +536,10 @@
       </inertial>
       <visual name="rotor_3_visual">
         <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
-        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        <material>
+          <ambient>0.05 0.05 0.05 1.0</ambient>
+          <diffuse>0.05 0.05 0.05 1.0</diffuse>
+        </material>
       </visual>
       <collision name="rotor_3_collision">
         <geometry><box><size>0.3302 0.035 0.001</size></box></geometry>
@@ -780,35 +551,28 @@
       <child>rotor_3</child>
       <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
     </joint>
-
+    
     
 
-    
-
-    <joint name="arm_4_joint" type="revolute">
-    <parent>base_link</parent> 
-    <child>arm_4_link</child>
-    <axis>
-        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
-        <lower>-1.570796326795</lower>
-        <upper>0</upper>
-        </limit>
-    </axis>
+    <joint name="arm_4_joint" type="fixed">
+      <pose>0 0 0.275 0 0 0</pose>
+      <parent>base_link</parent> 
+      <child>arm_4_link</child>
     </joint>
 
     <link name="arm_4_link">
       <pose>0.0 -0.345 0.014 -1.570796326795 0 6.28318530718</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose>
-        <mass>0.014</mass>
+        <pose>0 0 0.1375 0 0 0</pose> 
+        <mass>0.064</mass> 
         
     <inertia>
-      <ixx>8.845316666666666e-05</ixx>
+      <ixx>0.00040435733333333337</ixx>
       <ixy>0</ixy>
       <ixz>0</ixz>
-      <iyy>8.845316666666666e-05</iyy>
+      <iyy>0.00040435733333333337</iyy>
       <iyz>0</iyz>
-      <izz>4.48e-07</izz>
+      <izz>2.048e-06</izz>
     </inertia>
   
       </inertial>
@@ -818,55 +582,10 @@
       </visual>
     </link>
 
-   <joint name="tilt_arm_axis_4_joint" type="revolute">
+    <joint name="motor_4_joint" type="fixed">
+      <pose>0 0 -0.03 0 0 0</pose>
       <parent>arm_4_link</parent> 
-      <child>motor_gimbal_link_4</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>  
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-
-    <link name="motor_gimbal_link_4">
-      <pose relative_to="arm_4_endpoint">-0.05 0 0.03 0 0 0</pose>
-      <inertial>
-        <mass>0.005</mass> 
-        <inertia>
-          <ixx>1e-5</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-5</iyy>
-          <iyz>0</iyz>
-          <izz>1e-5</izz>
-        </inertia>
-      </inertial>
-    </link>
-
-    <joint name="tilt_outward_axis_4_joint" type="revolute">
-      <parent>motor_gimbal_link_4</parent>
       <child>motor_4</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
     </joint>
 
     <link name="motor_4">
@@ -911,7 +630,10 @@
       </inertial>
       <visual name="rotor_4_visual">
         <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
-        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        <material>
+          <ambient>0.05 0.05 0.05 1.0</ambient>
+          <diffuse>0.05 0.05 0.05 1.0</diffuse>
+        </material>
       </visual>
       <collision name="rotor_4_collision">
         <geometry><box><size>0.3302 0.035 0.001</size></box></geometry>
@@ -923,35 +645,28 @@
       <child>rotor_4</child>
       <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
     </joint>
-
+    
     
 
-    
-
-    <joint name="arm_5_joint" type="revolute">
-    <parent>base_link</parent> 
-    <child>arm_5_link</child>
-    <axis>
-        <xyz expressed_in="base_link">0 0 1</xyz> <limit>
-        <lower>-1.570796326795</lower>
-        <upper>0</upper>
-        </limit>
-    </axis>
+    <joint name="arm_5_joint" type="fixed">
+      <pose>0 0 0.275 0 0 0</pose>
+      <parent>base_link</parent> 
+      <child>arm_5_link</child>
     </joint>
 
     <link name="arm_5_link">
       <pose>0.298778625 -0.1725 0.014 -1.570796326795 0 7.330382858376668</pose>
       <inertial>
-        <pose>0 0 0.1375 0 0 0</pose>
-        <mass>0.014</mass>
+        <pose>0 0 0.1375 0 0 0</pose> 
+        <mass>0.064</mass> 
         
     <inertia>
-      <ixx>8.845316666666666e-05</ixx>
+      <ixx>0.00040435733333333337</ixx>
       <ixy>0</ixy>
       <ixz>0</ixz>
-      <iyy>8.845316666666666e-05</iyy>
+      <iyy>0.00040435733333333337</iyy>
       <iyz>0</iyz>
-      <izz>4.48e-07</izz>
+      <izz>2.048e-06</izz>
     </inertia>
   
       </inertial>
@@ -961,55 +676,10 @@
       </visual>
     </link>
 
-   <joint name="tilt_arm_axis_5_joint" type="revolute">
+    <joint name="motor_5_joint" type="fixed">
+      <pose>0 0 -0.03 0 0 0</pose>
       <parent>arm_5_link</parent> 
-      <child>motor_gimbal_link_5</child>
-      <axis>
-        <xyz>1 0 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>  
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
-    </joint>
-
-    <link name="motor_gimbal_link_5">
-      <pose relative_to="arm_5_endpoint">-0.05 0 0.03 0 0 0</pose>
-      <inertial>
-        <mass>0.005</mass> 
-        <inertia>
-          <ixx>1e-5</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>1e-5</iyy>
-          <iyz>0</iyz>
-          <izz>1e-5</izz>
-        </inertia>
-      </inertial>
-    </link>
-
-    <joint name="tilt_outward_axis_5_joint" type="revolute">
-      <parent>motor_gimbal_link_5</parent>
       <child>motor_5</child>
-      <axis>
-        <xyz>0 1 0</xyz>
-        <limit>
-          <lower>-0.7853981633975</lower> 
-          <upper>0.7853981633975</upper>
-          <effort>1.0</effort>
-          <velocity>5.0</velocity>
-        </limit>
-        <dynamics>
-          <damping>0.01</damping>
-          <friction>0.01</friction>
-        </dynamics>
-      </axis>
     </joint>
 
     <link name="motor_5">
@@ -1054,7 +724,10 @@
       </inertial>
       <visual name="rotor_5_visual">
         <geometry><mesh><uri>model://fy690s/meshes/tarot_t650_prop_low_poly.dae</uri></mesh></geometry>
-        <material><script><name>Gazebo/DarkGrey</name><uri>file://media/materials/scripts/gazebo.material</uri></script></material>
+        <material>
+          <ambient>0.05 0.05 0.05 1.0</ambient>
+          <diffuse>0.05 0.05 0.05 1.0</diffuse>
+        </material>
       </visual>
       <collision name="rotor_5_collision">
         <geometry><box><size>0.3302 0.035 0.001</size></box></geometry>
@@ -1066,7 +739,6 @@
       <child>rotor_5</child>
       <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
     </joint>
-
     
 
     
@@ -1078,23 +750,35 @@
       <inertial>
         <pose>0 0 -0.198 0 0 0</pose>
         <mass>0.05</mass>
-        <inertia>
-          <ixx>0.00030</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.00060</iyy>
-          <iyz>0</iyz>
-          <izz>0.00030</izz>
-        </inertia>
+        
+    <inertia>
+      <ixx>0.0005112166666666666</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.0005112166666666666</iyy>
+      <iyz>0</iyz>
+      <izz>1.6e-06</izz>
+    </inertia>
+  
       </inertial>
 
       <visual name="lg_1_v">
         <pose>0 0 -0.125 0 0 0</pose>
         <geometry><cylinder><radius>0.008</radius><length>0.25</length></cylinder></geometry>
+        <material>
+          <ambient>0.08 0.08 0.08 1.0</ambient>
+          <diffuse>0.08 0.08 0.08 1.0</diffuse>
+          <specular>0.01 0.01 0.01 1.0</specular>
+        </material>
       </visual>
       <visual name="lg_1_h">
         <pose>0 0 -0.25 0 1.570796326795 0</pose>
         <geometry><cylinder><radius>0.008</radius><length>0.35</length></cylinder></geometry>
+        <material>
+          <ambient>0.08 0.08 0.08 1.0</ambient>
+          <diffuse>0.08 0.08 0.08 1.0</diffuse>
+          <specular>0.01 0.01 0.01 1.0</specular>
+        </material>
       </visual>
       <collision name="lg_1_c">
         <pose>0 0 -0.25 0 1.570796326795 0</pose>
@@ -1113,23 +797,35 @@
       <inertial>
         <pose>0 0 -0.198 0 0 0</pose>
         <mass>0.05</mass>
-        <inertia>
-          <ixx>0.00030</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.00060</iyy>
-          <iyz>0</iyz>
-          <izz>0.00030</izz>
-        </inertia>
+        
+    <inertia>
+      <ixx>0.0005112166666666666</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>0.0005112166666666666</iyy>
+      <iyz>0</iyz>
+      <izz>1.6e-06</izz>
+    </inertia>
+  
       </inertial>
 
       <visual name="lg_2_v">
         <pose>0 0 -0.125 0 0 0</pose>
         <geometry><cylinder><radius>0.008</radius><length>0.25</length></cylinder></geometry>
+        <material>
+          <ambient>0.08 0.08 0.08 1.0</ambient>
+          <diffuse>0.08 0.08 0.08 1.0</diffuse>
+          <specular>0.01 0.01 0.01 1.0</specular>
+        </material>
       </visual>
       <visual name="lg_2_h">
         <pose>0 0 -0.25 0 1.570796326795 0</pose>
         <geometry><cylinder><radius>0.008</radius><length>0.35</length></cylinder></geometry>
+        <material>
+          <ambient>0.08 0.08 0.08 1.0</ambient>
+          <diffuse>0.08 0.08 0.08 1.0</diffuse>
+          <specular>0.01 0.01 0.01 1.0</specular>
+        </material>
       </visual>
       <collision name="lg_2_c">
         <pose>0 0 -0.25 0 1.570796326795 0</pose>
@@ -1143,258 +839,189 @@
     
 
     
-    <!-- TODO: change to actually model the given motors -->
+    
+    <link name="rukobi_holder_link">
+      <pose>0.92 0 0.0265 0 0 -1.570796326795</pose>
+      <inertial>
+        <mass>0.05</mass>
+        
+    <inertia>
+      <ixx>6.666666666666667e-06</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>6.666666666666667e-06</iyy>
+      <iyz>0</iyz>
+      <izz>1e-05</izz>
+    </inertia>
+  
+      </inertial>
+      <visual name="rukobi_holder_visual">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi_holder.dae</uri></mesh></geometry>
+        <material>
+          <ambient>0.25 0.25 0.25 1.0</ambient>
+          <diffuse>0.25 0.25 0.25 1.0</diffuse>
+        </material>
+      </visual>
+      <collision name="rukobi_holder_collision">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi_holder.dae</uri></mesh></geometry>
+      </collision>
+    </link>
+
+    <joint name="base_to_rukobi_holder_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>rukobi_holder_link</child>
+    </joint>
+
+    <link name="rukobi_sensor_link">
+      <pose>0.92 0 0.0265 0 0 -1.570796326795</pose>
+      <inertial>
+        <mass>0.15</mass>
+        
+    <inertia>
+      <ixx>5.375e-05</ixx>
+      <ixy>0</ixy>
+      <ixz>0</ixz>
+      <iyy>5.375e-05</iyy>
+      <iyz>0</iyz>
+      <izz>6.75e-05</izz>
+    </inertia>
+  
+      </inertial>
+      <visual name="rukobi_visual">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi.dae</uri></mesh></geometry>
+        <material>
+          <ambient>0.7 0.0 0.0 1.0</ambient>
+          <diffuse>0.9 0.05 0.05 1.0</diffuse>
+          <specular>0.5 0.1 0.1 1.0</specular>
+          <emissive>0.3 0.0 0.0 1.0</emissive>
+        </material>
+      </visual>
+      <collision name="rukobi_sensor_collision">
+        <geometry><mesh><uri>model://fy690s/meshes/rukobi.dae</uri></mesh></geometry>
+      </collision>
+    </link>
+
+    <joint name="rukobi_joint" type="revolute">
+      <parent>rukobi_holder_link</parent>
+      <child>rukobi_sensor_link</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+        </limit>
+      </axis>
+      <sensor name="rukobi_ft_sensor" type="force_torque">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <force_torque>
+          <frame>child</frame>
+          <measure_direction>child_to_parent</measure_direction>
+        </force_torque>
+      </sensor>
+    </joint>
     
 
+    
+    
+    <plugin filename="gz-sim-forcetorque-system" name="gz::sim::systems::ForceTorque"></plugin>
+    
+
+    
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_0_joint</jointName>
       <linkName>rotor_0</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>866.0</maxRotVelocity>
+      <motorConstant>2.02e-05</motorConstant>
+      <momentConstant>0.018</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>0</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-
-    <!-- Actuating tilt joint plugins -->
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_arm_axis_0_joint</joint_name>
-      <topic>command/tilt_arm_axis_0</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
-
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_outward_axis_0_joint</joint_name>
-      <topic>command/tilt_outward_axis_0</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_1_joint</jointName>
       <linkName>rotor_1</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>866.0</maxRotVelocity>
+      <motorConstant>2.02e-05</motorConstant>
+      <momentConstant>0.018</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>1</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-
-    <!-- Actuating tilt joint plugins -->
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_arm_axis_1_joint</joint_name>
-      <topic>command/tilt_arm_axis_1</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
-
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_outward_axis_1_joint</joint_name>
-      <topic>command/tilt_outward_axis_1</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_2_joint</jointName>
       <linkName>rotor_2</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>866.0</maxRotVelocity>
+      <motorConstant>2.02e-05</motorConstant>
+      <momentConstant>0.018</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>2</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-
-    <!-- Actuating tilt joint plugins -->
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_arm_axis_2_joint</joint_name>
-      <topic>command/tilt_arm_axis_2</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
-
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_outward_axis_2_joint</joint_name>
-      <topic>command/tilt_outward_axis_2</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_3_joint</jointName>
       <linkName>rotor_3</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>866.0</maxRotVelocity>
+      <motorConstant>2.02e-05</motorConstant>
+      <momentConstant>0.018</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>3</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-
-    <!-- Actuating tilt joint plugins -->
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_arm_axis_3_joint</joint_name>
-      <topic>command/tilt_arm_axis_3</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
-
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_outward_axis_3_joint</joint_name>
-      <topic>command/tilt_outward_axis_3</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_4_joint</jointName>
       <linkName>rotor_4</linkName>
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>866.0</maxRotVelocity>
+      <motorConstant>2.02e-05</motorConstant>
+      <momentConstant>0.018</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>4</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
-
-    <!-- Actuating tilt joint plugins -->
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_arm_axis_4_joint</joint_name>
-      <topic>command/tilt_arm_axis_4</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
-
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_outward_axis_4_joint</joint_name>
-      <topic>command/tilt_outward_axis_4</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
     
-
     <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
       <jointName>rotor_5_joint</jointName>
       <linkName>rotor_5</linkName>
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1100.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.01362</momentConstant>
+      <maxRotVelocity>866.0</maxRotVelocity>
+      <motorConstant>2.02e-05</motorConstant>
+      <momentConstant>0.018</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>5</motorNumber>
       <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
-    </plugin>
-
-    <!-- Actuating tilt joint plugins -->
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_arm_axis_5_joint</joint_name>
-      <topic>command/tilt_arm_axis_5</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
-    </plugin>
-
-    <plugin filename="gz-sim-joint-position-controller-system" name="gz::sim::systems::JointPositionController">
-      <joint_name>tilt_outward_axis_5_joint</joint_name>
-      <topic>command/tilt_outward_axis_5</topic>
-      <p_gain>2.0</p_gain>
-      <i_gain>0.0</i_gain>
-      <d_gain>0.1</d_gain>
-      <i_max>1</i_max>
-      <i_min>-1</i_min>
-      <cmd_max>1.0</cmd_max>
-      <cmd_min>-1.0</cmd_min>
     </plugin>
     
   </model>
