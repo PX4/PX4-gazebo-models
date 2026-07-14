@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sdf version='1.9'>
+
+  {# --- MATHEMATICAL CONSTANTS --- #}
+  {%- set pi = 3.14159265359 -%}
+  {%- set rad90 = 90 * pi / 180 -%}
+  {%- set rad180 = 180 * pi / 180 -%}
+  {%- set sin45 = 0.70710678118 -%}
+
+  {# --- PHYSICAL DIMENSIONS & MASS --- #}
+  {# Component Weight Breakdown (kg) #}
+  {%- set mass_total_target = 2.0736 -%}
+  {%- set mass_prop = 0.0126 -%}
+  {%- set mass_rotors_total = 4 * mass_prop -%}
+  
+  {# --- BASE LINK MASS --- #}
+  {%- set mass = mass_total_target - mass_rotors_total -%} {# Evaluates to 2.0232 kg #}
+  
+  {# --- REFERENCE VARIABLES FOR KNOWN BASE COMPONENTS --- #}
+  {%- set mass_arm = 0.050 -%}
+  {%- set mass_base_plates = 0.0634 -%}
+  {%- set mass_leg = 0.0237 -%}
+  {%- set mass_battery = 0.5982 -%}
+  {%- set mass_known_base = mass_base_plates + (4 * mass_arm) + (4 * mass_leg) + mass_battery -%}
+  {%- set mass_nuc_and_extras = mass - mass_known_base -%} {# Evaluates to 1.0668 kg #}
+
+  {# --- GEOMETRY --- #}
+  {%- set body_radius = 0.065 -%}
+  {%- set body_height = 0.1 -%}
+  {%- set radius_prop = 0.127 -%}
+  {%- set prop_collision_height = 0.01 -%} <!-- 10mm thickness for propeller collision --> 
+  {%- set prop_offset_top = 0.0235 -%}
+  {%- set arm_length = 0.23 -%}
+  {%- set arm_height = 0.038 -%}
+  {%- set board_radius = 0.065 -%}
+  {%- set board_height = 0.002 -%}
+  {%- set holder_offset = 0.02 -%}
+  {%- set leg_offset_z = 0.098 -%}
+  {%- set leg_offset_r = 0.0072 -%}
+  {%- set leg_radius = 0.012 -%}
+  {%- set leg_height = 0.17 -%}
+  {%- set pixhawk_offset = -0.0075 -%}
+  {%- set root = "base_link" -%}
+
+  {# --- MOTOR CONSTANTS --- #}
+  {%- set rotor_velocity_slowdown_sim = 10 -%}
+  {%- set motor_constant = 1.2e-05 -%}
+  {%- set moment_constant = 0.0137 -%}
+  {%- set time_constant_up = 0.0125 -%}
+  {%- set time_constant_down = 0.0125 -%}
+  {%- set max_rot_velocity = 1032 -%}
+  {%- set rotor_drag_coefficient = 8.06428e-05 -%}
+  {%- set rolling_moment_coefficient = "1.0e-6" -%}
+
+  {# --- INERTIA CONSTANTS --- #}
+  {%- set inertia_body_radius = 0.2 -%}
+  {%- set inertia_body_height = 0.05 -%}
+  {%- set body_ixx = mass * (3 * inertia_body_radius * inertia_body_radius + inertia_body_height * inertia_body_height) / 12 -%}
+  {%- set body_iyy = mass * (3 * inertia_body_radius * inertia_body_radius + inertia_body_height * inertia_body_height) / 12 -%}
+  {%- set body_izz = (mass * inertia_body_radius * inertia_body_radius) / 2 -%}
+  {%- set prop_ixx = 9.75e-07 -%}
+  {%- set prop_iyy = 4.17041e-05 -%}
+  {%- set prop_izz = 4.26041e-05 -%}
+
+  {# --- MESHES & SCALES --- #}
+  {%- set central_board_mesh_top = "model://f450/meshes/dji_f450_central_top.dae" -%}
+  {%- set central_board_mesh_bottom = "model://f450/meshes/dji_f450_central_bottom.dae" -%}
+  {%- set arm_mesh_file = "model://f450/meshes/dji_f450_arm.dae" -%}
+  {%- set leg_mesh_file = "model://f450/meshes/dji_f450_leg_170mm.dae" -%}
+  {%- set motor_mesh_file = "model://f450/meshes/dji_f450_rotor.dae" -%}
+  {%- set prop_mesh_file = "model://f450/meshes/dji_f450_prop.dae" -%}
+  {%- set pixhawk_mesh_file = "model://f450/meshes/dji_f450_pixhawk.dae" -%}
+  {%- set nuc_mesh_file = "model://f450/meshes/dji_f450_nuc.dae" -%}
+  {%- set battery_mount_mesh = "model://f450/meshes/dji_f450_battery_mount.dae" -%}
+  
+  {%- set mesh_scale = "1 1 1" -%}
+  {%- set mesh_scale_prop_ccw = "1 1 1" -%}
+  {%- set mesh_scale_prop_cw = "-1 1 1" -%}
+  {%- set mesh_scale_milimeters = "0.001 0.001 0.001" -%}
+
+
+  {# --- MACROS --- #}
+  {%- macro rad(deg) -%}{{ deg * pi / 180 }}{%- endmacro -%}
+
+  {%- macro zero_inertial_macro() -%}
+  <inertial>
+    <mass>0.0001</mass>
+    <inertia>
+      <ixx>1e-7</ixx><ixy>0</ixy><ixz>0</ixz>
+      <iyy>1e-7</iyy><iyz>0</iyz><izz>1e-7</izz>
+    </inertia>
+  </inertial>
+  {%- endmacro -%}
+
+  {%- macro multirotor_physics_macro(mass, body_radius, body_height, ixx, ixy, ixz, iyy, iyz, izz) -%}
+  <inertial>
+    <mass>{{ mass }}</mass>
+    <inertia>
+      <ixx>{{ ixx }}</ixx><ixy>{{ ixy }}</ixy><ixz>{{ ixz }}</ixz>
+      <iyy>{{ iyy }}</iyy><iyz>{{ iyz }}</iyz><izz>{{ izz }}</izz>
+    </inertia>
+  </inertial>
+  <collision name="base_link_collision">
+    <pose>0 0 {{ - body_height / 2 }} 0 0 0</pose>
+    <geometry>
+      <cylinder>
+        <length>{{ body_height + 0.05 }}</length>
+        <radius>{{ body_radius }}</radius>
+      </cylinder>
+    </geometry>
+    <surface>
+      <contact>
+        <ode>
+          <min_depth>0.001</min_depth>
+          <max_vel>0.0</max_vel>
+        </ode>
+      </contact>
+      <friction><ode/></friction>
+    </surface>
+  </collision>
+  {%- endmacro -%}
+
+  {%- macro visual_mesh_macro(name, mesh_file, mesh_scale, color, x, y, z, roll, pitch, yaw) -%}
+  <visual name="{{ name }}_visual">
+    <pose>{{ x }} {{ y }} {{ z }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+    <geometry>
+      <mesh>
+        <uri>{{ mesh_file }}</uri>
+        <scale>{{ mesh_scale }}</scale>
+      </mesh>
+    </geometry>
+    <material>
+      <script>
+        <name>Gazebo/{{ color }}</name>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+      </script>
+    </material>
+  </visual>
+  {%- endmacro -%}
+
+  {%- macro visual_colored_box_macro(name, size_x, size_y, size_z, color, x, y, z, roll, pitch, yaw) -%}
+  <visual name="{{ name }}_visual">
+    <pose>{{ x }} {{ y }} {{ z }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+    <geometry>
+      <box>
+        <size>{{ size_x }} {{ size_y }} {{ size_z }}</size>
+      </box>
+    </geometry>
+    <material>
+      <script>
+        <name>Gazebo/{{ color }}</name>
+        <uri>file://media/materials/scripts/gazebo.material</uri>
+      </script>
+    </material>
+  </visual>
+  {%- endmacro -%}
+
+  {%- macro leg_macro(name, mesh_file, mesh_scale, color, parent, x, y, z, roll, pitch, yaw, collision_height, collision_radius) -%}
+  {{ visual_mesh_macro(name=name, mesh_file=mesh_file, mesh_scale=mesh_scale, color=color, x=x, y=y, z=z, roll=roll, pitch=pitch, yaw=yaw) }}
+  <collision name="{{ name }}_link_collision">
+    <pose>{{ x }} {{ y }} {{ z }} {{ roll }} {{ pitch }} {{ yaw }}</pose>
+    <geometry>
+      <cylinder>
+        <length>{{ collision_height }}</length>
+        <radius>{{ collision_radius }}</radius>
+      </cylinder>
+    </geometry>
+    <surface>
+      <contact>
+        <ode>
+          <min_depth>0.001</min_depth>
+          <max_vel>0.0</max_vel>
+        </ode>
+      </contact>
+      <friction><ode/></friction>
+    </surface>
+  </collision>
+  {%- endmacro -%}
+
+  {# --- MODEL DEFINITION --- #}
+  <model name="{{ name | default('f450') }}">
+    <pose>0 0 0.25 0 0 0</pose>
+
+    <plugin filename="gz-sim-magnetometer-system" name="gz::sim::systems::Magnetometer"></plugin>
+
+    <link name="{{ root }}">
+
+      {{ multirotor_physics_macro(
+        mass = mass,
+        body_radius = body_radius,
+        body_height = body_height,
+        ixx = body_ixx, ixy = 0, ixz = 0, iyy = body_iyy, iyz = 0, izz = body_izz)
+      }}
+
+      {{ visual_mesh_macro(
+        name = "lower_central_board",
+        mesh_file = central_board_mesh_bottom,
+        mesh_scale = mesh_scale,
+        color = "DarkGrey",
+        x = 0, y = 0, z = - body_height / 2, roll = 0, pitch = 0, yaw = 0)
+      }}
+
+      {{ visual_mesh_macro(
+        name = "upper_central_board",
+        mesh_file = central_board_mesh_top,
+        mesh_scale = mesh_scale,
+        color = "DarkGrey",
+        x = 0, y = 0, z = arm_height - body_height / 2, roll = 0, pitch = 0, yaw = 0)
+      }}
+
+      {# --- ARMS & LEGS --- #}
+      {# Defines mapping: Name | X multiplier | Y multiplier | Arm Yaw | Leg Yaw #}
+      {% set corners = [
+        ("front_right",  1, -1, -45,  135),
+        ("front_left",   1,  1,  45, -135),
+        ("back_right",  -1, -1,-135,   45),
+        ("back_left",   -1,  1, 135,  -45)
+      ] %}
+      
+      {% for name, x_dir, y_dir, arm_yaw, leg_yaw in corners %}
+        {{ visual_mesh_macro(
+          name = name ~ "_arm",
+          mesh_file = arm_mesh_file,
+          mesh_scale = mesh_scale,
+          color = "White" if "front" in name else "Red",
+          x = x_dir * board_radius * sin45,
+          y = y_dir * board_radius * sin45,
+          z = arm_height - body_height / 2,
+          roll = 0, pitch = 0, yaw = rad(arm_yaw))
+        }}
+
+        {{ leg_macro(
+          name = name ~ "_leg",
+          mesh_file = leg_mesh_file,
+          mesh_scale = mesh_scale_milimeters,
+          color = "White" if "front" in name else "Red",
+          parent = root,
+          x = x_dir * (arm_length - leg_offset_r) * sin45,
+          y = y_dir * (arm_length - leg_offset_r) * sin45,
+          z = arm_height - body_height/2 - leg_offset_z,
+          roll = 0, pitch = 0, yaw = rad(leg_yaw),
+          collision_height = leg_height,
+          collision_radius = leg_radius)
+        }}
+      {% endfor %}
+
+      {# --- BODY MESHES --- #}
+      {{ visual_mesh_macro(
+        name = "NUC",
+        mesh_file = nuc_mesh_file,
+        mesh_scale = mesh_scale_milimeters,
+        color = "DarkGrey",
+        x = 0, y = 0, z = 0.023, roll = 0, pitch = 0, yaw = 0)
+      }}
+
+      {{ visual_mesh_macro(
+        name = "pixhawk",
+        mesh_file = pixhawk_mesh_file,
+        mesh_scale = mesh_scale,
+        color = "DarkGrey",
+        x = 0, y = 0, z = -body_height / 2 - pixhawk_offset, roll = 0, pitch = 0, yaw = 0)
+      }}
+
+      {{ visual_mesh_macro(
+        name = "battery_mount",
+        mesh_file = battery_mount_mesh,
+        mesh_scale = mesh_scale_milimeters,
+        color = "DarkGrey",
+        x = 0, y = 0, z = -body_height / 2 - 0.028, roll = 0, pitch = 0, yaw = 0)
+      }}
+
+      {{ visual_colored_box_macro(
+        name = "battery",
+        size_x = 0.13, size_y = 0.042, size_z = 0.044,
+        color = "Grey",
+        x = 0, y = 0, z = -body_height / 2 - 0.027, roll = 0, pitch = 0, yaw = 0)
+      }}
+
+      {# --- STANDARD STATE SENSORS --- #}
+      <sensor name="imu_sensor" type="imu">
+        <always_on>1</always_on><update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.00018665</stddev><dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev><dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.00018665</stddev><dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev><dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.00018665</stddev><dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev><dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time></noise></z>
+          </angular_velocity>
+          <linear_acceleration>
+            <x><noise type="gaussian"><mean>0</mean><stddev>0.00186</stddev><dynamic_bias_stddev>0.006</dynamic_bias_stddev><dynamic_bias_correlation_time>300</dynamic_bias_correlation_time></noise></x>
+            <y><noise type="gaussian"><mean>0</mean><stddev>0.00186</stddev><dynamic_bias_stddev>0.006</dynamic_bias_stddev><dynamic_bias_correlation_time>300</dynamic_bias_correlation_time></noise></y>
+            <z><noise type="gaussian"><mean>0</mean><stddev>0.00186</stddev><dynamic_bias_stddev>0.006</dynamic_bias_stddev><dynamic_bias_correlation_time>300</dynamic_bias_correlation_time></noise></z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <always_on>1</always_on><update_rate>50</update_rate>
+        <air_pressure>
+          <pressure><noise type="gaussian"><mean>0</mean><stddev>0.01</stddev></noise></pressure>
+        </air_pressure>
+      </sensor>
+
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <always_on>1</always_on><update_rate>100</update_rate>
+        <magnetometer>
+          <x><noise type="gaussian"><stddev>0.0001</stddev></noise></x>
+          <y><noise type="gaussian"><stddev>0.0001</stddev></noise></y>
+          <z><noise type="gaussian"><stddev>0.0001</stddev></noise></z>
+        </magnetometer>
+      </sensor>
+
+      <sensor name="navsat_sensor" type="navsat">
+        <always_on>1</always_on><update_rate>30</update_rate>
+      </sensor>
+    </link>
+
+    {# --- ROTORS --- #}
+    {# Defines mapping: ID | X multiplier | Y multiplier | Direction #}
+    {% set rotors = [
+      (0,  1, -1, "ccw"),
+      (1, -1,  1, "ccw"),
+      (2,  1,  1,  "cw"),
+      (3, -1, -1,  "cw")
+    ] %}
+    
+    {% for motor_num, x_dir, y_dir, direction in rotors %}
+      <link name="rotor_{{ motor_num }}">
+        <pose>{{ x_dir * arm_length * sin45 }} {{ y_dir * arm_length * sin45 }} {{ arm_height + prop_offset_top - body_height/2 }} 0 0 0</pose>
+        <inertial>
+          <mass>{{ mass_prop }}</mass>
+          <inertia><ixx>{{ prop_ixx }}</ixx><iyy>{{ prop_iyy }}</iyy><izz>{{ prop_izz }}</izz></inertia>
+        </inertial>
+
+        {# --- PROPELLER COLLISIONS --- #}
+        <collision name="rotor_{{ motor_num }}_collision">
+          <pose>0 0 0 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>{{ prop_collision_height }}</length>
+              <radius>{{ radius_prop }}</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+
+        <visual name="motor_{{ motor_num }}_base_visual">
+          <pose>0 0 {{ -prop_offset_top }} 0 0 0</pose>
+          <geometry><mesh><uri>{{ motor_mesh_file }}</uri><scale>{{ mesh_scale }}</scale></mesh></geometry>
+          <material>
+            <ambient>0.3 0.3 0.3 1</ambient><diffuse>0.3 0.3 0.3 1</diffuse><specular>0.5 0.5 0.5 1</specular>
+          </material>
+        </visual>
+        <visual name="rotor_{{ motor_num }}_visual">
+          <geometry><mesh><uri>{{ prop_mesh_file }}</uri><scale>{{ mesh_scale_prop_ccw if direction == "ccw" else mesh_scale_prop_cw }}</scale></mesh></geometry>
+          <material>
+            <ambient>0.05 0.05 0.05 1</ambient><diffuse>0.05 0.05 0.05 1</diffuse>
+          </material>
+        </visual>
+      </link>
+      
+      <joint name="rotor_{{ motor_num }}_joint" type="revolute">
+        <child>rotor_{{ motor_num }}</child>
+        <parent>{{ root }}</parent>
+        <axis><xyz>0 0 1</xyz><limit><lower>-1e+16</lower><upper>1e+16</upper></limit></axis>
+      </joint>
+      
+      {# --- PLUGINS --- #}
+      <plugin filename="gz-sim-multicopter-motor-model-system" name="gz::sim::systems::MulticopterMotorModel">
+        <jointName>rotor_{{ motor_num }}_joint</jointName>
+        <linkName>rotor_{{ motor_num }}</linkName>
+        <turningDirection>{{ direction }}</turningDirection>
+        <timeConstantUp>{{ time_constant_up }}</timeConstantUp>
+        <timeConstantDown>{{ time_constant_down }}</timeConstantDown>
+        <maxRotVelocity>{{ max_rot_velocity }}</maxRotVelocity>
+        <motorConstant>{{ motor_constant }}</motorConstant>
+        <momentConstant>{{ moment_constant }}</momentConstant>
+        <commandSubTopic>command/motor_speed</commandSubTopic>
+        <motorNumber>{{ motor_num }}</motorNumber>
+        <rotorDragCoefficient>{{ rotor_drag_coefficient }}</rotorDragCoefficient>
+        <rollingMomentCoefficient>{{ rolling_moment_coefficient }}</rollingMomentCoefficient>
+        <rotorVelocitySlowdownSim>{{ rotor_velocity_slowdown_sim }}</rotorVelocitySlowdownSim>
+        <motorType>velocity</motorType>
+      </plugin>
+    {% endfor %}
+
+  </model>
+</sdf>
