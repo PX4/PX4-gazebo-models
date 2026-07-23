@@ -722,5 +722,10 @@
       <motorType>velocity</motorType>
 
     </plugin>
+    <plugin filename="ParachutePlugin" name="gz::sim::systems::ParachuteSystem">
+      <link_name>base_link</link_name>
+      <cd_a>0.64</cd_a>
+      <angular_damping>1.0</angular_damping>
+    </plugin>
   </model>
 </sdf>
