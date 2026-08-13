@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="aethon_residential">
+    <!-- Keep PX4's validated world-level sensor references and timing. -->
+    <physics name="ode" type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <scene>
+      <grid>false</grid>
+      <ambient>0.45 0.45 0.45 1</ambient>
+      <background>0.55 0.72 0.92 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <light name="sun" type="directional">
+      <pose>0 0 25 0 0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <diffuse>0.9 0.9 0.85 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.4 0.2 -0.9</direction>
+    </light>
+
+    <model name="ground">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision"><pose>0 0 -0.1 0 0 0</pose><geometry><box><size>160 100 0.2</size></box></geometry></collision>
+        <visual name="visual"><pose>0 0 -0.1 0 0 0</pose><geometry><box><size>160 100 0.2</size></box></geometry><material><diffuse>0.20 0.43 0.18 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="residential_road">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision"><pose>0 0 0.01 0 0 0</pose><geometry><box><size>140 10 0.04</size></box></geometry></collision>
+        <visual name="visual"><pose>0 0 0.01 0 0 0</pose><geometry><box><size>140 10 0.04</size></box></geometry><material><diffuse>0.12 0.12 0.13 1</diffuse></material></visual>
+      </link>
+    </model>
+    <model name="north_sidewalk"><static>true</static><link name="link"><visual name="visual"><pose>0 6 0.03 0 0 0</pose><geometry><box><size>140 2 0.05</size></box></geometry><material><diffuse>0.65 0.65 0.63 1</diffuse></material></visual></link></model>
+    <model name="south_sidewalk"><static>true</static><link name="link"><visual name="visual"><pose>0 -6 0.03 0 0 0</pose><geometry><box><size>140 2 0.05</size></box></geometry><material><diffuse>0.65 0.65 0.63 1</diffuse></material></visual></link></model>
+    <model name="centre_line"><static>true</static><link name="link"><visual name="visual"><pose>0 0 0.04 0 0 0</pose><geometry><box><size>140 0.18 0.02</size></box></geometry><material><diffuse>0.95 0.72 0.10 1</diffuse></material></visual></link></model>
+
+    <model name="house_northwest"><pose>-34 15 2.5 0 0 0</pose><static>true</static><link name="link"><collision name="collision"><geometry><box><size>13 10 5</size></box></geometry></collision><visual name="visual"><geometry><box><size>13 10 5</size></box></geometry><material><diffuse>0.78 0.56 0.40 1</diffuse></material></visual></link></model>
+    <model name="house_northeast"><pose>31 15 3 0 0 0</pose><static>true</static><link name="link"><collision name="collision"><geometry><box><size>15 11 6</size></box></geometry></collision><visual name="visual"><geometry><box><size>15 11 6</size></box></geometry><material><diffuse>0.73 0.67 0.52 1</diffuse></material></visual></link></model>
+    <model name="house_southwest"><pose>-34 -15 2.25 0 0 0</pose><static>true</static><link name="link"><collision name="collision"><geometry><box><size>14 10 4.5</size></box></geometry></collision><visual name="visual"><geometry><box><size>14 10 4.5</size></box></geometry><material><diffuse>0.52 0.70 0.82 1</diffuse></material></visual></link></model>
+    <model name="house_southeast"><pose>31 -15 2.75 0 0 0</pose><static>true</static><link name="link"><collision name="collision"><geometry><box><size>12 12 5.5</size></box></geometry></collision><visual name="visual"><geometry><box><size>12 12 5.5</size></box></geometry><material><diffuse>0.82 0.50 0.47 1</diffuse></material></visual></link></model>
+    <model name="house_north_far"><pose>0 17 2 0 0 0</pose><static>true</static><link name="link"><collision name="collision"><geometry><box><size>12 9 4</size></box></geometry></collision><visual name="visual"><geometry><box><size>12 9 4</size></box></geometry><material><diffuse>0.68 0.73 0.58 1</diffuse></material></visual></link></model>
+    <model name="house_south_far"><pose>0 -17 2.25 0 0 0</pose><static>true</static><link name="link"><collision name="collision"><geometry><box><size>12 9 4.5</size></box></geometry></collision><visual name="visual"><geometry><box><size>12 9 4.5</size></box></geometry><material><diffuse>0.70 0.57 0.75 1</diffuse></material></visual></link></model>
+
+    <model name="streetlight_east"><pose>14 7 2.5 0 0 0</pose><static>true</static><link name="link"><visual name="visual"><geometry><cylinder><radius>0.12</radius><length>5</length></cylinder></geometry><material><diffuse>0.20 0.20 0.22 1</diffuse></material></visual></link></model>
+    <model name="streetlight_west"><pose>-14 -7 2.5 0 0 0</pose><static>true</static><link name="link"><visual name="visual"><geometry><cylinder><radius>0.12</radius><length>5</length></cylinder></geometry><material><diffuse>0.20 0.20 0.22 1</diffuse></material></visual></link></model>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg>8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+  </world>
+</sdf>
