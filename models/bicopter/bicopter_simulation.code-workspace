@@ -1,0 +1,61 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../dual_tiltrotor"
+		},
+		{
+			"path": "../../../../../../PX4-Autopilot"
+		}
+	],
+	"settings": {
+		"python.autoComplete.extraPaths": [
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/ur_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/rqt_joint_trajectory_controller/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/rqt_controller_manager/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/ros2controlcli/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/ros2_controllers_test_nodes/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/controller_manager/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/px4_ros_com/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/example_mode_with_rclpy_py/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/example_mode_goto_py/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/px4_ros2_py/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/px4_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/mavros_examples/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/mavros/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/mavros_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/keyboard_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/joint_state_publisher_gui/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/joint_state_publisher/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/controller_manager_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/control_msgs/local/lib/python3.10/dist-packages",
+			"/opt/ros/humble/lib/python3.10/site-packages",
+			"/opt/ros/humble/local/lib/python3.10/dist-packages"
+		],
+		"python.analysis.extraPaths": [
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/ur_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/rqt_joint_trajectory_controller/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/rqt_controller_manager/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/ros2controlcli/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/ros2_controllers_test_nodes/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/controller_manager/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/px4_ros_com/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/example_mode_with_rclpy_py/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/example_mode_goto_py/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/px4_ros2_py/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/px4_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/mavros_examples/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/mavros/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/mavros_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/keyboard_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/joint_state_publisher_gui/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/joint_state_publisher/lib/python3.10/site-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/controller_manager_msgs/local/lib/python3.10/dist-packages",
+			"/home/abisop-nvme/drone/simulations/ros2_ws/install/control_msgs/local/lib/python3.10/dist-packages",
+			"/opt/ros/humble/lib/python3.10/site-packages",
+			"/opt/ros/humble/local/lib/python3.10/dist-packages"
+		]
+	}
+}
