@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <model name="coaxial">
+    <pose>0 0 0.2 0 0 0</pose>
+    <self_collide>false</self_collide>
+    <static>false</static>
+    <link name="base_link">
+      <inertial>
+        <mass>1.9</mass>
+        <inertia>
+          <ixx>0.03</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>0.035</iyy><iyz>0</iyz>
+          <izz>0.015</izz>
+        </inertia>
+      </inertial>
+      <gravity>true</gravity>
+      <velocity_decay />
+      <visual name="fuselage_visual">
+        <geometry>
+          <box>
+            <size>0.22 0.1 0.12</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.2 0.2 0.25 1</diffuse>
+        </material>
+      </visual>
+      <visual name="mast_visual">
+        <pose>0 0 0.16 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.008</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name="swashplate_visual">
+        <pose>0 0 0.17 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.03</radius>
+            <length>0.006</length>
+          </cylinder>
+        </geometry>
+      </visual>
+      <visual name="skid_left_visual">
+        <pose>0 0.1 -0.17 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.012 0.012</size>
+          </box>
+        </geometry>
+      </visual>
+      <visual name="skid_right_visual">
+        <pose>0 -0.1 -0.17 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.012 0.012</size>
+          </box>
+        </geometry>
+      </visual>
+      <collision name="fuselage_collision">
+        <geometry>
+          <box>
+            <size>0.22 0.1 0.12</size>
+          </box>
+        </geometry>
+      </collision>
+      <collision name="skid_left_collision">
+        <pose>0 0.1 -0.17 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.012 0.012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode />
+          </friction>
+        </surface>
+      </collision>
+      <collision name="skid_right_collision">
+        <pose>0 -0.1 -0.17 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.012 0.012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <min_depth>0.001</min_depth>
+              <max_vel>0</max_vel>
+            </ode>
+          </contact>
+          <friction>
+            <ode />
+          </friction>
+        </surface>
+      </collision>
+      <sensor name="air_pressure_sensor" type="air_pressure">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <air_pressure>
+          <!-- Noise modeled after BMP390 -->
+          <pressure>
+            <noise type="gaussian">
+              <mean>0</mean>
+              <stddev>3</stddev>
+            </noise>
+          </pressure>
+        </air_pressure>
+      </sensor>
+      <sensor name="magnetometer_sensor" type="magnetometer">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>100</update_rate>
+        <magnetometer>
+          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
+          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
+          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
+          <!-- Noise modeled after IIS2MDC -->
+          <x>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </x>
+          <y>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </y>
+          <z>
+            <noise type="gaussian">
+              <stddev>0.0001</stddev>
+            </noise>
+          </z>
+        </magnetometer>
+      </sensor>
+      <sensor name="imu_sensor" type="imu">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>250</update_rate>
+        <imu>
+          <angular_velocity>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- 0.05 deg/s converted to rad/s -->
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.0008726646</stddev>
+              </noise>
+            </z>
+          </angular_velocity>
+          <linear_acceleration>
+            <!-- Noise modeled after IIM42653 -->
+            <!-- X & Y axis: 0.65 mg-rms converted to m/ss -->
+            <x>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00637</stddev>
+              </noise>
+            </y>
+            <!-- Z axis: 0.70 mg-rms converted to m/ss-->
+            <z>
+              <noise type="gaussian">
+                <mean>0.0</mean>
+                <stddev>0.00686</stddev>
+              </noise>
+            </z>
+          </linear_acceleration>
+        </imu>
+      </sensor>
+      <sensor name="navsat_sensor" type="navsat">
+        <gz_frame_id>base_link</gz_frame_id>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+      </sensor>
+    </link>
+    <link name="rotor_lower">
+      <pose>0 0 0.2 0 0 0</pose>
+      <inertial>
+        <mass>0.05</mass>
+        <inertia>
+          <ixx>1e-5</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>2e-3</iyy><iyz>0</iyz>
+          <izz>2e-3</izz>
+        </inertia>
+      </inertial>
+      <visual name="rotor_lower_blades">
+        <geometry>
+          <box>
+            <size>0.7 0.035 0.004</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.8 0.2 0.1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <visual name="rotor_lower_hub">
+        <geometry>
+          <cylinder>
+            <radius>0.015</radius>
+            <length>0.02</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="rotor_lower_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rotor_lower</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name="rotor_upper">
+      <pose>0 0 0.32 0 0 0</pose>
+      <inertial>
+        <mass>0.05</mass>
+        <inertia>
+          <ixx>1e-5</ixx><ixy>0</ixy><ixz>0</ixz>
+          <iyy>2e-3</iyy><iyz>0</iyz>
+          <izz>2e-3</izz>
+        </inertia>
+      </inertial>
+      <visual name="rotor_upper_blades">
+        <geometry>
+          <box>
+            <size>0.7 0.035 0.004</size>
+          </box>
+        </geometry>
+        <material>
+          <diffuse>0.1 0.3 0.8 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <visual name="rotor_upper_hub">
+        <geometry>
+          <cylinder>
+            <radius>0.015</radius>
+            <length>0.02</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="rotor_upper_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>rotor_upper</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <plugin filename="libCoaxialRotorModelPlugin.so" name="px4::CoaxialRotorModel">
+      <base_link>base_link</base_link>
+      <command_topic>command/motor_speed</command_topic>
+      <air_density>1.225</air_density>
+      <fuselage_drag_area>0.012 0.02 0.03</fuselage_drag_area>
+      <!-- Clockwise upper rotor, fixed pitch -->
+      <rotor name="upper">
+        <joint_name>rotor_upper_joint</joint_name>
+        <turning_direction>cw</turning_direction>
+        <actuator_number>0</actuator_number>
+        <collective_pitch>0.14</collective_pitch>
+        <num_blades>2</num_blades>
+        <radius>0.35</radius>
+        <chord>0.035</chord>
+        <root_cutout>0.15</root_cutout>
+        <tip_loss>0.97</tip_loss>
+        <lift_slope>5.7</lift_slope>
+        <max_lift_coefficient>1.2</max_lift_coefficient>
+        <profile_drag>0.012</profile_drag>
+        <drag_alpha2>0.5</drag_alpha2>
+        <twist>0</twist>
+        <blade_mass>0.03</blade_mass>
+        <flap_stiffness>5.0</flap_stiffness>
+        <hub_inertia>2e-4</hub_inertia>
+        <motor_time_constant>0.05</motor_time_constant>
+        <max_motor_torque>1.5</max_motor_torque>
+        <max_rot_velocity>330</max_rot_velocity>
+      </rotor>
+      <!-- Counter-clockwise lower rotor with a 3 servo swash plate for cyclic -->
+      <rotor name="lower">
+        <joint_name>rotor_lower_joint</joint_name>
+        <turning_direction>ccw</turning_direction>
+        <actuator_number>1</actuator_number>
+        <collective_pitch>0.18</collective_pitch>
+        <num_blades>2</num_blades>
+        <radius>0.35</radius>
+        <chord>0.035</chord>
+        <root_cutout>0.15</root_cutout>
+        <tip_loss>0.97</tip_loss>
+        <lift_slope>5.7</lift_slope>
+        <max_lift_coefficient>1.2</max_lift_coefficient>
+        <profile_drag>0.012</profile_drag>
+        <drag_alpha2>0.5</drag_alpha2>
+        <twist>0</twist>
+        <blade_mass>0.03</blade_mass>
+        <flap_stiffness>5.0</flap_stiffness>
+        <hub_inertia>2e-4</hub_inertia>
+        <motor_time_constant>0.05</motor_time_constant>
+        <max_motor_torque>1.5</max_motor_torque>
+        <max_rot_velocity>330</max_rot_velocity>
+        <swashplate>
+          <pitch_link_radius>0.03</pitch_link_radius>
+          <pitch_horn_length>0.04</pitch_horn_length>
+          <phase_angle>80</phase_angle>
+          <servo_time_constant>0.02</servo_time_constant>
+          <servo>
+            <index>0</index>
+            <azimuth>0</azimuth>
+            <radius>0.03</radius>
+            <horn_length>0.015</horn_length>
+          </servo>
+          <servo>
+            <index>1</index>
+            <azimuth>120</azimuth>
+            <radius>0.03</radius>
+            <horn_length>0.015</horn_length>
+          </servo>
+          <servo>
+            <index>2</index>
+            <azimuth>240</azimuth>
+            <radius>0.03</radius>
+            <horn_length>0.015</horn_length>
+          </servo>
+        </swashplate>
+      </rotor>
+    </plugin>
+  </model>
+</sdf>
