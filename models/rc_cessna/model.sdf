@@ -162,23 +162,22 @@
         <always_on>1</always_on>
         <update_rate>100</update_rate>
         <magnetometer>
-          <!-- TODO: update to fix units and coordinate system when we move past Harmonic -->
-          <!-- See https://github.com/gazebosim/gz-sim/pull/2460 -->
-          <!-- 3mgauss RMS: NOTE: noise is in tesla but sensor reports data in gauss -->
-          <!-- Noise modeled after IIS2MDC -->
+          <!-- 3mgauss RMS = 3e-7 tesla, noise modeled after IIS2MDC -->
+          <!-- Noise is in the units of the field: tesla with use_units_gauss=false (PX4 gz_bridge server.config),
+               gauss with the gz-sim default -->
           <x>
             <noise type="gaussian">
-              <stddev>0.0001</stddev>
+              <stddev>3e-7</stddev>
             </noise>
           </x>
           <y>
             <noise type="gaussian">
-              <stddev>0.0001</stddev>
+              <stddev>3e-7</stddev>
             </noise>
           </y>
           <z>
             <noise type="gaussian">
-              <stddev>0.0001</stddev>
+              <stddev>3e-7</stddev>
             </noise>
           </z>
         </magnetometer>
