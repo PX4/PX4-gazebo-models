@@ -80,7 +80,7 @@ def ctrl_surface_coef(file: TextIO,ctrl_surface_vec: list,index: str, direction:
 	# Insert necessary coefficient values, index and direction in correct sdf location.
     extracted_text = extracted_text.replace("<name></name>",f'<name>servo_{index}</name>')
     extracted_text = extracted_text.replace("<index></index>",f'<index>{index}</index>')
-    extracted_text = extracted_text.replace("<direction></direction>",f'<directon>{direction}</direction>')
+    extracted_text = extracted_text.replace("<direction></direction>",f'<direction>{direction}</direction>')
     extracted_text = extracted_text.replace("<CD_ctrl></CD_ctrl>",f'<CD_ctrl>{ctrl_surface_vec[0]}</CD_ctrl>')
     extracted_text = extracted_text.replace("<CY_ctrl></CY_ctrl>",f'<CY_ctrl>{ctrl_surface_vec[1]}</CY_ctrl>')
     extracted_text = extracted_text.replace("<CL_ctrl></CL_ctrl>",f'<CL_ctrl>{ctrl_surface_vec[2]}</CL_ctrl>')
