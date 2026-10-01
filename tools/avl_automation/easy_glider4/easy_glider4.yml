@@ -1,0 +1,266 @@
+# Enter a name for your vehicle
+vehicle_name: easy_glider4
+
+# Enter the type of airframe you would like to use:
+frame_type: custom
+
+# First define some model-wide parameters for custom models (meters):
+reference_area: 0.416
+wing_span: 1.8
+# Provide a reference point at which the forces and moments generated will act.
+reference_point:
+  X: 0
+  Y: 0
+  Z: 0
+
+#Provide information on each of the Control Surfaces
+num_ctrl_surfaces: 4
+control_surfaces:
+  - name: left_aileron
+    nchord: 1
+    cspace: 1
+    nspan: 17
+    sspace: -2
+    angle: 4
+    translation:
+      X: 0.275
+      Y: 0
+      Z: 0
+    sections:
+    - name: section_end
+      naca: "2412"
+      position:
+        X: 0.185
+        Y: -0.885
+        Z: 0
+      chord: 0.02
+      ainc: 0
+      nspan: 0
+      sspace: 0
+    - name: aileron_end
+      types:
+      - type: left_aileron
+        Cgain: 1.0
+        Xhinge: 0.765
+        HingeVec:
+          X: 0
+          Y: 1
+          Z: 0
+        SgnDup: 1
+      naca: "2412"
+      position:
+        X: 0.035
+        Y: -0.72
+        Z: 0
+      chord: 0.17
+      ainc: 0
+      nspan: 8
+      sspace: -2
+    - name: aileron_begin
+      types:
+      - type: left_aileron
+        Cgain: 1.0
+        Xhinge: 0.80
+        HingeVec:
+          X: 0
+          Y: 1
+          Z: 0
+        SgnDup: 1
+      naca: "2412"
+      position:
+        X: 0.005
+        Y: -0.31
+        Z: 0
+      chord: 0.2
+      ainc: 0
+      nspan: 8
+      sspace: -2
+    - name: section_begin
+      naca: "2412"
+      position:
+        X: 0
+        Y: 0
+        Z: 0
+      chord: 0.205
+      ainc: 0
+      nspan: 1
+      sspace: -2
+
+  - name: right_aileron
+    nchord: 1
+    cspace: 1
+    nspan: 17
+    sspace: -2
+    angle: 4
+    translation:
+        X: 0.275
+        Y: 0
+        Z: 0
+    sections:
+    -   name: section_begin
+        naca: "2412"
+        position:
+            X: 0
+            Y: 0
+            Z: 0
+        chord: 0.205
+        ainc: 0
+        nspan: 1
+        sspace: -2
+    - name: aileron_begin
+      types:
+      - type: right_aileron
+        Cgain: 1.0
+        Xhinge: 0.80
+        HingeVec:
+          X: 0
+          Y: -1
+          Z: 0
+        SgnDup: 1
+      naca: "2412"
+      position:
+        X: 0.005
+        Y: 0.31
+        Z: 0
+      chord: 0.2
+      ainc: 0
+      nspan: 8
+      sspace: -2
+    - name: aileron_end
+      types:
+      - type: right_aileron
+        Cgain: 1.0
+        Xhinge: 0.765
+        HingeVec:
+          X: 0
+          Y: -1
+          Z: 0
+        SgnDup: 1
+      naca: "2412"
+      position:
+        X: 0.035
+        Y: 0.72
+        Z: 0
+      chord: 0.17
+      ainc: 0
+      nspan: 8
+      sspace: -2
+    - name: section_end
+      naca: "2412"
+      position:
+        X: 0.185
+        Y: 0.885
+        Z: 0
+      chord: 0.02
+      ainc: 0
+      nspan: 0
+      sspace: 0
+
+#elevator is mirrored only halth of it must be defined
+  - name: elevator
+    nchord: 1
+    cspace: 1
+    nspan: 14
+    sspace: -1.25
+    translation:
+      X: 0.96
+      Y: 0
+      Z: 0.15
+    sections:
+    - name: elevator_begin
+      types:
+      - type: elevator
+        Cgain: 1.0
+        Xhinge: 0.767
+        HingeVec:
+          X: 0
+          Y: 1
+          Z: 0
+        SgnDup: 1
+      naca: "2412"
+      position:
+        X: 0
+        Y: 0
+        Z: 0
+      chord: 0.15
+      ainc: 0
+      nspan: 7
+      sspace: -1.25
+    - name: elevator_end
+      types:
+      - type: elevator
+        Cgain: 1.0
+        Xhinge: 0.611
+        HingeVec:
+          X: 0
+          Y: 1
+          Z: 0
+        SgnDup: 1
+      naca: "2412"
+      position:
+        X: 0.06
+        Y: 0.165
+        Z: 0
+      chord: 0.09
+      ainc: 0
+      nspan: 7
+      sspace: -1.25
+    - name: section_end
+      naca: "2412"
+      position:
+        X: 0.13
+        Y: 0.235
+        Z: 0
+      chord: 0.02
+      ainc: 0
+      nspan: 0
+      sspace: 0
+
+  - name: rudder
+    nchord: 1
+    cspace: 1
+    nspan: 7
+    sspace: -1.25
+    translation:
+      X: 0.96
+      Y: 0
+      Z: 0.1
+    sections:
+    - name: rudder_begin
+      types:
+      - type: rudder
+        Cgain: 1.0
+        Xhinge: 0.571
+        HingeVec:
+          X: 0
+          Y: 0
+          Z: 1
+        SgnDup: 1
+      naca: "2412"
+      position:
+        X: 0
+        Y: 0
+        Z: 0
+      chord: 0.14
+      ainc: 0
+      nspan: 7
+      sspace: -1.25
+    - name: rudder_end
+      types:
+      - type: rudder
+        Cgain: 1.0
+        Xhinge: 0.9
+        HingeVec:
+          X: 0
+          Y: 0
+          Z: 1
+        SgnDup: 1
+      naca: "2412"
+      position:
+        X: 0.12
+        Y: 0
+        Z: 0.29
+      chord: 0.02
+      ainc: 0
+      nspan: 0
+      sspace: 0
