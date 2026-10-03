@@ -29,5 +29,5 @@ jobs:
           sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
           wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
           sudo apt-get update
-          sudo apt-get install -y libgz-fuel-tools8-dev
+          sudo apt-get install -y libgz-fuel-tools9-dev
           ./fuel_upload.sh ${{ steps.second_to_last_commit.outputs.hash }} ${{ steps.latest_commit.outputs.hash }} ${{ secrets.GAZEBO_FUEL_TOKEN }}
