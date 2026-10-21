@@ -383,13 +383,13 @@
         </magnetometer>
       </sensor>
       <sensor name="navsat_sensor" type="navsat">
-        <pose relative_to="base_link">0.5 0 0.1 0 0 0</pose>
+        <pose relative_to="base_link">0.0 0.5 0.1 0 0 0</pose>
         <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>
       <sensor name="navsat_sensor_1" type="navsat">
-        <pose relative_to="base_link">-0.5 0 0.1 0 0 0</pose>
+        <pose relative_to="base_link">0.0 -0.5 0.1 0 0 0</pose>
         <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
