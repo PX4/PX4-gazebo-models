@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<sdf version='1.10'>
+  <model name='standard_vtol_multi_sens'>
+    <include merge="true">
+      <uri>model://standard_vtol</uri>
+      <experimental:params>
+        <sensor element_id="base_link::imu_sensor" action="replace" name="imu_sensor" type="imu">
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>250</update_rate>
+          <imu>
+            <angular_velocity>
+              <x>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </x>
+              <y>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </y>
+              <z>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </z>
+            </angular_velocity>
+            <linear_acceleration>
+              <x>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </x>
+              <y>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </y>
+              <z>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </z>
+            </linear_acceleration>
+          </imu>
+        </sensor>
+        <sensor element_id="base_link" action="add" name="imu_sensor_1" type="imu">
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>250</update_rate>
+          <imu>
+            <angular_velocity>
+              <x>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </x>
+              <y>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </y>
+              <z>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </z>
+            </angular_velocity>
+            <linear_acceleration>
+              <x>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </x>
+              <y>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </y>
+              <z>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </z>
+            </linear_acceleration>
+          </imu>
+        </sensor>
+        <sensor element_id="base_link" action="add" name="imu_sensor_2" type="imu">
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>250</update_rate>
+          <imu>
+            <angular_velocity>
+              <x>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </x>
+              <y>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </y>
+              <z>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.0003394</stddev>
+                  <dynamic_bias_stddev>3.8785e-05</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>1000</dynamic_bias_correlation_time>
+                </noise>
+              </z>
+            </angular_velocity>
+            <linear_acceleration>
+              <x>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </x>
+              <y>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </y>
+              <z>
+                <noise type="gaussian">
+                  <mean>0</mean>
+                  <stddev>0.004</stddev>
+                  <dynamic_bias_stddev>0.006</dynamic_bias_stddev>
+                  <dynamic_bias_correlation_time>300</dynamic_bias_correlation_time>
+                </noise>
+              </z>
+            </linear_acceleration>
+          </imu>
+        </sensor>
+        <sensor element_id="base_link::air_pressure_sensor" action="replace" name="air_pressure_sensor" type="air_pressure">
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>50</update_rate>
+          <air_pressure>
+            <pressure>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </pressure>
+          </air_pressure>
+        </sensor>
+        <sensor element_id="base_link" action="add" name="air_pressure_sensor_1" type="air_pressure">
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>50</update_rate>
+          <air_pressure>
+            <pressure>
+              <noise type="gaussian">
+                <mean>0</mean>
+                <stddev>0.01</stddev>
+              </noise>
+            </pressure>
+          </air_pressure>
+        </sensor>
+        <sensor element_id="base_link::magnetometer_sensor" action="replace" name="magnetometer_sensor" type="magnetometer">
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <magnetometer>
+            <!-- 3mgauss RMS = 3e-7 tesla, noise modeled after IIS2MDC -->
+            <!-- Noise is in the units of the field: tesla with use_units_gauss=false (PX4 gz_bridge server.config),
+                 gauss with the gz-sim default -->
+            <x>
+              <noise type="gaussian">
+                <stddev>3e-7</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <stddev>3e-7</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <stddev>3e-7</stddev>
+              </noise>
+            </z>
+          </magnetometer>
+        </sensor>
+        <sensor element_id="base_link" action="add" name="magnetometer_sensor_1" type="magnetometer">
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <!-- 3mgauss RMS = 3e-7 tesla, noise modeled after IIS2MDC -->
+          <!-- Noise is in the units of the field: tesla with use_units_gauss=false (PX4 gz_bridge server.config),
+                gauss with the gz-sim default -->
+          <magnetometer>
+            <x>
+              <noise type="gaussian">
+                <stddev>3e-7</stddev>
+              </noise>
+            </x>
+            <y>
+              <noise type="gaussian">
+                <stddev>3e-7</stddev>
+              </noise>
+            </y>
+            <z>
+              <noise type="gaussian">
+                <stddev>3e-7</stddev>
+              </noise>
+            </z>
+          </magnetometer>
+        </sensor>
+        <sensor element_id="base_link::navsat_sensor" action="replace" name="navsat_sensor" type="navsat">
+          <pose relative_to="base_link">0.0 0.5 0.1 0 0 0</pose>
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+        </sensor>
+        <sensor element_id="base_link" action="add" name="navsat_sensor_1" type="navsat">
+          <pose relative_to="base_link">0.0 -0.5 0.1 0 0 0</pose>
+          <gz_frame_id>base_link</gz_frame_id>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+        </sensor>
+      </experimental:params>
+    </include>
+  </model>
+</sdf>
