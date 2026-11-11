@@ -328,7 +328,7 @@
       <child>cast_wheel_front_link</child>
     </joint>
 
-    <joint name='cast_wheel_rear_link' type='ball'>
+    <joint name='cast_wheel_rear_joint' type='ball'>
       <pose relative_to='cast_wheel_rear_link' />
       <parent>base_link</parent>
       <child>cast_wheel_rear_link</child>
